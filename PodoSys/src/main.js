@@ -1,20 +1,27 @@
-import "./style.css";
+import "../src/style.css";
+import { renderLanding } from "./features/landing/index.js";
+import { navigate, initRouter } from "./router/index.js";
 
-const app = document.querySelector("#app");
-
-// Renderizador inicial simples para testar a fluidez
-const renderHero = () => {
-  app.innerHTML = `
-    <div class="h-full flex flex-col items-center justify-center p-6 animate-in fade-in duration-700">
-      <div class="glass p-10 rounded-[3rem] text-center max-w-sm w-full shadow-2xl">
-        <h1 class="text-3xl font-bold tracking-tight mb-2">PodoSys</h1>
-        <p class="text-slate-500 dark:text-slate-400 mb-8">Gestão Premium de Podologia</p>
-        <button id="btn-iniciar" class="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-black rounded-2xl font-semibold active:scale-95 transition-all duration-150 shadow-lg">
-          Entrar no Sistema
-        </button>
-      </div>
-    </div>
-  `;
+const routes = {
+  "/": renderLanding,
 };
 
-renderHero();
+const init = () => {
+  initRouter(routes);
+
+  // Renderização inicial
+  const container = document.querySelector("#app");
+  if (container) {
+    container.innerHTML = renderLanding();
+  }
+
+  // Event Delegation para capturar cliques no botão dinâmico
+  document.addEventListener("click", (e) => {
+    if (e.target.id === "btn-explorar") {
+      console.log("Navegação iniciada...");
+      // navigate(renderAgenda); // Exemplo de uso futuro
+    }
+  });
+};
+
+init();
