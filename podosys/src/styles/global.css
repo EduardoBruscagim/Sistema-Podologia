@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Dark mode controlado por classe no html */
 @custom-variant dark (&:is(.dark *));
 
@@ -215,26 +219,26 @@
    * over 600ms with Apple's signature ease curve.
    */
   /* Seleciona apenas os containers e elementos principais para a transição */
-.theme-transitioning body,
-.theme-transitioning #app,
-.theme-transitioning header,
-.theme-transitioning section,
-.theme-transitioning footer,
-.theme-transitioning .apple-glass,
-.theme-transitioning #mobile-popup,
-.theme-transitioning #dashboard-preview {
-  transition: 
-    background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-    color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-    border-color 350ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
+  .theme-transitioning body,
+  .theme-transitioning #app,
+  .theme-transitioning header,
+  .theme-transitioning section,
+  .theme-transitioning footer,
+  .theme-transitioning .apple-glass,
+  .theme-transitioning #mobile-popup,
+  .theme-transitioning #dashboard-preview {
+    transition:
+      background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      border-color 350ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+  }
 
-/* Transição de sombra apenas em componentes específicos, se necessário */
-.theme-transitioning .apple-glass {
-  transition: 
-    background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-    box-shadow 350ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
+  /* Transição de sombra apenas em componentes específicos, se necessário */
+  .theme-transitioning .apple-glass {
+    transition:
+      background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      box-shadow 350ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+  }
 
   /*
    * Gradient crossfade: the page wrapper has a light gradient inline.
