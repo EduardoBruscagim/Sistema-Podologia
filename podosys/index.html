@@ -5,9 +5,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PodoSys</title>
+
+  <!-- Fontes: Plus Jakarta Sans (UI) + Geist (fallback mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!--
+    Prevenção de FOUC (Flash of Unstyled Content):
+    Aplica a classe .dark antes do primeiro paint, garantindo que o
+    usuário nunca veja um flash branco ao recarregar no modo escuro.
+  -->
   <script>
     if (
       localStorage.theme === "dark" ||
