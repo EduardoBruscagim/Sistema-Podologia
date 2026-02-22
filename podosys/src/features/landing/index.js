@@ -113,7 +113,7 @@ export function renderLandingPage() {
            ════════════════════════════════════════════════════ -->
       <main class="pt-36 sm:pt-40 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center relative">
         <h1 class="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tighter mb-6 max-w-4xl text-gray-900 dark:text-white leading-tight">
-          A agenda inteligente para <br />
+          Agenda inteligente para <br />
           <span class="text-blue-600 dark:text-blue-500">clínicas de podologia.</span>
         </h1>
 
