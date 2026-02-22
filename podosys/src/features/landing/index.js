@@ -27,7 +27,7 @@ export function renderLandingPage() {
            HEADER — Barra fixa com glassmorphism
            ════════════════════════════════════════════════════ -->
       <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl z-40">
-        <div class="apple-glass rounded-3xl px-2 sm:px-3">
+        <div class="apple-glass rounded-2xl px-2 sm:px-3">
           <div class="h-16 flex items-center justify-between gap-2">
 
             <!-- Logo -->
@@ -41,7 +41,7 @@ export function renderLandingPage() {
             <!-- Nav Desktop -->
             <nav class="hidden md:flex items-center gap-2">
               <button
-                class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-xl transition-colors focus:outline-none"
+                class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-2xl transition-colors focus:outline-none"
                 aria-label="Alternar tema"
               >
                 <span class="theme-icon-container flex items-center justify-center"></span>
@@ -49,7 +49,7 @@ export function renderLandingPage() {
 
               <button
                 id="btn-login-desktop"
-                class="h-11 px-5 text-sm font-medium bg-blue-600 text-white rounded-xl hover:bg-blue-700 apple-transition active:scale-95 ml-1 flex items-center gap-2"
+                class="h-11 px-5 text-sm font-medium bg-blue-600 text-white rounded-2xl hover:bg-blue-700 apple-transition active:scale-95 ml-1 flex items-center gap-2"
               >
                 Acessar Painel
                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -60,7 +60,7 @@ export function renderLandingPage() {
             <div class="md:hidden flex items-center gap-2 pr-1">
               <button
                 id="btn-mobile-open"
-                class="w-10 h-10 flex items-center justify-center text-gray-900 dark:text-white bg-transparent rounded-xl active:scale-95 apple-transition focus:outline-none"
+                class="w-10 h-10 flex items-center justify-center text-gray-900 dark:text-white bg-transparent rounded-2xl active:scale-95 apple-transition focus:outline-none"
                 aria-label="Abrir menu"
               >
                 <i data-lucide="menu" class="w-6 h-6" style="stroke-width: 1.5"></i>
@@ -100,7 +100,7 @@ export function renderLandingPage() {
 
           <button
             id="btn-login-mobile"
-            class="w-full py-4 text-sm font-medium bg-blue-600 text-white rounded-xl hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2 shadow-sm"
+            class="w-full py-4 text-sm font-medium bg-blue-600 text-white rounded-2xl hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2 shadow-sm"
           >
             Acessar Painel
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -125,7 +125,7 @@ export function renderLandingPage() {
         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button
             id="btn-start"
-            class="w-full sm:w-auto px-8 py-4 text-lg font-medium bg-blue-600 text-white rounded-full shadow-[0_8px_30px_rgb(37,99,235,0.3)] hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2"
+            class="w-full sm:w-auto px-8 py-4 text-lg font-medium bg-blue-600 text-white rounded-2xl shadow-[0_8px_30px_rgb(37,99,235,0.3)] hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2"
           >
             Começar Gratuitamente
             <i data-lucide="chevron-right" class="w-5 h-5"></i>
@@ -135,7 +135,7 @@ export function renderLandingPage() {
         <!-- Dashboard Preview — placeholder até a implementação real -->
         <div
           id="dashboard-preview"
-          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-[2rem] shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10"
+          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10"
           style="background: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.8); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px)"
         >
           <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-300/5 dark:from-blue-500/8 dark:to-cyan-400/5"></div>
