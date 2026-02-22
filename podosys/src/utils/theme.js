@@ -1,3 +1,5 @@
+import { createIcons, Moon, Sun } from "lucide";
+
 const THEME_STORAGE_KEY = "theme";
 const DARK_THEME = "dark";
 const LIGHT_THEME = "light";
@@ -5,11 +7,13 @@ const LIGHT_THEME = "light";
 function createThemeIcon(theme) {
   const icon = document.createElement("i");
   if (theme === DARK_THEME) {
-    icon.className = "fa-solid fa-moon";
+    icon.setAttribute("data-lucide", "moon");
   } else {
-    icon.className = "fa-solid fa-sun";
+    icon.setAttribute("data-lucide", "sun");
   }
-  icon.style.fontSize = "1.15rem";
+  // Tamanho compatível com os ícones anteriores do FA
+  icon.style.width = "1.15rem";
+  icon.style.height = "1.15rem";
   return icon;
 }
 
@@ -34,6 +38,13 @@ function getCurrentTheme() {
 function updateThemeIcons(containers, theme) {
   containers.forEach((container) => {
     container.replaceChildren(createThemeIcon(theme));
+  });
+
+  // Mágica necessária para o Lucide renderizar ícones injetados via JS
+  createIcons({
+    icons: { Moon, Sun },
+    nameAttr: "data-lucide",
+    attrs: { "stroke-width": 1.5 },
   });
 }
 

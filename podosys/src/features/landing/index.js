@@ -5,7 +5,7 @@ const MOBILE_BACKDROP_VISIBLE_CLASSES = ["opacity-100", "pointer-events-auto"];
 
 export function renderLandingPage() {
   return `
-    <div class="landing-page-bg min-h-screen transition-colors duration-300 relative overflow-x-hidden" style="background:radial-gradient(ellipse at 50% 0%,#dbeafe 0%,#c7d2fe 35%,#e0e7ff 60%,#f1f5f9 100%);background-attachment:fixed">
+    <div class="landing-page-bg min-h-screen transition-colors duration-300 relative overflow-x-hidden" style="background:radial-gradient(ellipse at 50% 0%,#dbeafe 0%,#c7d2fe 35%,#e0e7ff 60%,#f1f5f9 100%);">
       <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl z-40">
         <div class="apple-glass rounded-3xl px-2 sm:px-3">
           <div class="h-16 flex items-center justify-between gap-2">
@@ -51,7 +51,7 @@ export function renderLandingPage() {
 
       <div
         id="mobile-popup"
-        class="popover popover-hidden fixed top-24 right-2 left-2 z-50 rounded-2xl shadow-2xl md:hidden flex flex-col overflow-hidden" style="background:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.8);-webkit-backdrop-filter:saturate(200%) blur(50px);backdrop-filter:saturate(200%) blur(50px)"
+        class="popover popover-hidden fixed top-24 right-2 left-2 z-50 rounded-2xl shadow-2xl md:hidden flex flex-col overflow-hidden" style="background:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)"
       >
         <div class="p-4 flex flex-col gap-2">
           <div class="flex items-center justify-between p-2">
