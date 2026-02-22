@@ -21,7 +21,7 @@ export function renderLandingPage() {
   return `
     <div
       class="landing-page-bg min-h-screen transition-colors duration-300 relative overflow-x-hidden"
-      style="background: radial-gradient(ellipse at 50% 0%, #dbeafe 0%, #c7d2fe 35%, #e0e7ff 60%, #f1f5f9 100%);"
+      style="background: radial-gradient(ellipse at 50% 0%, #bfdbfe 0%, #a5b4fc 30%, #c7d2fe 55%, #e0e7ff 80%, #f1f5f9 100%);"
     >
       <!-- ════════════════════════════════════════════════════
            HEADER — Barra fixa com glassmorphism
