@@ -1,19 +1,44 @@
+// ============================================================
+//  PodoSys — Landing Page
+//  Estrutura visual e lógica de interação da página inicial.
+// ============================================================
+
 import { ThemeManager } from "../../utils/theme.js";
 
-const MOBILE_BACKDROP_HIDDEN_CLASSES = ["opacity-0", "pointer-events-none"];
-const MOBILE_BACKDROP_VISIBLE_CLASSES = ["opacity-100", "pointer-events-auto"];
+// ── Constantes ──────────────────────────────────────────────
 
+const MOBILE_BACKDROP_HIDDEN = ["opacity-0", "pointer-events-none"];
+const MOBILE_BACKDROP_VISIBLE = ["opacity-100", "pointer-events-auto"];
+
+// ── Template ────────────────────────────────────────────────
+
+/**
+ * Retorna o markup completo da landing page.
+ * Decisão: HTML como template string para manter a landing
+ * auto-contida sem dependências externas de template engine.
+ */
 export function renderLandingPage() {
   return `
-    <div class="landing-page-bg min-h-screen transition-colors duration-300 relative overflow-x-hidden" style="background:radial-gradient(ellipse at 50% 0%,#dbeafe 0%,#c7d2fe 35%,#e0e7ff 60%,#f1f5f9 100%);">
+    <div
+      class="landing-page-bg min-h-screen transition-colors duration-300 relative overflow-x-hidden"
+      style="background: radial-gradient(ellipse at 50% 0%, #dbeafe 0%, #c7d2fe 35%, #e0e7ff 60%, #f1f5f9 100%);"
+    >
+      <!-- ════════════════════════════════════════════════════
+           HEADER — Barra fixa com glassmorphism
+           ════════════════════════════════════════════════════ -->
       <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl z-40">
         <div class="apple-glass rounded-3xl px-2 sm:px-3">
           <div class="h-16 flex items-center justify-between gap-2">
+
+            <!-- Logo -->
             <div class="flex items-center gap-2 px-2 cursor-default min-w-0">
               <i data-lucide="footprints" class="text-blue-600 dark:text-blue-500 w-6 h-6 shrink-0"></i>
-              <span class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">PodoSys</span>
+              <span class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">
+                PodoSys
+              </span>
             </div>
 
+            <!-- Nav Desktop -->
             <nav class="hidden md:flex items-center gap-2">
               <button
                 class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-xl transition-colors focus:outline-none"
@@ -31,19 +56,24 @@ export function renderLandingPage() {
               </button>
             </nav>
 
+            <!-- Hamburger Mobile -->
             <div class="md:hidden flex items-center gap-2 pr-1">
               <button
                 id="btn-mobile-open"
                 class="w-10 h-10 flex items-center justify-center text-gray-900 dark:text-white bg-transparent rounded-xl active:scale-95 apple-transition focus:outline-none"
                 aria-label="Abrir menu"
               >
-                <i data-lucide="menu" class="w-6 h-6" style="stroke-width:1.5"></i>
+                <i data-lucide="menu" class="w-6 h-6" style="stroke-width: 1.5"></i>
               </button>
             </div>
+
           </div>
         </div>
       </header>
 
+      <!-- ════════════════════════════════════════════════════
+           MOBILE MENU — Backdrop + Popover
+           ════════════════════════════════════════════════════ -->
       <div
         id="mobile-backdrop"
         class="fixed inset-0 z-40 bg-gray-900/20 dark:bg-black/50 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 ease-out md:hidden"
@@ -51,7 +81,8 @@ export function renderLandingPage() {
 
       <div
         id="mobile-popup"
-        class="popover popover-hidden fixed top-24 right-2 left-2 z-50 rounded-2xl shadow-2xl md:hidden flex flex-col overflow-hidden" style="background:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)"
+        class="popover popover-hidden fixed top-24 right-2 left-2 z-50 rounded-2xl shadow-2xl md:hidden flex flex-col overflow-hidden"
+        style="background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.8); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px)"
       >
         <div class="p-4 flex flex-col gap-2">
           <div class="flex items-center justify-between p-2">
@@ -77,6 +108,9 @@ export function renderLandingPage() {
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════
+           HERO — Conteúdo principal acima da dobra
+           ════════════════════════════════════════════════════ -->
       <main class="pt-36 sm:pt-40 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center relative">
         <h1 class="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tighter mb-6 max-w-4xl text-gray-900 dark:text-white leading-tight">
           A agenda inteligente para <br />
@@ -84,7 +118,8 @@ export function renderLandingPage() {
         </h1>
 
         <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl leading-relaxed">
-          Gerencie horários comerciais, evite conflitos de agendamento e ofereça uma experiência premium. Tudo em tempo real e na palma da mão.
+          Gerencie horários comerciais, evite conflitos de agendamento e ofereça
+          uma experiência premium. Tudo em tempo real e na palma da mão.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -97,7 +132,12 @@ export function renderLandingPage() {
           </button>
         </div>
 
-        <div id="dashboard-preview" class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-[2rem] shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10" style="background:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.8);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)">
+        <!-- Dashboard Preview — placeholder até a implementação real -->
+        <div
+          id="dashboard-preview"
+          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-[2rem] shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10"
+          style="background: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.8); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px)"
+        >
           <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-300/5 dark:from-blue-500/8 dark:to-cyan-400/5"></div>
 
           <span class="text-gray-500 dark:text-gray-500 font-medium text-sm tracking-widest uppercase flex items-center gap-2 relative">
@@ -110,57 +150,72 @@ export function renderLandingPage() {
   `;
 }
 
+// ── Helpers de estado do DOM ────────────────────────────────
+
+/**
+ * Troca classes de um elemento de forma segura.
+ * Centralizado para evitar repetição nos handlers de popover.
+ */
 function setElementState(element, removeClasses, addClasses) {
-  if (!element) {
-    return;
-  }
+  if (!element) return;
 
   element.classList.remove(...removeClasses);
   element.classList.add(...addClasses);
 }
 
+/**
+ * Abre o popover mobile com animação e trava o scroll do body.
+ */
 function openMobilePopup(popupElement, backdropElement) {
-  if (!popupElement || !backdropElement) {
-    return;
-  }
+  if (!popupElement || !backdropElement) return;
 
   popupElement.classList.remove("popover-hidden", "popover-closing");
   popupElement.classList.add("popover-open");
 
   setElementState(
     backdropElement,
-    MOBILE_BACKDROP_HIDDEN_CLASSES,
-    MOBILE_BACKDROP_VISIBLE_CLASSES,
+    MOBILE_BACKDROP_HIDDEN,
+    MOBILE_BACKDROP_VISIBLE,
   );
+
   document.body.style.overflow = "hidden";
 }
 
+/**
+ * Fecha o popover mobile com animação de saída e libera o scroll.
+ */
 function closeMobilePopup(popupElement, backdropElement) {
-  if (!popupElement || !backdropElement) {
-    return;
-  }
+  if (!popupElement || !backdropElement) return;
 
   popupElement.classList.remove("popover-open");
   popupElement.classList.add("popover-closing");
 
   setElementState(
     backdropElement,
-    MOBILE_BACKDROP_VISIBLE_CLASSES,
-    MOBILE_BACKDROP_HIDDEN_CLASSES,
+    MOBILE_BACKDROP_VISIBLE,
+    MOBILE_BACKDROP_HIDDEN,
   );
+
   document.body.style.overflow = "";
 }
 
+/**
+ * Bind seguro por ID — silencioso quando o elemento não existe.
+ * Útil para features que ainda não foram implementadas.
+ */
 function bindClickById(elementId, handler) {
   const element = document.getElementById(elementId);
-
-  if (!element) {
-    return;
-  }
+  if (!element) return;
 
   element.addEventListener("click", handler);
 }
 
+// ── Inicialização de eventos ────────────────────────────────
+
+/**
+ * Registra todos os event listeners da landing page.
+ * Chamado após o DOM estar montado e os ícones renderizados.
+ */
 export function initLandingEvents() {
   ThemeManager.initToggleButtons();
 
@@ -168,10 +223,9 @@ export function initLandingEvents() {
   const backdropElement = document.getElementById("mobile-backdrop");
   const mobileOpenButton = document.getElementById("btn-mobile-open");
 
+  // Reseta estado do popover após a animação de saída completar
   popupElement?.addEventListener("animationend", (event) => {
-    if (event.animationName !== "popover-out") {
-      return;
-    }
+    if (event.animationName !== "popover-out") return;
 
     popupElement.classList.remove("popover-closing");
     popupElement.classList.add("popover-hidden");
@@ -181,10 +235,12 @@ export function initLandingEvents() {
     openMobilePopup(popupElement, backdropElement);
   });
 
+  // Click no backdrop fecha o menu
   backdropElement?.addEventListener("click", () => {
     closeMobilePopup(popupElement, backdropElement);
   });
 
+  // Handlers de navegação — stubs prontos para integração com router
   bindClickById("btn-login-desktop", () => {});
   bindClickById("btn-login-mobile", () => {
     closeMobilePopup(popupElement, backdropElement);

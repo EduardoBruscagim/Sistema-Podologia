@@ -1,45 +1,82 @@
-import { createIcons, Moon, Sun } from "lucide";
+// ============================================================
+//  PodoSys — ThemeManager
+//  Controle centralizado de tema claro/escuro com transição
+//  suave estilo Apple. Toda troca de tema passa por aqui.
+// ============================================================
+
+// Ícones Sun/Moon são registrados e renderizados pelo main.js
+// para centralizar todas as chamadas de createIcons em um único ponto.
+
+// ── Constantes ──────────────────────────────────────────────
 
 const THEME_STORAGE_KEY = "theme";
 const DARK_THEME = "dark";
 const LIGHT_THEME = "light";
 const TRANSITION_CLASS = "theme-transitioning";
-const TRANSITION_DURATION = 400; // ms — must match CSS
+
+// Duração sincronizada com o CSS (.theme-transitioning em global.css)
+const TRANSITION_DURATION = 400;
+
+// ── Estado interno ──────────────────────────────────────────
 
 let transitionTimer = null;
 
+// ── Helpers ─────────────────────────────────────────────────
+
+/**
+ * Aplica o tema no <html> e persiste no localStorage.
+ * Retorna o tema efetivamente aplicado.
+ */
 function applyTheme(theme) {
-  const isDarkTheme = theme === DARK_THEME;
-  document.documentElement.classList.toggle(DARK_THEME, isDarkTheme);
-  localStorage.setItem(THEME_STORAGE_KEY, isDarkTheme ? DARK_THEME : LIGHT_THEME);
-  return isDarkTheme ? DARK_THEME : LIGHT_THEME;
+  const isDark = theme === DARK_THEME;
+
+  document.documentElement.classList.toggle(DARK_THEME, isDark);
+  localStorage.setItem(THEME_STORAGE_KEY, isDark ? DARK_THEME : LIGHT_THEME);
+
+  return isDark ? DARK_THEME : LIGHT_THEME;
 }
 
+/**
+ * Leitura direta do DOM — fonte de verdade sempre atualizada.
+ */
 function getCurrentTheme() {
-  return document.documentElement.classList.contains(DARK_THEME) ? DARK_THEME : LIGHT_THEME;
+  return document.documentElement.classList.contains(DARK_THEME)
+    ? DARK_THEME
+    : LIGHT_THEME;
 }
+
+// ── API pública ─────────────────────────────────────────────
 
 export const ThemeManager = {
   get current() {
     return getCurrentTheme();
   },
 
+  /**
+   * Alterna entre claro/escuro com transição orquestrada:
+   * 1. Adiciona classe de transição ANTES da troca
+   * 2. Troca a classe de tema
+   * 3. Remove a classe de transição após o tempo exato
+   *
+   * Debounce embutido: cliques rápidos cancelam o timer anterior
+   * para evitar remoção prematura da classe de transição.
+   */
   toggle() {
     const root = document.documentElement;
 
-    // Limpa timer anterior se o usuário clicar rápido
     if (transitionTimer) {
       clearTimeout(transitionTimer);
       transitionTimer = null;
     }
 
-    // Ativa transições ANTES de trocar o tema
+    // Ativa transição global ANTES da troca de tema
     root.classList.add(TRANSITION_CLASS);
 
-    // Troca o tema
-    const result = applyTheme(this.current === DARK_THEME ? LIGHT_THEME : DARK_THEME);
+    const result = applyTheme(
+      this.current === DARK_THEME ? LIGHT_THEME : DARK_THEME,
+    );
 
-    // Remove a classe após a transição terminar
+    // +50ms de margem para garantir que a animação CSS termine
     transitionTimer = setTimeout(() => {
       root.classList.remove(TRANSITION_CLASS);
       transitionTimer = null;
@@ -48,6 +85,11 @@ export const ThemeManager = {
     return result;
   },
 
+  /**
+   * Inicializa todos os botões de toggle de tema na página.
+   * Injeta os ícones Sol/Lua com animação de rotação + scale
+   * controlada por Tailwind (classes dark:).
+   */
   initToggleButtons(
     buttonClass = ".theme-toggle-btn",
     iconContainerClass = ".theme-icon-container",
@@ -57,23 +99,26 @@ export const ThemeManager = {
 
     if (!buttons.length || !iconContainers.length) return;
 
-    // O PADRÃO PREMIUM: Rotação oposta com Scale.
-    // O Sol gira pra esquerda e some. A Lua vem da direita girando e cresce.
+    // Rotação oposta com scale: Sol gira e some, Lua aparece girando
     iconContainers.forEach((container) => {
-      container.classList.add("relative", "flex", "items-center", "justify-center");
-
+      container.classList.add(
+        "relative",
+        "flex",
+        "items-center",
+        "justify-center",
+      );
       container.style = "";
 
       container.innerHTML = `
-        <i data-lucide="sun" class="absolute h-[1.25rem] w-[1.25rem] rotate-0 scale-100 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:-rotate-90 dark:scale-0"></i>
-        <i data-lucide="moon" class="absolute h-[1.25rem] w-[1.25rem] rotate-90 scale-0 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:rotate-0 dark:scale-100"></i>
+        <i
+          data-lucide="sun"
+          class="absolute h-[1.25rem] w-[1.25rem] rotate-0 scale-100 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:-rotate-90 dark:scale-0"
+        ></i>
+        <i
+          data-lucide="moon"
+          class="absolute h-[1.25rem] w-[1.25rem] rotate-90 scale-0 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:rotate-0 dark:scale-100"
+        ></i>
       `;
-    });
-
-    createIcons({
-      icons: { Moon, Sun },
-      nameAttr: "data-lucide",
-      attrs: { "stroke-width": 1.5 },
     });
 
     const handleToggle = () => {
