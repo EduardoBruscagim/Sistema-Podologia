@@ -99,7 +99,7 @@ export const ThemeManager = {
 
     if (!buttons.length || !iconContainers.length) return;
 
-    // Rotação oposta com scale: Sol gira e some, Lua aparece girando
+    // Animação premium: rotação ampla (180°) + scale + opacity crossfade
     iconContainers.forEach((container) => {
       container.classList.add(
         "relative",
@@ -112,11 +112,11 @@ export const ThemeManager = {
       container.innerHTML = `
         <i
           data-lucide="sun"
-          class="absolute h-[1.25rem] w-[1.25rem] rotate-0 scale-100 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:-rotate-90 dark:scale-0"
+          class="theme-icon-sun absolute h-[1.25rem] w-[1.25rem]"
         ></i>
         <i
           data-lucide="moon"
-          class="absolute h-[1.25rem] w-[1.25rem] rotate-90 scale-0 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:rotate-0 dark:scale-100"
+          class="theme-icon-moon absolute h-[1.25rem] w-[1.25rem]"
         ></i>
       `;
     });

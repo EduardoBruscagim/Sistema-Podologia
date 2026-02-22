@@ -251,6 +251,42 @@
     ) !important;
   }
 
+  /* ── Theme Icon Animation ────────────────────────────────── */
+  /*
+   * Crossfade com rotação oposta: Sol gira pra esquerda e some,
+   * Lua entra pela direita girando. Spring easing de 600ms
+   * para sensação fluida e orgânica.
+   */
+
+  .theme-icon-sun,
+  .theme-icon-moon {
+    transition:
+      transform 600ms cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 400ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  /* Estado light: Sol visível, Lua escondida */
+  .theme-icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  .theme-icon-moon {
+    opacity: 0;
+    transform: rotate(180deg) scale(0.4);
+  }
+
+  /* Estado dark: Lua visível, Sol escondida */
+  :is(.dark *) .theme-icon-sun {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.4);
+  }
+
+  :is(.dark *) .theme-icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
   /* ── Theme Transition System ────────────────────────────── */
   /*
    * Classe .theme-transitioning controlada pelo ThemeManager.
@@ -273,15 +309,12 @@
       stroke 400ms cubic-bezier(0.19, 1, 0.22, 1) !important;
   }
 
-  /* Ícones de tema preservam sua animação própria de rotate + scale */
-  .theme-transitioning .theme-icon-container *,
-  .theme-transitioning .theme-icon-container {
+  /* Ícones de tema preservam sua animação própria durante a transição global */
+  .theme-transitioning .theme-icon-sun,
+  .theme-transitioning .theme-icon-moon {
     transition:
-      transform 500ms cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 500ms cubic-bezier(0.19, 1, 0.22, 1),
-      color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      fill 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      stroke 400ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+      transform 600ms cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 400ms cubic-bezier(0.25, 0.1, 0.25, 1) !important;
   }
 
   /* ── Landing Page Background Crossfade ──────────────────── */
