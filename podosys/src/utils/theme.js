@@ -4,52 +4,15 @@ const THEME_STORAGE_KEY = "theme";
 const DARK_THEME = "dark";
 const LIGHT_THEME = "light";
 
-function createThemeIcon(theme) {
-  const icon = document.createElement("i");
-  if (theme === DARK_THEME) {
-    icon.setAttribute("data-lucide", "moon");
-  } else {
-    icon.setAttribute("data-lucide", "sun");
-  }
-  // Tamanho compatível com os ícones anteriores do FA
-  icon.style.width = "1.15rem";
-  icon.style.height = "1.15rem";
-  return icon;
-}
-
 function applyTheme(theme) {
   const isDarkTheme = theme === DARK_THEME;
-
   document.documentElement.classList.toggle(DARK_THEME, isDarkTheme);
-  localStorage.setItem(
-    THEME_STORAGE_KEY,
-    isDarkTheme ? DARK_THEME : LIGHT_THEME,
-  );
-
+  localStorage.setItem(THEME_STORAGE_KEY, isDarkTheme ? DARK_THEME : LIGHT_THEME);
   return isDarkTheme ? DARK_THEME : LIGHT_THEME;
 }
 
 function getCurrentTheme() {
-  return document.documentElement.classList.contains(DARK_THEME)
-    ? DARK_THEME
-    : LIGHT_THEME;
-}
-
-function updateThemeIcons(containers, theme) {
-  containers.forEach((container) => {
-    container.replaceChildren(createThemeIcon(theme));
-  });
-
-  // Mágica necessária para o Lucide renderizar ícones injetados via JS
-  createIcons({
-    icons: { Moon, Sun },
-    nameAttr: "data-lucide",
-    attrs: { "stroke-width": 1.5 },
-  });
-}
-
-function bindThemeToggle(buttonElement, onToggle) {
-  buttonElement.addEventListener("click", onToggle);
+  return document.documentElement.classList.contains(DARK_THEME) ? DARK_THEME : LIGHT_THEME;
 }
 
 export const ThemeManager = {
@@ -58,9 +21,7 @@ export const ThemeManager = {
   },
 
   toggle() {
-    const nextTheme = this.current === DARK_THEME ? LIGHT_THEME : DARK_THEME;
-
-    return applyTheme(nextTheme);
+    return applyTheme(this.current === DARK_THEME ? LIGHT_THEME : DARK_THEME);
   },
 
   initToggleButtons(
@@ -70,36 +31,37 @@ export const ThemeManager = {
     const buttons = document.querySelectorAll(buttonClass);
     const iconContainers = document.querySelectorAll(iconContainerClass);
 
-    if (!buttons.length || !iconContainers.length) {
-      return;
-    }
+    if (!buttons.length || !iconContainers.length) return;
+
+    // 1. O PADRÃO PREMIUM: Rotação oposta com Scale. 
+    // O Sol gira pra esquerda e some. A Lua vem da direita girando e cresce.
+    iconContainers.forEach((container) => {
+      container.classList.add("relative", "flex", "items-center", "justify-center");
+      
+      // Limpamos estilos inline antigos que podiam estar conflitando
+      container.style = "";
+      
+      container.innerHTML = `
+        <i data-lucide="sun" class="absolute h-[1.25rem] w-[1.25rem] rotate-0 scale-100 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:-rotate-90 dark:scale-0"></i>
+        <i data-lucide="moon" class="absolute h-[1.25rem] w-[1.25rem] rotate-90 scale-0 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] dark:rotate-0 dark:scale-100"></i>
+      `;
+    });
+
+    // 2. Renderiza o SVG do Lucide
+    createIcons({
+      icons: { Moon, Sun },
+      nameAttr: "data-lucide",
+      attrs: { "stroke-width": 1.5 },
+    });
 
     const handleToggle = () => {
-      document.documentElement.classList.add("theme-transitioning");
-
-      // Icon animation — identical to reference repo
-      iconContainers.forEach((container) => {
-        container.style.transition =
-          "transform 0.4s cubic-bezier(0.19, 1, 0.22, 1)";
-        container.style.transform = "rotate(360deg) scale(0.85)";
-
-        setTimeout(() => {
-          container.style.transform = "rotate(0deg) scale(1)";
-        }, 400);
-      });
-
-      const activeTheme = this.toggle();
-      updateThemeIcons(iconContainers, activeTheme);
-
-      setTimeout(() => {
-        document.documentElement.classList.remove("theme-transitioning");
-      }, 400);
+      // Como o Tailwind cuida de toda a transição através das classes dark:, 
+      // não precisamos de setTimeout, variáveis de controle ou hacks no JS.
+      this.toggle();
     };
 
-    updateThemeIcons(iconContainers, this.current);
-
     buttons.forEach((button) => {
-      bindThemeToggle(button, handleToggle);
+      button.addEventListener("click", handleToggle);
     });
   },
 };

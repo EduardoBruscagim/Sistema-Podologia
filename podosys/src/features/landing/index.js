@@ -11,7 +11,7 @@ export function renderLandingPage() {
           <div class="h-16 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2 px-2 cursor-default min-w-0">
               <i data-lucide="footprints" class="text-blue-600 dark:text-blue-500 w-6 h-6 shrink-0"></i>
-              <span class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">PodoSys.</span>
+              <span class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">PodoSys</span>
             </div>
 
             <nav class="hidden md:flex items-center gap-2">
