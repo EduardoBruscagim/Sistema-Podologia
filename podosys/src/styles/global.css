@@ -197,6 +197,7 @@
   :is(.dark *) #dashboard-preview {
     background: rgba(28, 28, 30, 0.6) !important;
     border-color: rgba(84, 84, 88, 0.48) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
   }
 
   /* Dark-mode page background override */
@@ -214,36 +215,45 @@
   /* ------------------------------------------------------------------ */
 
   /*
-   * Added/removed by ThemeManager around every toggle.
-   * Forces ALL elements to smoothly interpolate colors & shadows
-   * over 600ms with Apple's signature ease curve.
+   * A classe .theme-transitioning é adicionada/removida pelo ThemeManager
+   * no JS ao redor de cada toggle. Usa um seletor universal limitado às
+   * propriedades visuais de cor para que TODOS os elementos façam a
+   * transição ao MESMO TEMPO, na MESMA velocidade.
+   *
+   * Performance: só anima color/background/border/shadow — propriedades
+   * que não afetam layout, então o navegador resolve tudo no compositor.
    */
-  /* Seleciona apenas os containers e elementos principais para a transição */
-  .theme-transitioning body,
-  .theme-transitioning #app,
-  .theme-transitioning header,
-  .theme-transitioning section,
-  .theme-transitioning footer,
-  .theme-transitioning .apple-glass,
-  .theme-transitioning #mobile-popup,
-  .theme-transitioning #dashboard-preview {
+  .theme-transitioning,
+  .theme-transitioning *,
+  .theme-transitioning *::before,
+  .theme-transitioning *::after {
     transition:
       background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      background 400ms cubic-bezier(0.19, 1, 0.22, 1),
       color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      border-color 350ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+      border-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      box-shadow 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      fill 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      stroke 400ms cubic-bezier(0.19, 1, 0.22, 1) !important;
   }
 
-  /* Transição de sombra apenas em componentes específicos, se necessário */
-  .theme-transitioning .apple-glass {
+  /* Ícones de tema mantêm sua própria transição de rotate+scale */
+  .theme-transitioning .theme-icon-container *,
+  .theme-transitioning .theme-icon-container {
     transition:
-      background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      box-shadow 350ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+      transform 500ms cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 500ms cubic-bezier(0.19, 1, 0.22, 1),
+      color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      fill 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      stroke 400ms cubic-bezier(0.19, 1, 0.22, 1) !important;
   }
 
   /*
-   * Gradient crossfade: the page wrapper has a light gradient inline.
-   * This pseudo-element overlays the dark gradient on top with opacity 0,
-   * then when .dark is active it fades to opacity 1.
+   * Gradient crossfade: a landing page tem um gradiente claro inline.
+   * Este pseudo-elemento sobrepõe o gradiente escuro com opacity 0,
+   * e quando .dark está ativo, opacity vai a 1.
+   * Duração: mesmos 400ms do sistema.
    */
   .landing-page-bg {
     position: relative;
@@ -267,11 +277,5 @@
 
   .dark .landing-page-bg::before {
     opacity: 1;
-  }
-
-  /* Let icon containers use their OWN inline JS transition (rotate+scale) */
-  .theme-transitioning .theme-icon-container,
-  .theme-transitioning .theme-icon-container * {
-    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1) !important;
   }
 }
