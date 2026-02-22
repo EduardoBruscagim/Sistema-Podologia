@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* Otimização de renderização e performance base */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
