@@ -3,7 +3,6 @@ import {
   renderLandingPage,
   initLandingEvents,
 } from "./features/landing/index.js";
-// Importação dos novos ícones Menu e X garantindo o Tree-shaking
 import {
   createIcons,
   Footprints,
@@ -14,23 +13,54 @@ import {
   X,
 } from "lucide";
 
-function bootstrap() {
-  const root = document.getElementById("app");
-  if (!root)
+const ROOT_SELECTOR = "app";
+const LUCIDE_ICONS = {
+  Footprints,
+  ArrowRight,
+  ChevronRight,
+  LayoutDashboard,
+  Menu,
+  X,
+};
+
+function getRootElement() {
+  const rootElement = document.getElementById(ROOT_SELECTOR);
+
+  if (!rootElement) {
     throw new Error("Critical: Root element #app missing from index.html");
+  }
 
-  root.innerHTML = renderLandingPage();
+  return rootElement;
+}
 
-  requestAnimationFrame(() => {
-    initLandingEvents();
+function renderApplication(rootElement) {
+  const template = document.createElement("template");
+  template.innerHTML = renderLandingPage().trim();
 
-    // Atualizado para varrer os ícones da navegação mobile
-    createIcons({
-      icons: { Footprints, ArrowRight, ChevronRight, LayoutDashboard, Menu, X },
-      nameAttr: "data-lucide",
-      attrs: { "stroke-width": 1.5 },
-    });
+  const landingView = template.content.firstElementChild;
+
+  if (!landingView) {
+    throw new Error("Critical: Landing view returned empty markup");
+  }
+
+  rootElement.replaceChildren(landingView);
+}
+
+function hydrateApplication() {
+  initLandingEvents();
+
+  createIcons({
+    icons: LUCIDE_ICONS,
+    nameAttr: "data-lucide",
+    attrs: { "stroke-width": 1.5 },
   });
+}
+
+function bootstrap() {
+  const rootElement = getRootElement();
+
+  renderApplication(rootElement);
+  requestAnimationFrame(hydrateApplication);
 }
 
 document.addEventListener("DOMContentLoaded", bootstrap);
