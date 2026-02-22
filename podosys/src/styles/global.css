@@ -31,7 +31,7 @@
   body {
     min-height: 100%;
     overflow-x: hidden;
-    @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100 transition-colors duration-300;
+    @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100;
   }
 
   /* Oculta scrollbar sem desativar scroll */
@@ -65,21 +65,53 @@
   a[role="button"],
   input[type="submit"] {
     min-height: 48px;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
     @apply flex items-center justify-center;
+    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 0.2s ease,
+      background-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  button:active,
+  a[role="button"]:active,
+  input[type="submit"]:active {
+    transform: scale(0.97);
+    opacity: 0.85;
+  }
+
+  button:hover,
+  a[role="button"]:hover {
+    will-change: transform;
   }
 }
 
 @layer utilities {
   .apple-transition {
-    transition-property: transform, opacity;
-    transition-timing-function: var(--ease-apple);
-    transition-duration: 250ms;
+    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 0.2s ease;
+  }
+
+  .apple-transition:active {
+    transform: scale(0.96) !important;
+    opacity: 0.8;
   }
 
   .apple-glass {
-    @apply bg-white/70 dark:bg-[var(--color-dark-surface)]/70 border border-gray-200/50 dark:border-white/5;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    @apply bg-white/35 border border-white/80 dark:border-white/[0.12];
+    background: rgba(255, 255, 255, 0.35);
+    -webkit-backdrop-filter: saturate(200%) blur(40px);
+    backdrop-filter: saturate(200%) blur(40px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  :is(.dark *) .apple-glass {
+    background: rgba(28, 28, 30, 0.72);
+    border-color: rgba(84, 84, 88, 0.48);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.64),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   /* Fallback explícito para navegadores sem backdrop-filter */
@@ -87,7 +119,10 @@
     (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
   ) {
     .apple-glass {
-      @apply bg-white/90 dark:bg-[var(--color-dark-surface)]/90;
+      @apply bg-white/90;
+    }
+    :is(.dark *) .apple-glass {
+      background: rgba(28, 28, 30, 0.95);
     }
   }
 
@@ -147,5 +182,70 @@
     .popover-hidden {
       transform: none;
     }
+  }
+
+  /* Dark-mode overrides for landing glass elements styled inline */
+  :is(.dark *) #mobile-popup,
+  :is(.dark *) #dashboard-preview {
+    background: rgba(28, 28, 30, 0.6) !important;
+    border-color: rgba(84, 84, 88, 0.48) !important;
+  }
+
+  /* Dark-mode page background override */
+  .dark .min-h-screen[style*="radial-gradient"] {
+    background: radial-gradient(ellipse at 50% 0%, #0f172a 0%, #020617 40%, #000000 100%) !important;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /*  APPLE-LIKE THEME TRANSITION SYSTEM                                */
+  /* ------------------------------------------------------------------ */
+
+  /*
+   * Added/removed by ThemeManager around every toggle.
+   * Forces ALL elements to smoothly interpolate colors & shadows
+   * over 600ms with Apple's signature ease curve.
+   */
+  .theme-transitioning,
+  .theme-transitioning *,
+  .theme-transitioning *::before,
+  .theme-transitioning *::after {
+    transition: background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      background 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      color 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      border-color 350ms cubic-bezier(0.19, 1, 0.22, 1),
+      box-shadow 350ms cubic-bezier(0.19, 1, 0.22, 1),
+      fill 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      stroke 400ms cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 350ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+  }
+
+  /*
+   * Gradient crossfade: the page wrapper has a light gradient inline.
+   * This pseudo-element overlays the dark gradient on top with opacity 0,
+   * then when .dark is active it fades to opacity 1.
+   */
+  .landing-page-bg {
+    position: relative;
+  }
+
+  .landing-page-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 0%, #0f172a 0%, #020617 40%, #000000 100%);
+    opacity: 0;
+    transition: opacity 400ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .dark .landing-page-bg::before {
+    opacity: 1;
+  }
+
+  /* Let icon containers use their OWN inline JS transition (rotate+scale) */
+  .theme-transitioning .theme-icon-container,
+  .theme-transitioning .theme-icon-container * {
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1) !important;
   }
 }

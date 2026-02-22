@@ -1,62 +1,16 @@
-const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 const THEME_STORAGE_KEY = "theme";
 const DARK_THEME = "dark";
 const LIGHT_THEME = "light";
 
-const ICON_CONFIG = {
-  [LIGHT_THEME]: {
-    className: "lucide lucide-sun",
-    paths: [
-      { tag: "circle", attrs: { cx: "12", cy: "12", r: "4" } },
-      { tag: "path", attrs: { d: "M12 2v2" } },
-      { tag: "path", attrs: { d: "M12 20v2" } },
-      { tag: "path", attrs: { d: "m4.93 4.93 1.41 1.41" } },
-      { tag: "path", attrs: { d: "m17.66 17.66 1.41 1.41" } },
-      { tag: "path", attrs: { d: "M2 12h2" } },
-      { tag: "path", attrs: { d: "M20 12h2" } },
-      { tag: "path", attrs: { d: "m6.34 17.66-1.41 1.41" } },
-      { tag: "path", attrs: { d: "m19.07 4.93-1.41 1.41" } },
-    ],
-  },
-  [DARK_THEME]: {
-    className: "lucide lucide-moon",
-    paths: [
-      { tag: "path", attrs: { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" } },
-    ],
-  },
-};
-
-function createSvgElement(tagName, attributes) {
-  const element = document.createElementNS(SVG_NAMESPACE, tagName);
-
-  Object.entries(attributes).forEach(([name, value]) => {
-    element.setAttribute(name, value);
-  });
-
-  return element;
-}
-
 function createThemeIcon(theme) {
-  const iconDefinition = ICON_CONFIG[theme] ?? ICON_CONFIG[LIGHT_THEME];
-
-  const svg = createSvgElement("svg", {
-    xmlns: SVG_NAMESPACE,
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    "stroke-width": "1.5",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    class: iconDefinition.className,
-  });
-
-  iconDefinition.paths.forEach(({ tag, attrs }) => {
-    svg.appendChild(createSvgElement(tag, attrs));
-  });
-
-  return svg;
+  const icon = document.createElement("i");
+  if (theme === DARK_THEME) {
+    icon.className = "fa-solid fa-moon";
+  } else {
+    icon.className = "fa-solid fa-sun";
+  }
+  icon.style.fontSize = "1.15rem";
+  return icon;
 }
 
 function applyTheme(theme) {
@@ -110,8 +64,25 @@ export const ThemeManager = {
     }
 
     const handleToggle = () => {
+      document.documentElement.classList.add("theme-transitioning");
+
+      // Icon animation — identical to reference repo
+      iconContainers.forEach((container) => {
+        container.style.transition =
+          "transform 0.4s cubic-bezier(0.19, 1, 0.22, 1)";
+        container.style.transform = "rotate(360deg) scale(0.85)";
+
+        setTimeout(() => {
+          container.style.transform = "rotate(0deg) scale(1)";
+        }, 400);
+      });
+
       const activeTheme = this.toggle();
       updateThemeIcons(iconContainers, activeTheme);
+
+      setTimeout(() => {
+        document.documentElement.classList.remove("theme-transitioning");
+      }, 400);
     };
 
     updateThemeIcons(iconContainers, this.current);
