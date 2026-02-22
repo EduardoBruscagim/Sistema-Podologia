@@ -97,7 +97,7 @@ export function renderLandingPage() {
           </button>
         </div>
 
-        <div id="dashboard-preview" class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-[2rem] shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10 transition-colors duration-300" style="background:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.8);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)">
+        <div id="dashboard-preview" class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-[2rem] shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10" style="background:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.8);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)">
           <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-300/5 dark:from-blue-500/8 dark:to-cyan-400/5"></div>
 
           <span class="text-gray-500 dark:text-gray-500 font-medium text-sm tracking-widest uppercase flex items-center gap-2 relative">
