@@ -1,32 +1,51 @@
 @import "tailwindcss";
 
-/* OBRIGATÓRIO NA V4: Ativando dark mode manual via classe */
+/* Dark mode controlado por classe no html */
 @custom-variant dark (&:is(.dark *));
 
-/* Configuração de Tema Tailwind v4 (Design Tokens) */
 @theme {
   --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-spring: cubic-bezier(0.19, 1, 0.22, 1);
 
   --color-dark-bg: #0a0a0c;
   --color-dark-surface: #121214;
+
+  /* Base 8pt para padronização gradual do spacing */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
 }
 
 @layer base {
-  /* Otimização de renderização e performance base */
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /* Prevenção de CLS: Força a barra de rolagem existir para a tela não pular */
-    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   body {
+    min-height: 100%;
+    overflow-x: hidden;
     @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100 transition-colors duration-300;
   }
 
-  /* Tipografia fluida com clamp() (Mobile First real) */
+  /* Oculta scrollbar sem desativar scroll */
+  html,
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
   h1 {
     font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
     line-height: 1.1;
@@ -39,11 +58,9 @@
   }
 
   p {
-    /* Máximo 75 caracteres por linha para legibilidade perfeita */
     max-width: 75ch;
   }
 
-  /* Garantindo Touch Target mínimo de 48px para mobile */
   button,
   a[role="button"],
   input[type="submit"] {
@@ -53,7 +70,6 @@
 }
 
 @layer utilities {
-  /* Microinterações e animações GPU-accelerated */
   .apple-transition {
     transition-property: transform, opacity;
     transition-timing-function: var(--ease-apple);
@@ -61,6 +77,75 @@
   }
 
   .apple-glass {
-    @apply bg-white/70 dark:bg-[var(--color-dark-surface)]/70 backdrop-blur-md border border-gray-200/50 dark:border-white/5;
+    @apply bg-white/70 dark:bg-[var(--color-dark-surface)]/70 border border-gray-200/50 dark:border-white/5;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  /* Fallback explícito para navegadores sem backdrop-filter */
+  @supports not (
+    (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+  ) {
+    .apple-glass {
+      @apply bg-white/90 dark:bg-[var(--color-dark-surface)]/90;
+    }
+  }
+
+  .popover {
+    will-change: transform, opacity;
+    transform-origin: top right;
+  }
+
+  .popover-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, -14px, 0) scale(0.985);
+  }
+
+  .popover-open {
+    pointer-events: auto;
+    animation: popover-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .popover-closing {
+    pointer-events: none;
+    animation: popover-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+
+  @keyframes popover-in {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, -14px, 0) scale(0.985);
+    }
+    62% {
+      opacity: 1;
+      transform: translate3d(0, 2px, 0) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes popover-out {
+    0% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(0, -10px, 0) scale(0.99);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .popover-open,
+    .popover-closing {
+      animation: none;
+    }
+
+    .popover-hidden {
+      transform: none;
+    }
   }
 }

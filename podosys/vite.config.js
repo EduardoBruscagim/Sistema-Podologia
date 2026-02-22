@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 
-// Otimização agressiva e injeção do Tailwind v4
+// Setup enxuto: Vite + Tailwind sem complexidade prematura
 export default defineConfig({
   plugins: [tailwindcss()],
   server: {
@@ -11,12 +11,5 @@ export default defineConfig({
   build: {
     target: "es2024",
     minify: "esbuild",
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          supabase: ["@supabase/supabase-js"],
-        },
-      },
-    },
   },
 });
