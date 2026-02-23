@@ -20,8 +20,7 @@ const MOBILE_BACKDROP_VISIBLE = ["opacity-100", "pointer-events-auto"];
 export function renderLandingPage() {
   return `
     <div
-      class="landing-page-bg min-h-screen transition-colors duration-300 relative overflow-x-hidden"
-      style="background: radial-gradient(ellipse at 50% 0%, #bfdbfe 0%, #a5b4fc 30%, #c7d2fe 55%, #e0e7ff 80%, #f1f5f9 100%);"
+      class="landing-page-bg bg-[radial-gradient(ellipse_at_50%_0%,#bfdbfe_0%,#a5b4fc_30%,#c7d2fe_55%,#e0e7ff_80%,#f1f5f9_100%)] min-h-screen transition-colors duration-300 relative overflow-x-hidden"
     >
       <!-- ════════════════════════════════════════════════════
            HEADER — Barra fixa com glassmorphism
@@ -41,7 +40,7 @@ export function renderLandingPage() {
             <!-- Nav Desktop -->
             <nav class="hidden md:flex items-center gap-2">
               <button
-                class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-2xl transition-colors focus:outline-none"
+                class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-2xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 aria-label="Alternar tema"
               >
                 <span class="theme-icon-container flex items-center justify-center"></span>
@@ -49,7 +48,7 @@ export function renderLandingPage() {
 
               <button
                 id="btn-login-desktop"
-                class="h-11 px-5 text-sm font-medium bg-blue-600 text-white rounded-2xl hover:bg-blue-700 apple-transition active:scale-95 ml-1 flex items-center gap-2"
+                class="h-11 px-5 text-sm font-medium bg-blue-600 text-white rounded-2xl hover:bg-blue-700 apple-transition active:scale-95 ml-1 flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0c]"
               >
                 Acessar Painel
                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -60,10 +59,10 @@ export function renderLandingPage() {
             <div class="md:hidden flex items-center gap-2 pr-1">
               <button
                 id="btn-mobile-open"
-                class="w-10 h-10 flex items-center justify-center text-gray-900 dark:text-white bg-transparent rounded-2xl active:scale-95 apple-transition focus:outline-none"
+                class="w-10 h-10 flex items-center justify-center text-gray-900 dark:text-white bg-transparent rounded-2xl active:scale-95 apple-transition outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 aria-label="Abrir menu"
               >
-                <i data-lucide="menu" class="w-6 h-6" style="stroke-width: 1.5"></i>
+                <i data-lucide="menu" class="w-6 h-6 stroke-[1.5]"></i>
               </button>
             </div>
 
@@ -81,15 +80,14 @@ export function renderLandingPage() {
 
       <div
         id="mobile-popup"
-        class="popover popover-hidden fixed top-24 right-2 left-2 z-50 rounded-2xl shadow-2xl md:hidden flex flex-col overflow-hidden"
-        style="background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.8); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px)"
+        class="popover popover-hidden fixed top-24 right-2 left-2 z-50 rounded-2xl shadow-2xl md:hidden flex flex-col overflow-hidden bg-white/70 border border-white/80 backdrop-saturate-[1.8] backdrop-blur-[20px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
       >
         <div class="p-4 flex flex-col gap-2">
           <div class="flex items-center justify-between p-2">
             <span class="text-sm font-medium text-gray-900 dark:text-white">Aparência</span>
 
             <button
-              class="theme-toggle-btn w-10 h-10 flex items-center justify-center text-gray-500 dark:text-gray-400 rounded-full transition-colors focus:outline-none"
+              class="theme-toggle-btn w-10 h-10 flex items-center justify-center text-gray-500 dark:text-gray-400 rounded-full transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               aria-label="Alternar tema"
             >
               <span class="theme-icon-container flex items-center justify-center"></span>
@@ -100,7 +98,7 @@ export function renderLandingPage() {
 
           <button
             id="btn-login-mobile"
-            class="w-full py-4 text-sm font-medium bg-blue-600 text-white rounded-2xl hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2 shadow-sm"
+            class="w-full py-4 text-sm font-medium bg-blue-600 text-white rounded-2xl hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2 shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#1c1c1e]"
           >
             Acessar Painel
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -125,7 +123,7 @@ export function renderLandingPage() {
         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button
             id="btn-start"
-            class="w-full sm:w-auto px-8 py-4 text-lg font-medium bg-blue-600 text-white rounded-2xl shadow-[0_8px_30px_rgb(37,99,235,0.3)] hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2"
+            class="w-full sm:w-auto px-8 py-4 text-lg font-medium bg-blue-600 text-white rounded-2xl shadow-[0_8px_30px_rgb(37,99,235,0.3)] hover:bg-blue-700 apple-transition active:scale-95 flex items-center justify-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0c]"
           >
             Começar Gratuitamente
             <i data-lucide="chevron-right" class="w-5 h-5"></i>
@@ -135,8 +133,7 @@ export function renderLandingPage() {
         <!-- Dashboard Preview — placeholder até a implementação real -->
         <div
           id="dashboard-preview"
-          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10"
-          style="background: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.8); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px)"
+          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10 bg-white/45 border border-white/80 backdrop-blur-[16px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
         >
           <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-300/5 dark:from-blue-500/8 dark:to-cyan-400/5"></div>
 
