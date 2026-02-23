@@ -230,27 +230,7 @@
     }
   }
 
-  /* ── Dark Mode Overrides ────────────────────────────────── */
-
-  /* Elementos glass da landing que usam style inline precisam
-     de override explícito para o dark mode funcionar */
-  :is(.dark *) #mobile-popup,
-  :is(.dark *) #dashboard-preview {
-    background: rgba(28, 28, 30, 0.6) !important;
-    border-color: rgba(84, 84, 88, 0.48) !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  /* Gradiente de fundo escuro para a página principal */
-  .dark .min-h-screen[style*="radial-gradient"] {
-    background: radial-gradient(
-      ellipse at 50% 0%,
-      #1e3a5f 0%,
-      #0f172a 35%,
-      #020617 65%,
-      #0a0a0c 100%
-    ) !important;
-  }
+  /* ── Dark Mode Overrides (Refatored to Tailwind utilities) ──────── */
 
   /* ── Theme Icon Animation ────────────────────────────────── */
   /*
