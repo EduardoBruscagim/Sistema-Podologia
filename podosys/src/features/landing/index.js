@@ -20,13 +20,13 @@ const MOBILE_BACKDROP_VISIBLE = ["opacity-100", "pointer-events-auto"];
 export function renderLandingPage() {
   return `
     <div
-      class="landing-page-bg bg-[radial-gradient(ellipse_at_50%_0%,#bfdbfe_0%,#a5b4fc_30%,#c7d2fe_55%,#e0e7ff_80%,#f1f5f9_100%)] min-h-screen transition-colors duration-300 relative overflow-x-hidden"
+      class="landing-page-bg bg-[radial-gradient(ellipse_at_50%_0%,#bfdbfe_0%,#a5b4fc_30%,#c7d2fe_55%,#e0e7ff_80%,#f1f5f9_100%)] min-h-screen relative overflow-x-hidden"
     >
       <!-- ════════════════════════════════════════════════════
            HEADER — Barra fixa com glassmorphism
            ════════════════════════════════════════════════════ -->
       <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl z-40">
-        <div class="apple-glass rounded-2xl px-2 sm:px-3 transition-colors duration-300">
+        <div class="apple-glass rounded-2xl px-2 sm:px-3">
           <div class="h-16 flex items-center justify-between gap-2">
 
             <!-- Logo -->

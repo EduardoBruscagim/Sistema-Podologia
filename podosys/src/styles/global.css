@@ -52,7 +52,7 @@
   body {
     min-height: 100%;
     overflow-x: hidden;
-    @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100 transition-colors duration-300;
+    @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100;
   }
 
   /* Scrollbar oculta sem desativar o scroll nativo */
@@ -96,9 +96,7 @@
     @apply flex items-center justify-center;
     transition:
       transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 0.2s ease,
-      background-color 0.25s ease,
-      box-shadow 0.25s ease;
+      opacity 0.2s ease;
   }
 
   /* Feedback tátil no press — escala sutil para sensação física */
@@ -141,8 +139,8 @@
   .apple-glass {
     @apply bg-white/35 border border-white/80 dark:border-white/[0.12];
     background: rgba(255, 255, 255, 0.35);
-    -webkit-backdrop-filter: saturate(200%) blur(40px);
-    backdrop-filter: saturate(200%) blur(40px);
+    -webkit-backdrop-filter: saturate(200%) blur(20px);
+    backdrop-filter: saturate(200%) blur(20px);
     box-shadow:
       0 8px 32px 0 rgba(31, 38, 135, 0.07),
       inset 0 0 0 1px rgba(255, 255, 255, 0.1);
