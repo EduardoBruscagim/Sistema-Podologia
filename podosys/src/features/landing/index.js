@@ -26,7 +26,7 @@ export function renderLandingPage() {
            HEADER — Barra fixa com glassmorphism
            ════════════════════════════════════════════════════ -->
       <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl z-40">
-        <div class="apple-glass rounded-2xl px-2 sm:px-3">
+        <div class="apple-glass rounded-2xl px-2 sm:px-3 transition-colors duration-300">
           <div class="h-16 flex items-center justify-between gap-2">
 
             <!-- Logo -->
@@ -40,7 +40,7 @@ export function renderLandingPage() {
             <!-- Nav Desktop -->
             <nav class="hidden md:flex items-center gap-2">
               <button
-                class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-2xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-2xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0c]"
                 aria-label="Alternar tema"
               >
                 <span class="theme-icon-container flex items-center justify-center"></span>

@@ -21,6 +21,7 @@
   --ease-spring: cubic-bezier(0.19, 1, 0.22, 1);
 
   /* Paleta dark mode — preto profundo para contraste premium */
+
   --color-dark-bg: #0a0a0c;
   --color-dark-surface: #121214;
 
@@ -51,7 +52,7 @@
   body {
     min-height: 100%;
     overflow-x: hidden;
-    @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100;
+    @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100 transition-colors duration-300;
   }
 
   /* Scrollbar oculta sem desativar o scroll nativo */
@@ -130,7 +131,7 @@
   }
 
   .apple-transition:active {
-    transform: scale(0.96) !important;
+    transform: scale(0.96);
     opacity: 0.8;
   }
 
@@ -230,8 +231,6 @@
     }
   }
 
-  /* ── Dark Mode Overrides (Refatored to Tailwind utilities) ──────── */
-
   /* ── Theme Icon Animation ────────────────────────────────── */
   /*
    * Crossfade com rotação oposta: Sol gira pra esquerda e some,
@@ -266,36 +265,6 @@
   :is(.dark *) .theme-icon-moon {
     opacity: 1;
     transform: rotate(0deg) scale(1);
-  }
-
-  /* ── Theme Transition System ────────────────────────────── */
-  /*
-   * Classe .theme-transitioning controlada pelo ThemeManager.
-   * Seletor universal limitado a propriedades visuais que NÃO
-   * afetam layout — o navegador resolve tudo no compositor.
-   */
-
-  .theme-transitioning,
-  .theme-transitioning *,
-  .theme-transitioning *::before,
-  .theme-transitioning *::after {
-    transition:
-      background-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      background 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      border-color 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      box-shadow 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      fill 400ms cubic-bezier(0.19, 1, 0.22, 1),
-      stroke 400ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-  }
-
-  /* Ícones de tema preservam sua animação própria durante a transição global */
-  .theme-transitioning .theme-icon-sun,
-  .theme-transitioning .theme-icon-moon {
-    transition:
-      transform 600ms cubic-bezier(0.19, 1, 0.22, 1),
-      opacity 400ms cubic-bezier(0.25, 0.1, 0.25, 1) !important;
   }
 
   /* ── Landing Page Background Crossfade ──────────────────── */

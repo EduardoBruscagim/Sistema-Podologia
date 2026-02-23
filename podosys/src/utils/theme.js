@@ -1,7 +1,7 @@
 // ============================================================
 //  PodoSys — ThemeManager
-//  Controle centralizado de tema claro/escuro com transição
-//  suave estilo Apple. Toda troca de tema passa por aqui.
+//  Controle centralizado de tema claro/escuro.
+//  Toggle síncrono — transição visual delegada ao Tailwind CSS.
 // ============================================================
 
 // Ícones Sun/Moon são registrados e renderizados pelo main.js
@@ -12,14 +12,6 @@
 const THEME_STORAGE_KEY = "theme";
 const DARK_THEME = "dark";
 const LIGHT_THEME = "light";
-const TRANSITION_CLASS = "theme-transitioning";
-
-// Duração sincronizada com o CSS (.theme-transitioning em global.css)
-const TRANSITION_DURATION = 400;
-
-// ── Estado interno ──────────────────────────────────────────
-
-let transitionTimer = null;
 
 // ── Helpers ─────────────────────────────────────────────────
 
@@ -53,36 +45,14 @@ export const ThemeManager = {
   },
 
   /**
-   * Alterna entre claro/escuro com transição orquestrada:
-   * 1. Adiciona classe de transição ANTES da troca
-   * 2. Troca a classe de tema
-   * 3. Remove a classe de transição após o tempo exato
-   *
-   * Debounce embutido: cliques rápidos cancelam o timer anterior
-   * para evitar remoção prematura da classe de transição.
+   * Alterna entre claro e escuro de forma síncrona.
+   * A suavização visual é responsabilidade do CSS (transition-colors)
+   * aplicado diretamente nos elementos estruturais.
    */
   toggle() {
-    const root = document.documentElement;
-
-    if (transitionTimer) {
-      clearTimeout(transitionTimer);
-      transitionTimer = null;
-    }
-
-    // Ativa transição global ANTES da troca de tema
-    root.classList.add(TRANSITION_CLASS);
-
-    const result = applyTheme(
+    return applyTheme(
       this.current === DARK_THEME ? LIGHT_THEME : DARK_THEME,
     );
-
-    // +50ms de margem para garantir que a animação CSS termine
-    transitionTimer = setTimeout(() => {
-      root.classList.remove(TRANSITION_CLASS);
-      transitionTimer = null;
-    }, TRANSITION_DURATION + 50);
-
-    return result;
   },
 
   /**
