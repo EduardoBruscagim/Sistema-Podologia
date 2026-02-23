@@ -133,7 +133,7 @@ export function renderLandingPage() {
         <!-- Dashboard Preview — placeholder até a implementação real -->
         <div
           id="dashboard-preview"
-          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10 bg-white/45 border border-white/80 backdrop-blur-[16px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
+          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10 bg-white/45 border border-white/80 backdrop-blur-[8px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
         >
           <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-300/5 dark:from-blue-500/8 dark:to-cyan-400/5"></div>
 
