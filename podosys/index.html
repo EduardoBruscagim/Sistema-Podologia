@@ -1,41 +1,43 @@
 <!doctype html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PodoSys — Agenda Inteligente para Clínicas de Podologia</title>
+    <meta
+      name="description"
+      content="Gerencie horários comerciais, evite conflitos de agendamento e ofereça uma experiência premium para seus pacientes."
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PodoSys — Agenda Inteligente para Clínicas de Podologia</title>
-  <meta name="description" content="Gerencie horários comerciais, evite conflitos de agendamento e ofereça uma experiência premium para seus pacientes. PodoSys é o sistema SaaS feito para podólogos." />
+    <!-- Fonte: Plus Jakarta Sans (UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Fonte: Plus Jakarta Sans (UI) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
-    rel="stylesheet"
-  >
-
-  <!--
+    <!--
     Prevenção de FOUC (Flash of Unstyled Content):
     Aplica a classe .dark antes do primeiro paint, garantindo que o
     usuário nunca veja um flash branco ao recarregar no modo escuro.
   -->
-  <script>
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  </script>
-</head>
+    <script>
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
+  </head>
 
-<body class="bg-white text-gray-900 dark:bg-[#0a0a0c] dark:text-gray-100 transition-colors duration-300">
-  <div id="app"></div>
-  <script type="module" src="/src/main.js"></script>
-</body>
-
+  <body
+    class="bg-white text-gray-900 dark:bg-[#0a0a0c] dark:text-gray-100 transition-colors duration-300"
+  >
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
