@@ -3,12 +3,12 @@
 //  Estrutura visual e lógica de interação da página inicial.
 // ============================================================
 
-import { ThemeManager } from "../../utils/theme.js";
+import { ThemeManager } from '../../utils/theme.js'
 
 // ── Constantes ──────────────────────────────────────────────
 
-const MOBILE_BACKDROP_HIDDEN = ["opacity-0", "pointer-events-none"];
-const MOBILE_BACKDROP_VISIBLE = ["opacity-100", "pointer-events-auto"];
+const MOBILE_BACKDROP_HIDDEN = ['opacity-0', 'pointer-events-none']
+const MOBILE_BACKDROP_VISIBLE = ['opacity-100', 'pointer-events-auto']
 
 // ── Template ────────────────────────────────────────────────
 
@@ -22,14 +22,10 @@ export function renderLandingPage() {
     <div
       class="landing-page-bg bg-[radial-gradient(ellipse_at_50%_0%,#bfdbfe_0%,#a5b4fc_30%,#c7d2fe_55%,#e0e7ff_80%,#f1f5f9_100%)] min-h-screen relative overflow-x-hidden"
     >
-      <!-- ════════════════════════════════════════════════════
-           HEADER — Barra fixa com glassmorphism
-           ════════════════════════════════════════════════════ -->
       <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl z-40">
         <div class="apple-glass rounded-2xl px-2 sm:px-3">
           <div class="h-16 flex items-center justify-between gap-2">
 
-            <!-- Logo -->
             <div class="flex items-center gap-2 px-2 cursor-default min-w-0">
               <i data-lucide="footprints" class="text-blue-600 dark:text-blue-500 w-6 h-6 shrink-0"></i>
               <span class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">
@@ -37,7 +33,6 @@ export function renderLandingPage() {
               </span>
             </div>
 
-            <!-- Nav Desktop -->
             <nav class="hidden md:flex items-center gap-2">
               <button
                 class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-2xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0c]"
@@ -55,7 +50,6 @@ export function renderLandingPage() {
               </button>
             </nav>
 
-            <!-- Hamburger Mobile -->
             <div class="md:hidden flex items-center gap-2 pr-1">
               <button
                 id="btn-mobile-open"
@@ -70,9 +64,6 @@ export function renderLandingPage() {
         </div>
       </header>
 
-      <!-- ════════════════════════════════════════════════════
-           MOBILE MENU — Backdrop + Popover
-           ════════════════════════════════════════════════════ -->
       <div
         id="mobile-backdrop"
         class="fixed inset-0 z-40 bg-gray-900/20 dark:bg-black/50 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 ease-out md:hidden"
@@ -106,9 +97,6 @@ export function renderLandingPage() {
         </div>
       </div>
 
-      <!-- ════════════════════════════════════════════════════
-           HERO — Conteúdo principal acima da dobra
-           ════════════════════════════════════════════════════ -->
       <main class="pt-36 sm:pt-40 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center relative">
         <h1 class="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tighter mb-6 max-w-4xl text-gray-900 dark:text-white leading-tight">
           Agenda inteligente para <br />
@@ -130,7 +118,6 @@ export function renderLandingPage() {
           </button>
         </div>
 
-        <!-- Dashboard Preview — placeholder até a implementação real -->
         <div
           id="dashboard-preview"
           class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10 bg-white/45 border border-white/80 backdrop-blur-[8px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
@@ -144,7 +131,7 @@ export function renderLandingPage() {
         </div>
       </main>
     </div>
-  `;
+  `
 }
 
 // ── Helpers de estado do DOM ────────────────────────────────
@@ -154,46 +141,38 @@ export function renderLandingPage() {
  * Centralizado para evitar repetição nos handlers de popover.
  */
 function setElementState(element, removeClasses, addClasses) {
-  if (!element) return;
+  if (!element) return
 
-  element.classList.remove(...removeClasses);
-  element.classList.add(...addClasses);
+  element.classList.remove(...removeClasses)
+  element.classList.add(...addClasses)
 }
 
 /**
  * Abre o popover mobile com animação e trava o scroll do body.
  */
 function openMobilePopup(popupElement, backdropElement) {
-  if (!popupElement || !backdropElement) return;
+  if (!popupElement || !backdropElement) return
 
-  popupElement.classList.remove("popover-hidden", "popover-closing");
-  popupElement.classList.add("popover-open");
+  popupElement.classList.remove('popover-hidden', 'popover-closing')
+  popupElement.classList.add('popover-open')
 
-  setElementState(
-    backdropElement,
-    MOBILE_BACKDROP_HIDDEN,
-    MOBILE_BACKDROP_VISIBLE,
-  );
+  setElementState(backdropElement, MOBILE_BACKDROP_HIDDEN, MOBILE_BACKDROP_VISIBLE)
 
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = 'hidden'
 }
 
 /**
  * Fecha o popover mobile com animação de saída e libera o scroll.
  */
 function closeMobilePopup(popupElement, backdropElement) {
-  if (!popupElement || !backdropElement) return;
+  if (!popupElement || !backdropElement) return
 
-  popupElement.classList.remove("popover-open");
-  popupElement.classList.add("popover-closing");
+  popupElement.classList.remove('popover-open')
+  popupElement.classList.add('popover-closing')
 
-  setElementState(
-    backdropElement,
-    MOBILE_BACKDROP_VISIBLE,
-    MOBILE_BACKDROP_HIDDEN,
-  );
+  setElementState(backdropElement, MOBILE_BACKDROP_VISIBLE, MOBILE_BACKDROP_HIDDEN)
 
-  document.body.style.overflow = "";
+  document.body.style.overflow = ''
 }
 
 /**
@@ -201,10 +180,10 @@ function closeMobilePopup(popupElement, backdropElement) {
  * Útil para features que ainda não foram implementadas.
  */
 function bindClickById(elementId, handler) {
-  const element = document.getElementById(elementId);
-  if (!element) return;
+  const element = document.getElementById(elementId)
+  if (!element) return
 
-  element.addEventListener("click", handler);
+  element.addEventListener('click', handler)
 }
 
 // ── Inicialização de eventos ────────────────────────────────
@@ -214,33 +193,41 @@ function bindClickById(elementId, handler) {
  * Chamado após o DOM estar montado e os ícones renderizados.
  */
 export function initLandingEvents() {
-  ThemeManager.initToggleButtons();
+  ThemeManager.initToggleButtons()
 
-  const popupElement = document.getElementById("mobile-popup");
-  const backdropElement = document.getElementById("mobile-backdrop");
-  const mobileOpenButton = document.getElementById("btn-mobile-open");
+  const popupElement = document.getElementById('mobile-popup')
+  const backdropElement = document.getElementById('mobile-backdrop')
+  const mobileOpenButton = document.getElementById('btn-mobile-open')
 
   // Reseta estado do popover após a animação de saída completar
-  popupElement?.addEventListener("animationend", (event) => {
-    if (event.animationName !== "popover-out") return;
+  popupElement?.addEventListener('animationend', (event) => {
+    if (event.animationName !== 'popover-out') return
 
-    popupElement.classList.remove("popover-closing");
-    popupElement.classList.add("popover-hidden");
-  });
+    popupElement.classList.remove('popover-closing')
+    popupElement.classList.add('popover-hidden')
+  })
 
-  mobileOpenButton?.addEventListener("click", () => {
-    openMobilePopup(popupElement, backdropElement);
-  });
+  mobileOpenButton?.addEventListener('click', () => {
+    openMobilePopup(popupElement, backdropElement)
+  })
 
   // Click no backdrop fecha o menu
-  backdropElement?.addEventListener("click", () => {
-    closeMobilePopup(popupElement, backdropElement);
-  });
+  backdropElement?.addEventListener('click', () => {
+    closeMobilePopup(popupElement, backdropElement)
+  })
 
-  // Handlers de navegação — stubs prontos para integração com router
-  bindClickById("btn-login-desktop", () => {});
-  bindClickById("btn-login-mobile", () => {
-    closeMobilePopup(popupElement, backdropElement);
-  });
-  bindClickById("btn-start", () => {});
+  // ── Handlers Integrados com o Drawer de Auth ────────────────
+
+  bindClickById('btn-login-desktop', () => {
+    if (window.openAuthDrawer) window.openAuthDrawer()
+  })
+
+  bindClickById('btn-login-mobile', () => {
+    closeMobilePopup(popupElement, backdropElement)
+    if (window.openAuthDrawer) window.openAuthDrawer()
+  })
+
+  bindClickById('btn-start', () => {
+    if (window.openAuthDrawer) window.openAuthDrawer()
+  })
 }
