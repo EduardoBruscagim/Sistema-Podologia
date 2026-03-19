@@ -3,12 +3,9 @@
 //  Bootstrap da aplicação: monta a view e inicializa os eventos.
 // ============================================================
 
-import "./styles/global.css";
+import './styles/global.css'
 
-import {
-  renderLandingPage,
-  initLandingEvents,
-} from "./features/landing/index.js";
+import { renderLandingPage, initLandingEvents } from './features/landing/index.js'
 
 import {
   createIcons,
@@ -20,11 +17,11 @@ import {
   Moon,
   Sun,
   X,
-} from "lucide";
+} from 'lucide'
 
 // ── Constantes ──────────────────────────────────────────────
 
-const ROOT_SELECTOR = "app";
+const ROOT_SELECTOR = 'app'
 
 // Registro único e centralizado de todos os ícones da aplicação.
 // Sun/Moon incluídos aqui para evitar chamadas duplicadas de createIcons.
@@ -37,7 +34,7 @@ const LUCIDE_ICONS = {
   Moon,
   Sun,
   X,
-};
+}
 
 // ── Funções internas ────────────────────────────────────────
 
@@ -46,13 +43,13 @@ const LUCIDE_ICONS = {
  * Falha crítica caso #app não exista no DOM.
  */
 function getRootElement() {
-  const root = document.getElementById(ROOT_SELECTOR);
+  const root = document.getElementById(ROOT_SELECTOR)
 
   if (!root) {
-    throw new Error("Critical: Root element #app missing from index.html");
+    throw new Error('Critical: Root element #app missing from index.html')
   }
 
-  return root;
+  return root
 }
 
 /**
@@ -60,16 +57,16 @@ function getRootElement() {
  * Usa <template> para evitar parsing desnecessário.
  */
 function renderApplication(rootElement) {
-  const template = document.createElement("template");
-  template.innerHTML = renderLandingPage().trim();
+  const template = document.createElement('template')
+  template.innerHTML = renderLandingPage().trim()
 
-  const landingView = template.content.firstElementChild;
+  const landingView = template.content.firstElementChild
 
   if (!landingView) {
-    throw new Error("Critical: Landing view returned empty markup");
+    throw new Error('Critical: Landing view returned empty markup')
   }
 
-  rootElement.replaceChildren(landingView);
+  rootElement.replaceChildren(landingView)
 }
 
 /**
@@ -79,24 +76,24 @@ function renderApplication(rootElement) {
 function hydrateApplication() {
   // initLandingEvents injeta o HTML dos ícones de tema no DOM.
   // createIcons roda DEPOIS para renderizar tudo de uma vez.
-  initLandingEvents();
+  initLandingEvents()
 
   createIcons({
     icons: LUCIDE_ICONS,
-    nameAttr: "data-lucide",
-    attrs: { "stroke-width": 1.5 },
-  });
+    nameAttr: 'data-lucide',
+    attrs: { 'stroke-width': 1.5 },
+  })
 }
 
 // ── Bootstrap ───────────────────────────────────────────────
 
 function bootstrap() {
-  const rootElement = getRootElement();
+  const rootElement = getRootElement()
 
-  renderApplication(rootElement);
+  renderApplication(rootElement)
 
   // requestAnimationFrame garante que o DOM está pronto para hidratação
-  requestAnimationFrame(hydrateApplication);
+  requestAnimationFrame(hydrateApplication)
 }
 
-document.addEventListener("DOMContentLoaded", bootstrap);
+document.addEventListener('DOMContentLoaded', bootstrap)
