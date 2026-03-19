@@ -1,11 +1,12 @@
 // ============================================================
 //  PodoSys — Entry Point
-//  Bootstrap da aplicação: monta a view e inicializa os eventos.
+//  Bootstrap da aplicação: monta a view, inicializa eventos e Auth.
 // ============================================================
 
 import './styles/global.css'
-
 import { renderLandingPage, initLandingEvents } from './features/landing/index.js'
+import { renderAuthDrawer, initAuthEvents } from './features/auth/index.js'
+import { AuthManager, authStore } from './state/auth.js'
 
 import {
   createIcons,
@@ -19,64 +20,33 @@ import {
   X,
 } from 'lucide'
 
-// ── Constantes ──────────────────────────────────────────────
-
 const ROOT_SELECTOR = 'app'
 
-// Registro único e centralizado de todos os ícones da aplicação.
-// Sun/Moon incluídos aqui para evitar chamadas duplicadas de createIcons.
-const LUCIDE_ICONS = {
-  ArrowRight,
-  ChevronRight,
-  Footprints,
-  LayoutDashboard,
-  Menu,
-  Moon,
-  Sun,
-  X,
-}
+const LUCIDE_ICONS = { ArrowRight, ChevronRight, Footprints, LayoutDashboard, Menu, Moon, Sun, X }
 
-// ── Funções internas ────────────────────────────────────────
-
-/**
- * Retorna o elemento raiz da aplicação.
- * Falha crítica caso #app não exista no DOM.
- */
 function getRootElement() {
   const root = document.getElementById(ROOT_SELECTOR)
-
-  if (!root) {
-    throw new Error('Critical: Root element #app missing from index.html')
-  }
-
+  if (!root) throw new Error('Critical: Root element #app missing from index.html')
   return root
 }
 
-/**
- * Gera o HTML da landing page e injeta no DOM.
- * Usa <template> para evitar parsing desnecessário.
- */
 function renderApplication(rootElement) {
   const template = document.createElement('template')
-  template.innerHTML = renderLandingPage().trim()
 
-  const landingView = template.content.firstElementChild
+  // Monta o layout base: View Principal + Drawer de Autenticação sobreposto
+  template.innerHTML = `
+    <div id="router-view" class="w-full h-full min-h-screen">
+      ${renderLandingPage().trim()}
+    </div>
+    ${renderAuthDrawer().trim()}
+  `
 
-  if (!landingView) {
-    throw new Error('Critical: Landing view returned empty markup')
-  }
-
-  rootElement.replaceChildren(landingView)
+  rootElement.replaceChildren(...template.content.childNodes)
 }
 
-/**
- * Inicializa event listeners e renderiza os ícones Lucide.
- * Executado no próximo frame para garantir que o DOM já foi renderizado.
- */
 function hydrateApplication() {
-  // initLandingEvents injeta o HTML dos ícones de tema no DOM.
-  // createIcons roda DEPOIS para renderizar tudo de uma vez.
   initLandingEvents()
+  initAuthEvents() // Hidrata a lógica do Drawer de Auth
 
   createIcons({
     icons: LUCIDE_ICONS,
@@ -87,13 +57,21 @@ function hydrateApplication() {
 
 // ── Bootstrap ───────────────────────────────────────────────
 
-function bootstrap() {
+async function bootstrap() {
   const rootElement = getRootElement()
-
   renderApplication(rootElement)
-
-  // requestAnimationFrame garante que o DOM está pronto para hidratação
   requestAnimationFrame(hydrateApplication)
+
+  // Inicializa a sessão com o Supabase de forma assíncrona
+  await AuthManager.initialize()
+
+  // Escuta as reações do nosso Store Proxy (Reatividade sem React)
+  AuthManager.subscribe((property, value, target) => {
+    if (property === 'isAuthenticated' && value === true) {
+      console.log('Usuário Autenticado via Proxy!', target.profile)
+      // Aqui faremos a transição de rota para a agenda no futuro
+    }
+  })
 }
 
 document.addEventListener('DOMContentLoaded', bootstrap)
