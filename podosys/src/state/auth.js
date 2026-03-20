@@ -12,6 +12,7 @@ const initialState = {
   profile: null, // Dados da tabela 'profiles' (nome, role, telefone)
   isAuthenticated: false,
   isLoading: true, // Protege as rotas da SPA enquanto checa o banco
+  isRecoveringPassword: false, // Dispara via URL de reset de senha
 }
 
 // ── Sistema de Reatividade (Proxy) ──────────────────────────
@@ -54,7 +55,10 @@ export const AuthManager = {
       authStore.isLoading = false
     }
 
-    supabase.auth.onAuthStateChange(async (_event, session) => {
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        authStore.isRecoveringPassword = true
+      }
       if (session) {
         await this._handleSession(session)
       } else {
@@ -116,5 +120,11 @@ export const AuthManager = {
       redirectTo: window.location.origin,
     })
     if (error) throw error
+  },
+
+  async updatePassword(password) {
+    const { error } = await supabase.auth.updateUser({ password })
+    if (error) throw error
+    authStore.isRecoveringPassword = false
   },
 }
