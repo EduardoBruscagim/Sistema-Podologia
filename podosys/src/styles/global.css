@@ -57,13 +57,15 @@
 
   /* Scrollbar oculta sem desativar o scroll nativo */
   html,
-  body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  body,
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
+  body::-webkit-scrollbar,
+  .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 
@@ -111,6 +113,23 @@
   a[role="button"]:hover {
     will-change: transform;
   }
+
+  /* Evita o fundo branco/amarelo do autofill nativo mantendo bordas e cores naturais do tema */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s !important;
+    background-color: transparent !important;
+    -webkit-text-fill-color: #0F172A !important;
+  }
+
+  :is(.dark *) input:-webkit-autofill,
+  :is(.dark *) input:-webkit-autofill:hover, 
+  :is(.dark *) input:-webkit-autofill:focus, 
+  :is(.dark *) input:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+  }
 }
 
 /* =============================================================
@@ -137,10 +156,10 @@
   /* Glassmorphism com saturação elevada como no macOS/iOS */
 
   .apple-glass {
-    @apply bg-white/35 border border-white/80 dark:border-white/[0.12];
-    background: rgba(255, 255, 255, 0.35);
-    -webkit-backdrop-filter: saturate(200%) blur(20px);
-    backdrop-filter: saturate(200%) blur(20px);
+    @apply bg-white/60 border border-white/60 dark:border-white/[0.12];
+    background: rgba(255, 255, 255, 0.60);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    backdrop-filter: saturate(180%) blur(24px);
     box-shadow:
       0 8px 32px 0 rgba(31, 38, 135, 0.07),
       inset 0 0 0 1px rgba(255, 255, 255, 0.1);

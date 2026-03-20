@@ -70,9 +70,12 @@ export function renderLandingPage() {
       ></div>
 
       <div
-        id="mobile-popup"
-        class="popover popover-hidden fixed top-24 right-2 left-2 z-50 rounded-2xl shadow-2xl md:hidden flex flex-col overflow-hidden bg-white/70 border border-white/80 backdrop-saturate-[1.8] backdrop-blur-[20px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
+        id="mobile-drawer"
+        class="fixed inset-x-0 bottom-0 z-50 md:hidden flex flex-col overflow-hidden apple-glass rounded-t-[32px] border-t border-white/40 dark:border-white/10 shadow-[0_-25px_50px_rgba(0,0,0,0.3)] dark:shadow-[0_-25px_50px_rgba(0,0,0,0.8)] pb-8 pt-2 transform transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] translate-y-full opacity-0 pointer-events-none"
       >
+        <div class="w-full flex justify-center pt-3 pb-2">
+          <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+        </div>
         <div class="p-4 flex flex-col gap-2">
           <div class="flex items-center justify-between p-2">
             <span class="text-sm font-medium text-gray-900 dark:text-white">Aparência</span>
@@ -120,7 +123,7 @@ export function renderLandingPage() {
 
         <div
           id="dashboard-preview"
-          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10 bg-white/45 border border-white/80 backdrop-blur-[8px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
+          class="mt-20 w-full max-w-5xl aspect-[16/9] rounded-2xl shadow-2xl overflow-hidden flex items-center justify-center relative ring-1 ring-black/5 dark:ring-white/10 bg-white/80 border border-white/80 backdrop-blur-[8px] dark:bg-[#1c1c1e]/60 dark:border-[#545458]/48 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] cursor-default"
         >
           <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-300/5 dark:from-blue-500/8 dark:to-cyan-400/5"></div>
 
@@ -148,13 +151,13 @@ function setElementState(element, removeClasses, addClasses) {
 }
 
 /**
- * Abre o popover mobile com animação e trava o scroll do body.
+ * Abre o drawer mobile com animação e trava o scroll do body.
  */
-function openMobilePopup(popupElement, backdropElement) {
-  if (!popupElement || !backdropElement) return
+function openMobileDrawer(drawerElement, backdropElement) {
+  if (!drawerElement || !backdropElement) return
 
-  popupElement.classList.remove('popover-hidden', 'popover-closing')
-  popupElement.classList.add('popover-open')
+  drawerElement.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none')
+  drawerElement.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto')
 
   setElementState(backdropElement, MOBILE_BACKDROP_HIDDEN, MOBILE_BACKDROP_VISIBLE)
 
@@ -162,13 +165,13 @@ function openMobilePopup(popupElement, backdropElement) {
 }
 
 /**
- * Fecha o popover mobile com animação de saída e libera o scroll.
+ * Fecha o drawer mobile com animação de saída e libera o scroll.
  */
-function closeMobilePopup(popupElement, backdropElement) {
-  if (!popupElement || !backdropElement) return
+function closeMobileDrawer(drawerElement, backdropElement) {
+  if (!drawerElement || !backdropElement) return
 
-  popupElement.classList.remove('popover-open')
-  popupElement.classList.add('popover-closing')
+  drawerElement.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto')
+  drawerElement.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none')
 
   setElementState(backdropElement, MOBILE_BACKDROP_VISIBLE, MOBILE_BACKDROP_HIDDEN)
 
@@ -195,25 +198,17 @@ function bindClickById(elementId, handler) {
 export function initLandingEvents() {
   ThemeManager.initToggleButtons()
 
-  const popupElement = document.getElementById('mobile-popup')
+  const drawerElement = document.getElementById('mobile-drawer')
   const backdropElement = document.getElementById('mobile-backdrop')
   const mobileOpenButton = document.getElementById('btn-mobile-open')
 
-  // Reseta estado do popover após a animação de saída completar
-  popupElement?.addEventListener('animationend', (event) => {
-    if (event.animationName !== 'popover-out') return
-
-    popupElement.classList.remove('popover-closing')
-    popupElement.classList.add('popover-hidden')
-  })
-
   mobileOpenButton?.addEventListener('click', () => {
-    openMobilePopup(popupElement, backdropElement)
+    openMobileDrawer(drawerElement, backdropElement)
   })
 
   // Click no backdrop fecha o menu
   backdropElement?.addEventListener('click', () => {
-    closeMobilePopup(popupElement, backdropElement)
+    closeMobileDrawer(drawerElement, backdropElement)
   })
 
   // ── Handlers Integrados com o Drawer de Auth ────────────────
@@ -223,7 +218,7 @@ export function initLandingEvents() {
   })
 
   bindClickById('btn-login-mobile', () => {
-    closeMobilePopup(popupElement, backdropElement)
+    closeMobileDrawer(drawerElement, backdropElement)
     if (window.openAuthDrawer) window.openAuthDrawer()
   })
 

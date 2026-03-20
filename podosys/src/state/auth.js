@@ -97,11 +97,11 @@ export const AuthManager = {
     if (error) throw error
   },
 
-  async signUp(email, password, fullName) {
+  async signUp(email, password, fullName, phone, address) {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName } },
+      options: { data: { full_name: fullName, phone, address } },
     })
     if (error) throw error
   },

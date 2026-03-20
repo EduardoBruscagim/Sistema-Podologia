@@ -11,13 +11,13 @@ export function renderAuthDrawer() {
     
     <div id="auth-wrapper" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center pointer-events-none sm:p-6">
       
-      <div id="auth-dialog" class="w-full sm:max-w-[420px] bg-white/85 dark:bg-[#1c1c1e]/85 backdrop-blur-2xl sm:rounded-[32px] rounded-t-[32px] sm:border border-white/40 dark:border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.1)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.5)] pointer-events-auto transform transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] translate-y-full sm:translate-y-8 sm:scale-95 sm:opacity-0 flex flex-col max-h-[90vh]">
+      <div id="auth-dialog" class="w-full sm:max-w-[420px] apple-glass sm:rounded-[32px] rounded-t-[32px] shadow-[0_0_40px_rgba(0,0,0,0.1)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.5)] pointer-events-auto transform transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] translate-y-full sm:translate-y-8 sm:scale-95 sm:opacity-0 flex flex-col max-h-[90vh]">
         
         <div class="w-full flex justify-center pt-3 pb-2 sm:hidden">
           <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
         </div>
 
-        <div class="px-6 pb-8 sm:pt-8 pt-2 overflow-y-auto">
+        <div class="px-6 pb-8 sm:pt-8 pt-2 overflow-y-auto scrollbar-hide">
           <div class="flex items-center justify-between mb-6">
             <h2 id="auth-title" class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bem-vindo</h2>
             <button id="close-auth-btn" class="p-2 rounded-full bg-gray-100/80 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-700 active:scale-95 transition-all" aria-label="Fechar">
@@ -26,19 +26,31 @@ export function renderAuthDrawer() {
           </div>
 
           <form id="auth-form" class="flex flex-col gap-4">
-            <div id="name-field" class="hidden flex-col gap-1.5">
-              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Nome Completo</label>
-              <input type="text" id="auth-name" placeholder="Ex: Maria Silva" class="h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+            <div id="register-fields" class="hidden flex-col gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Nome Completo</label>
+                <input type="text" id="auth-name" placeholder="Ex: Maria Silva" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Número</label>
+                <input type="tel" id="auth-phone" placeholder="(11) 99999-9999" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Endereço</label>
+                <input type="text" id="auth-address" placeholder="Rua Exemplo, 123" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+              </div>
             </div>
 
             <div class="flex flex-col gap-1.5">
               <label class="text-sm font-medium text-gray-700 dark:text-gray-300">E-mail</label>
-              <input type="email" id="auth-email" required placeholder="seu@email.com" class="h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+              <input type="email" id="auth-email" required placeholder="seu@email.com" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
             </div>
 
             <div class="flex flex-col gap-1.5">
               <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Senha</label>
-              <input type="password" id="auth-password" required placeholder="••••••••" class="h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+              <input type="password" id="auth-password" required placeholder="••••••••" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
             </div>
 
             <p id="auth-error" class="text-red-500 text-sm hidden font-medium text-center"></p>
@@ -49,10 +61,9 @@ export function renderAuthDrawer() {
             </button>
           </form>
 
-          <div class="mt-6 text-center">
-            <button id="toggle-auth-mode-btn" type="button" class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
-              Ainda não tem conta? <span class="text-blue-600 dark:text-blue-400 font-semibold">Criar agora</span>
-            </button>
+          <div class="mt-6 flex flex-row items-center justify-center gap-1 text-sm font-medium text-gray-600 dark:text-gray-400">
+            <span id="auth-mode-text">Ainda não tem conta?</span> 
+            <button id="toggle-auth-mode-btn" type="button" class="text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300 transition-colors cursor-pointer min-h-0 p-0 !inline-block">Criar agora</button>
           </div>
         </div>
       </div>
@@ -67,8 +78,11 @@ export function initAuthEvents() {
   const closeBtn = document.getElementById('close-auth-btn')
   const toggleModeBtn = document.getElementById('toggle-auth-mode-btn')
   const form = document.getElementById('auth-form')
-  const nameField = document.getElementById('name-field')
+  const registerFields = document.getElementById('register-fields')
   const nameInput = document.getElementById('auth-name')
+  const phoneInput = document.getElementById('auth-phone')
+  const addressInput = document.getElementById('auth-address')
+  const authModeText = document.getElementById('auth-mode-text')
   const title = document.getElementById('auth-title')
   const submitText = document.getElementById('auth-submit-text')
   const errorText = document.getElementById('auth-error')
@@ -121,19 +135,25 @@ export function initAuthEvents() {
     errorText.classList.add('hidden')
 
     if (isSignUp) {
-      nameField.classList.remove('hidden')
+      registerFields.classList.remove('hidden')
+      registerFields.classList.add('flex')
       nameInput.required = true
-      title.textContent = 'Criar Conta'
-      submitText.textContent = 'Cadastrar'
-      toggleModeBtn.innerHTML =
-        'Já possui conta? <span class="text-blue-600 dark:text-blue-400 font-semibold">Entrar</span>'
+      phoneInput.required = true
+      addressInput.required = true
+      title.textContent = 'Cadastro'
+      submitText.textContent = 'Criar Conta'
+      authModeText.textContent = 'Já possui conta?'
+      toggleModeBtn.textContent = 'Entrar'
     } else {
-      nameField.classList.add('hidden')
+      registerFields.classList.add('hidden')
+      registerFields.classList.remove('flex')
       nameInput.required = false
+      phoneInput.required = false
+      addressInput.required = false
       title.textContent = 'Bem-vindo'
       submitText.textContent = 'Entrar no Painel'
-      toggleModeBtn.innerHTML =
-        'Ainda não tem conta? <span class="text-blue-600 dark:text-blue-400 font-semibold">Criar agora</span>'
+      authModeText.textContent = 'Ainda não tem conta?'
+      toggleModeBtn.textContent = 'Criar agora'
     }
   })
 
@@ -145,6 +165,8 @@ export function initAuthEvents() {
     const email = document.getElementById('auth-email').value
     const password = document.getElementById('auth-password').value
     const name = nameInput.value
+    const phone = phoneInput.value
+    const address = addressInput.value
 
     submitText.classList.add('opacity-0')
     loadingSpinner.classList.remove('hidden')
@@ -152,7 +174,7 @@ export function initAuthEvents() {
 
     try {
       if (isSignUp) {
-        await AuthManager.signUp(email, password, name)
+        await AuthManager.signUp(email, password, name, phone, address)
       } else {
         await AuthManager.signIn(email, password)
       }
