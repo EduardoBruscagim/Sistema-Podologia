@@ -71,6 +71,13 @@ async function bootstrap() {
       console.log('Usuário Autenticado via Proxy!', target.profile)
       // Aqui faremos a transição de rota para a agenda no futuro
     }
+    
+    // Dispara modal para refazer a senha caso usuário tenha voltado pelo link do e-mail
+    if (property === 'isRecoveringPassword' && value === true) {
+      if (window.openAuthDrawer) {
+        window.openAuthDrawer('update_password')
+      }
+    }
   })
 }
 
