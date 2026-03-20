@@ -29,17 +29,17 @@ export function renderAuthDrawer() {
               <div id="register-inner" class="overflow-hidden flex flex-col pointer-events-none">
                 <div class="flex flex-col gap-1.5 mb-4 mt-1">
                   <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Nome Completo</label>
-                  <input type="text" id="auth-name" placeholder="Ex: Maria Silva" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+                  <input type="text" id="auth-name" placeholder="Ex: Maria Silva" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Número</label>
-                  <input type="tel" id="auth-phone" placeholder="(11) 99999-9999" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+                  <input type="tel" id="auth-phone" placeholder="(11) 99999-9999" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Endereço</label>
-                  <input type="text" id="auth-address" placeholder="Rua Exemplo, 123" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+                  <input type="text" id="auth-address" placeholder="Rua Exemplo, 123" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@ export function renderAuthDrawer() {
               <div id="email-inner" class="overflow-hidden flex flex-col pointer-events-auto">
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label class="text-sm font-medium text-gray-700 dark:text-gray-300">E-mail</label>
-                  <input type="email" id="auth-email" required placeholder="seu@email.com" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+                  <input type="email" id="auth-email" required placeholder="seu@email.com" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ export function renderAuthDrawer() {
               <div id="password-inner" class="overflow-hidden flex flex-col pointer-events-auto">
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Senha</label>
-                  <input type="password" id="auth-password" required placeholder="••••••••" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white" />
+                  <input type="password" id="auth-password" required placeholder="••••••••" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
               </div>
             </div>
@@ -80,7 +80,7 @@ export function renderAuthDrawer() {
               <span id="auth-mode-text">Ainda não tem conta?</span>
               <button id="toggle-auth-mode-btn" type="button" class="text-blue-600 dark:text-blue-400 font-semibold hover:opacity-80 transition-opacity cursor-pointer px-2 py-2 -mx-2 rounded-lg active:bg-blue-50 dark:active:bg-blue-900/20">Criar agora</button>
             </div>
-            <button id="forgot-password-btn" type="button" class="text-gray-500 dark:text-gray-400 hover:opacity-80 transition-opacity cursor-pointer px-3 py-2 -mt-1 rounded-lg active:bg-gray-100 dark:active:bg-gray-800">Esqueceu sua senha?</button>
+            <button id="forgot-password-btn" type="button" class="text-blue-600 dark:text-blue-400 font-semibold hover:opacity-80 transition-opacity cursor-pointer px-3 py-2 -mt-1 rounded-lg active:bg-gray-100 dark:active:bg-gray-800">Esqueceu sua senha?</button>
           </div>
         </div>
       </div>
