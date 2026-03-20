@@ -1,17 +1,21 @@
-import { defineConfig } from "vite";
-import tailwindcss from "@tailwindcss/vite";
+// ============================================================
+//  PodoSys — Vite Configuration
+//  Setup minimalista: Vite + Tailwind, sem plugins extras.
+// ============================================================
 
-// Configuração mínima e direta — sem complexidade prematura
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineConfig({
   plugins: [tailwindcss()],
 
   server: {
     port: 3000,
-    host: true, // Expõe na rede local para testes em dispositivos
+    host: true,
   },
 
   build: {
-    target: "es2024",
-    minify: "esbuild",
+    target: 'es2024',
+    minify: 'esbuild',
   },
-});
+})

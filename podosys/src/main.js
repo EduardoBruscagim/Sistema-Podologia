@@ -6,7 +6,7 @@
 import './styles/global.css'
 import { renderLandingPage, initLandingEvents } from './features/landing/index.js'
 import { renderAuthDrawer, initAuthEvents } from './features/auth/index.js'
-import { AuthManager, authStore } from './state/auth.js'
+import { AuthManager } from './state/auth.js'
 
 import {
   createIcons,
@@ -20,33 +20,38 @@ import {
   X,
 } from 'lucide'
 
+// ── Constantes ──────────────────────────────────────────────
+
 const ROOT_SELECTOR = 'app'
 
-const LUCIDE_ICONS = { ArrowRight, ChevronRight, Footprints, LayoutDashboard, Menu, Moon, Sun, X }
+const LUCIDE_ICONS = {
+  ArrowRight, ChevronRight, Footprints, LayoutDashboard, Menu, Moon, Sun, X,
+}
+
+// ── Montagem do DOM ─────────────────────────────────────────
 
 function getRootElement() {
   const root = document.getElementById(ROOT_SELECTOR)
-  if (!root) throw new Error('Critical: Root element #app missing from index.html')
+  if (!root) throw new Error('[PodoSys] Root element #app ausente no index.html')
   return root
 }
 
 function renderApplication(rootElement) {
-  const template = document.createElement('template')
+  const fragment = document.createElement('template')
 
-  // Monta o layout base: View Principal + Drawer de Autenticação sobreposto
-  template.innerHTML = `
+  fragment.innerHTML = `
     <div id="router-view" class="w-full h-full min-h-screen">
       ${renderLandingPage().trim()}
     </div>
     ${renderAuthDrawer().trim()}
   `
 
-  rootElement.replaceChildren(...template.content.childNodes)
+  rootElement.replaceChildren(...fragment.content.childNodes)
 }
 
 function hydrateApplication() {
   initLandingEvents()
-  initAuthEvents() // Hidrata a lógica do Drawer de Auth
+  initAuthEvents()
 
   createIcons({
     icons: LUCIDE_ICONS,
@@ -62,21 +67,16 @@ async function bootstrap() {
   renderApplication(rootElement)
   requestAnimationFrame(hydrateApplication)
 
-  // Inicializa a sessão com o Supabase de forma assíncrona
   await AuthManager.initialize()
 
-  // Escuta as reações do nosso Store Proxy (Reatividade sem React)
   AuthManager.subscribe((property, value, target) => {
     if (property === 'isAuthenticated' && value === true) {
-      console.log('Usuário Autenticado via Proxy!', target.profile)
-      // Aqui faremos a transição de rota para a agenda no futuro
+      console.log('[PodoSys] Usuário autenticado:', target.profile)
+      // TODO: Transição de rota para a agenda
     }
-    
-    // Dispara modal para refazer a senha caso usuário tenha voltado pelo link do e-mail
+
     if (property === 'isRecoveringPassword' && value === true) {
-      if (window.openAuthDrawer) {
-        window.openAuthDrawer('update_password')
-      }
+      window.openAuthDrawer?.('update_password')
     }
   })
 }
