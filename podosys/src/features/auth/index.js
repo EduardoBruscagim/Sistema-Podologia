@@ -13,9 +13,6 @@ export function renderAuthDrawer() {
       
       <div id="auth-dialog" class="w-full sm:max-w-[420px] apple-glass sm:rounded-[32px] rounded-t-[32px] shadow-[0_0_40px_rgba(0,0,0,0.1)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.5)] pointer-events-auto transform transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] translate-y-full sm:translate-y-8 sm:scale-95 sm:opacity-0 flex flex-col max-h-[90vh]">
         
-        <div class="w-full flex justify-center pt-3 pb-2 sm:hidden">
-          <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
-        </div>
 
         <div class="px-6 pb-8 sm:pt-8 pt-2 overflow-y-auto scrollbar-hide">
           <div class="flex items-center justify-between mb-6">
@@ -93,6 +90,7 @@ export function initAuthEvents() {
 
   // ── Controle de Abertura/Fechamento Responsivo
   window.openAuthDrawer = () => {
+    document.body.style.overflow = 'hidden'
     backdrop.classList.remove('hidden')
     wrapper.classList.remove('hidden')
     wrapper.classList.add('flex')
@@ -107,6 +105,7 @@ export function initAuthEvents() {
   }
 
   const closeDrawer = () => {
+    document.body.style.overflow = ''
     backdrop.classList.add('opacity-0')
     // Remove estado aberto
     dialog.classList.remove('translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100')
