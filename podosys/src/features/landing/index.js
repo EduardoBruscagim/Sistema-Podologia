@@ -158,6 +158,7 @@ function openMobileDrawer(drawerElement, backdropElement) {
 
   setElementState(backdropElement, MOBILE_BACKDROP_HIDDEN, MOBILE_BACKDROP_VISIBLE)
 
+  document.documentElement.style.overflow = 'hidden'
   document.body.style.overflow = 'hidden'
 }
 
@@ -172,6 +173,7 @@ function closeMobileDrawer(drawerElement, backdropElement) {
 
   setElementState(backdropElement, MOBILE_BACKDROP_VISIBLE, MOBILE_BACKDROP_HIDDEN)
 
+  document.documentElement.style.overflow = ''
   document.body.style.overflow = ''
 }
 
@@ -206,6 +208,13 @@ export function initLandingEvents() {
   // Click no backdrop fecha o menu
   backdropElement?.addEventListener('click', () => {
     closeMobileDrawer(drawerElement, backdropElement)
+  })
+
+  // Fecha ao apertar a tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !drawerElement?.classList.contains('translate-y-full')) {
+      closeMobileDrawer(drawerElement, backdropElement)
+    }
   })
 
   // ── Handlers Integrados com o Drawer de Auth ────────────────

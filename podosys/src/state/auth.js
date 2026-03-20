@@ -110,4 +110,11 @@ export const AuthManager = {
     const { error } = await supabase.auth.signOut()
     if (error) throw error
   },
+
+  async resetPasswordForEmail(email) {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin,
+    })
+    if (error) throw error
+  },
 }
