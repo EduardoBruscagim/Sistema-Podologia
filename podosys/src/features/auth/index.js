@@ -1,13 +1,38 @@
 // ============================================================
-//  PodoSys — Auth Feature
+//  PodoSys — Auth Feature (Lógica)
 //  Mobile: Bottom Drawer. Desktop: Glass Modal.
+//  Modos: login | register | forgot | update_password
 // ============================================================
 
 import { AuthManager } from '../../state/auth.js'
 
 export { renderAuthDrawer } from './template.js'
 
+// ── Helpers de Estado Visual ────────────────────────────────
+
+const GRID_OPEN = ['grid-rows-[1fr]', 'opacity-100']
+const GRID_CLOSED = ['grid-rows-[0fr]', 'opacity-0']
+
+/** Expande uma seção animada via grid-rows. */
+function expandSection(wrapper, inner) {
+  wrapper.classList.remove(...GRID_CLOSED)
+  wrapper.classList.add(...GRID_OPEN)
+  inner.classList.remove('pointer-events-none')
+}
+
+/** Recolhe uma seção animada via grid-rows. */
+function collapseSection(wrapper, inner) {
+  wrapper.classList.add(...GRID_CLOSED)
+  wrapper.classList.remove(...GRID_OPEN)
+  inner.classList.add('pointer-events-none')
+}
+
+// ── Inicialização ───────────────────────────────────────────
+
 export function initAuthEvents() {
+
+  // ── Referências DOM ─────────────────────────────────────────
+
   const backdrop = document.getElementById('auth-backdrop')
   const wrapper = document.getElementById('auth-wrapper')
   const dialog = document.getElementById('auth-dialog')
@@ -15,6 +40,7 @@ export function initAuthEvents() {
   const toggleModeBtn = document.getElementById('toggle-auth-mode-btn')
   const form = document.getElementById('auth-form')
   const registerFields = document.getElementById('register-fields')
+  const registerInner = document.getElementById('register-inner')
   const nameInput = document.getElementById('auth-name')
   const phoneInput = document.getElementById('auth-phone')
   const addressInput = document.getElementById('auth-address')
@@ -31,146 +57,126 @@ export function initAuthEvents() {
   const passwordInner = document.getElementById('password-inner')
   const forgotPasswordBtn = document.getElementById('forgot-password-btn')
   const passwordInput = document.getElementById('auth-password')
-  const authFooterActions = document.getElementById('auth-footer-actions')
+  const footerActions = document.getElementById('auth-footer-actions')
 
-  let authMode = 'login' // 'login' | 'register' | 'forgot' | 'update_password'
+  // ── Estado Interno ──────────────────────────────────────────
 
-  const setAuthMode = (mode) => {
+  let authMode = 'login'
+  let closeTimeout = null
+
+  // ── Configuração de Modos ─────────────────────────────────
+
+  const MODE_CONFIG = {
+    login: {
+      title: 'Bem-vindo',
+      submit: 'Entrar no Painel',
+      modeText: 'Ainda não tem conta?',
+      toggleText: 'Criar agora',
+      register: false,
+      email: true,
+      password: true,
+      showForgot: true,
+      required: { name: false, phone: false, address: false, email: true, password: true },
+    },
+    register: {
+      title: 'Cadastro',
+      submit: 'Criar Conta',
+      modeText: 'Já possui conta?',
+      toggleText: 'Entrar',
+      register: true,
+      email: true,
+      password: true,
+      showForgot: false,
+      required: { name: true, phone: true, address: true, email: true, password: true },
+    },
+    forgot: {
+      title: 'Recuperar Senha',
+      submit: 'Enviar Instruções',
+      modeText: 'Lembrou sua senha?',
+      toggleText: 'Entrar',
+      register: false,
+      email: true,
+      password: false,
+      showForgot: false,
+      required: { name: false, phone: false, address: false, email: true, password: false },
+    },
+    update_password: {
+      title: 'Redefinir Senha',
+      submit: 'Atualizar Senha',
+      register: false,
+      email: false,
+      password: true,
+      showForgot: false,
+      hideFooter: true,
+      required: { name: false, phone: false, address: false, email: false, password: true },
+    },
+  }
+
+  function setAuthMode(mode) {
     authMode = mode
 
-    // Reseta cores de erro/sucesso sempre que mudar de aba
     errorText.classList.remove('text-green-500')
-    errorText.classList.add('text-red-500')
-    errorText.classList.add('hidden')
+    errorText.classList.add('text-red-500', 'hidden')
 
-    const registerInner = document.getElementById('register-inner')
+    const config = MODE_CONFIG[mode]
 
-    if (authMode === 'register') {
-      registerFields.classList.remove('grid-rows-[0fr]', 'opacity-0')
-      registerFields.classList.add('grid-rows-[1fr]', 'opacity-100')
-      registerInner.classList.remove('pointer-events-none')
+    // Seções animadas
+    config.register ? expandSection(registerFields, registerInner) : collapseSection(registerFields, registerInner)
+    config.email ? expandSection(emailWrapper, emailInner) : collapseSection(emailWrapper, emailInner)
+    config.password ? expandSection(passwordWrapper, passwordInner) : collapseSection(passwordWrapper, passwordInner)
 
-      emailWrapper.classList.remove('grid-rows-[0fr]', 'opacity-0')
-      emailWrapper.classList.add('grid-rows-[1fr]', 'opacity-100')
-      emailInner.classList.remove('pointer-events-none')
+    // Campos obrigatórios
+    nameInput.required = config.required.name
+    phoneInput.required = config.required.phone
+    addressInput.required = config.required.address
+    emailInput.required = config.required.email
+    passwordInput.required = config.required.password
 
-      passwordWrapper.classList.remove('grid-rows-[0fr]', 'opacity-0')
-      passwordWrapper.classList.add('grid-rows-[1fr]', 'opacity-100')
-      passwordInner.classList.remove('pointer-events-none')
+    // Textos
+    title.textContent = config.title
+    submitText.textContent = config.submit
 
-      nameInput.required = true
-      phoneInput.required = true
-      addressInput.required = true
-      emailInput.required = true
-      passwordInput.required = true
-
-      title.textContent = 'Cadastro'
-      submitText.textContent = 'Criar Conta'
-      authFooterActions.classList.remove('hidden', 'opacity-0')
-      authModeText.textContent = 'Já possui conta?'
-      toggleModeBtn.textContent = 'Entrar'
-
-      forgotPasswordBtn.classList.add('hidden')
-      forgotPasswordBtn.classList.remove('block')
-    } else if (authMode === 'forgot') {
-      registerFields.classList.add('grid-rows-[0fr]', 'opacity-0')
-      registerFields.classList.remove('grid-rows-[1fr]', 'opacity-100')
-      registerInner.classList.add('pointer-events-none')
-
-      emailWrapper.classList.remove('grid-rows-[0fr]', 'opacity-0')
-      emailWrapper.classList.add('grid-rows-[1fr]', 'opacity-100')
-      emailInner.classList.remove('pointer-events-none')
-
-      passwordWrapper.classList.add('grid-rows-[0fr]', 'opacity-0')
-      passwordWrapper.classList.remove('grid-rows-[1fr]', 'opacity-100')
-      passwordInner.classList.add('pointer-events-none')
-
-      nameInput.required = false
-      phoneInput.required = false
-      addressInput.required = false
-      emailInput.required = true
-      passwordInput.required = false
-
-      title.textContent = 'Recuperar Senha'
-      submitText.textContent = 'Enviar Instruções'
-      authFooterActions.classList.remove('hidden', 'opacity-0')
-      authModeText.textContent = 'Lembrou sua senha?'
-      toggleModeBtn.textContent = 'Entrar'
-
-      forgotPasswordBtn.classList.add('hidden')
-      forgotPasswordBtn.classList.remove('block')
-    } else if (authMode === 'update_password') {
-      registerFields.classList.add('grid-rows-[0fr]', 'opacity-0')
-      registerFields.classList.remove('grid-rows-[1fr]', 'opacity-100')
-      registerInner.classList.add('pointer-events-none')
-
-      emailWrapper.classList.add('grid-rows-[0fr]', 'opacity-0')
-      emailWrapper.classList.remove('grid-rows-[1fr]', 'opacity-100')
-      emailInner.classList.add('pointer-events-none')
-
-      passwordWrapper.classList.remove('grid-rows-[0fr]', 'opacity-0')
-      passwordWrapper.classList.add('grid-rows-[1fr]', 'opacity-100')
-      passwordInner.classList.remove('pointer-events-none')
-
-      nameInput.required = false
-      phoneInput.required = false
-      addressInput.required = false
-      emailInput.required = false
-      passwordInput.required = true
-
-      title.textContent = 'Redefinir Senha'
-      submitText.textContent = 'Atualizar Senha'
-      // Oculta completamente o rodapé para focar apenas na redefinição
-      authFooterActions.classList.add('hidden', 'opacity-0')
+    // Rodapé
+    if (config.hideFooter) {
+      footerActions.classList.add('hidden', 'opacity-0')
     } else {
-      // login
-      registerFields.classList.add('grid-rows-[0fr]', 'opacity-0')
-      registerFields.classList.remove('grid-rows-[1fr]', 'opacity-100')
-      registerInner.classList.add('pointer-events-none')
+      footerActions.classList.remove('hidden', 'opacity-0')
+      authModeText.textContent = config.modeText
+      toggleModeBtn.textContent = config.toggleText
+    }
 
-      emailWrapper.classList.remove('grid-rows-[0fr]', 'opacity-0')
-      emailWrapper.classList.add('grid-rows-[1fr]', 'opacity-100')
-      emailInner.classList.remove('pointer-events-none')
-
-      passwordWrapper.classList.remove('grid-rows-[0fr]', 'opacity-0')
-      passwordWrapper.classList.add('grid-rows-[1fr]', 'opacity-100')
-      passwordInner.classList.remove('pointer-events-none')
-
-      nameInput.required = false
-      phoneInput.required = false
-      addressInput.required = false
-      emailInput.required = true
-      passwordInput.required = true
-
-      title.textContent = 'Bem-vindo'
-      submitText.textContent = 'Entrar no Painel'
-      authFooterActions.classList.remove('hidden', 'opacity-0')
-      authModeText.textContent = 'Ainda não tem conta?'
-      toggleModeBtn.textContent = 'Criar agora'
-
+    // Link "Esqueceu sua senha?"
+    if (config.showForgot) {
       forgotPasswordBtn.classList.remove('hidden')
       forgotPasswordBtn.classList.add('block')
+    } else {
+      forgotPasswordBtn.classList.add('hidden')
+      forgotPasswordBtn.classList.remove('block')
     }
   }
 
-  // ── Controle de Abertura/Fechamento Responsivo
+  // ── Abertura / Fechamento ─────────────────────────────────
+
   window.openAuthDrawer = (mode = 'login') => {
-    setAuthMode(mode) // Reseta para a aba passada, default 'login'
+    if (closeTimeout) {
+      clearTimeout(closeTimeout)
+      closeTimeout = null
+    }
+
+    setAuthMode(mode)
+
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
+
     backdrop.classList.remove('hidden')
     wrapper.classList.remove('hidden')
     wrapper.classList.add('flex')
 
-    // Força o DOM a computar o display:flex antes de engatilhar a transição
-    // Isso evita o efeito de "teleporte" e estabiliza os quadros (60fps) no mobile.
     void wrapper.offsetWidth
 
     requestAnimationFrame(() => {
       backdrop.classList.remove('opacity-0')
-      // Remove classes de estado fechado
       dialog.classList.remove('translate-y-full', 'sm:translate-y-8', 'sm:scale-95', 'sm:opacity-0')
-      // Adiciona classes de estado aberto (Reseta translateY no mobile e scale no desktop)
       dialog.classList.add('translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100')
     })
   }
@@ -178,57 +184,60 @@ export function initAuthEvents() {
   const closeDrawer = () => {
     document.documentElement.style.overflow = ''
     document.body.style.overflow = ''
+
     backdrop.classList.add('opacity-0')
-    // Remove estado aberto
     dialog.classList.remove('translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100')
-    // Restaura estado fechado (Desce no mobile, encolhe no desktop)
     dialog.classList.add('translate-y-full', 'sm:translate-y-8', 'sm:scale-95', 'sm:opacity-0')
 
-    setTimeout(() => {
+    if (closeTimeout) clearTimeout(closeTimeout)
+
+    closeTimeout = setTimeout(() => {
       backdrop.classList.add('hidden')
       wrapper.classList.add('hidden')
       wrapper.classList.remove('flex')
       form.reset()
       errorText.classList.add('hidden')
-    }, 400)
+      closeTimeout = null
+    }, 500)
   }
+
+  // ── Eventos de Fechamento ─────────────────────────────────
 
   closeBtn.addEventListener('click', closeDrawer)
 
-  // Fecha ao clicar fora do modal (no wrapper que cobre a tela)
   wrapper.addEventListener('click', (e) => {
     if (e.target === wrapper) closeDrawer()
   })
 
-  // Fecha ao apertar a tecla ESC
+  backdrop.addEventListener('click', closeDrawer)
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !wrapper.classList.contains('hidden')) {
       closeDrawer()
     }
   })
 
-  // ── Alternar Login / Cadastro / Forgot
+  // ── Alternância de Modo ───────────────────────────────────
+
   toggleModeBtn.addEventListener('click', () => {
-    if (authMode === 'register' || authMode === 'forgot') {
-      setAuthMode('login')
-    } else {
-      setAuthMode('register')
-    }
+    setAuthMode(authMode === 'login' ? 'register' : 'login')
   })
 
   forgotPasswordBtn.addEventListener('click', () => {
     setAuthMode('forgot')
   })
 
-  // ── Submissão do Formulário
+  // ── Submissão ─────────────────────────────────────────────
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
+
     errorText.classList.add('hidden')
     errorText.classList.remove('text-green-500')
     errorText.classList.add('text-red-500')
 
-    const email = document.getElementById('auth-email').value
-    const password = document.getElementById('auth-password').value
+    const email = emailInput.value
+    const password = passwordInput.value
     const name = nameInput.value
     const phone = phoneInput.value
     const address = addressInput.value
@@ -243,35 +252,20 @@ export function initAuthEvents() {
         closeDrawer()
       } else if (authMode === 'forgot') {
         await AuthManager.resetPasswordForEmail(email)
-        errorText.classList.remove('text-red-500')
-        errorText.classList.add('text-green-500')
-        errorText.textContent = 'Instruções enviadas para seu e-mail!'
-        errorText.classList.remove('hidden')
-
-        // Após 3 segundos reverte para login
-        setTimeout(() => {
-          setAuthMode('login')
-        }, 3000)
+        showSuccess('Instruções enviadas para seu e-mail!')
+        setTimeout(() => setAuthMode('login'), 3000)
       } else if (authMode === 'update_password') {
         await AuthManager.updatePassword(password)
-        errorText.classList.remove('text-red-500')
-        errorText.classList.add('text-green-500')
-        errorText.textContent = 'Senha atualizada com sucesso!'
-        errorText.classList.remove('hidden')
-
-        setTimeout(() => {
-          setAuthMode('login')
-          closeDrawer()
-        }, 2000)
+        showSuccess('Senha atualizada com sucesso!')
+        setTimeout(() => { setAuthMode('login'); closeDrawer() }, 2000)
       } else {
         await AuthManager.signIn(email, password)
         closeDrawer()
       }
     } catch (error) {
-      errorText.textContent =
-        error.message === 'Invalid login credentials'
-          ? 'E-mail ou senha incorretos.'
-          : 'Ocorreu um erro. Verifique seus dados e tente novamente.'
+      errorText.textContent = error.message === 'Invalid login credentials'
+        ? 'E-mail ou senha incorretos.'
+        : 'Ocorreu um erro. Verifique seus dados e tente novamente.'
       errorText.classList.remove('hidden')
     } finally {
       submitText.classList.remove('opacity-0')
@@ -279,4 +273,13 @@ export function initAuthEvents() {
       submitBtn.disabled = false
     }
   })
+
+  // ── Feedback Visual ───────────────────────────────────────
+
+  function showSuccess(message) {
+    errorText.classList.remove('text-red-500')
+    errorText.classList.add('text-green-500')
+    errorText.textContent = message
+    errorText.classList.remove('hidden')
+  }
 }

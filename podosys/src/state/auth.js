@@ -1,6 +1,6 @@
 // ============================================================
 //  PodoSys — Auth State Manager
-//  Store reativo usando ES2024 Proxy para gerenciar sessão e perfil.
+//  Store reativo usando ES2024 Proxy para gerenciar sessão.
 // ============================================================
 
 import { supabase } from '../api/supabase.js'
@@ -8,46 +8,44 @@ import { supabase } from '../api/supabase.js'
 // ── Estado Inicial ──────────────────────────────────────────
 
 const initialState = {
-  user: null, // Dados do supabase.auth
-  profile: null, // Dados da tabela 'profiles' (nome, role, telefone)
+  user: null,
+  profile: null,
   isAuthenticated: false,
-  isLoading: true, // Protege as rotas da SPA enquanto checa o banco
-  isRecoveringPassword: false, // Dispara via URL de reset de senha
+  isLoading: true,
+  isRecoveringPassword: false,
 }
 
-// ── Sistema de Reatividade (Proxy) ──────────────────────────
+// ── Reatividade (Proxy) ─────────────────────────────────────
 
 const listeners = new Set()
 
 /**
- * Proxy ES2024: Intercepta mutações no objeto alvo e notifica inscritos.
+ * Proxy ES2024: intercepta mutações e notifica inscritos.
  * Permite reatividade e atualização parcial do DOM sem Virtual DOM.
  */
 export const authStore = new Proxy(initialState, {
   set(target, property, value) {
     target[property] = value
-    listeners.forEach((listener) => listener(property, value, target))
+    listeners.forEach((fn) => fn(property, value, target))
     return true
   },
 })
 
-// ── Auth Manager API ────────────────────────────────────────
+// ── Auth Manager ────────────────────────────────────────────
 
 export const AuthManager = {
+
+  /** Registra um callback reativo. Retorna função para desinscrição. */
   subscribe(callback) {
     listeners.add(callback)
     return () => listeners.delete(callback)
   },
 
-  /**
-   * Inicializa o motor, recupera sessão ativa e escuta mudanças.
-   */
+  /** Recupera sessão ativa e escuta mudanças de autenticação. */
   async initialize() {
     authStore.isLoading = true
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession()
+    const { data: { session } } = await supabase.auth.getSession()
 
     if (session) {
       await this._handleSession(session)
@@ -59,6 +57,7 @@ export const AuthManager = {
       if (event === 'PASSWORD_RECOVERY') {
         authStore.isRecoveringPassword = true
       }
+
       if (session) {
         await this._handleSession(session)
       } else {
@@ -67,9 +66,9 @@ export const AuthManager = {
     })
   },
 
-  /**
-   * Popula o estado global fundindo Auth com a tabela profiles (RLS ativo).
-   */
+  // ── Sessão ──────────────────────────────────────────────────
+
+  /** Popula o estado global fundindo Auth com a tabela profiles. */
   async _handleSession(session) {
     authStore.user = session.user
 

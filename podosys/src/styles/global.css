@@ -1,6 +1,6 @@
 /* =============================================================
    PodoSys — Design System (Global Styles)
-   Tokens, base resets e utilitários visuais centralizados.
+   Tokens, resets e utilitários visuais centralizados.
    ============================================================= */
 
 @import "tailwindcss";
@@ -16,16 +16,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Easing curves inspiradas no HIG da Apple */
+  /* Easing curves — Apple HIG */
   --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-spring: cubic-bezier(0.19, 1, 0.22, 1);
 
-  /* Paleta dark mode — preto profundo para contraste premium */
-
+  /* Dark mode surfaces */
   --color-dark-bg: #0a0a0c;
   --color-dark-surface: #121214;
 
-  /* Escala de espaçamento baseada em 4px (8pt grid) */
+  /* 8pt grid spacing scale */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -40,7 +39,8 @@
 
 @layer base {
 
-  /* Renderização de texto otimizada para todos os navegadores */
+  /* ── Renderização otimizada ─────────────────────────────── */
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -55,12 +55,13 @@
     @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100;
   }
 
-  /* Scrollbar oculta sem desativar o scroll nativo */
+  /* ── Scrollbar oculta ──────────────────────────────────── */
+
   html,
   body,
   .scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   html::-webkit-scrollbar,
@@ -69,7 +70,7 @@
     display: none;
   }
 
-  /* ── Tipografia responsiva com clamp() ──────────────────── */
+  /* ── Tipografia responsiva (clamp) ─────────────────────── */
 
   h1 {
     font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
@@ -82,12 +83,11 @@
     letter-spacing: -0.01em;
   }
 
-  /* Largura máxima para legibilidade ideal (~75 caracteres) */
   p {
     max-width: 75ch;
   }
 
-  /* ── Botões e elementos interativos ─────────────────────── */
+  /* ── Interativos — Toque mínimo 48px ───────────────────── */
 
   button,
   a[role="button"],
@@ -101,7 +101,6 @@
       opacity 0.2s ease;
   }
 
-  /* Feedback tátil no press — escala sutil para sensação física */
   button:active,
   a[role="button"]:active,
   input[type="submit"]:active {
@@ -114,10 +113,11 @@
     will-change: transform;
   }
 
-  /* Evita o fundo branco/amarelo do autofill nativo mantendo bordas e cores naturais do tema */
+  /* ── Autofill — Neutraliza background nativo ───────────── */
+
   input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s !important;
     background-color: transparent !important;
@@ -125,8 +125,8 @@
   }
 
   :is(.dark *) input:-webkit-autofill,
-  :is(.dark *) input:-webkit-autofill:hover, 
-  :is(.dark *) input:-webkit-autofill:focus, 
+  :is(.dark *) input:-webkit-autofill:hover,
+  :is(.dark *) input:-webkit-autofill:focus,
   :is(.dark *) input:-webkit-autofill:active {
     -webkit-text-fill-color: #ffffff !important;
   }
@@ -139,7 +139,6 @@
 @layer utilities {
 
   /* ── Apple Transition ───────────────────────────────────── */
-  /* Feedback de press consistente em toda a UI */
 
   .apple-transition {
     transition:
@@ -152,8 +151,7 @@
     opacity: 0.8;
   }
 
-  /* ── Apple Glass ────────────────────────────────────────── */
-  /* Glassmorphism com saturação elevada como no macOS/iOS */
+  /* ── Apple Glass (Glassmorphism) ────────────────────────── */
 
   .apple-glass {
     @apply bg-white/60 border border-white/60 dark:border-white/[0.12];
@@ -173,10 +171,7 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
-  /* Fallback para navegadores sem suporte a backdrop-filter */
-  @supports not (
-    (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-  ) {
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     .apple-glass {
       @apply bg-white/90;
     }
@@ -187,7 +182,6 @@
   }
 
   /* ── Popover System ─────────────────────────────────────── */
-  /* Sistema de popover com animação spring-like */
 
   .popover {
     will-change: transform, opacity;
@@ -236,7 +230,6 @@
     }
   }
 
-  /* Respeita preferência do SO por animações reduzidas */
   @media (prefers-reduced-motion: reduce) {
     .popover-open,
     .popover-closing {
@@ -248,12 +241,7 @@
     }
   }
 
-  /* ── Theme Icon Animation ────────────────────────────────── */
-  /*
-   * Crossfade com rotação oposta: Sol gira pra esquerda e some,
-   * Lua entra pela direita girando. Spring easing de 600ms
-   * para sensação fluida e orgânica.
-   */
+  /* ── Theme Icon Animation ──────────────────────────────── */
 
   .theme-icon-sun,
   .theme-icon-moon {
@@ -262,7 +250,7 @@
       opacity 400ms cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  /* Estado light: Sol visível, Lua escondida */
+  /* Light: Sol visível */
   .theme-icon-sun {
     opacity: 1;
     transform: rotate(0deg) scale(1);
@@ -273,7 +261,7 @@
     transform: rotate(180deg) scale(0.4);
   }
 
-  /* Estado dark: Lua visível, Sol escondida */
+  /* Dark: Lua visível */
   :is(.dark *) .theme-icon-sun {
     opacity: 0;
     transform: rotate(-180deg) scale(0.4);
@@ -284,12 +272,7 @@
     transform: rotate(0deg) scale(1);
   }
 
-  /* ── Landing Page Background Crossfade ──────────────────── */
-  /*
-   * Pseudo-elemento com gradiente escuro sobreposto ao claro.
-   * Opacity 0 → 1 controlado pela classe .dark.
-   * Evita troca abrupta de background na landing page.
-   */
+  /* ── Landing Background Crossfade ──────────────────────── */
 
   .landing-page-bg {
     position: relative;
