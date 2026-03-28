@@ -209,15 +209,15 @@ export function initLandingEvents() {
   // ── Integração com Auth Drawer ──────────────────────────────
 
   bindClick('btn-login-desktop', () => {
-    window.openAuthDrawer?.()
+    window.openAuthDrawer?.('login')
   })
 
   bindClick('btn-login-mobile', () => {
     closeMobileDrawer(drawer, backdrop)
-    window.openAuthDrawer?.()
+    window.openAuthDrawer?.('login')
   })
 
   bindClick('btn-start', () => {
-    window.openAuthDrawer?.()
+    window.openAuthDrawer?.('register')
   })
 }
