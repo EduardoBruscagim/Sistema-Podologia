@@ -8,6 +8,22 @@ import { AuthManager } from '../../state/auth.js'
 
 export { renderAuthDrawer } from './template.js'
 
+// ── Máscara de Telefone BR ──────────────────────────────────
+
+/** Aplica máscara (DD) 9XXXX-XXXX a um valor numérico. */
+function applyPhoneMask(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 11)
+  if (digits.length === 0) return ''
+  if (digits.length <= 2) return `(${digits}`
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
+}
+
+/** Remove a máscara e retorna apenas dígitos. */
+function stripPhoneMask(value) {
+  return value.replace(/\D/g, '')
+}
+
 // ── Helpers de Estado Visual ────────────────────────────────
 
 const GRID_OPEN = ['grid-rows-[1fr]', 'opacity-100']
@@ -43,7 +59,9 @@ export function initAuthEvents() {
   const registerInner = document.getElementById('register-inner')
   const nameInput = document.getElementById('auth-name')
   const phoneInput = document.getElementById('auth-phone')
-  const addressInput = document.getElementById('auth-address')
+  const streetInput = document.getElementById('auth-street')
+  const neighborhoodInput = document.getElementById('auth-neighborhood')
+  const addressNumberInput = document.getElementById('auth-address-number')
   const authModeText = document.getElementById('auth-mode-text')
   const title = document.getElementById('auth-title')
   const submitText = document.getElementById('auth-submit-text')
@@ -58,6 +76,17 @@ export function initAuthEvents() {
   const forgotPasswordBtn = document.getElementById('forgot-password-btn')
   const passwordInput = document.getElementById('auth-password')
   const footerActions = document.getElementById('auth-footer-actions')
+
+  // ── Máscara de Telefone ─────────────────────────────────────
+
+  phoneInput.addEventListener('input', () => {
+    const cursorPos = phoneInput.selectionStart
+    const prevLen = phoneInput.value.length
+    phoneInput.value = applyPhoneMask(phoneInput.value)
+    const newLen = phoneInput.value.length
+    const newPos = cursorPos + (newLen - prevLen)
+    phoneInput.setSelectionRange(newPos, newPos)
+  })
 
   // ── Estado Interno ──────────────────────────────────────────
 
@@ -76,7 +105,7 @@ export function initAuthEvents() {
       email: true,
       password: true,
       showForgot: true,
-      required: { name: false, phone: false, address: false, email: true, password: true },
+      required: { name: false, phone: false, street: false, neighborhood: false, addressNumber: false, email: true, password: true },
     },
     register: {
       title: 'Cadastro',
@@ -87,7 +116,7 @@ export function initAuthEvents() {
       email: true,
       password: true,
       showForgot: false,
-      required: { name: true, phone: true, address: true, email: true, password: true },
+      required: { name: true, phone: true, street: true, neighborhood: true, addressNumber: true, email: true, password: true },
     },
     forgot: {
       title: 'Recuperar Senha',
@@ -98,7 +127,7 @@ export function initAuthEvents() {
       email: true,
       password: false,
       showForgot: false,
-      required: { name: false, phone: false, address: false, email: true, password: false },
+      required: { name: false, phone: false, street: false, neighborhood: false, addressNumber: false, email: true, password: false },
     },
     update_password: {
       title: 'Redefinir Senha',
@@ -108,7 +137,7 @@ export function initAuthEvents() {
       password: true,
       showForgot: false,
       hideFooter: true,
-      required: { name: false, phone: false, address: false, email: false, password: true },
+      required: { name: false, phone: false, street: false, neighborhood: false, addressNumber: false, email: false, password: true },
     },
   }
 
@@ -128,7 +157,9 @@ export function initAuthEvents() {
     // Campos obrigatórios
     nameInput.required = config.required.name
     phoneInput.required = config.required.phone
-    addressInput.required = config.required.address
+    streetInput.required = config.required.street
+    neighborhoodInput.required = config.required.neighborhood
+    addressNumberInput.required = config.required.addressNumber
     emailInput.required = config.required.email
     passwordInput.required = config.required.password
 
@@ -229,6 +260,59 @@ export function initAuthEvents() {
 
   // ── Submissão ─────────────────────────────────────────────
 
+  // ── Tradução de erros do Supabase ──────────────────────────
+
+  const ERROR_MAP = {
+    'Invalid login credentials': 'E-mail ou senha incorretos.',
+    'Email not confirmed': 'E-mail não confirmado. Verifique sua caixa de entrada.',
+    'User already registered': 'Este e-mail já está cadastrado.',
+    'Password should be at least 6 characters': 'A senha deve ter pelo menos 6 caracteres.',
+    'Signup requires a valid password': 'Informe uma senha válida.',
+    'Unable to validate email address: invalid format': 'Formato de e-mail inválido.',
+    'Email rate limit exceeded': 'Muitas tentativas. Aguarde alguns minutos.',
+    'For security purposes, you can only request this after 60 seconds.': 'Aguarde 60 segundos antes de tentar novamente.',
+    'New password should be different from the old password.': 'A nova senha deve ser diferente da senha atual.',
+    'A user with this email address has already been registered': 'Este e-mail já está cadastrado. Tente fazer login.',
+  }
+
+  /** Traduz erros do Supabase para PT-BR com fallback por busca parcial. */
+  function translateError(message) {
+    if (ERROR_MAP[message]) return ERROR_MAP[message]
+
+    // Busca parcial — cobre variações de mensagens do Supabase
+    const partialMatch = Object.keys(ERROR_MAP).find((key) => message?.includes(key))
+    if (partialMatch) return ERROR_MAP[partialMatch]
+
+    return 'Ocorreu um erro. Verifique seus dados e tente novamente.'
+  }
+
+  // ── Validação Frontend ────────────────────────────────────
+
+  function showError(message) {
+    errorText.classList.remove('text-green-500', 'hidden')
+    errorText.classList.add('text-red-500')
+    errorText.textContent = message
+  }
+
+  function validateForm(email, password, name, phone) {
+    if (authMode === 'register') {
+      if (!name?.trim()) return 'Informe seu nome completo.'
+      if (!phone?.trim()) return 'Informe seu número de telefone.'
+    }
+
+    if ((authMode === 'login' || authMode === 'register' || authMode === 'forgot') && !email?.trim()) {
+      return 'Informe seu e-mail.'
+    }
+
+    if ((authMode === 'login' || authMode === 'register' || authMode === 'update_password') && password) {
+      if (password.length < 6) return 'A senha deve ter pelo menos 6 caracteres.'
+    }
+
+    return null
+  }
+
+  // ── Submissão do Formulário ──────────────────────────────
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
 
@@ -236,11 +320,20 @@ export function initAuthEvents() {
     errorText.classList.remove('text-green-500')
     errorText.classList.add('text-red-500')
 
-    const email = emailInput.value
+    const email = emailInput.value.trim()
     const password = passwordInput.value
-    const name = nameInput.value
-    const phone = phoneInput.value
-    const address = addressInput.value
+    const name = nameInput.value.trim()
+    const phone = stripPhoneMask(phoneInput.value)
+    const street = streetInput.value.trim()
+    const neighborhood = neighborhoodInput.value.trim()
+    const addressNumber = addressNumberInput.value.trim()
+
+    // Validação frontend — feedback instantâneo sem bater no servidor
+    const validationError = validateForm(email, password, name, phone)
+    if (validationError) {
+      showError(validationError)
+      return
+    }
 
     submitText.classList.add('opacity-0')
     loadingSpinner.classList.remove('hidden')
@@ -248,24 +341,27 @@ export function initAuthEvents() {
 
     try {
       if (authMode === 'register') {
-        await AuthManager.signUp(email, password, name, phone, address)
-        closeDrawer()
+        await AuthManager.signUp(email, password, name, phone, street, neighborhood, addressNumber)
+        showSuccess('Conta criada com sucesso!')
+        setTimeout(() => showSuccess('Redirecionando para o login...'), 1500)
+        setTimeout(() => setAuthMode('login'), 3000)
       } else if (authMode === 'forgot') {
         await AuthManager.resetPasswordForEmail(email)
         showSuccess('Instruções enviadas para seu e-mail!')
+        setTimeout(() => showSuccess('Redirecionando para o login...'), 1500)
         setTimeout(() => setAuthMode('login'), 3000)
       } else if (authMode === 'update_password') {
         await AuthManager.updatePassword(password)
         showSuccess('Senha atualizada com sucesso!')
-        setTimeout(() => { setAuthMode('login'); closeDrawer() }, 2000)
+        setTimeout(() => showSuccess('Redirecionando para o login...'), 1500)
+        setTimeout(() => setAuthMode('login'), 3000)
       } else {
         await AuthManager.signIn(email, password)
         closeDrawer()
       }
     } catch (error) {
-      errorText.textContent = error.message === 'Invalid login credentials'
-        ? 'E-mail ou senha incorretos.'
-        : 'Ocorreu um erro. Verifique seus dados e tente novamente.'
+      console.error('[PodoSys] Auth error:', error.message, error)
+      errorText.textContent = translateError(error.message)
       errorText.classList.remove('hidden')
     } finally {
       submitText.classList.remove('opacity-0')
