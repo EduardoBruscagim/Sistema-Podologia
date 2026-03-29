@@ -79,50 +79,34 @@ export const AuthManager = {
 
   // ── Sessão ──────────────────────────────────────────────────
 
+  /** Timeout global para evitar loading infinito. */
+  _SESSION_TIMEOUT: 10_000,
+
   /** Popula o estado global fundindo Auth com a tabela profiles. */
   async _handleSession(session) {
-    // Incrementa versão — chamadas simultâneas anteriores são descartadas
     const currentVersion = ++this._sessionVersion
-
     authStore.user = session.user
 
     try {
-      // Tenta buscar o profile com retries (trigger pode demorar a criar)
-      let profile = null
-      let attempts = 0
-      const MAX_ATTEMPTS = 3
-      const RETRY_DELAY = 800
+      const profile = await Promise.race([
+        this._fetchProfileWithRetry(session.user.id, currentVersion),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Profile fetch timeout')), this._SESSION_TIMEOUT),
+        ),
+      ])
 
-      while (attempts < MAX_ATTEMPTS) {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('full_name, phone, street, neighborhood, address_number, role')
-          .eq('id', session.user.id)
-          .maybeSingle()
-
-        // Se outra chamada mais recente já está em andamento, aborta esta
-        if (this._sessionVersion !== currentVersion) return
-
-        if (!error && data) {
-          profile = data
-          break
-        }
-
-        attempts++
-        if (attempts < MAX_ATTEMPTS) {
-          await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY))
-          if (this._sessionVersion !== currentVersion) return
-        }
-      }
-
-      // Garante que ainda somos a chamada mais recente
       if (this._sessionVersion !== currentVersion) return
 
       if (profile) {
         authStore.profile = profile
       }
     } catch (err) {
-      console.warn('[PodoSys] Erro ao buscar profile:', err.message)
+      if (this._sessionVersion !== currentVersion) return
+      console.error('[PodoSys] Falha ao buscar profile:', {
+        userId: session.user.id,
+        error: err.message,
+        stack: err.stack,
+      })
     }
 
     // Sempre finaliza o loading, mesmo sem profile
@@ -130,6 +114,40 @@ export const AuthManager = {
       authStore.isAuthenticated = true
       authStore.isLoading = false
     }
+  },
+
+  /** Busca profile com retries e backoff exponencial. */
+  async _fetchProfileWithRetry(userId, version) {
+    const MAX_ATTEMPTS = 3
+    const BASE_DELAY = 800
+
+    for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('full_name, phone, street, neighborhood, address_number, role')
+        .eq('id', userId)
+        .maybeSingle()
+
+      if (this._sessionVersion !== version) return null
+
+      if (error) {
+        console.error('[PodoSys] Erro na query de profile (tentativa %d/%d):', attempt + 1, MAX_ATTEMPTS, {
+          userId,
+          error: error.message,
+        })
+      }
+
+      if (data) return data
+
+      // Backoff exponencial entre tentativas
+      if (attempt < MAX_ATTEMPTS - 1) {
+        const delay = BASE_DELAY * Math.pow(2, attempt)
+        await new Promise((resolve) => setTimeout(resolve, delay))
+        if (this._sessionVersion !== version) return null
+      }
+    }
+
+    return null
   },
 
   _clearState() {
@@ -147,7 +165,7 @@ export const AuthManager = {
     if (error) throw error
   },
 
-  async signUp(email, password, fullName, phone, street, neighborhood, addressNumber) {
+  async signUp({ email, password, fullName, phone, street, neighborhood, addressNumber }) {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,

@@ -49,6 +49,9 @@ export const ThemeManager = {
    * Inicializa todos os botões de toggle de tema na página.
    * Injeta ícones Sol/Lua com animação de rotação + crossfade
    * controlada inteiramente por classes Tailwind (dark:).
+   *
+   * Layout classes (relative, flex, sizing) pertencem ao template HTML.
+   * Este método injeta apenas o conteúdo (ícones).
    */
   initToggleButtons(buttonClass = '.theme-toggle-btn', iconContainerClass = '.theme-icon-container') {
     const buttons = document.querySelectorAll(buttonClass)
@@ -57,9 +60,6 @@ export const ThemeManager = {
     if (!buttons.length || !iconContainers.length) return
 
     iconContainers.forEach((container) => {
-      container.classList.add('relative', 'flex', 'items-center', 'justify-center')
-      container.style = ''
-
       container.innerHTML = `
         <i data-lucide="sun" class="theme-icon-sun absolute h-[1.25rem] w-[1.25rem]"></i>
         <i data-lucide="moon" class="theme-icon-moon absolute h-[1.25rem] w-[1.25rem]"></i>

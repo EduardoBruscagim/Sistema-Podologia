@@ -7,6 +7,7 @@ import './styles/global.css'
 import { renderLandingPage, initLandingEvents } from './features/landing/index.js'
 import { renderAuthDrawer, initAuthEvents } from './features/auth/index.js'
 import { AuthManager } from './state/auth.js'
+import { eventBus } from './utils/eventBus.js'
 
 import {
   createIcons,
@@ -69,14 +70,13 @@ async function bootstrap() {
 
   await AuthManager.initialize()
 
-  AuthManager.subscribe((property, value, target) => {
+  AuthManager.subscribe((property, value) => {
     if (property === 'isAuthenticated' && value === true) {
-      console.log('[PodoSys] Usuário autenticado:', target.profile)
       // TODO: Transição de rota para a agenda
     }
 
     if (property === 'isRecoveringPassword' && value === true) {
-      window.openAuthDrawer?.('update_password')
+      eventBus.emit('auth:open', 'update_password')
     }
   })
 }
