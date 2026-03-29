@@ -28,28 +28,28 @@ export function renderAuthDrawer() {
             <div id="register-fields" class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
               <div id="register-inner" class="overflow-hidden flex flex-col pointer-events-none">
                 <div class="flex flex-col gap-1.5 mb-4 mt-1">
-                  <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Nome Completo</label>
+                  <label for="auth-name" class="text-sm font-medium text-gray-700 dark:text-gray-300">Nome Completo</label>
                   <input type="text" id="auth-name" placeholder="Ex: Maria Silva" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
-                  <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Número</label>
+                  <label for="auth-phone" class="text-sm font-medium text-gray-700 dark:text-gray-300">Número</label>
                   <input type="tel" id="auth-phone" placeholder="(11) 99999-9999" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3 mb-4">
                   <div class="flex flex-col gap-1.5 flex-1">
-                    <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Rua</label>
+                    <label for="auth-street" class="text-sm font-medium text-gray-700 dark:text-gray-300">Rua</label>
                     <input type="text" id="auth-street" placeholder="Rua Exemplo" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                   </div>
                   <div class="flex flex-col gap-1.5 sm:w-24">
-                    <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Nº</label>
+                    <label for="auth-address-number" class="text-sm font-medium text-gray-700 dark:text-gray-300">Nº</label>
                     <input type="text" id="auth-address-number" placeholder="123" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                   </div>
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
-                  <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Bairro</label>
+                  <label for="auth-neighborhood" class="text-sm font-medium text-gray-700 dark:text-gray-300">Bairro</label>
                   <input type="text" id="auth-neighborhood" placeholder="Centro" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
               </div>
@@ -59,7 +59,7 @@ export function renderAuthDrawer() {
             <div id="email-wrapper" class="grid grid-rows-[1fr] opacity-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
               <div id="email-inner" class="overflow-hidden flex flex-col pointer-events-auto">
                 <div class="flex flex-col gap-1.5 mb-4">
-                  <label class="text-sm font-medium text-gray-700 dark:text-gray-300">E-mail</label>
+                  <label for="auth-email" class="text-sm font-medium text-gray-700 dark:text-gray-300">E-mail</label>
                   <input type="email" id="auth-email" required placeholder="seu@email.com" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
               </div>
@@ -69,14 +69,14 @@ export function renderAuthDrawer() {
             <div id="password-wrapper" class="grid grid-rows-[1fr] opacity-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
               <div id="password-inner" class="overflow-hidden flex flex-col pointer-events-auto">
                 <div class="flex flex-col gap-1.5 mb-4">
-                  <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Senha</label>
+                  <label for="auth-password" class="text-sm font-medium text-gray-700 dark:text-gray-300">Senha</label>
                   <input type="password" id="auth-password" required placeholder="••••••••" class="appearance-none h-12 px-4 rounded-xl bg-gray-50/50 dark:bg-[#2c2c2e]/50 border-2 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-[#2c2c2e] focus:border-blue-500 outline-none transition-all dark:text-white" />
                 </div>
               </div>
             </div>
 
             <!-- Feedback de erro/sucesso -->
-            <p id="auth-error" class="text-red-500 text-sm hidden font-medium text-center mb-4"></p>
+            <p id="auth-feedback" class="text-red-500 text-sm hidden font-medium text-center mb-4"></p>
 
             <!-- Botão de ação principal -->
             <button type="submit" id="auth-submit-btn" class="relative flex items-center justify-center p-0 h-12 mt-2 bg-blue-600 text-white font-semibold rounded-xl active:scale-95 hover:opacity-90 transition-opacity w-full disabled:opacity-70 shadow-[0_8px_20px_rgb(37,99,235,0.2)]">

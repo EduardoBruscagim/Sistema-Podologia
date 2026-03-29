@@ -4,6 +4,9 @@
 // ============================================================
 
 import { ThemeManager } from '../../utils/theme.js'
+import { lockScroll, unlockScroll } from '../../utils/scrollLock.js'
+import { eventBus } from '../../utils/eventBus.js'
+import { registerEscapeHandler } from '../../utils/escapeStack.js'
 
 // ── Constantes ──────────────────────────────────────────────
 
@@ -39,7 +42,7 @@ export function renderLandingPage() {
                 class="theme-toggle-btn w-12 h-12 flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded-2xl transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0c]"
                 aria-label="Alternar tema"
               >
-                <span class="theme-icon-container flex items-center justify-center"></span>
+                <span class="theme-icon-container relative flex items-center justify-center w-5 h-5"></span>
               </button>
 
               <button
@@ -85,7 +88,7 @@ export function renderLandingPage() {
               class="theme-toggle-btn w-10 h-10 flex items-center justify-center text-gray-500 dark:text-gray-400 rounded-full transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               aria-label="Alternar tema"
             >
-              <span class="theme-icon-container flex items-center justify-center"></span>
+              <span class="theme-icon-container relative flex items-center justify-center w-5 h-5"></span>
             </button>
           </div>
 
@@ -157,9 +160,7 @@ function openMobileDrawer(drawer, backdrop) {
   drawer.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto')
 
   setElementState(backdrop, BACKDROP_HIDDEN, BACKDROP_VISIBLE)
-
-  document.documentElement.style.overflow = 'hidden'
-  document.body.style.overflow = 'hidden'
+  lockScroll()
 }
 
 /** Fecha o drawer mobile com animação de saída e libera o scroll. */
@@ -170,9 +171,7 @@ function closeMobileDrawer(drawer, backdrop) {
   drawer.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none')
 
   setElementState(backdrop, BACKDROP_VISIBLE, BACKDROP_HIDDEN)
-
-  document.documentElement.style.overflow = ''
-  document.body.style.overflow = ''
+  unlockScroll()
 }
 
 /** Bind seguro por ID — silencioso quando o elemento não existe. */
@@ -200,24 +199,20 @@ export function initLandingEvents() {
     closeMobileDrawer(drawer, backdrop)
   })
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !drawer?.classList.contains('translate-y-full')) {
-      closeMobileDrawer(drawer, backdrop)
-    }
-  })
+  // Escape handler — registrado no stack global (prioridade menor que auth)
+  registerEscapeHandler(
+    () => drawer && !drawer.classList.contains('translate-y-full'),
+    () => closeMobileDrawer(drawer, backdrop),
+  )
 
-  // ── Integração com Auth Drawer ──────────────────────────────
+  // ── Integração com Auth Drawer via Event Bus ───────────────
 
-  bindClick('btn-login-desktop', () => {
-    window.openAuthDrawer?.('login')
-  })
+  bindClick('btn-login-desktop', () => eventBus.emit('auth:open', 'login'))
 
   bindClick('btn-login-mobile', () => {
     closeMobileDrawer(drawer, backdrop)
-    window.openAuthDrawer?.('login')
+    eventBus.emit('auth:open', 'login')
   })
 
-  bindClick('btn-start', () => {
-    window.openAuthDrawer?.('register')
-  })
+  bindClick('btn-start', () => eventBus.emit('auth:open', 'register'))
 }
