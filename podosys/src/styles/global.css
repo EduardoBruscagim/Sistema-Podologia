@@ -1,13 +1,13 @@
-/* =============================================================
-   PodoSys — Design System (Global Styles)
-   Tokens, resets e utilitários visuais centralizados.
-   ============================================================= */
+/* -----------------------------------------------------------------------------
+ * PodoSys — Design System (Global Styles)
+ * Tokens, resets e utilitários visuais centralizados.
+ * -------------------------------------------------------------------------- */
 
 @import "tailwindcss";
 
-/* =============================================================
-   DESIGN TOKENS
-   ============================================================= */
+/* -----------------------------------------------------------------------------
+ * Design Tokens
+ * -------------------------------------------------------------------------- */
 
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
@@ -25,13 +25,13 @@
   --color-dark-surface: #121214;
 }
 
-/* =============================================================
-   BASE — Resets e tipografia global
-   ============================================================= */
+/* -----------------------------------------------------------------------------
+ * Base — Resets e tipografia global
+ * -------------------------------------------------------------------------- */
 
 @layer base {
 
-  /* ── Renderização otimizada ─────────────────────────────── */
+  /* Renderização otimizada */
 
   html {
     -webkit-font-smoothing: antialiased;
@@ -47,7 +47,7 @@
     @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100;
   }
 
-  /* ── Scrollbar oculta ──────────────────────────────────── */
+  /* Scrollbar oculta */
 
   html,
   body,
@@ -62,7 +62,7 @@
     display: none;
   }
 
-  /* ── Tipografia responsiva (clamp) ─────────────────────── */
+  /* Tipografia responsiva (clamp) */
 
   h1 {
     font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
@@ -79,7 +79,7 @@
     max-width: 75ch;
   }
 
-  /* ── Interativos — Toque mínimo 48px ───────────────────── */
+  /* Interativos — Toque mínimo 48px */
 
   button,
   a[role="button"],
@@ -105,7 +105,7 @@
     will-change: transform;
   }
 
-  /* ── Autofill — Neutraliza background nativo ───────────── */
+  /* Autofill — Neutraliza background nativo */
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -124,13 +124,13 @@
   }
 }
 
-/* =============================================================
-   UTILITIES — Componentes visuais reutilizáveis
-   ============================================================= */
+/* -----------------------------------------------------------------------------
+ * Utilities — Componentes visuais reutilizáveis
+ * -------------------------------------------------------------------------- */
 
 @layer utilities {
 
-  /* ── Apple Transition ───────────────────────────────────── */
+  /* Apple Transition */
 
   .apple-transition {
     transition:
@@ -143,7 +143,7 @@
     opacity: 0.85;
   }
 
-  /* ── Apple Glass (Glassmorphism) ────────────────────────── */
+  /* Apple Glass (Glassmorphism) */
 
   .apple-glass {
     @apply bg-white/60 border border-white/60 dark:border-white/[0.12];
@@ -173,7 +173,7 @@
     }
   }
 
-  /* ── Theme Icon Animation ──────────────────────────────── */
+  /* Theme Icon Animation */
 
   .theme-icon-sun,
   .theme-icon-moon {
@@ -204,7 +204,7 @@
     transform: rotate(0deg) scale(1);
   }
 
-  /* ── Landing Background Crossfade ──────────────────────── */
+  /* Landing Background Crossfade */
 
   .landing-page-bg {
     position: relative;

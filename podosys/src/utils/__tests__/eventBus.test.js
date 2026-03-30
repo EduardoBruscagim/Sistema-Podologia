@@ -61,6 +61,7 @@ describe('eventBus', () => {
     eventBus.emit('event-b', 'data')
 
     expect(cb).not.toHaveBeenCalled()
+
     eventBus.off('event-a', cb)
   })
 })

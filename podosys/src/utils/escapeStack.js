@@ -1,8 +1,8 @@
-// ============================================================
-//  PodoSys — Escape Stack
-//  Stack de handlers para a tecla Escape.
-//  O handler ativo mais recente (maior z-index) tem prioridade.
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Escape Stack
+// Stack de handlers para a tecla Escape.
+// O handler ativo mais recente (maior z-index) tem prioridade.
+// -----------------------------------------------------------------------------
 
 const handlers = []
 
@@ -28,6 +28,7 @@ document.addEventListener('keydown', (e) => {
 export function registerEscapeHandler(isActive, handler) {
   const entry = { isActive, handler }
   handlers.push(entry)
+
   return () => {
     const index = handlers.indexOf(entry)
     if (index !== -1) handlers.splice(index, 1)

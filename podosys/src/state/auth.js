@@ -1,11 +1,13 @@
-// ============================================================
-//  PodoSys — Auth State Manager
-//  Store reativo usando ES2024 Proxy para gerenciar sessão.
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Auth State Manager
+// Store reativo usando ES2024 Proxy para gerenciar sessão.
+// -----------------------------------------------------------------------------
 
 import { supabase } from '../api/supabase.js'
 
-// ── Estado Inicial ──────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Initial State
+// -----------------------------------------------------------------------------
 
 const initialState = {
   user: null,
@@ -15,7 +17,9 @@ const initialState = {
   isRecoveringPassword: false,
 }
 
-// ── Reatividade (Proxy) ─────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Reactivity (Proxy)
+// -----------------------------------------------------------------------------
 
 const listeners = new Set()
 
@@ -31,7 +35,9 @@ export const authStore = new Proxy(initialState, {
   },
 })
 
-// ── Auth Manager ────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Auth Manager
+// -----------------------------------------------------------------------------
 
 export const AuthManager = {
 
@@ -41,7 +47,9 @@ export const AuthManager = {
     return () => listeners.delete(callback)
   },
 
-  // ── Controle de concorrência ────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Concurrency Control
+  // ---------------------------------------------------------------------------
 
   /** ID incremental para cancelar processamentos obsoletos. */
   _sessionVersion: 0,
@@ -77,7 +85,9 @@ export const AuthManager = {
     })
   },
 
-  // ── Sessão ──────────────────────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Session Management
+  // ---------------------------------------------------------------------------
 
   /** Timeout global para evitar loading infinito. */
   _SESSION_TIMEOUT: 10_000,
@@ -91,7 +101,10 @@ export const AuthManager = {
       const profile = await Promise.race([
         this._fetchProfileWithRetry(session.user.id, currentVersion),
         new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('Profile fetch timeout')), this._SESSION_TIMEOUT),
+          setTimeout(
+            () => reject(new Error('Profile fetch timeout')),
+            this._SESSION_TIMEOUT,
+          ),
         ),
       ])
 
@@ -102,6 +115,7 @@ export const AuthManager = {
       }
     } catch (err) {
       if (this._sessionVersion !== currentVersion) return
+
       console.error('[PodoSys] Falha ao buscar profile:', {
         userId: session.user.id,
         error: err.message,
@@ -131,10 +145,12 @@ export const AuthManager = {
       if (this._sessionVersion !== version) return null
 
       if (error) {
-        console.error('[PodoSys] Erro na query de profile (tentativa %d/%d):', attempt + 1, MAX_ATTEMPTS, {
-          userId,
-          error: error.message,
-        })
+        console.error(
+          '[PodoSys] Erro na query de profile (tentativa %d/%d):',
+          attempt + 1,
+          MAX_ATTEMPTS,
+          { userId, error: error.message },
+        )
       }
 
       if (data) return data
@@ -158,19 +174,38 @@ export const AuthManager = {
     authStore.isLoading = false
   },
 
-  // ── Ações Públicas ────────────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Public Actions
+  // ---------------------------------------------------------------------------
 
   async signIn(email, password) {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) throw error
   },
 
-  async signUp({ email, password, fullName, phone, street, neighborhood, addressNumber }) {
+  async signUp({
+    email,
+    password,
+    fullName,
+    phone,
+    street,
+    neighborhood,
+    addressNumber,
+  }) {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName, phone, street, neighborhood, address_number: addressNumber } },
+      options: {
+        data: {
+          full_name: fullName,
+          phone,
+          street,
+          neighborhood,
+          address_number: addressNumber,
+        },
+      },
     })
+
     if (error) throw error
     return data
   },
