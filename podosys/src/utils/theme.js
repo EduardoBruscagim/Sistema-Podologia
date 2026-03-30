@@ -1,16 +1,20 @@
-// ============================================================
-//  PodoSys — Theme Manager
-//  Controle centralizado de tema claro/escuro.
-//  Toggle síncrono — transição visual delegada ao Tailwind CSS.
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Theme Manager
+// Controle centralizado de tema claro/escuro.
+// Toggle síncrono — transição visual delegada ao Tailwind CSS.
+// -----------------------------------------------------------------------------
 
-// ── Constantes ──────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Constants
+// -----------------------------------------------------------------------------
 
 const STORAGE_KEY = 'theme'
 const DARK = 'dark'
 const LIGHT = 'light'
 
-// ── Helpers ─────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Helpers
+// -----------------------------------------------------------------------------
 
 /**
  * Aplica o tema no <html> e persiste no localStorage.
@@ -30,7 +34,9 @@ function getCurrentTheme() {
   return document.documentElement.classList.contains(DARK) ? DARK : LIGHT
 }
 
-// ── API Pública ─────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Public API
+// -----------------------------------------------------------------------------
 
 export const ThemeManager = {
   get current() {
@@ -53,7 +59,10 @@ export const ThemeManager = {
    * Layout classes (relative, flex, sizing) pertencem ao template HTML.
    * Este método injeta apenas o conteúdo (ícones).
    */
-  initToggleButtons(buttonClass = '.theme-toggle-btn', iconContainerClass = '.theme-icon-container') {
+  initToggleButtons(
+    buttonClass = '.theme-toggle-btn',
+    iconContainerClass = '.theme-icon-container',
+  ) {
     const buttons = document.querySelectorAll(buttonClass)
     const iconContainers = document.querySelectorAll(iconContainerClass)
 

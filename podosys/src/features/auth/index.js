@@ -1,8 +1,8 @@
-// ============================================================
-//  PodoSys — Auth Feature (Lógica)
-//  Mobile: Bottom Drawer. Desktop: Glass Modal.
-//  Modos: login | register | forgot | update_password
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Auth Feature (Logic)
+// Mobile: Bottom Drawer. Desktop: Glass Modal.
+// Modos: login | register | forgot | update_password
+// -----------------------------------------------------------------------------
 
 import { AuthManager } from '../../state/auth.js'
 import { applyPhoneMask, stripPhoneMask } from '../../utils/phoneMask.js'
@@ -14,7 +14,9 @@ import { registerEscapeHandler } from '../../utils/escapeStack.js'
 
 export { renderAuthDrawer } from './template.js'
 
-// ── Helpers de Estado Visual ────────────────────────────────
+// -----------------------------------------------------------------------------
+// Visual State Helpers
+// -----------------------------------------------------------------------------
 
 const GRID_OPEN = ['grid-rows-[1fr]', 'opacity-100']
 const GRID_CLOSED = ['grid-rows-[0fr]', 'opacity-0']
@@ -31,7 +33,19 @@ function collapseSection(wrapper, inner) {
   inner.classList.add('pointer-events-none')
 }
 
-// ── Configuração de Modos ───────────────────────────────────
+// -----------------------------------------------------------------------------
+// Mode Configuration
+// -----------------------------------------------------------------------------
+
+const ALL_FIELDS_OPTIONAL = {
+  name: false,
+  phone: false,
+  street: false,
+  neighborhood: false,
+  addressNumber: false,
+  email: false,
+  password: false,
+}
 
 const MODE_CONFIG = {
   login: {
@@ -43,8 +57,9 @@ const MODE_CONFIG = {
     showEmail: true,
     showPassword: true,
     showForgot: true,
-    required: { name: false, phone: false, street: false, neighborhood: false, addressNumber: false, email: true, password: true },
+    required: { ...ALL_FIELDS_OPTIONAL, email: true, password: true },
   },
+
   register: {
     title: 'Cadastro',
     submit: 'Criar Conta',
@@ -54,8 +69,17 @@ const MODE_CONFIG = {
     showEmail: true,
     showPassword: true,
     showForgot: false,
-    required: { name: true, phone: true, street: true, neighborhood: true, addressNumber: true, email: true, password: true },
+    required: {
+      name: true,
+      phone: true,
+      street: true,
+      neighborhood: true,
+      addressNumber: true,
+      email: true,
+      password: true,
+    },
   },
+
   forgot: {
     title: 'Recuperar Senha',
     submit: 'Enviar Instruções',
@@ -65,8 +89,9 @@ const MODE_CONFIG = {
     showEmail: true,
     showPassword: false,
     showForgot: false,
-    required: { name: false, phone: false, street: false, neighborhood: false, addressNumber: false, email: true, password: false },
+    required: { ...ALL_FIELDS_OPTIONAL, email: true },
   },
+
   update_password: {
     title: 'Redefinir Senha',
     submit: 'Atualizar Senha',
@@ -75,15 +100,19 @@ const MODE_CONFIG = {
     showPassword: true,
     showForgot: false,
     hideFooter: true,
-    required: { name: false, phone: false, street: false, neighborhood: false, addressNumber: false, email: false, password: true },
+    required: { ...ALL_FIELDS_OPTIONAL, password: true },
   },
 }
 
-// ── Inicialização ───────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Initialization
+// -----------------------------------------------------------------------------
 
 export function initAuthEvents() {
 
-  // ── Referências DOM ─────────────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // DOM References
+  // ---------------------------------------------------------------------------
 
   const backdrop = document.getElementById('auth-backdrop')
   const wrapper = document.getElementById('auth-wrapper')
@@ -113,7 +142,9 @@ export function initAuthEvents() {
   const passwordInput = document.getElementById('auth-password')
   const footerActions = document.getElementById('auth-footer-actions')
 
-  // ── Máscara de Telefone ─────────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Phone Mask
+  // ---------------------------------------------------------------------------
 
   phoneInput.addEventListener('input', () => {
     const cursorPos = phoneInput.selectionStart
@@ -124,7 +155,9 @@ export function initAuthEvents() {
     phoneInput.setSelectionRange(newPos, newPos)
   })
 
-  // ── Estado Interno ──────────────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Internal State
+  // ---------------------------------------------------------------------------
 
   let authMode = 'login'
   let closeTimeout = null
@@ -135,7 +168,9 @@ export function initAuthEvents() {
     pendingTimeouts = []
   }
 
-  // ── Feedback Visual ───────────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Visual Feedback
+  // ---------------------------------------------------------------------------
 
   function showFeedback(message, isSuccess = false) {
     feedbackText.classList.remove('text-red-500', 'text-green-500', 'hidden')
@@ -154,7 +189,11 @@ export function initAuthEvents() {
     clearPendingTimeouts()
     showFeedback(message, true)
 
-    const t1 = setTimeout(() => showFeedback('Redirecionando para o login...', true), 1500)
+    const t1 = setTimeout(
+      () => showFeedback('Redirecionando para o login...', true),
+      1500,
+    )
+
     const t2 = setTimeout(() => {
       finalAction()
       clearPendingTimeouts()
@@ -163,7 +202,9 @@ export function initAuthEvents() {
     pendingTimeouts.push(t1, t2)
   }
 
-  // ── Gestão de Modos ───────────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Mode Management
+  // ---------------------------------------------------------------------------
 
   function resetRegisterFields() {
     nameInput.value = ''
@@ -181,17 +222,31 @@ export function initAuthEvents() {
 
     const config = MODE_CONFIG[mode]
 
-    // Seções animadas
-    config.showRegister ? expandSection(registerFields, registerInner) : collapseSection(registerFields, registerInner)
-    config.showEmail ? expandSection(emailWrapper, emailInner) : collapseSection(emailWrapper, emailInner)
-    config.showPassword ? expandSection(passwordWrapper, passwordInner) : collapseSection(passwordWrapper, passwordInner)
+    // Animated sections
+    if (config.showRegister) {
+      expandSection(registerFields, registerInner)
+    } else {
+      collapseSection(registerFields, registerInner)
+    }
 
-    // Reset campos de cadastro ao sair do modo register
+    if (config.showEmail) {
+      expandSection(emailWrapper, emailInner)
+    } else {
+      collapseSection(emailWrapper, emailInner)
+    }
+
+    if (config.showPassword) {
+      expandSection(passwordWrapper, passwordInner)
+    } else {
+      collapseSection(passwordWrapper, passwordInner)
+    }
+
+    // Reset register fields when leaving register mode
     if (previousMode === 'register' && mode !== 'register') {
       resetRegisterFields()
     }
 
-    // Campos obrigatórios
+    // Required fields
     nameInput.required = config.required.name
     phoneInput.required = config.required.phone
     streetInput.required = config.required.street
@@ -200,11 +255,11 @@ export function initAuthEvents() {
     emailInput.required = config.required.email
     passwordInput.required = config.required.password
 
-    // Textos
+    // Text labels
     title.textContent = config.title
     submitText.textContent = config.submit
 
-    // Rodapé
+    // Footer
     if (config.hideFooter) {
       footerActions.classList.add('hidden', 'opacity-0')
     } else {
@@ -213,7 +268,7 @@ export function initAuthEvents() {
       toggleModeBtn.textContent = config.toggleText
     }
 
-    // Link "Esqueceu sua senha?"
+    // Forgot password link
     if (config.showForgot) {
       forgotPasswordBtn.classList.remove('hidden')
       forgotPasswordBtn.classList.add('block')
@@ -223,7 +278,9 @@ export function initAuthEvents() {
     }
   }
 
-  // ── Abertura / Fechamento ─────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Open / Close
+  // ---------------------------------------------------------------------------
 
   function openDrawer(mode = 'login') {
     if (closeTimeout) {
@@ -244,8 +301,13 @@ export function initAuthEvents() {
 
     requestAnimationFrame(() => {
       backdrop.classList.remove('opacity-0')
-      dialog.classList.remove('translate-y-full', 'sm:translate-y-8', 'sm:scale-95', 'sm:opacity-0')
-      dialog.classList.add('translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100')
+
+      dialog.classList.remove(
+        'translate-y-full', 'sm:translate-y-8', 'sm:scale-95', 'sm:opacity-0',
+      )
+      dialog.classList.add(
+        'translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100',
+      )
     })
   }
 
@@ -254,8 +316,13 @@ export function initAuthEvents() {
     clearPendingTimeouts()
 
     backdrop.classList.add('opacity-0')
-    dialog.classList.remove('translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100')
-    dialog.classList.add('translate-y-full', 'sm:translate-y-8', 'sm:scale-95', 'sm:opacity-0')
+
+    dialog.classList.remove(
+      'translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100',
+    )
+    dialog.classList.add(
+      'translate-y-full', 'sm:translate-y-8', 'sm:scale-95', 'sm:opacity-0',
+    )
 
     if (closeTimeout) clearTimeout(closeTimeout)
 
@@ -269,18 +336,24 @@ export function initAuthEvents() {
     }, 500)
   }
 
-  // ── Event Bus — API pública de abertura ───────────────────
+  // ---------------------------------------------------------------------------
+  // Event Bus
+  // ---------------------------------------------------------------------------
 
   eventBus.on('auth:open', openDrawer)
 
-  // ── Escape Handler (stack global, sem duplicação) ─────────
+  // ---------------------------------------------------------------------------
+  // Escape Handler
+  // ---------------------------------------------------------------------------
 
   registerEscapeHandler(
     () => !wrapper.classList.contains('hidden'),
     closeDrawer,
   )
 
-  // ── Eventos de Fechamento ─────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Close Events
+  // ---------------------------------------------------------------------------
 
   closeBtn.addEventListener('click', closeDrawer)
 
@@ -290,7 +363,9 @@ export function initAuthEvents() {
 
   backdrop.addEventListener('click', closeDrawer)
 
-  // ── Alternância de Modo ───────────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Mode Toggle
+  // ---------------------------------------------------------------------------
 
   toggleModeBtn.addEventListener('click', () => {
     setAuthMode(authMode === 'login' ? 'register' : 'login')
@@ -300,7 +375,9 @@ export function initAuthEvents() {
     setAuthMode('forgot')
   })
 
-  // ── Submissão do Formulário ──────────────────────────────
+  // ---------------------------------------------------------------------------
+  // Form Submission
+  // ---------------------------------------------------------------------------
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
@@ -314,8 +391,17 @@ export function initAuthEvents() {
     const neighborhood = neighborhoodInput.value.trim()
     const addressNumber = addressNumberInput.value.trim()
 
-    // Validação frontend — feedback instantâneo sem bater no servidor
-    const validationError = validateForm(authMode, { email, password, name, phone, street, neighborhood, addressNumber })
+    // Frontend validation — feedback instantâneo sem bater no servidor
+    const validationError = validateForm(authMode, {
+      email,
+      password,
+      name,
+      phone,
+      street,
+      neighborhood,
+      addressNumber,
+    })
+
     if (validationError) {
       showFeedback(validationError)
       return
@@ -327,20 +413,34 @@ export function initAuthEvents() {
 
     try {
       if (authMode === 'register') {
-        await AuthManager.signUp({ email, password, fullName: name, phone, street, neighborhood, addressNumber })
+        await AuthManager.signUp({
+          email,
+          password,
+          fullName: name,
+          phone,
+          street,
+          neighborhood,
+          addressNumber,
+        })
         showSuccessSequence('Conta criada com sucesso!', () => setAuthMode('login'))
+
       } else if (authMode === 'forgot') {
         await AuthManager.resetPasswordForEmail(email)
         showSuccessSequence('Instruções enviadas para seu e-mail!', () => setAuthMode('login'))
+
       } else if (authMode === 'update_password') {
         await AuthManager.updatePassword(password)
         showSuccessSequence('Senha atualizada com sucesso!', () => setAuthMode('login'))
+
       } else {
         await AuthManager.signIn(email, password)
         closeDrawer()
       }
     } catch (error) {
-      console.error('[PodoSys] Auth error:', { message: error.message, error })
+      console.error('[PodoSys] Auth error:', {
+        message: error.message,
+        error,
+      })
       showFeedback(translateError(error.message))
     } finally {
       submitText.classList.remove('opacity-0')

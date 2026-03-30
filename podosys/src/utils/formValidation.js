@@ -1,7 +1,7 @@
-// ============================================================
-//  PodoSys — Form Validation
-//  Validação frontend dos formulários de autenticação.
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Form Validation
+// Validação frontend dos formulários de autenticação.
+// -----------------------------------------------------------------------------
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -10,9 +10,11 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
  * Retorna mensagem de erro (string) ou null se válido.
  *
  * @param {string} mode - 'login' | 'register' | 'forgot' | 'update_password'
- * @param {object} fields - Campos do formulário (já tratados: phone sem máscara, strings trimadas)
+ * @param {object} fields - Campos do formulário (phone sem máscara, strings trimadas)
  */
-export function validateForm(mode, { email, password, name, phone, street, neighborhood, addressNumber }) {
+export function validateForm(mode, fields) {
+  const { email, password, name, phone, street, neighborhood, addressNumber } = fields
+
   // Campos exclusivos de cadastro
   if (mode === 'register') {
     if (!name?.trim()) return 'Informe seu nome completo.'

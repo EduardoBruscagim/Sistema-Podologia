@@ -1,7 +1,7 @@
-// ============================================================
-//  PodoSys — Event Bus
-//  Barramento de eventos desacoplado para comunicação entre features.
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Event Bus
+// Barramento de eventos desacoplado para comunicação entre features.
+// -----------------------------------------------------------------------------
 
 const listeners = new Map()
 

@@ -1,7 +1,7 @@
-// ============================================================
-//  PodoSys — Supabase Client
-//  Instância única do SDK para comunicação com PostgreSQL e Auth.
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Supabase Client
+// Instância única do SDK para comunicação com PostgreSQL e Auth.
+// -----------------------------------------------------------------------------
 
 import { createClient } from '@supabase/supabase-js'
 

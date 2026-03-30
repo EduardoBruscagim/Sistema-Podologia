@@ -1,7 +1,7 @@
-// ============================================================
-//  PodoSys — Entry Point
-//  Bootstrap da aplicação: monta a view, inicializa eventos e Auth.
-// ============================================================
+// -----------------------------------------------------------------------------
+// PodoSys — Entry Point
+// Bootstrap da aplicação: monta a view, inicializa eventos e Auth.
+// -----------------------------------------------------------------------------
 
 import './styles/global.css'
 import { renderLandingPage, initLandingEvents } from './features/landing/index.js'
@@ -21,15 +21,26 @@ import {
   X,
 } from 'lucide'
 
-// ── Constantes ──────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Constants
+// -----------------------------------------------------------------------------
 
 const ROOT_SELECTOR = 'app'
 
 const LUCIDE_ICONS = {
-  ArrowRight, ChevronRight, Footprints, LayoutDashboard, Menu, Moon, Sun, X,
+  ArrowRight,
+  ChevronRight,
+  Footprints,
+  LayoutDashboard,
+  Menu,
+  Moon,
+  Sun,
+  X,
 }
 
-// ── Montagem do DOM ─────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// DOM Assembly
+// -----------------------------------------------------------------------------
 
 function getRootElement() {
   const root = document.getElementById(ROOT_SELECTOR)
@@ -61,7 +72,9 @@ function hydrateApplication() {
   })
 }
 
-// ── Bootstrap ───────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Bootstrap
+// -----------------------------------------------------------------------------
 
 async function bootstrap() {
   const rootElement = getRootElement()
