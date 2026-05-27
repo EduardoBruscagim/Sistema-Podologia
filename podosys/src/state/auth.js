@@ -29,6 +29,9 @@ const listeners = new Set()
  */
 export const authStore = new Proxy(initialState, {
   set(target, property, value) {
+    if (property === '__proto__' || property === 'prototype' || property === 'constructor') {
+      return false
+    }
     target[property] = value
     listeners.forEach((fn) => fn(property, value, target))
     return true

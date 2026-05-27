@@ -220,6 +220,10 @@ export function initAuthEvents() {
 
     hideFeedback()
 
+    if (!Object.prototype.hasOwnProperty.call(MODE_CONFIG, mode)) {
+      mode = 'login'
+    }
+
     const config = MODE_CONFIG[mode]
 
     // Animated sections
