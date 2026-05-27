@@ -31,7 +31,7 @@ const FALLBACK_MESSAGE = 'Ocorreu um erro. Verifique seus dados e tente novament
 /** Traduz erros do Supabase para PT-BR com fallback por busca parcial. */
 export function translateError(message) {
   if (!message) return FALLBACK_MESSAGE
-  if (ERROR_MAP[message]) return ERROR_MAP[message]
+  if (Object.prototype.hasOwnProperty.call(ERROR_MAP, message)) return ERROR_MAP[message]
 
   // Busca parcial — cobre variações de mensagens do Supabase
   const partialMatch = Object.keys(ERROR_MAP).find((key) => message.includes(key))

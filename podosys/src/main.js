@@ -49,16 +49,18 @@ function getRootElement() {
 }
 
 function renderApplication(rootElement) {
-  const fragment = document.createElement('template')
+  const parser = new DOMParser()
 
-  fragment.innerHTML = `
-    <div id="router-view" class="w-full h-full min-h-screen">
-      ${renderLandingPage().trim()}
-    </div>
-    ${renderAuthDrawer().trim()}
-  `
+  const routerView = document.createElement('div')
+  routerView.id = 'router-view'
+  routerView.className = 'w-full h-full min-h-screen'
+  
+  const landingNodes = parser.parseFromString(renderLandingPage().trim(), 'text/html').body.childNodes
+  routerView.append(...Array.from(landingNodes))
 
-  rootElement.replaceChildren(...fragment.content.childNodes)
+  const authNodes = parser.parseFromString(renderAuthDrawer().trim(), 'text/html').body.childNodes
+
+  rootElement.replaceChildren(routerView, ...Array.from(authNodes))
 }
 
 function hydrateApplication() {
