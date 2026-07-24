@@ -15,14 +15,12 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export function validateForm(mode, fields) {
   const { email, password, name, phone, street, neighborhood, addressNumber } = fields
 
-  // Campos exclusivos de cadastro
+  // Campos exclusivos de cadastro (Progressive Disclosure — Baymard UX Benchmark)
   if (mode === 'register') {
     if (!name?.trim()) return 'Informe seu nome completo.'
-    if (!phone?.trim()) return 'Informe seu número de telefone.'
-    if (phone.length !== 11) return 'O telefone deve ter 11 dígitos (DDD + número).'
-    if (!street?.trim()) return 'Informe sua rua.'
-    if (!neighborhood?.trim()) return 'Informe seu bairro.'
-    if (!addressNumber?.trim()) return 'Informe o número do endereço.'
+    if (phone?.trim() && phone.trim().length !== 11) {
+      return 'O telefone deve ter 11 dígitos (DDD + número).'
+    }
   }
 
   // E-mail — obrigatório em login, register e forgot

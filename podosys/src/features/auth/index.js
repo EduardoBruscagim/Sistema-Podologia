@@ -21,16 +21,34 @@ export { renderAuthDrawer } from './template.js'
 const GRID_OPEN = ['grid-rows-[1fr]', 'opacity-100']
 const GRID_CLOSED = ['grid-rows-[0fr]', 'opacity-0']
 
+function setInputsAccessibility(container, enabled) {
+  if (!container) return
+  const inputs = container.querySelectorAll('input, select, textarea, button')
+  inputs.forEach((input) => {
+    if (enabled) {
+      input.removeAttribute('tabindex')
+      input.removeAttribute('disabled')
+      input.removeAttribute('aria-hidden')
+    } else {
+      input.setAttribute('tabindex', '-1')
+      input.setAttribute('disabled', 'true')
+      input.setAttribute('aria-hidden', 'true')
+    }
+  })
+}
+
 function expandSection(wrapper, inner) {
   wrapper.classList.remove(...GRID_CLOSED)
   wrapper.classList.add(...GRID_OPEN)
   inner.classList.remove('pointer-events-none')
+  setInputsAccessibility(inner, true)
 }
 
 function collapseSection(wrapper, inner) {
   wrapper.classList.add(...GRID_CLOSED)
   wrapper.classList.remove(...GRID_OPEN)
   inner.classList.add('pointer-events-none')
+  setInputsAccessibility(inner, false)
 }
 
 // -----------------------------------------------------------------------------
@@ -71,10 +89,10 @@ const MODE_CONFIG = {
     showForgot: false,
     required: {
       name: true,
-      phone: true,
-      street: true,
-      neighborhood: true,
-      addressNumber: true,
+      phone: false,
+      street: false,
+      neighborhood: false,
+      addressNumber: false,
       email: true,
       password: true,
     },
@@ -162,6 +180,9 @@ export function initAuthEvents() {
   let authMode = 'login'
   let closeTimeout = null
   let pendingTimeouts = []
+  let lastAuthTrigger = null
+  let isModalOpen = false
+  let authRequestVersion = 0
 
   function clearPendingTimeouts() {
     pendingTimeouts.forEach(clearTimeout)
@@ -169,32 +190,67 @@ export function initAuthEvents() {
   }
 
   // ---------------------------------------------------------------------------
-  // Visual Feedback
+  // Visual Feedback & Error Field Identification (WCAG 2.2 — 3.3.1)
   // ---------------------------------------------------------------------------
 
+  function getInputElementForError(validationError) {
+    if (!validationError) return null
+    const err = validationError.toLowerCase()
+    if (err.includes('nome')) return nameInput
+    if (err.includes('telefone')) return phoneInput
+    if (err.includes('rua')) return streetInput
+    if (err.includes('bairro')) return neighborhoodInput
+    if (err.includes('número do endereço')) return addressNumberInput
+    if (err.includes('e-mail')) return emailInput
+    if (err.includes('senha')) return passwordInput
+    return null
+  }
+
+  function clearInputErrors() {
+    const allInputs = [nameInput, phoneInput, streetInput, neighborhoodInput, addressNumberInput, emailInput, passwordInput]
+    allInputs.forEach((input) => {
+      if (!input) return
+      input.removeAttribute('aria-invalid')
+      input.classList.remove('border-red-500', 'dark:border-red-500', 'ring-2', 'ring-red-500')
+    })
+  }
+
   function showFeedback(message, isSuccess = false) {
-    feedbackText.classList.remove('text-red-500', 'text-green-500', 'hidden')
-    feedbackText.classList.add(isSuccess ? 'text-green-500' : 'text-red-500')
+    clearInputErrors()
+    feedbackText.classList.remove('text-red-600', 'dark:text-red-400', 'text-green-600', 'dark:text-green-400', 'hidden')
+    feedbackText.classList.add(isSuccess ? 'text-green-600' : 'text-red-600', isSuccess ? 'dark:text-green-400' : 'dark:text-red-400')
     feedbackText.textContent = message
+
+    if (!isSuccess) {
+      const errorInput = getInputElementForError(message)
+      if (errorInput) {
+        errorInput.setAttribute('aria-invalid', 'true')
+        errorInput.classList.add('border-red-500', 'dark:border-red-500', 'ring-2', 'ring-red-500')
+        errorInput.focus()
+      }
+    }
   }
 
   function hideFeedback() {
+    clearInputErrors()
     feedbackText.classList.add('hidden')
-    feedbackText.classList.remove('text-green-500')
-    feedbackText.classList.add('text-red-500')
+    feedbackText.classList.remove('text-green-600', 'dark:text-green-400')
+    feedbackText.classList.add('text-red-600', 'dark:text-red-400')
   }
 
   /** Mostra sucesso e redireciona para login após delay cancelável. */
-  function showSuccessSequence(message, finalAction) {
+  function showSuccessSequence(message, finalAction, requestVersion) {
+    if (!isModalOpen || requestVersion !== authRequestVersion) return
     clearPendingTimeouts()
     showFeedback(message, true)
 
-    const t1 = setTimeout(
-      () => showFeedback('Redirecionando para o login...', true),
-      1500,
-    )
+    const t1 = setTimeout(() => {
+      if (!isModalOpen || requestVersion !== authRequestVersion) return
+      showFeedback('Redirecionando para o login...', true)
+    }, 1500)
 
     const t2 = setTimeout(() => {
+      if (!isModalOpen || requestVersion !== authRequestVersion) return
       finalAction()
       clearPendingTimeouts()
     }, 3000)
@@ -215,6 +271,7 @@ export function initAuthEvents() {
   }
 
   function setAuthMode(mode) {
+    authRequestVersion++
     const previousMode = authMode
     authMode = mode
 
@@ -283,14 +340,19 @@ export function initAuthEvents() {
   }
 
   // ---------------------------------------------------------------------------
-  // Open / Close
+  // Open / Close (Focus Trap & Focus Restoration — WCAG 2.4.3)
   // ---------------------------------------------------------------------------
 
   function openDrawer(mode = 'login') {
+    authRequestVersion++
+    isModalOpen = true
+
     if (closeTimeout) {
       clearTimeout(closeTimeout)
       closeTimeout = null
     }
+
+    lastAuthTrigger = document.activeElement
 
     setAuthMode(mode)
     lockScroll()
@@ -312,10 +374,16 @@ export function initAuthEvents() {
       dialog.classList.add(
         'translate-y-0', 'sm:translate-y-0', 'sm:scale-100', 'sm:opacity-100',
       )
+
+      // Foco automático inicial no primeiro campo visível
+      const initialInput = mode === 'register' ? nameInput : (MODE_CONFIG[mode]?.showEmail ? emailInput : passwordInput)
+      initialInput?.focus()
     })
   }
 
   function closeDrawer() {
+    authRequestVersion++
+    isModalOpen = false
     unlockScroll()
     clearPendingTimeouts()
 
@@ -337,8 +405,63 @@ export function initAuthEvents() {
       form.reset()
       hideFeedback()
       closeTimeout = null
+
+      if (lastAuthTrigger && typeof lastAuthTrigger.focus === 'function') {
+        lastAuthTrigger.focus()
+      }
     }, 500)
   }
+
+  // ---------------------------------------------------------------------------
+  // Password Visibility Toggle
+  // ---------------------------------------------------------------------------
+
+  const togglePasswordBtn = document.getElementById('toggle-password-visibility-btn')
+  togglePasswordBtn?.addEventListener('click', () => {
+    const isPassword = passwordInput.type === 'password'
+    passwordInput.type = isPassword ? 'text' : 'password'
+    togglePasswordBtn.setAttribute('aria-label', isPassword ? 'Ocultar senha' : 'Mostrar senha')
+
+    const iconShow = document.getElementById('icon-eye-show')
+    const iconHide = document.getElementById('icon-eye-hide')
+
+    if (isPassword) {
+      iconShow?.classList.add('hidden')
+      iconHide?.classList.remove('hidden')
+    } else {
+      iconHide?.classList.add('hidden')
+      iconShow?.classList.remove('hidden')
+    }
+  })
+
+  // Retenção de Foco Teclado (Focus Trap — WCAG 2.4.3)
+  document.addEventListener('keydown', (e) => {
+    if (wrapper.classList.contains('hidden')) return
+    if (e.key !== 'Tab') return
+
+    const focusables = Array.from(
+      dialog.querySelectorAll(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement)
+
+    if (focusables.length === 0) return
+
+    const first = focusables[0]
+    const last = focusables[focusables.length - 1]
+
+    if (e.shiftKey) {
+      if (document.activeElement === first || !dialog.contains(document.activeElement)) {
+        last.focus()
+        e.preventDefault()
+      }
+    } else {
+      if (document.activeElement === last || !dialog.contains(document.activeElement)) {
+        first.focus()
+        e.preventDefault()
+      }
+    }
+  })
 
   // ---------------------------------------------------------------------------
   // Event Bus
@@ -411,6 +534,8 @@ export function initAuthEvents() {
       return
     }
 
+    const currentRequestVersion = ++authRequestVersion
+
     submitText.classList.add('opacity-0')
     loadingSpinner.classList.remove('hidden')
     submitBtn.disabled = true
@@ -426,30 +551,37 @@ export function initAuthEvents() {
           neighborhood,
           addressNumber,
         })
-        showSuccessSequence('Conta criada com sucesso!', () => setAuthMode('login'))
+        if (!isModalOpen || currentRequestVersion !== authRequestVersion) return
+        showSuccessSequence('Conta criada com sucesso!', () => setAuthMode('login'), currentRequestVersion)
 
       } else if (authMode === 'forgot') {
         await AuthManager.resetPasswordForEmail(email)
-        showSuccessSequence('Instruções enviadas para seu e-mail!', () => setAuthMode('login'))
+        if (!isModalOpen || currentRequestVersion !== authRequestVersion) return
+        showSuccessSequence('Instruções enviadas para seu e-mail!', () => setAuthMode('login'), currentRequestVersion)
 
       } else if (authMode === 'update_password') {
         await AuthManager.updatePassword(password)
-        showSuccessSequence('Senha atualizada com sucesso!', () => setAuthMode('login'))
+        if (!isModalOpen || currentRequestVersion !== authRequestVersion) return
+        showSuccessSequence('Senha atualizada com sucesso!', () => setAuthMode('login'), currentRequestVersion)
 
       } else {
         await AuthManager.signIn(email, password)
+        if (!isModalOpen || currentRequestVersion !== authRequestVersion) return
         closeDrawer()
       }
     } catch (error) {
+      if (!isModalOpen || currentRequestVersion !== authRequestVersion) return
       console.error('[PodoSys] Auth error:', {
         message: error.message,
         error,
       })
       showFeedback(translateError(error.message))
     } finally {
-      submitText.classList.remove('opacity-0')
-      loadingSpinner.classList.add('hidden')
-      submitBtn.disabled = false
+      if (isModalOpen && currentRequestVersion === authRequestVersion) {
+        submitText.classList.remove('opacity-0')
+        loadingSpinner.classList.add('hidden')
+        submitBtn.disabled = false
+      }
     }
   })
 }

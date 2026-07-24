@@ -30,11 +30,14 @@ export function renderAuthDrawer() {
       <!-- Dialog -->
       <div
         id="auth-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-title"
         class="
           w-full sm:max-w-[420px] apple-glass sm:rounded-[32px] rounded-t-[32px]
           shadow-[0_0_40px_rgba(0,0,0,0.1)] dark:shadow-[0_25px_50px_rgba(0,0,0,0.5)]
           pointer-events-auto transform transition-all duration-500
-          ease-[cubic-bezier(0.16,1,0.3,1)]
+          ease-[cubic-bezier(0.16,1,0.3,1)] origin-bottom sm:origin-top
           translate-y-full sm:translate-y-8 sm:scale-95 sm:opacity-0
           flex flex-col max-h-[90vh]
         "
@@ -67,34 +70,34 @@ export function renderAuthDrawer() {
             <!-- Register Fields (animated via grid-rows) -->
             <div
               id="register-fields"
-              class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
             >
               <div id="register-inner" class="overflow-hidden flex flex-col pointer-events-none">
 
                 <div class="flex flex-col gap-1.5 mb-4 mt-1">
                   <label for="auth-name" class="text-sm font-medium text-gray-700 dark:text-gray-300">Nome Completo</label>
-                  <input type="text" id="auth-name" placeholder="Ex: Maria Silva" class="${INPUT_CLASS}" />
+                  <input type="text" id="auth-name" placeholder="Ex: Maria Silva" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
-                  <label for="auth-phone" class="text-sm font-medium text-gray-700 dark:text-gray-300">Número</label>
-                  <input type="tel" id="auth-phone" placeholder="(11) 99999-9999" class="${INPUT_CLASS}" />
+                  <label for="auth-phone" class="text-sm font-medium text-gray-700 dark:text-gray-300">Número (Opcional)</label>
+                  <input type="tel" id="auth-phone" placeholder="(11) 99999-9999" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3 mb-4">
                   <div class="flex flex-col gap-1.5 flex-1">
-                    <label for="auth-street" class="text-sm font-medium text-gray-700 dark:text-gray-300">Rua</label>
-                    <input type="text" id="auth-street" placeholder="Rua Exemplo" class="${INPUT_CLASS}" />
+                    <label for="auth-street" class="text-sm font-medium text-gray-700 dark:text-gray-300">Rua (Opcional)</label>
+                    <input type="text" id="auth-street" placeholder="Rua Exemplo" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                   </div>
                   <div class="flex flex-col gap-1.5 sm:w-24">
                     <label for="auth-address-number" class="text-sm font-medium text-gray-700 dark:text-gray-300">Nº</label>
-                    <input type="text" id="auth-address-number" placeholder="123" class="${INPUT_CLASS}" />
+                    <input type="text" id="auth-address-number" placeholder="123" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                   </div>
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
-                  <label for="auth-neighborhood" class="text-sm font-medium text-gray-700 dark:text-gray-300">Bairro</label>
-                  <input type="text" id="auth-neighborhood" placeholder="Centro" class="${INPUT_CLASS}" />
+                  <label for="auth-neighborhood" class="text-sm font-medium text-gray-700 dark:text-gray-300">Bairro (Opcional)</label>
+                  <input type="text" id="auth-neighborhood" placeholder="Centro" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
 
               </div>
@@ -103,12 +106,12 @@ export function renderAuthDrawer() {
             <!-- Email (animated via grid-rows) -->
             <div
               id="email-wrapper"
-              class="grid grid-rows-[1fr] opacity-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              class="grid grid-rows-[1fr] opacity-100 transition-[grid-template-rows,opacity] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
             >
               <div id="email-inner" class="overflow-hidden flex flex-col pointer-events-auto">
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label for="auth-email" class="text-sm font-medium text-gray-700 dark:text-gray-300">E-mail</label>
-                  <input type="email" id="auth-email" required placeholder="seu@email.com" class="${INPUT_CLASS}" />
+                  <input type="email" id="auth-email" required placeholder="seu@email.com" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
               </div>
             </div>
@@ -116,18 +119,29 @@ export function renderAuthDrawer() {
             <!-- Password (animated via grid-rows) -->
             <div
               id="password-wrapper"
-              class="grid grid-rows-[1fr] opacity-100 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              class="grid grid-rows-[1fr] opacity-100 transition-[grid-template-rows,opacity] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
             >
               <div id="password-inner" class="overflow-hidden flex flex-col pointer-events-auto">
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label for="auth-password" class="text-sm font-medium text-gray-700 dark:text-gray-300">Senha</label>
-                  <input type="password" id="auth-password" required placeholder="••••••••" class="${INPUT_CLASS}" />
+                  <div class="relative flex items-center">
+                    <input type="password" id="auth-password" required placeholder="••••••••" aria-describedby="auth-feedback" class="${INPUT_CLASS} pr-12 w-full" />
+                    <button
+                      type="button"
+                      id="toggle-password-visibility-btn"
+                      class="absolute right-1 w-11 h-11 text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg flex items-center justify-center"
+                      aria-label="Mostrar senha"
+                    >
+                      <i id="icon-eye-show" data-lucide="eye" class="w-5 h-5"></i>
+                      <i id="icon-eye-hide" data-lucide="eye-off" class="w-5 h-5 hidden text-blue-600 dark:text-blue-400"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Error/Success feedback -->
-            <p id="auth-feedback" class="text-red-500 text-sm hidden font-medium text-center mb-4"></p>
+            <p id="auth-feedback" role="alert" aria-live="polite" class="text-red-600 dark:text-red-400 text-sm hidden font-medium text-center mb-4"></p>
 
             <!-- Primary action button -->
             <button
