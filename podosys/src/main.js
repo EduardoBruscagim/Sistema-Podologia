@@ -19,6 +19,12 @@ import {
   Moon,
   Sun,
   X,
+  Eye,
+  EyeOff,
+  Calendar,
+  Clock,
+  CheckCircle2,
+  UserCheck,
 } from 'lucide'
 
 // -----------------------------------------------------------------------------
@@ -36,6 +42,12 @@ const LUCIDE_ICONS = {
   Moon,
   Sun,
   X,
+  Eye,
+  EyeOff,
+  Calendar,
+  Clock,
+  CheckCircle2,
+  UserCheck,
 }
 
 // -----------------------------------------------------------------------------

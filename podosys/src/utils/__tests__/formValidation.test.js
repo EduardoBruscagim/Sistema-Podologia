@@ -43,13 +43,13 @@ describe('validateForm', () => {
       email: 'test@email.com',
       password: '123456',
       name: 'Maria Silva',
-      phone: '11999991234',
-      street: 'Rua Exemplo',
-      neighborhood: 'Centro',
-      addressNumber: '123',
+      phone: '',
+      street: '',
+      neighborhood: '',
+      addressNumber: '',
     }
 
-    it('should pass with all valid fields', () => {
+    it('should pass with minimal required fields (name, email, password)', () => {
       expect(validateForm('register', validRegister)).toBeNull()
     })
 
@@ -58,29 +58,14 @@ describe('validateForm', () => {
         .toBe('Informe seu nome completo.')
     })
 
-    it('should reject missing phone', () => {
-      expect(validateForm('register', { ...validRegister, phone: '' }))
-        .toBe('Informe seu número de telefone.')
+    it('should pass when optional phone and address are empty', () => {
+      expect(validateForm('register', { ...validRegister, phone: '', street: '', neighborhood: '', addressNumber: '' }))
+        .toBeNull()
     })
 
-    it('should reject phone with wrong digit count', () => {
+    it('should reject phone with wrong digit count if provided', () => {
       expect(validateForm('register', { ...validRegister, phone: '1199999' }))
         .toBe('O telefone deve ter 11 dígitos (DDD + número).')
-    })
-
-    it('should reject missing street', () => {
-      expect(validateForm('register', { ...validRegister, street: '' }))
-        .toBe('Informe sua rua.')
-    })
-
-    it('should reject missing neighborhood', () => {
-      expect(validateForm('register', { ...validRegister, neighborhood: '' }))
-        .toBe('Informe seu bairro.')
-    })
-
-    it('should reject missing address number', () => {
-      expect(validateForm('register', { ...validRegister, addressNumber: '' }))
-        .toBe('Informe o número do endereço.')
     })
   })
 

@@ -62,21 +62,24 @@
     display: none;
   }
 
-  /* Tipografia responsiva (clamp) */
+  /* Tipografia responsiva (clamp) com Kerning Óptico */
 
   h1 {
     font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    font-optical-sizing: auto;
   }
 
   h2 {
     font-size: clamp(1.5rem, 3vw + 1rem, 2.5rem);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
+    font-optical-sizing: auto;
   }
 
   p {
     max-width: 75ch;
+    font-optical-sizing: auto;
   }
 
   /* Interativos — Toque mínimo 48px */
@@ -143,29 +146,29 @@
     opacity: 0.85;
   }
 
-  /* Apple Glass (Glassmorphism) */
+  /* Apple Glass (Glassmorphism) — Translucidez equilibrada em Modo Claro e Escuro (WCAG AA Compliant) */
 
   .apple-glass {
-    @apply bg-white/60 border border-white/60 dark:border-white/[0.12];
-    background: rgba(255, 255, 255, 0.60);
+    @apply bg-white/75 border border-white/70 dark:border-white/[0.12];
+    background: rgba(255, 255, 255, 0.72);
     -webkit-backdrop-filter: saturate(180%) blur(24px);
     backdrop-filter: saturate(180%) blur(24px);
     box-shadow:
-      0 8px 32px 0 rgba(31, 38, 135, 0.07),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      0 20px 40px -15px rgba(0, 0, 0, 0.08),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.6);
   }
 
   :is(.dark *) .apple-glass {
-    background: rgba(28, 28, 30, 0.72);
-    border-color: rgba(84, 84, 88, 0.48);
+    background: rgba(28, 28, 30, 0.75);
+    border-color: rgba(255, 255, 255, 0.12);
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.64),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      0 20px 50px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
   @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     .apple-glass {
-      @apply bg-white/90;
+      @apply bg-white/95;
     }
 
     :is(.dark *) .apple-glass {
@@ -229,5 +232,30 @@
 
   .dark .landing-page-bg::before {
     opacity: 1;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * Accessibility — Prefers Reduced Motion (WCAG 2.2 — 2.3.3)
+ * -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .apple-transition,
+  #mobile-drawer,
+  #auth-dialog,
+  #auth-backdrop,
+  #mobile-backdrop,
+  .theme-icon-sun,
+  .theme-icon-moon {
+    transform: none !important;
   }
 }
