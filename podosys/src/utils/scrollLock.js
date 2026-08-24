@@ -10,21 +10,27 @@ export function lockScroll() {
   lockCount++
   if (lockCount > 1) return
 
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-  if (scrollbarWidth > 0) {
-    document.body.style.paddingRight = `${scrollbarWidth}px`
-  }
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    const scrollbarWidth = window.innerWidth - (document.documentElement?.clientWidth || 0)
+    if (scrollbarWidth > 0 && document.body) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`
+    }
 
-  document.documentElement.style.overflow = 'hidden'
-  document.body.style.overflow = 'hidden'
+    if (document.documentElement) document.documentElement.style.overflow = 'hidden'
+    if (document.body) document.body.style.overflow = 'hidden'
+  }
 }
 
 export function unlockScroll() {
   lockCount = Math.max(0, lockCount - 1)
   if (lockCount > 0) return
 
-  document.documentElement.style.overflow = ''
-  document.body.style.overflow = ''
-  document.body.style.paddingRight = ''
+  if (typeof document !== 'undefined') {
+    if (document.documentElement) document.documentElement.style.overflow = ''
+    if (document.body) {
+      document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
+    }
+  }
 }
 
