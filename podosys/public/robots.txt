@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://podosys.vercel.app/sitemap.xml

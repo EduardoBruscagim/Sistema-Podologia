@@ -15,22 +15,22 @@ describe('validateForm', () => {
 
     it('should reject missing email', () => {
       expect(validateForm('login', { email: '', password: '123456' }))
-        .toBe('Informe seu e-mail.')
+        .toEqual({ field: 'email', message: 'Informe seu e-mail.' })
     })
 
     it('should reject invalid email format', () => {
       expect(validateForm('login', { email: 'not-an-email', password: '123456' }))
-        .toBe('Formato de e-mail inválido.')
+        .toEqual({ field: 'email', message: 'Formato de e-mail inválido.' })
     })
 
     it('should reject missing password', () => {
       expect(validateForm('login', { email: 'test@email.com', password: '' }))
-        .toBe('Informe sua senha.')
+        .toEqual({ field: 'password', message: 'Informe sua senha.' })
     })
 
     it('should reject short password', () => {
       expect(validateForm('login', { email: 'test@email.com', password: '123' }))
-        .toBe('A senha deve ter pelo menos 6 caracteres.')
+        .toEqual({ field: 'password', message: 'A senha deve ter pelo menos 6 caracteres.' })
     })
   })
 
@@ -55,7 +55,7 @@ describe('validateForm', () => {
 
     it('should reject missing name', () => {
       expect(validateForm('register', { ...validRegister, name: '' }))
-        .toBe('Informe seu nome completo.')
+        .toEqual({ field: 'name', message: 'Informe seu nome completo.' })
     })
 
     it('should pass when optional phone and address are empty', () => {
@@ -65,7 +65,7 @@ describe('validateForm', () => {
 
     it('should reject phone with wrong digit count if provided', () => {
       expect(validateForm('register', { ...validRegister, phone: '1199999' }))
-        .toBe('O telefone deve ter 11 dígitos (DDD + número).')
+        .toEqual({ field: 'phone', message: 'O telefone deve ter 11 dígitos (DDD + número).' })
     })
   })
 
@@ -80,7 +80,7 @@ describe('validateForm', () => {
 
     it('should reject missing email', () => {
       expect(validateForm('forgot', { email: '' }))
-        .toBe('Informe seu e-mail.')
+        .toEqual({ field: 'email', message: 'Informe seu e-mail.' })
     })
 
     it('should not require password', () => {
@@ -100,12 +100,12 @@ describe('validateForm', () => {
 
     it('should reject missing password', () => {
       expect(validateForm('update_password', { password: '' }))
-        .toBe('Informe sua senha.')
+        .toEqual({ field: 'password', message: 'Informe sua senha.' })
     })
 
     it('should reject short password', () => {
       expect(validateForm('update_password', { password: '12345' }))
-        .toBe('A senha deve ter pelo menos 6 caracteres.')
+        .toEqual({ field: 'password', message: 'A senha deve ter pelo menos 6 caracteres.' })
     })
 
     it('should not require email', () => {
@@ -114,3 +114,4 @@ describe('validateForm', () => {
     })
   })
 })
+

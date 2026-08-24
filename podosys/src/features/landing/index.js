@@ -28,20 +28,20 @@ export function renderLandingPage() {
     <div class="landing-page-bg bg-[radial-gradient(ellipse_at_50%_0%,#bfdbfe_0%,#a5b4fc_30%,#c7d2fe_55%,#e0e7ff_80%,#f1f5f9_100%)] min-h-screen relative overflow-x-hidden">
 
       <!-- Header fixo com glassmorphism -->
-      <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl z-40">
-        <div class="apple-glass rounded-2xl px-2 sm:px-3">
+      <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] max-w-6xl lg:max-w-7xl z-40">
+        <div class="apple-glass rounded-2xl px-2 sm:px-3 lg:px-4">
           <div class="h-16 flex items-center justify-between gap-2">
 
             <!-- Logo -->
             <div class="flex items-center gap-2 px-2 cursor-default min-w-0">
-              <i data-lucide="footprints" class="text-blue-600 dark:text-blue-500 w-6 h-6 shrink-0"></i>
-              <span class="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">
+              <i data-lucide="footprints" aria-hidden="true" class="text-blue-600 dark:text-blue-500 w-6 h-6 shrink-0"></i>
+              <span class="text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">
                 PodoSys
               </span>
             </div>
 
             <!-- Nav Desktop -->
-            <nav class="hidden md:flex items-center gap-2">
+            <nav class="hidden md:flex items-center gap-2" aria-label="Navegação Principal">
               <button
                 class="
                   theme-toggle-btn w-12 h-12 flex items-center justify-center
@@ -58,7 +58,7 @@ export function renderLandingPage() {
               <button
                 id="btn-login-desktop"
                 class="
-                  h-11 px-5 text-sm font-medium bg-blue-600 text-white rounded-2xl
+                  h-11 px-5 lg:px-6 text-sm lg:text-base font-medium bg-blue-600 text-white rounded-2xl
                   hover:opacity-90 apple-transition active:scale-95 ml-1
                   flex items-center gap-2 outline-none
                   focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
@@ -66,7 +66,7 @@ export function renderLandingPage() {
                 "
               >
                 Acessar Painel
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <i data-lucide="arrow-right" aria-hidden="true" class="w-4 h-4"></i>
               </button>
             </nav>
 
@@ -84,7 +84,7 @@ export function renderLandingPage() {
                 aria-expanded="false"
                 aria-controls="mobile-drawer"
               >
-                <i data-lucide="menu" class="w-6 h-6 stroke-[1.5]"></i>
+                <i data-lucide="menu" aria-hidden="true" class="w-6 h-6 stroke-[1.5]"></i>
               </button>
             </div>
 
@@ -147,28 +147,28 @@ export function renderLandingPage() {
             "
           >
             Acessar Painel
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <i data-lucide="arrow-right" aria-hidden="true" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
 
       <!-- Hero -->
-      <main class="pt-36 sm:pt-40 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center relative">
-        <h1 class="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight mb-6 max-w-4xl text-gray-900 dark:text-white leading-tight [text-wrap:balance]">
+      <main class="pt-36 sm:pt-40 lg:pt-44 pb-16 lg:pb-24 px-6 max-w-7xl xl:max-w-[88rem] mx-auto flex flex-col items-center text-center relative">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[5.5rem] font-semibold tracking-tight mb-6 max-w-4xl lg:max-w-5xl text-gray-900 dark:text-white leading-tight lg:leading-[1.1] [text-wrap:balance]">
           Agenda inteligente para
           <span class="text-blue-600 dark:text-blue-500">clínicas de podologia</span>
         </h1>
 
-        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl leading-relaxed">
+        <p class="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl lg:max-w-3xl leading-relaxed">
           Gerencie horários comerciais, evite conflitos de agendamento e ofereça
           uma experiência premium. Tudo em tempo real e na palma da mão.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16">
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16 lg:mb-20">
           <button
             id="btn-start"
             class="
-              w-full sm:w-auto px-8 py-4 text-lg font-medium
+              w-full sm:w-auto px-8 lg:px-10 py-4 lg:py-4.5 text-lg lg:text-xl font-medium
               bg-blue-600 text-white rounded-2xl
               shadow-[0_8px_30px_rgb(37,99,235,0.3)]
               hover:opacity-90 apple-transition active:scale-95
@@ -178,7 +178,7 @@ export function renderLandingPage() {
             "
           >
             Começar Gratuitamente
-            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            <i data-lucide="chevron-right" aria-hidden="true" class="w-5 h-5"></i>
           </button>
         </div>
 
@@ -186,65 +186,65 @@ export function renderLandingPage() {
         <div
           id="dashboard-preview"
           class="
-            w-full max-w-5xl rounded-3xl overflow-hidden text-left shadow-2xl
+            w-full max-w-5xl lg:max-w-6xl xl:max-w-7xl rounded-3xl overflow-hidden text-left shadow-2xl
             ring-1 ring-black/10 dark:ring-white/15 apple-glass cursor-default relative
           "
         >
           <!-- Barra de controle superior do mockup -->
           <div class="px-6 py-4 border-b border-gray-200/80 dark:border-white/10 flex items-center justify-between bg-white/40 dark:bg-white/5">
             <div class="flex items-center gap-3">
-              <span class="w-3 h-3 rounded-full bg-red-400"></span>
-              <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <span class="w-3 h-3 rounded-full bg-red-400" aria-hidden="true"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400" aria-hidden="true"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-400" aria-hidden="true"></span>
               <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 ml-2 hidden sm:inline-block">PodoSys Agenda — Painel da Clínica</span>
             </div>
 
             <div class="flex items-center gap-2">
               <span class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
                 Ao Vivo
               </span>
             </div>
           </div>
 
           <!-- Métricas mockadas -->
-          <div class="p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 border-b border-gray-200/60 dark:border-white/5">
-            <div class="p-4 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
+          <div class="p-6 lg:p-8 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 border-b border-gray-200/60 dark:border-white/5">
+            <div class="p-4 lg:p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
               <div class="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
-                <i data-lucide="calendar" class="w-5 h-5"></i>
+                <i data-lucide="calendar" aria-hidden="true" class="w-5 h-5"></i>
               </div>
               <div>
                 <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Consultas Hoje</p>
-                <p class="text-lg font-bold text-gray-900 dark:text-white">12 Pacientes</p>
+                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">12 Pacientes</p>
               </div>
             </div>
 
-            <div class="p-4 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
+            <div class="p-4 lg:p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
               <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                <i data-lucide="user-check" class="w-5 h-5"></i>
+                <i data-lucide="user-check" aria-hidden="true" class="w-5 h-5"></i>
               </div>
               <div>
                 <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Em Atendimento</p>
-                <p class="text-lg font-bold text-gray-900 dark:text-white">2 Confirmados</p>
+                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">2 Confirmados</p>
               </div>
             </div>
 
-            <div class="p-4 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
+            <div class="p-4 lg:p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
               <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400">
-                <i data-lucide="clock" class="w-5 h-5"></i>
+                <i data-lucide="clock" aria-hidden="true" class="w-5 h-5"></i>
               </div>
               <div>
                 <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Próximo Horário</p>
-                <p class="text-lg font-bold text-gray-900 dark:text-white">09:30 — Dra. Camila</p>
+                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">09:30 — Dra. Camila</p>
               </div>
             </div>
           </div>
 
           <!-- Tabela mockada da agenda de podologia -->
-          <div class="p-6 overflow-x-auto">
-            <table class="w-full text-sm text-left">
+          <div class="p-6 lg:p-8 overflow-x-auto">
+            <table class="w-full text-sm lg:text-base text-left">
               <thead>
-                <tr class="text-xs text-gray-400 uppercase border-b border-gray-200/60 dark:border-white/10">
+                <tr class="text-xs lg:text-sm text-gray-400 uppercase border-b border-gray-200/60 dark:border-white/10">
                   <th class="pb-3 font-semibold">Horário</th>
                   <th class="pb-3 font-semibold">Paciente</th>
                   <th class="pb-3 font-semibold hidden sm:table-cell">Procedimento</th>
@@ -254,39 +254,39 @@ export function renderLandingPage() {
               <tbody class="divide-y divide-gray-200/40 dark:divide-white/5 font-medium text-gray-800 dark:text-gray-200">
                 <tr>
                   <td class="py-3.5 flex items-center gap-2">
-                    <i data-lucide="clock" class="w-4 h-4 text-blue-500"></i>
+                    <i data-lucide="clock" aria-hidden="true" class="w-4 h-4 text-blue-500"></i>
                     09:00
                   </td>
                   <td class="py-3.5">Ana Souza</td>
                   <td class="py-3.5 text-gray-500 dark:text-gray-400 hidden sm:table-cell">Tratamento de Onicocriptose</td>
                   <td class="py-3.5 text-right">
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs lg:text-sm font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                       Em Atendimento
                     </span>
                   </td>
                 </tr>
                 <tr>
                   <td class="py-3.5 flex items-center gap-2">
-                    <i data-lucide="clock" class="w-4 h-4 text-gray-400"></i>
+                    <i data-lucide="clock" aria-hidden="true" class="w-4 h-4 text-gray-400"></i>
                     10:30
                   </td>
                   <td class="py-3.5">Carlos Lima</td>
                   <td class="py-3.5 text-gray-500 dark:text-gray-400 hidden sm:table-cell">Podologia Preventiva & Laser</td>
                   <td class="py-3.5 text-right">
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs lg:text-sm font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400">
                       Confirmado
                     </span>
                   </td>
                 </tr>
                 <tr>
                   <td class="py-3.5 flex items-center gap-2">
-                    <i data-lucide="clock" class="w-4 h-4 text-gray-400"></i>
+                    <i data-lucide="clock" aria-hidden="true" class="w-4 h-4 text-gray-400"></i>
                     14:00
                   </td>
                   <td class="py-3.5">Juliana Melo</td>
                   <td class="py-3.5 text-gray-500 dark:text-gray-400 hidden sm:table-cell">Exame de Podometria Computadorizada</td>
                   <td class="py-3.5 text-right">
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs lg:text-sm font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
                       Agendado
                     </span>
                   </td>
@@ -298,19 +298,19 @@ export function renderLandingPage() {
       </main>
 
       <!-- Rodapé Semântico (Footer — Enxuto & Compacto) -->
-      <footer class="w-full border-t border-gray-200/50 dark:border-white/10 py-6 px-4 mt-12 sm:mt-20 relative z-10 text-xs text-gray-500 dark:text-gray-400 bg-white/40 dark:bg-black/30 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <footer class="w-full border-t border-gray-200/50 dark:border-white/10 py-6 lg:py-8 px-4 mt-12 sm:mt-20 lg:mt-24 relative z-10 text-xs lg:text-sm text-gray-500 dark:text-gray-400 bg-white/40 dark:bg-black/30 backdrop-blur-md">
+        <div class="max-w-7xl xl:max-w-[88rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div class="flex items-center gap-2 justify-center sm:justify-start">
-            <i data-lucide="footprints" class="w-4 h-4 text-blue-600 dark:text-blue-500"></i>
-            <span class="font-semibold text-gray-900 dark:text-white text-xs">PodoSys</span>
-            <span class="text-[11px] text-gray-400 ml-1">© 2026</span>
+            <i data-lucide="footprints" aria-hidden="true" class="w-4 h-4 text-blue-600 dark:text-blue-500"></i>
+            <span class="font-semibold text-gray-900 dark:text-white text-xs lg:text-sm">PodoSys</span>
+            <span class="text-[11px] lg:text-xs text-gray-400 ml-1">© 2026</span>
           </div>
 
-          <nav class="flex items-center justify-center gap-3 text-[11px] font-medium text-gray-500 dark:text-gray-400" aria-label="Navegação do Rodapé">
+          <nav class="flex items-center justify-center gap-3 text-[11px] lg:text-xs font-medium text-gray-500 dark:text-gray-400" aria-label="Navegação do Rodapé">
             <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Termos</a>
-            <span class="text-gray-300 dark:text-gray-700">•</span>
+            <span class="text-gray-300 dark:text-gray-700" aria-hidden="true">•</span>
             <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacidade (LGPD)</a>
-            <span class="text-gray-300 dark:text-gray-700">•</span>
+            <span class="text-gray-300 dark:text-gray-700" aria-hidden="true">•</span>
             <a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Suporte</a>
           </nav>
         </div>
