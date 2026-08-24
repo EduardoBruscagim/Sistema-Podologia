@@ -1,0 +1,17 @@
+{
+  "name": "PodoSys — Agenda Inteligente para Clínicas de Podologia",
+  "short_name": "PodoSys",
+  "description": "Gerencie horários comerciais, evite conflitos de agendamento e ofereça uma experiência premium para seus pacientes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0c",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

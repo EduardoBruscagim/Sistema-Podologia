@@ -193,21 +193,22 @@ export function initAuthEvents() {
   // Visual Feedback & Error Field Identification (WCAG 2.2 — 3.3.1)
   // ---------------------------------------------------------------------------
 
-  function getInputElementForError(validationError) {
-    if (!validationError) return null
-    const err = validationError.toLowerCase()
-    if (err.includes('nome')) return nameInput
-    if (err.includes('telefone')) return phoneInput
-    if (err.includes('rua')) return streetInput
-    if (err.includes('bairro')) return neighborhoodInput
-    if (err.includes('número do endereço')) return addressNumberInput
-    if (err.includes('e-mail')) return emailInput
-    if (err.includes('senha')) return passwordInput
-    return null
+  const fieldElements = {
+    name: nameInput,
+    phone: phoneInput,
+    street: streetInput,
+    neighborhood: neighborhoodInput,
+    addressNumber: addressNumberInput,
+    email: emailInput,
+    password: passwordInput,
+  }
+
+  function getInputElementForField(field) {
+    return field ? fieldElements[field] : null
   }
 
   function clearInputErrors() {
-    const allInputs = [nameInput, phoneInput, streetInput, neighborhoodInput, addressNumberInput, emailInput, passwordInput]
+    const allInputs = Object.values(fieldElements)
     allInputs.forEach((input) => {
       if (!input) return
       input.removeAttribute('aria-invalid')
@@ -215,14 +216,14 @@ export function initAuthEvents() {
     })
   }
 
-  function showFeedback(message, isSuccess = false) {
+  function showFeedback(message, isSuccess = false, targetField = null) {
     clearInputErrors()
     feedbackText.classList.remove('text-red-600', 'dark:text-red-400', 'text-green-600', 'dark:text-green-400', 'hidden')
     feedbackText.classList.add(isSuccess ? 'text-green-600' : 'text-red-600', isSuccess ? 'dark:text-green-400' : 'dark:text-red-400')
     feedbackText.textContent = message
 
-    if (!isSuccess) {
-      const errorInput = getInputElementForError(message)
+    if (!isSuccess && targetField) {
+      const errorInput = getInputElementForField(targetField)
       if (errorInput) {
         errorInput.setAttribute('aria-invalid', 'true')
         errorInput.classList.add('border-red-500', 'dark:border-red-500', 'ring-2', 'ring-red-500')
@@ -530,7 +531,7 @@ export function initAuthEvents() {
     })
 
     if (validationError) {
-      showFeedback(validationError)
+      showFeedback(validationError.message, false, validationError.field)
       return
     }
 
@@ -575,7 +576,17 @@ export function initAuthEvents() {
         message: error.message,
         error,
       })
-      showFeedback(translateError(error.message))
+
+      const translated = translateError(error.message)
+      const errLower = (error.message || '').toLowerCase()
+      let errorField = null
+      if (errLower.includes('password') || errLower.includes('senha')) {
+        errorField = 'password'
+      } else if (errLower.includes('email') || errLower.includes('user')) {
+        errorField = 'email'
+      }
+
+      showFeedback(translated, false, errorField)
     } finally {
       if (isModalOpen && currentRequestVersion === authRequestVersion) {
         submitText.classList.remove('opacity-0')

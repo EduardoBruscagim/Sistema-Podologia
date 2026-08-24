@@ -59,6 +59,7 @@ export function renderAuthDrawer() {
             >
               <i
                 data-lucide="x"
+                aria-hidden="true"
                 class="w-7 h-7 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-white transition-colors"
               ></i>
             </button>
@@ -132,8 +133,8 @@ export function renderAuthDrawer() {
                       class="absolute right-1 w-11 h-11 text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg flex items-center justify-center"
                       aria-label="Mostrar senha"
                     >
-                      <i id="icon-eye-show" data-lucide="eye" class="w-5 h-5"></i>
-                      <i id="icon-eye-hide" data-lucide="eye-off" class="w-5 h-5 hidden text-blue-600 dark:text-blue-400"></i>
+                      <i id="icon-eye-show" data-lucide="eye" aria-hidden="true" class="w-5 h-5"></i>
+                      <i id="icon-eye-hide" data-lucide="eye-off" aria-hidden="true" class="w-5 h-5 hidden text-blue-600 dark:text-blue-400"></i>
                     </button>
                   </div>
                 </div>

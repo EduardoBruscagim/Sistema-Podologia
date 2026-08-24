@@ -95,7 +95,9 @@ async function bootstrap() {
   renderApplication(rootElement)
   requestAnimationFrame(hydrateApplication)
 
-  await AuthManager.initialize()
+  AuthManager.initialize().catch((err) => {
+    console.error('[PodoSys] Auth initialization non-fatal error:', err)
+  })
 
   AuthManager.subscribe((property, value) => {
     if (property === 'isAuthenticated' && value === true) {
@@ -109,3 +111,4 @@ async function bootstrap() {
 }
 
 document.addEventListener('DOMContentLoaded', bootstrap)
+

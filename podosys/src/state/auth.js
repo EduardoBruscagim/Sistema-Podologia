@@ -3,7 +3,7 @@
 // Store reativo usando ES2024 Proxy para gerenciar sessão.
 // -----------------------------------------------------------------------------
 
-import { supabase } from '../api/supabase.js'
+import { getSupabase } from '../api/supabase.js'
 
 // -----------------------------------------------------------------------------
 // Initial State
@@ -61,31 +61,37 @@ export const AuthManager = {
   async initialize() {
     authStore.isLoading = true
 
-    const { data: { session } } = await supabase.auth.getSession()
-
-    if (session) {
-      await this._handleSession(session)
-    } else {
-      authStore.isLoading = false
-    }
-
-    supabase.auth.onAuthStateChange((event, session) => {
-      // INITIAL_SESSION já foi processado acima via getSession()
-      if (event === 'INITIAL_SESSION') return
-
-      if (event === 'PASSWORD_RECOVERY') {
-        authStore.isRecoveringPassword = true
-      }
+    try {
+      const supabase = await getSupabase()
+      const { data: { session } } = await supabase.auth.getSession()
 
       if (session) {
-        // Não usar await aqui — Supabase v2 bloqueia signUp/signIn
-        // até callbacks async do onAuthStateChange resolverem.
-        // _handleSession roda em background sem travar o fluxo.
-        this._handleSession(session)
+        await this._handleSession(session)
       } else {
-        this._clearState()
+        authStore.isLoading = false
       }
-    })
+
+      supabase.auth.onAuthStateChange((event, session) => {
+        // INITIAL_SESSION já foi processado acima via getSession()
+        if (event === 'INITIAL_SESSION') return
+
+        if (event === 'PASSWORD_RECOVERY') {
+          authStore.isRecoveringPassword = true
+        }
+
+        if (session) {
+          // Não usar await aqui — Supabase v2 bloqueia signUp/signIn
+          // até callbacks async do onAuthStateChange resolverem.
+          // _handleSession roda em background sem travar o fluxo.
+          this._handleSession(session)
+        } else {
+          this._clearState()
+        }
+      })
+    } catch (err) {
+      console.error('[PodoSys] Falha ao inicializar autenticação:', err)
+      authStore.isLoading = false
+    }
   },
 
   // ---------------------------------------------------------------------------
@@ -138,6 +144,8 @@ export const AuthManager = {
     const MAX_ATTEMPTS = 3
     const BASE_DELAY = 800
 
+    const supabase = await getSupabase()
+
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
       const { data, error } = await supabase
         .from('profiles')
@@ -182,6 +190,7 @@ export const AuthManager = {
   // ---------------------------------------------------------------------------
 
   async signIn(email, password) {
+    const supabase = await getSupabase()
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) throw error
   },
@@ -195,6 +204,7 @@ export const AuthManager = {
     neighborhood,
     addressNumber,
   }) {
+    const supabase = await getSupabase()
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -214,11 +224,13 @@ export const AuthManager = {
   },
 
   async signOut() {
+    const supabase = await getSupabase()
     const { error } = await supabase.auth.signOut()
     if (error) throw error
   },
 
   async resetPasswordForEmail(email) {
+    const supabase = await getSupabase()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/`,
     })
@@ -226,6 +238,7 @@ export const AuthManager = {
   },
 
   async updatePassword(password) {
+    const supabase = await getSupabase()
     const { error } = await supabase.auth.updateUser({ password })
     if (error) throw error
     authStore.isRecoveringPassword = false
