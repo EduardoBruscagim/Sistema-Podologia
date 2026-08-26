@@ -14,7 +14,6 @@ import {
   ArrowRight,
   ChevronRight,
   Footprints,
-  LayoutDashboard,
   Menu,
   Moon,
   Sun,
@@ -23,7 +22,6 @@ import {
   EyeOff,
   Calendar,
   Clock,
-  CheckCircle2,
   UserCheck,
 } from 'lucide'
 
@@ -37,7 +35,6 @@ const LUCIDE_ICONS = {
   ArrowRight,
   ChevronRight,
   Footprints,
-  LayoutDashboard,
   Menu,
   Moon,
   Sun,
@@ -46,7 +43,6 @@ const LUCIDE_ICONS = {
   EyeOff,
   Calendar,
   Clock,
-  CheckCircle2,
   UserCheck,
 }
 
@@ -61,18 +57,12 @@ function getRootElement() {
 }
 
 function renderApplication(rootElement) {
-  const parser = new DOMParser()
-
-  const routerView = document.createElement('div')
-  routerView.id = 'router-view'
-  routerView.className = 'w-full h-full min-h-screen'
-  
-  const landingNodes = parser.parseFromString(renderLandingPage().trim(), 'text/html').body.childNodes
-  routerView.append(...Array.from(landingNodes))
-
-  const authNodes = parser.parseFromString(renderAuthDrawer().trim(), 'text/html').body.childNodes
-
-  rootElement.replaceChildren(routerView, ...Array.from(authNodes))
+  rootElement.innerHTML = `
+    <div id="router-view" class="w-full h-full min-h-screen">
+      ${renderLandingPage().trim()}
+    </div>
+    ${renderAuthDrawer().trim()}
+  `
 }
 
 function hydrateApplication() {

@@ -22,6 +22,12 @@ export function validateForm(mode, fields) {
     if (!name?.trim()) {
       return { field: 'name', message: 'Informe seu nome completo.' }
     }
+    if (name.trim().length < 2) {
+      return { field: 'name', message: 'O nome deve ter pelo menos 2 caracteres.' }
+    }
+    if (name.trim().length > 120) {
+      return { field: 'name', message: 'O nome não pode exceder 120 caracteres.' }
+    }
     if (phone?.trim() && phone.trim().length !== 11) {
       return { field: 'phone', message: 'O telefone deve ter 11 dígitos (DDD + número).' }
     }
@@ -33,7 +39,7 @@ export function validateForm(mode, fields) {
     if (!email?.trim()) {
       return { field: 'email', message: 'Informe seu e-mail.' }
     }
-    if (!EMAIL_REGEX.test(email.trim())) {
+    if (email.trim().length > 254 || !EMAIL_REGEX.test(email.trim())) {
       return { field: 'email', message: 'Formato de e-mail inválido.' }
     }
   }
@@ -46,6 +52,9 @@ export function validateForm(mode, fields) {
     }
     if (password.length < 6) {
       return { field: 'password', message: 'A senha deve ter pelo menos 6 caracteres.' }
+    }
+    if (password.length > 128) {
+      return { field: 'password', message: 'A senha não pode exceder 128 caracteres.' }
     }
   }
 

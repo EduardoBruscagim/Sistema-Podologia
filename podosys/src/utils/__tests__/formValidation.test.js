@@ -58,6 +58,16 @@ describe('validateForm', () => {
         .toEqual({ field: 'name', message: 'Informe seu nome completo.' })
     })
 
+    it('should reject name shorter than 2 characters', () => {
+      expect(validateForm('register', { ...validRegister, name: 'A' }))
+        .toEqual({ field: 'name', message: 'O nome deve ter pelo menos 2 caracteres.' })
+    })
+
+    it('should reject name longer than 120 characters', () => {
+      expect(validateForm('register', { ...validRegister, name: 'A'.repeat(121) }))
+        .toEqual({ field: 'name', message: 'O nome não pode exceder 120 caracteres.' })
+    })
+
     it('should pass when optional phone and address are empty', () => {
       expect(validateForm('register', { ...validRegister, phone: '', street: '', neighborhood: '', addressNumber: '' }))
         .toBeNull()
