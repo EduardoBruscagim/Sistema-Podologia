@@ -212,84 +212,84 @@ export function renderLandingPage() {
           <!-- Métricas mockadas -->
           <div class="p-6 lg:p-8 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 border-b border-gray-200/60 dark:border-white/5">
             <div class="p-4 lg:p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
-              <div class="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+              <div class="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 shrink-0">
                 <i data-lucide="calendar" aria-hidden="true" class="w-5 h-5"></i>
               </div>
-              <div>
-                <p class="text-xs text-gray-600 dark:text-gray-400 font-medium">Consultas Hoje</p>
-                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">12 Pacientes</p>
+              <div class="min-w-0">
+                <p class="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wider truncate">Consultas Hoje</p>
+                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white tracking-tight tabular-nums truncate">12 Pacientes</p>
               </div>
             </div>
 
             <div class="p-4 lg:p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
-              <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+              <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
                 <i data-lucide="user-check" aria-hidden="true" class="w-5 h-5"></i>
               </div>
-              <div>
-                <p class="text-xs text-gray-600 dark:text-gray-400 font-medium">Em Atendimento</p>
-                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">2 Confirmados</p>
+              <div class="min-w-0">
+                <p class="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wider truncate">Em Atendimento</p>
+                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white tracking-tight tabular-nums truncate">2 Confirmados</p>
               </div>
             </div>
 
             <div class="p-4 lg:p-5 rounded-2xl bg-white/60 dark:bg-white/5 border border-gray-200/50 dark:border-white/5 flex items-center gap-3">
-              <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400">
+              <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 shrink-0">
                 <i data-lucide="clock" aria-hidden="true" class="w-5 h-5"></i>
               </div>
-              <div>
-                <p class="text-xs text-gray-600 dark:text-gray-400 font-medium">Próximo Horário</p>
-                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white">09:30 — Dra. Camila</p>
+              <div class="min-w-0">
+                <p class="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wider truncate">Próximo Horário</p>
+                <p class="text-lg lg:text-xl font-bold text-gray-900 dark:text-white tracking-tight tabular-nums truncate">09:30 — Dra. Camila</p>
               </div>
             </div>
           </div>
 
           <!-- Tabela mockada da agenda de podologia -->
           <div class="p-6 lg:p-8 overflow-x-auto">
-            <table class="w-full text-sm lg:text-base text-left" aria-label="Tabela de horários e pacientes agendados hoje">
+            <table class="w-full text-sm lg:text-base text-left tabular-nums" aria-label="Tabela de horários e pacientes agendados hoje">
               <caption class="sr-only">Agenda de consultas e atendimentos do dia na clínica de podologia</caption>
               <thead>
-                <tr class="text-xs lg:text-sm text-gray-700 dark:text-gray-300 uppercase border-b border-gray-200/60 dark:border-white/10">
-                  <th scope="col" class="pb-3 font-semibold">Horário</th>
-                  <th scope="col" class="pb-3 font-semibold">Paciente</th>
+                <tr class="text-xs lg:text-sm text-gray-700 dark:text-gray-300 uppercase tracking-wider border-b border-gray-200/60 dark:border-white/10">
+                  <th scope="col" class="pb-3 font-semibold w-24 sm:w-28">Horário</th>
+                  <th scope="col" class="pb-3 font-semibold w-36 sm:w-44">Paciente</th>
                   <th scope="col" class="pb-3 font-semibold hidden sm:table-cell">Procedimento</th>
-                  <th scope="col" class="pb-3 font-semibold text-right">Status</th>
+                  <th scope="col" class="pb-3 font-semibold text-right w-36 sm:w-44">Status</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200/40 dark:divide-white/5 font-medium text-gray-800 dark:text-gray-200">
                 <tr>
-                  <th scope="row" class="py-3.5 flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100">
+                  <th scope="row" class="py-3.5 flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100 tabular-nums">
                     <i data-lucide="clock" aria-hidden="true" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
                     09:00
                   </th>
                   <td class="py-3.5">Ana Souza</td>
                   <td class="py-3.5 text-gray-600 dark:text-gray-300 hidden sm:table-cell">Tratamento de Onicocriptose</td>
                   <td class="py-3.5 text-right">
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs lg:text-sm font-semibold bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 dark:bg-emerald-400/10">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 dark:bg-emerald-400/10">
                       Em Atendimento
                     </span>
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" class="py-3.5 flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100">
+                  <th scope="row" class="py-3.5 flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100 tabular-nums">
                     <i data-lucide="clock" aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400"></i>
                     10:30
                   </th>
                   <td class="py-3.5">Carlos Lima</td>
                   <td class="py-3.5 text-gray-600 dark:text-gray-300 hidden sm:table-cell">Podologia Preventiva & Laser</td>
                   <td class="py-3.5 text-right">
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs lg:text-sm font-semibold bg-blue-500/15 text-blue-800 dark:text-blue-300 dark:bg-blue-400/10">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/15 text-blue-800 dark:text-blue-300 dark:bg-blue-400/10">
                       Confirmado
                     </span>
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row" class="py-3.5 flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100">
+                  <th scope="row" class="py-3.5 flex items-center gap-2 font-medium text-gray-900 dark:text-gray-100 tabular-nums">
                     <i data-lucide="clock" aria-hidden="true" class="w-4 h-4 text-gray-500 dark:text-gray-400"></i>
                     14:00
                   </th>
                   <td class="py-3.5">Juliana Melo</td>
                   <td class="py-3.5 text-gray-600 dark:text-gray-300 hidden sm:table-cell">Exame de Podometria Computadorizada</td>
                   <td class="py-3.5 text-right">
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs lg:text-sm font-semibold bg-amber-500/15 text-amber-800 dark:text-amber-300 dark:bg-amber-400/10">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-800 dark:text-amber-300 dark:bg-amber-400/10">
                       Agendado
                     </span>
                   </td>

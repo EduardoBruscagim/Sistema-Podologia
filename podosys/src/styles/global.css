@@ -44,12 +44,13 @@
 
 @layer base {
 
-  /* Renderização otimizada */
+  /* Renderização otimizada & OpenType Features */
 
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
     overflow-y: auto;
   }
@@ -57,7 +58,13 @@
   body {
     min-height: 100%;
     overflow-x: hidden;
+    line-height: 1.5;
+    letter-spacing: -0.011em;
     @apply bg-white text-gray-900 dark:bg-[var(--color-dark-bg)] dark:text-gray-100;
+  }
+
+  :is(.dark *) body {
+    letter-spacing: -0.006em;
   }
 
   /* Scrollbar oculta */
@@ -75,24 +82,37 @@
     display: none;
   }
 
-  /* Tipografia responsiva (clamp) com Kerning Óptico */
+  /* Tipografia responsiva (clamp) com Kerning Óptico & Balanceamento */
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
 
   h1 {
     font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
     line-height: 1.1;
-    letter-spacing: -0.025em;
-    font-optical-sizing: auto;
+    letter-spacing: -0.028em;
   }
 
   h2 {
     font-size: clamp(1.5rem, 3vw + 1rem, 2.5rem);
-    letter-spacing: -0.015em;
-    font-optical-sizing: auto;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   p {
     max-width: 75ch;
     font-optical-sizing: auto;
+    text-wrap: pretty;
+  }
+
+  /* Alinhamento numérico de precisão tabular (clínico) */
+
+  table,
+  .tabular-nums,
+  [data-tabular-nums] {
+    font-variant-numeric: tabular-nums;
   }
 
   /* Interativos — Toque mínimo 48px */
