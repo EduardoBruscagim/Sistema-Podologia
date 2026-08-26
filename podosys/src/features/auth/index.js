@@ -317,6 +317,13 @@ export function initAuthEvents() {
     emailInput.required = config.required.email
     passwordInput.required = config.required.password
 
+    // Autocomplete dinâmico para gerenciadores de senha (WCAG 1.3.5)
+    if (mode === 'register' || mode === 'update_password') {
+      passwordInput.setAttribute('autocomplete', 'new-password')
+    } else {
+      passwordInput.setAttribute('autocomplete', 'current-password')
+    }
+
     // Text labels
     title.textContent = config.title
     submitText.textContent = config.submit
@@ -361,10 +368,6 @@ export function initAuthEvents() {
     backdrop.classList.remove('hidden')
     wrapper.classList.remove('hidden')
     wrapper.classList.add('flex')
-
-    // Force reflow — garante que o browser processe a mudança de display
-    // antes de aplicar as classes de transição CSS
-    void wrapper.offsetWidth
 
     requestAnimationFrame(() => {
       backdrop.classList.remove('opacity-0')
@@ -444,7 +447,7 @@ export function initAuthEvents() {
       dialog.querySelectorAll(
         'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )
-    ).filter((el) => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement)
+    ).filter((el) => el.offsetParent !== null || el === document.activeElement)
 
     if (focusables.length === 0) return
 

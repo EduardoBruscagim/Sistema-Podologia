@@ -3,12 +3,12 @@
 // Markup HTML do modal/drawer de autenticação.
 // -----------------------------------------------------------------------------
 
-// Classe reutilizada em todos os inputs do formulário
+// Classe reutilizada em todos os inputs do formulário (text-base previne zoom indesejado no iOS)
 const INPUT_CLASS = [
-  'appearance-none h-12 px-4 rounded-xl',
-  'bg-gray-50/50 dark:bg-[#2c2c2e]/50',
+  'appearance-none h-12 px-4 rounded-xl text-base',
+  'bg-gray-50/50 dark:bg-dark-input/50',
   'border-2 border-gray-200 dark:border-gray-700',
-  'focus:bg-white dark:focus:bg-[#2c2c2e]',
+  'focus:bg-white dark:focus:bg-dark-input',
   'focus:border-blue-500 dark:focus:border-blue-500',
   'outline-none transition-all dark:text-white',
 ].join(' ')
@@ -43,7 +43,7 @@ export function renderAuthDrawer() {
         "
       >
 
-        <div class="px-6 pb-8 sm:pt-8 pt-2 overflow-y-auto scrollbar-hide">
+        <div class="px-6 pb-[max(2rem,env(safe-area-inset-bottom))] sm:pb-8 sm:pt-8 pt-2 overflow-y-auto scrollbar-hide">
 
           <!-- Header -->
           <div class="flex items-center justify-between mb-6">
@@ -55,7 +55,7 @@ export function renderAuthDrawer() {
             <button
               id="close-auth-btn"
               class="p-2 active:scale-90 transition-transform"
-              aria-label="Fechar"
+              aria-label="Fechar janela de autenticação"
             >
               <i
                 data-lucide="x"
@@ -66,7 +66,7 @@ export function renderAuthDrawer() {
           </div>
 
           <!-- Form -->
-          <form id="auth-form" class="flex flex-col">
+          <form id="auth-form" class="flex flex-col" novalidate>
 
             <!-- Register Fields (animated via grid-rows) -->
             <div
@@ -77,28 +77,28 @@ export function renderAuthDrawer() {
 
                 <div class="flex flex-col gap-1.5 mb-4 mt-1">
                   <label for="auth-name" class="text-sm font-medium text-gray-700 dark:text-gray-300">Nome Completo</label>
-                  <input type="text" id="auth-name" placeholder="Ex: Maria Silva" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
+                  <input type="text" id="auth-name" name="name" autocomplete="name" maxlength="120" placeholder="Ex: Maria Silva" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label for="auth-phone" class="text-sm font-medium text-gray-700 dark:text-gray-300">Número (Opcional)</label>
-                  <input type="tel" id="auth-phone" placeholder="(11) 99999-9999" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
+                  <input type="tel" id="auth-phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="15" placeholder="(11) 99999-9999" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3 mb-4">
                   <div class="flex flex-col gap-1.5 flex-1">
                     <label for="auth-street" class="text-sm font-medium text-gray-700 dark:text-gray-300">Rua (Opcional)</label>
-                    <input type="text" id="auth-street" placeholder="Rua Exemplo" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
+                    <input type="text" id="auth-street" name="street" autocomplete="address-line1" maxlength="150" placeholder="Rua Exemplo" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                   </div>
                   <div class="flex flex-col gap-1.5 sm:w-24">
                     <label for="auth-address-number" class="text-sm font-medium text-gray-700 dark:text-gray-300">Nº</label>
-                    <input type="text" id="auth-address-number" placeholder="123" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
+                    <input type="text" id="auth-address-number" name="address-number" autocomplete="address-line2" maxlength="20" placeholder="123" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                   </div>
                 </div>
 
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label for="auth-neighborhood" class="text-sm font-medium text-gray-700 dark:text-gray-300">Bairro (Opcional)</label>
-                  <input type="text" id="auth-neighborhood" placeholder="Centro" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
+                  <input type="text" id="auth-neighborhood" name="neighborhood" autocomplete="address-level3" maxlength="80" placeholder="Centro" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
 
               </div>
@@ -112,7 +112,7 @@ export function renderAuthDrawer() {
               <div id="email-inner" class="overflow-hidden flex flex-col pointer-events-auto">
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label for="auth-email" class="text-sm font-medium text-gray-700 dark:text-gray-300">E-mail</label>
-                  <input type="email" id="auth-email" required placeholder="seu@email.com" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
+                  <input type="email" id="auth-email" name="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" maxlength="254" required placeholder="seu@email.com" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ export function renderAuthDrawer() {
                 <div class="flex flex-col gap-1.5 mb-4">
                   <label for="auth-password" class="text-sm font-medium text-gray-700 dark:text-gray-300">Senha</label>
                   <div class="relative flex items-center">
-                    <input type="password" id="auth-password" required placeholder="••••••••" aria-describedby="auth-feedback" class="${INPUT_CLASS} pr-12 w-full" />
+                    <input type="password" id="auth-password" name="password" autocomplete="current-password" maxlength="128" required placeholder="••••••••" aria-describedby="auth-feedback" class="${INPUT_CLASS} pr-12 w-full" />
                     <button
                       type="button"
                       id="toggle-password-visibility-btn"
