@@ -70,8 +70,8 @@ export const ThemeManager = {
 
     iconContainers.forEach((container) => {
       container.innerHTML = `
-        <i data-lucide="sun" class="theme-icon-sun absolute h-[1.25rem] w-[1.25rem]"></i>
-        <i data-lucide="moon" class="theme-icon-moon absolute h-[1.25rem] w-[1.25rem]"></i>
+        <i data-lucide="sun" aria-hidden="true" class="theme-icon-sun absolute h-[1.25rem] w-[1.25rem]"></i>
+        <i data-lucide="moon" aria-hidden="true" class="theme-icon-moon absolute h-[1.25rem] w-[1.25rem]"></i>
       `
     })
 

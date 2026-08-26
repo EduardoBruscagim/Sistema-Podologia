@@ -90,7 +90,7 @@ export function renderAuthDrawer() {
                     <label for="auth-street" class="text-sm font-medium text-gray-700 dark:text-gray-300">Rua (Opcional)</label>
                     <input type="text" id="auth-street" name="street" autocomplete="address-line1" maxlength="150" placeholder="Rua Exemplo" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                   </div>
-                  <div class="flex flex-col gap-1.5 sm:w-24">
+                  <div class="flex flex-col gap-1.5 sm:w-28">
                     <label for="auth-address-number" class="text-sm font-medium text-gray-700 dark:text-gray-300">Nº</label>
                     <input type="text" id="auth-address-number" name="address-number" autocomplete="address-line2" maxlength="20" placeholder="123" aria-describedby="auth-feedback" class="${INPUT_CLASS}" />
                   </div>
