@@ -1,0 +1,2 @@
+// Page view definitions
+export {}
