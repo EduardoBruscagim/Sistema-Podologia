@@ -1,13 +1,150 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistema de Podologia</title>
+    <title>Angélica Eduarda | Podologia Especializada</title>
+    <link rel="stylesheet" href="/src/style.css">
   </head>
-  <body class="min-h-screen bg-base-200 text-base-content antialiased">
-    <div id="app"></div>
+  <body class="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 antialiased font-sans selection:bg-apple-blue selection:text-white transition-colors duration-300 break-words">
+    <!--
+    THESIS: Landing page de autoagendamento B2C que transmite cuidado clínico premium, livre do padrão de "clínica de bairro" e livre de agendamentos com atrito via WhatsApp.
+    OWN-WORLD: Apple Design (Minimalismo Clínico Premium) + Bolder Sweep. Quebra da simetria clássica através de Bento Grids, tipografia massiva (text-8xl) orientada à esquerda e layouts editoriais que criam ritmo na rolagem.
+    FORM: Azul Safira (Classic Trust), color-blue.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+    -->
+    
+    <div id="app">
+      <!-- Navbar Flutuante estilo Apple -->
+      <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-4xl z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 dark:shadow-black/20 rounded-full transition-all duration-300">
+        <div class="px-3 py-3 h-16 flex items-center justify-between">
+          <span class="font-semibold text-lg tracking-tight truncate flex-1 mr-4 pl-4 text-slate-900 dark:text-slate-50">Angélica Eduarda</span>
+          <div class="flex items-center gap-3">
+            <button id="theme-toggle" class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue" aria-label="Alternar tema" title="Alternar tema">
+              <!-- Ícone de Lua (Modo Escuro ativo -> Mostrar Lua para voltar pro Claro) -->
+              <svg id="theme-icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+              <!-- Ícone de Sol (Modo Claro ativo -> Mostrar Sol para ir pro Escuro) -->
+              <svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </button>
+            <button class="bg-apple-blue hover:bg-apple-blue-hover text-white text-sm font-medium px-5 py-2 rounded-full transition-all active:scale-95 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 focus-visible:ring-apple-blue disabled:opacity-50 disabled:cursor-not-allowed">
+              Agendar
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section Bolder -->
+      <section class="pt-40 pb-20 px-6 relative overflow-hidden min-h-[90vh] flex items-center">
+        <!-- Blur de fundo assimétrico -->
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-apple-blue/20 dark:from-apple-blue/20 to-transparent blur-[120px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+        
+        <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center relative z-10">
+          <div class="lg:col-span-7 gsap-hero-reveal">
+            <h1 class="text-5xl md:text-[6.5rem] lg:text-[7.5rem] font-bold tracking-tighter leading-[0.9] mb-8 text-slate-900 dark:text-slate-50">
+              Cuidado<br/>
+              <span class="text-slate-400 dark:text-slate-500">absoluto.</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-slate-500 dark:text-slate-400 font-medium max-w-xl mb-12 leading-snug text-balance">
+              Podologia de excelência no conforto do seu lar. Agende sua avaliação em segundos. Sem atrito. Sem espera.
+            </p>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <button class="bg-apple-blue hover:bg-apple-blue-hover text-white text-lg font-medium px-8 py-4 rounded-full transition-all active:scale-95 shadow-sm shadow-apple-blue/20 hover:shadow-md hover:shadow-apple-blue/30 leading-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 focus-visible:ring-apple-blue disabled:opacity-50 disabled:cursor-not-allowed">
+                Ver horários
+              </button>
+              <p class="text-sm font-semibold tracking-wider uppercase text-slate-400 dark:text-slate-500">Confirmação Imediata</p>
+            </div>
+          </div>
+          
+          <div class="lg:col-span-5 relative gsap-hero-image hidden md:block">
+            <!-- Glassmorphism "floating" UI representation -->
+            <div class="w-full aspect-[4/5] bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-[2.5rem] border border-slate-200/80 dark:border-slate-700/80 shadow-2xl shadow-slate-900/10 dark:shadow-black/40 overflow-hidden flex flex-col justify-between p-8 relative rotate-2 hover:rotate-0 transition-transform duration-700">
+               <div class="flex justify-between items-center mb-12">
+                 <div class="w-12 h-12 rounded-full bg-apple-blue/10 dark:bg-apple-blue/20 flex items-center justify-center">
+                   <svg class="w-6 h-6 text-apple-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                 </div>
+                 <div class="w-20 h-2 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+               </div>
+               <div class="space-y-4">
+                 <div class="h-5 bg-slate-200 dark:bg-slate-700 rounded-full w-3/4"></div>
+                 <div class="h-5 bg-slate-100 dark:bg-slate-800 rounded-full w-1/2"></div>
+               </div>
+               <div class="mt-12 grid grid-cols-3 gap-3">
+                 <div class="aspect-square rounded-2xl bg-apple-blue border border-apple-blue/30 shadow-lg shadow-apple-blue/30"></div>
+                 <div class="aspect-square rounded-2xl bg-slate-100 dark:bg-slate-800"></div>
+                 <div class="aspect-square rounded-2xl bg-slate-100 dark:bg-slate-800"></div>
+                 <div class="aspect-square rounded-2xl bg-slate-100 dark:bg-slate-800"></div>
+                 <div class="aspect-square rounded-2xl bg-slate-100 dark:bg-slate-800"></div>
+                 <div class="aspect-square rounded-2xl bg-slate-100 dark:bg-slate-800"></div>
+               </div>
+               <!-- Placeholder descritivo -->
+               <div class="absolute inset-0 flex items-center justify-center bg-white/30 dark:bg-slate-950/40 backdrop-blur-[4px]">
+                 <span class="font-bold text-sm text-slate-800 dark:text-slate-200 bg-white/90 dark:bg-slate-900/90 px-5 py-3 rounded-full shadow-md backdrop-blur-md border border-slate-200 dark:border-slate-700">[UI: Seleção de Horários]</span>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diferencial: Bento Grid -->
+      <section class="py-20 md:py-24 px-6 bg-slate-50 dark:bg-slate-950/50">
+        <div class="max-w-6xl mx-auto">
+          <div class="mb-12 md:mb-16 gsap-fade-up">
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tighter text-slate-900 dark:text-slate-50 text-balance">Desenhado para o<br/>seu tempo.</h2>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 md:p-10 border border-slate-200/60 dark:border-slate-800/60 shadow-sm shadow-slate-900/5 flex flex-col relative overflow-hidden gsap-fade-up">
+              <div class="w-14 h-14 bg-blue-50 dark:bg-apple-blue/10 rounded-2xl flex items-center justify-center text-apple-blue mb-8">
+                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 tracking-tight text-slate-900 dark:text-slate-50">Conforto do Lar</h3>
+              <p class="text-base text-slate-500 dark:text-slate-400 leading-relaxed font-medium">Atendimento podológico completo na sua casa. Você escolhe o horário, eu levo o cuidado até você.</p>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="bg-white dark:bg-slate-900 rounded-[2rem] p-8 md:p-10 border border-slate-200/60 dark:border-slate-800/60 shadow-sm shadow-slate-900/5 flex flex-col gsap-fade-up">
+              <div class="w-14 h-14 bg-blue-50 dark:bg-apple-blue/10 rounded-2xl flex items-center justify-center text-apple-blue mb-8 shrink-0">
+                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 tracking-tight text-slate-900 dark:text-slate-50 text-balance">Agenda Autônoma</h3>
+              <p class="text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">Sincronização em tempo real. Sem aguardar confirmação humana ou filas no WhatsApp.</p>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="bg-apple-blue rounded-[2rem] p-8 md:p-10 border border-apple-blue shadow-lg shadow-apple-blue/20 flex flex-col text-white gsap-fade-up">
+              <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-8 shrink-0">
+                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 tracking-tight text-white text-balance">Segurança</h3>
+              <p class="text-blue-100 text-base font-medium leading-relaxed">Biossegurança de nível hospitalar e proteção total dos seus dados de saúde.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- CTA Final -->
+      <section class="py-24 md:py-32 px-6 bg-apple-blue/5 dark:bg-slate-950 text-slate-900 dark:text-white text-center relative overflow-hidden transition-colors duration-300">
+        <!-- Glow sutil no fundo do CTA -->
+        <div class="absolute inset-0 bg-gradient-to-t from-apple-blue/10 dark:from-apple-blue/10 to-transparent pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto gsap-fade-up relative z-10 px-4">
+          <p class="text-xs md:text-sm uppercase tracking-[0.2em] font-semibold text-apple-blue dark:text-blue-400 mb-6">O próximo passo</p>
+          <h2 class="text-4xl md:text-[5rem] font-bold tracking-tighter mb-6 md:mb-8 leading-[1.05] text-balance">Pronto para<br/>agendar?</h2>
+          <p class="text-lg md:text-2xl text-slate-500 dark:text-slate-400 font-medium mb-10 md:mb-14 leading-snug text-balance">Escolha o melhor horário para você e garanta sua consulta em menos de um minuto, sem intermediários.</p>
+          <button class="bg-apple-blue hover:bg-apple-blue-hover text-white text-lg md:text-xl font-medium px-8 py-4 md:px-12 md:py-5 rounded-full transition-all active:scale-95 shadow-lg shadow-apple-blue/30 hover:shadow-xl hover:shadow-apple-blue/40 leading-tight w-full sm:w-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 focus-visible:ring-apple-blue disabled:opacity-50 disabled:cursor-not-allowed">
+            Acessar Agenda
+          </button>
+        </div>
+      </section>
+      
+      <!-- Footer Simples -->
+      <footer class="py-12 px-6 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-center text-slate-400 dark:text-slate-500 text-sm font-medium transition-colors duration-300">
+        <p>&copy; 2026 Angélica Eduarda Amaro Bruscagim. Todos os direitos reservados.</p>
+      </footer>
+    </div>
+    
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
