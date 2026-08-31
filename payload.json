@@ -1,0 +1,41 @@
+{
+  "title": "Escolha a cor de destaque (Apple Design)",
+  "question": "O universo visual será o Apple Design (fundo neutro, tipografia forte, microanimações fluidas). Qual cor servirá de destaque (CTA e realce)?",
+  "options": [
+    {
+      "id": "color-blue",
+      "label": "Azul Safira (Classic Trust)",
+      "kicker": "A MAIS SEGURA",
+      "lineage": "Minimalismo Clínico Premium",
+      "thesis": "O clássico azul transmite confiabilidade, higiene e precisão médica indiscutível.",
+      "palette": ["#ffffff", "#f5f5f7", "#1d1d1f", "#0071e3"],
+      "materials": ["Vidro fosco", "Animações spring"],
+      "viewport": "Fundo branco/cinza, tipografia escura, botões e elementos de destaque no azul da Apple.",
+      "risk": "É a escolha mais tradicional e esperada em softwares de saúde."
+    },
+    {
+      "id": "color-green",
+      "label": "Verde Esmeralda (Vitality)",
+      "lineage": "Minimalismo Saúde & Bem-estar",
+      "thesis": "Traz a percepção de saúde, renovação e cura, mantendo a sofisticação da interface.",
+      "palette": ["#ffffff", "#f5f5f7", "#1d1d1f", "#059669"],
+      "materials": ["Vidro fosco", "Animações spring"],
+      "viewport": "Base neutra, contrastes fortes e botões de chamada no verde vibrante, focado em agendamento.",
+      "risk": "A menos que o tom seja preciso, pode remeter a produtos financeiros."
+    },
+    {
+      "id": "color-coral",
+      "label": "Coral Rose (Elegance)",
+      "lineage": "Minimalismo Estética Premium",
+      "thesis": "Um tom quente e sofisticado que quebra o padrão 'hospital', com foco em cuidado pessoal e conforto.",
+      "palette": ["#ffffff", "#f5f5f7", "#1d1d1f", "#e11d48"],
+      "materials": ["Vidro fosco", "Animações spring"],
+      "viewport": "Botões primários e detalhes no tom rose quente, contrastando com um fundo clínico limpo.",
+      "risk": "Afasta-se da estética clínica tradicional, optando por um viés de estética/beleza."
+    }
+  ],
+  "buildPath": {
+    "value": "code",
+    "toggle": false
+  }
+}
