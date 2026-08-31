@@ -1,2 +1,0 @@
-// Application layout wrappers
-export {}
