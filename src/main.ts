@@ -49,11 +49,17 @@ if (themeToggleBtn && themeIconMoon && themeIconSun) {
       document.documentElement.classList.add('dark')
       themeIconMoon.classList.add('hidden')
       themeIconSun.classList.remove('hidden')
+      themeToggleBtn.setAttribute('aria-pressed', 'true')
+      themeToggleBtn.setAttribute('aria-label', 'Ativar modo claro')
+      themeToggleBtn.setAttribute('title', 'Ativar modo claro')
       localStorage.setItem('theme', 'dark')
     } else {
       document.documentElement.classList.remove('dark')
       themeIconSun.classList.add('hidden')
       themeIconMoon.classList.remove('hidden')
+      themeToggleBtn.setAttribute('aria-pressed', 'false')
+      themeToggleBtn.setAttribute('aria-label', 'Ativar modo escuro')
+      themeToggleBtn.setAttribute('title', 'Ativar modo escuro')
       localStorage.setItem('theme', 'light')
     }
   }
