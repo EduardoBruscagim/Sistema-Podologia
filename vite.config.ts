@@ -9,4 +9,17 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    target: 'es2022',
+    cssMinify: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes('node_modules/gsap')) {
+            return 'vendor-gsap'
+          }
+        },
+      },
+    },
+  },
 })

@@ -20,6 +20,7 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
 
   ScrollTrigger.batch('.gsap-fade-up', {
     start: 'top 85%',
+    once: true,
     onEnter: (batch) =>
       gsap.to(batch, {
         y: 0,
@@ -29,8 +30,6 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
         stagger: 0.15,
         overwrite: true,
       }),
-    onLeaveBack: (batch) =>
-      gsap.to(batch, { y: 40, opacity: 0, duration: 0.4, ease: 'power2.in', overwrite: true }),
   })
 })
 
