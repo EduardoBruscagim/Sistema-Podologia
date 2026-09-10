@@ -18,6 +18,26 @@
   body {
     background-color: var(--color-apple-bg);
     color: var(--color-apple-text);
+    caret-color: var(--color-apple-blue);
+  }
+
+  /* Barra de rolagem sutil refinada */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.5);
   }
 }
 
