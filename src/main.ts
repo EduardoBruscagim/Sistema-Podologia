@@ -14,6 +14,12 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 },
   )
 
+  gsap.fromTo(
+    '.gsap-hero-image',
+    { y: 50, opacity: 0 },
+    { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out', delay: 0.35 },
+  )
+
   // Microanimações em Scroll (Apple style) otimizadas com batch
   // Garante que os elementos iniciais fiquem invisíveis antes do batch agir
   gsap.set('.gsap-fade-up', { y: 40, opacity: 0 })
