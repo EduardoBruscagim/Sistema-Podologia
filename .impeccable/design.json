@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-10T23:26:00.000Z",
+  "title": "Design System: Angélica Eduarda Podologia",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Azul Safira",
+        "canonical": "#0071e3",
+        "tonalRamp": [
+          "#002b5e",
+          "#004595",
+          "#005cc9",
+          "#0071e3",
+          "#2e8df8",
+          "#66acfa",
+          "#9ecbfb",
+          "#d9ebfd"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Branco Puro",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#334155",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#f1f5f9",
+          "#ffffff"
+        ]
+      },
+      "dark-bg": {
+        "role": "neutral",
+        "displayName": "Ardósia Noturna Profunda",
+        "canonical": "#020617",
+        "tonalRamp": [
+          "#020617",
+          "#090d16",
+          "#0f172a",
+          "#1e293b",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título principal do Hero com impacto monumental e kerning fechado."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de seções principais (Bento Grid e CTA)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Títulos de cartões de serviços e recursos."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Parágrafos descritivos e explicações clínicas."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Badges de confirmação e pré-cabeçalhos em caixa alta."
+      }
+    },
+    "shadows": [
+      {
+        "name": "island-ambient",
+        "value": "0 20px 25px -5px rgba(15, 23, 42, 0.05)",
+        "purpose": "Dispersão ambiental sob a ilha flutuante no modo claro."
+      },
+      {
+        "name": "night-glow",
+        "value": "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
+        "purpose": "Sombra suave de profundidade no modo escuro."
+      },
+      {
+        "name": "accent-elevation",
+        "value": "0 10px 15px -3px rgba(0, 113, 227, 0.3)",
+        "purpose": "Elevação luminosa do botão primário de agendamento."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-power3",
+        "value": "cubic-bezier(0.215, 0.61, 0.355, 1)",
+        "purpose": "Entrada suave da revelação de títulos e transições de hover."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botão principal de conversão para agendamento de consultas.",
+      "html": "<button class=\"ds-btn-primary\">Agendar horário</button>",
+      "css": ".ds-btn-primary { background: #0071e3; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; font-size: 1.125rem; font-weight: 500; padding: 16px 32px; border-radius: 9999px; border: none; cursor: pointer; box-shadow: 0 10px 15px -3px rgba(0, 113, 227, 0.3); transition: background-color 0.2s, transform 0.15s; } .ds-btn-primary:hover { background: #0077ed; box-shadow: 0 14px 20px -3px rgba(0, 113, 227, 0.4); } .ds-btn-primary:active { transform: scale(0.96); }"
+    },
+    {
+      "name": "Navigation Island",
+      "kind": "nav",
+      "refersTo": "nav-island",
+      "description": "Barra de navegação flutuante estilo Apple com vidro fosco.",
+      "html": "<nav class=\"ds-nav-island\"><span>Angélica Eduarda</span><button class=\"ds-btn-compact\">Agendar</button></nav>",
+      "css": ".ds-nav-island { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(226, 232, 240, 0.6); border-radius: 9999px; box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif; font-weight: 600; color: #0f172a; width: 100%; max-width: 600px; } .ds-btn-compact { background: #0071e3; color: #ffffff; padding: 8px 18px; border-radius: 9999px; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s; } .ds-btn-compact:hover { background: #0077ed; }"
+    },
+    {
+      "name": "Bento Feature Card",
+      "kind": "card",
+      "refersTo": "card-bento",
+      "description": "Cartão do grid de diferenciais clínicos com cantos suaves.",
+      "html": "<div class=\"ds-card-bento\"><div class=\"ds-icon-box\">✓</div><h3>Conforto do Lar</h3><p>Cuidado podológico completo na sua casa. Você escolhe o horário, eu vou até você.</p></div>",
+      "css": ".ds-card-bento { background: #ffffff; border: 1px solid rgba(226, 232, 240, 0.6); border-radius: 28px; padding: 32px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif; } .ds-icon-box { width: 48px; height: 48px; border-radius: 16px; background: rgba(0, 113, 227, 0.1); color: #0071e3; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 24px; } .ds-card-bento h3 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0 0 12px 0; letter-spacing: -0.02em; } .ds-card-bento p { font-size: 1rem; color: #64748b; line-height: 1.6; margin: 0; font-weight: 500; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Santuário Clínico Minimalista",
+    "overview": "A experiência visual traduz a precisão cirúrgica e o acolhimento do atendimento podológico domiciliar premium. Em vez de recorrer ao repertório saturado de clichês de saúde, o sistema adota a sofisticação da linguagem editorial e tecnológica da Apple.",
+    "keyCharacteristics": [
+      "Rigor Tipográfico: Display massivo com kerning ultra-fechado (-0.05em) e alinhamento editorial à esquerda.",
+      "Transparência e Camadas: Vidro fosco (glassmorphism 24px) com desfoque de fundo e bordas translúcidas de 1px.",
+      "Aceleração Sensorial: Interações ágeis (active:scale-95) e foco absoluto na eliminação do atrito do agendamento.",
+      "Bipolaridade de Tema Intencional: Modos claro e escuro desenhados individualmente com contrastes rigorosos acima de 4.5:1."
+    ],
+    "rules": [
+      {
+        "name": "The Sapphire Accent Rule",
+        "body": "O Azul Safira é reservado para intenção direta de conversão ou elementos de confiança clínica. Sua força estética reside na sobriedade com que é aplicado no restante da tela.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Raw-Gray Rule",
+        "body": "Em superfícies escuras ou coloridas, o texto secundário nunca é cinza neutro desbotado; é sempre tonalizado com a matiz do fundo para preservar harmonia cromática.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tight Headline Rule",
+        "body": "Quanto maior a escala do título, mais fechado o tracking e menor a entrelinha. Headings de exibição não toleram entrelinha padrão de leitura.",
+        "section": "typography"
+      },
+      {
+        "name": "The Material-Over-Shadow Rule",
+        "body": "A profundidade deve ser transmitida primariamente por desfoque de fundo (backdrop-blur-2xl) e bordas translúcidas de 1px; sombras atuam apenas como dispersão ambiental secundária.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do manter todos os botões de ação em formato pílula (rounded-full) com altura de toque de no mínimo 44px.",
+      "Do utilizar contraste mínimo de 4.5:1 para textos em qualquer estado de cor ou tema.",
+      "Do utilizar alinhamento à esquerda e tipografia em escala clamp para manter a autoridade editorial.",
+      "Do preservar o script síncrono no <head> para evitar FOUC no modo escuro."
+    ],
+    "donts": [
+      "Don't introduzir cantos retos (sharp) ou bordas espessas (> 1px) em cards e contêineres.",
+      "Don't aplicar gradientes multicoloridos ou efeitos de neon; a saturação é exclusiva do Azul Safira.",
+      "Don't usar sombras duras sem difusão (box-shadow: 4px 4px 0).",
+      "Don't quebrar a navegação por teclado ou ocultar o link de salto (skip link)."
+    ]
+  }
+}
