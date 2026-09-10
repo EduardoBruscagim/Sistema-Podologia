@@ -16,37 +16,37 @@ colors:
   border-dark: 'rgba(51, 65, 85, 0.6)'
 typography:
   display:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     fontSize: '7.5rem'
     fontWeight: 700
     lineHeight: 0.95
     letterSpacing: '-0.05em'
   display-md:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     fontSize: '6.5rem'
     fontWeight: 700
     lineHeight: 0.95
     letterSpacing: '-0.05em'
   headline:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     fontSize: '5rem'
     fontWeight: 700
     lineHeight: 1.05
     letterSpacing: '-0.04em'
   title:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     fontSize: '1.5rem'
     fontWeight: 700
     lineHeight: 1.2
     letterSpacing: '-0.02em'
   body:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     fontSize: '1rem'
     fontWeight: 500
     lineHeight: 1.6
     letterSpacing: 'normal'
   label:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     fontSize: '0.875rem'
     fontWeight: 600
     lineHeight: 1.2
@@ -121,11 +121,11 @@ Paleta concisa ancorada no contraste entre neutros cirúrgicos e o impacto confi
 
 ## Typography
 
-**Display Font:** `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
-**Body Font:** `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
-**Label / Mono Font:** `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
+**Display Font:** `'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
+**Body Font:** `'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
+**Label / Mono Font:** `'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
 
-**Character:** Tipografia nativa sem carregamento externo, alcançando tempo zero de renderização inicial com a autoridade sóbria e limpa do design de sistemas operacionais de alta precisão.
+**Character:** Tipografia geométrica humanista (Outfit) carregada via Google Fonts com conexões `preconnect` otimizadas. Combina clareza digital contemporânea com formas curvas acolhedoras e suaves, traduzindo bem-estar, biossegurança e cuidado clínico de alta precisão.
 
 ### Hierarchy
 
