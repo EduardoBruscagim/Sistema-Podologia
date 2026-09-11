@@ -173,7 +173,51 @@ mm.add(
       },
     )
 
-    // --- 4. Navbar Flutuante Inteligente (Acessível, sem lag, com Delta Threshold) ---
+    // --- 4. Interações Ricas de Hover (Bento Cards) ---
+    const bentoCards = document.querySelectorAll('.bento-card')
+    bentoCards.forEach((card) => {
+      const icon = card.querySelector('.bento-icon')
+
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          y: -8,
+          scale: 1.015,
+          duration: 0.4,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+        if (icon) {
+          gsap.to(icon, {
+            scale: 1.12,
+            rotation: 4,
+            duration: 0.5,
+            ease: 'back.out(2)',
+            overwrite: 'auto',
+          })
+        }
+      })
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+        if (icon) {
+          gsap.to(icon, {
+            scale: 1,
+            rotation: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            overwrite: 'auto',
+          })
+        }
+      })
+    })
+
+    // --- 5. Navbar Flutuante Inteligente (Acessível, sem lag, com Delta Threshold) ---
     if (headerEl && floatingNav) {
       const navAnim = gsap
         .fromTo(
