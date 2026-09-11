@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @plugin "daisyui";
+@import '@fontsource-variable/outfit';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -11,8 +12,8 @@
   --color-apple-blue-hover: #0077ed;
 
   --font-sans:
-    'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
-    sans-serif;
+    'Outfit Variable', 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
 }
 
 @layer base {
