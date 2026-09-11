@@ -12,6 +12,10 @@ export default defineConfig({
   build: {
     target: 'es2022',
     cssMinify: true,
+    cssCodeSplit: true,
+    modulePreload: {
+      polyfill: false,
+    },
     rollupOptions: {
       output: {
         manualChunks(id: string) {
@@ -19,6 +23,9 @@ export default defineConfig({
             return 'vendor-gsap'
           }
         },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
       },
     },
   },
