@@ -7,36 +7,43 @@ gsap.registerPlugin(ScrollTrigger)
 const mm = gsap.matchMedia()
 
 mm.add('(prefers-reduced-motion: no-preference)', () => {
-  // Hero Animations (Carregamento inicial)
-  gsap.fromTo(
-    '.gsap-hero-reveal',
-    { y: 40, opacity: 0 },
-    { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 },
-  )
+  // Hero Animations: movimento suave sem ocultar texto (opacity: 1) para garantir LCP imediato (<0.5s)
+  gsap.from('.gsap-hero-reveal', {
+    y: 24,
+    duration: 0.8,
+    ease: 'power3.out',
+  })
 
   gsap.fromTo(
     '.gsap-hero-image',
-    { y: 50, opacity: 0 },
-    { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out', delay: 0.35 },
+    { y: 40, opacity: 0 },
+    { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.15 },
   )
 
-  // Microanimações em Scroll (Apple style) otimizadas com batch
-  // Garante que os elementos iniciais fiquem invisíveis antes do batch agir
-  gsap.set('.gsap-fade-up', { y: 40, opacity: 0 })
+  // ScrollTrigger diferido para o evento 'load' para eliminar Reflow Forçado durante o caminho crítico
+  const initScrollTrigger = () => {
+    gsap.set('.gsap-fade-up', { y: 30, opacity: 0 })
 
-  ScrollTrigger.batch('.gsap-fade-up', {
-    start: 'top 85%',
-    once: true,
-    onEnter: (batch) =>
-      gsap.to(batch, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-        stagger: 0.15,
-        overwrite: true,
-      }),
-  })
+    ScrollTrigger.batch('.gsap-fade-up', {
+      start: 'top 88%',
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          stagger: 0.12,
+          overwrite: true,
+        }),
+    })
+  }
+
+  if (document.readyState === 'complete') {
+    initScrollTrigger()
+  } else {
+    window.addEventListener('load', initScrollTrigger, { once: true })
+  }
 })
 
 // Theme Toggle Logic
