@@ -11,13 +11,26 @@
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
     <title>Angélica Eduarda | Podologia Especializada</title>
-    <!-- Tipografia Externa: Outfit (Google Fonts com preconnect otimizado) -->
+    <!-- Tipografia Externa: Outfit com carregamento assíncrono não-bloqueante (Elimina Render Blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
     <!-- Prevenção de FOUC: Inserido script síncrono no <head> para aplicação imediata do tema escuro/claro salvo antes do primeiro ciclo de renderização -->
     <script>
       ;(function () {
