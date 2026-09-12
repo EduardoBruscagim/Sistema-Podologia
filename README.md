@@ -133,4 +133,6 @@ O build do projeto está configurado no `vite.config.ts` com:
 
 ## 📄 Licença
 
-Este projeto é de uso privado para **Angélica Eduarda Amaro Bruscagim**. Todos os direitos reservados.
+Este projeto é de uso exclusivo e proprietário de **Eduardo Bruscagim** e **Angélica Eduarda Amaro Bruscagim**. Todos os direitos reservados.
+
+O código-fonte é disponibilizado publicamente exclusivamente para fins de visualização técnica e portfólio. Para mais detalhes, consulte o arquivo [LICENSE](LICENSE).
