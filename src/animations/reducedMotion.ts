@@ -26,4 +26,9 @@ export const applyReducedMotion = (
       clearProps: 'transform,scale',
     },
   )
+
+  const levitationWrapper = document.querySelector<HTMLElement>('.hero-levitation-wrapper')
+  if (levitationWrapper) {
+    levitationWrapper.style.willChange = 'auto'
+  }
 }
