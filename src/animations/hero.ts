@@ -47,6 +47,11 @@ export const initHeroAnimation = (): void => {
   )
 
   // Efeito de levitação ambiente contínua do Mockup (60fps na GPU)
+  const levitationWrapper = document.querySelector<HTMLElement>('.hero-levitation-wrapper')
+  if (levitationWrapper) {
+    levitationWrapper.style.willChange = 'transform'
+  }
+
   gsap.to('.hero-levitation-wrapper', {
     y: -8,
     duration: 3.2,

@@ -75,7 +75,3 @@
     background: rgba(100, 116, 139, 0.5);
   }
 }
-
-.hero-levitation-wrapper {
-  will-change: transform;
-}
