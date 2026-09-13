@@ -63,11 +63,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       .replace(/[._]/g, ' ')
       .replace(/\b\w/g, (l) => l.toUpperCase())
 
+    // No frontend, todos os usuários autenticados recebem papel de 'patient'.
+    // Permissões administrativas serão estritamente validadas no backend (Supabase RLS).
     const loggedUser: User = {
       id: 'usr_' + Date.now(),
       name: generatedName || 'Paciente',
       email: credentials.email.toLowerCase(),
-      role: credentials.email.includes('admin') ? 'admin' : 'patient',
+      role: 'patient',
     }
 
     setUser(loggedUser)

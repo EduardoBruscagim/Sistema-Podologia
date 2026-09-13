@@ -3,8 +3,10 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Hero } from '@/components/home/Hero'
 import { TrustStats } from '@/components/home/TrustStats'
 import { BentoGrid } from '@/components/home/BentoGrid'
+import { ServicesPricing } from '@/components/home/ServicesPricing'
 import { FaqSection } from '@/components/home/FaqSection'
 import { CtaSection } from '@/components/home/CtaSection'
+import { WhatsAppButton } from '@/components/common/WhatsAppButton'
 import { Footer } from '@/components/layout/Footer'
 
 export const HomePage: React.FC = () => {
@@ -22,9 +24,11 @@ export const HomePage: React.FC = () => {
         <Hero />
         <TrustStats />
         <BentoGrid />
+        <ServicesPricing />
         <FaqSection />
         <CtaSection />
       </main>
+      <WhatsAppButton />
       <Footer />
     </div>
   )
