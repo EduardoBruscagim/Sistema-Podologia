@@ -17,7 +17,13 @@ colors:
 typography:
   display:
     fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '7.5rem'
+    fontSize: 'clamp(2.5rem, 8vw + 1rem, 7.5rem)'
+    fontWeight: 700
+    lineHeight: 0.95
+    letterSpacing: '-0.05em'
+  display-min:
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontSize: '2.5rem'
     fontWeight: 700
     lineHeight: 0.95
     letterSpacing: '-0.05em'
@@ -29,7 +35,13 @@ typography:
     letterSpacing: '-0.05em'
   headline:
     fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '5rem'
+    fontSize: 'clamp(1.875rem, 5vw + 0.5rem, 5rem)'
+    fontWeight: 700
+    lineHeight: 1.05
+    letterSpacing: '-0.04em'
+  headline-min:
+    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    fontSize: '1.875rem'
     fontWeight: 700
     lineHeight: 1.05
     letterSpacing: '-0.04em'
@@ -129,8 +141,8 @@ Paleta concisa ancorada no contraste entre neutros cirúrgicos e o impacto confi
 
 ### Hierarchy
 
-- **Display** (Bold 700, `clamp(2.5rem, 8vw, 7.5rem)`, line-height: 0.95, tracking: -0.05em): Título principal do Hero ("Cuidado absoluto").
-- **Headline** (Bold 700, `clamp(2rem, 5vw, 3.75rem)`, line-height: 1.05, tracking: -0.04em): Títulos de seções como Bento Grid e CTA final.
+- **Display** (Bold 700, `clamp(2.5rem, 8vw + 1rem, 7.5rem)`, line-height: 0.95, tracking: -0.05em): Título principal do Hero ("Pés e mãos bem cuidados").
+- **Headline** (Bold 700, `clamp(1.875rem, 5vw + 0.5rem, 5rem)`, line-height: 1.05, tracking: -0.04em): Títulos de seções como Bento Grid e CTA final.
 - **Title** (Bold 700, `1.5rem` / 24px, line-height: 1.2, tracking: -0.02em): Títulos de cards de diferencial e subseções.
 - **Body** (Medium 500, `1rem` a `1.5rem` / 16px-24px, line-height: 1.6): Descrições clínicas e parágrafos explicativos com `text-balance`.
 - **Label** (SemiBold 600, `0.875rem` / 14px, tracking: 0.15em a 0.2em, uppercase): Selos de confirmação imediata e pré-cabeçalhos de seção.

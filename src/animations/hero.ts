@@ -1,6 +1,7 @@
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
-export const initHeroAnimation = (): void => {
+export const initHeroAnimation = (): (() => void) => {
   const heroTl = gsap.timeline({
     defaults: { ease: 'power3.out' },
   })
@@ -47,16 +48,49 @@ export const initHeroAnimation = (): void => {
   )
 
   // Efeito de levitação ambiente contínua do Mockup (60fps na GPU)
-  const levitationWrapper = document.querySelector<HTMLElement>('.hero-levitation-wrapper')
-  if (levitationWrapper) {
-    levitationWrapper.style.willChange = 'transform'
-  }
-
-  gsap.to('.hero-levitation-wrapper', {
+  const levitationTween = gsap.to('.hero-levitation-wrapper', {
     y: -8,
     duration: 3.2,
     ease: 'sine.inOut',
     repeat: -1,
     yoyo: true,
   })
+
+  // Pausa a levitação e restaura willChange: 'auto' fora do viewport para poupar GPU
+  const levitationTrigger = ScrollTrigger.create({
+    trigger: '.hero-levitation-wrapper',
+    start: 'top bottom',
+    end: 'bottom top',
+    onEnter: () => {
+      gsap.set('.hero-levitation-wrapper', { willChange: 'transform' })
+      levitationTween.play()
+    },
+    onLeave: () => {
+      levitationTween.pause()
+      gsap.set('.hero-levitation-wrapper', { willChange: 'auto' })
+    },
+    onEnterBack: () => {
+      gsap.set('.hero-levitation-wrapper', { willChange: 'transform' })
+      levitationTween.play()
+    },
+    onLeaveBack: () => {
+      levitationTween.pause()
+      gsap.set('.hero-levitation-wrapper', { willChange: 'auto' })
+    },
+  })
+
+  // Define willChange apenas se estiver visível inicialmente
+  if (levitationTrigger.isActive) {
+    gsap.set('.hero-levitation-wrapper', { willChange: 'transform' })
+  } else {
+    levitationTween.pause()
+    gsap.set('.hero-levitation-wrapper', { willChange: 'auto' })
+  }
+
+  return () => {
+    heroTl.kill()
+    levitationTrigger.kill()
+    levitationTween.kill()
+    gsap.set('.hero-levitation-wrapper', { willChange: 'auto' })
+  }
 }
