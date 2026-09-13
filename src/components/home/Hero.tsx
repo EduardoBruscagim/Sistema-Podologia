@@ -73,7 +73,7 @@ export const Hero: React.FC = () => {
               Agendar horário
             </button>
             <span className="badge badge-primary badge-outline text-xs uppercase font-semibold tracking-wider py-3 px-4 rounded-full self-center sm:self-auto">
-              ✓ Toda Mococa - SP
+              ✓ Confirmação Imediata
             </span>
           </div>
         </div>
