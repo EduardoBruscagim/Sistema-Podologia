@@ -38,11 +38,11 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 | Camada                                 | Tecnologias                                                                            |
 | :------------------------------------- | :------------------------------------------------------------------------------------- |
-| **Core**                               | HTML5 Semântico, TypeScript (ES2022+)                                                  |
-| **Build & Dev Tool**                   | [Vite](https://vite.dev/) 8.3+ com `@tailwindcss/vite`                                 |
+| **Core**                               | React 19, React Router 7, TypeScript (ES2022+)                                         |
+| **Build & Dev Tool**                   | [Vite](https://vite.dev/) 8.3+ com `@tailwindcss/vite` e `@vitejs/plugin-react`        |
 | **Estilização**                        | [Tailwind CSS v4](https://tailwindcss.com/), [daisyUI v5](https://daisyui.com/)        |
 | **Tipografia**                         | [Outfit Variable](https://fontsource.org/fonts/outfit) (`@fontsource-variable/outfit`) |
-| **Animações**                          | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger                                  |
+| **Animações**                          | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger + `@gsap/react`                  |
 | **Qualidade & Padronização**           | ESLint 10 (`typescript-eslint`), Prettier 3                                            |
 | **Backend / Persistência (Planejado)** | Supabase (PostgreSQL, Auth, Storage)                                                   |
 
@@ -50,7 +50,7 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 ## 📁 Estrutura do Projeto
 
-A organização de diretórios reflete a separação modular de responsabilidades em TypeScript puro:
+A organização de diretórios reflete a separação modular de componentes e animações em React 19:
 
 ```text
 ├── src/
@@ -61,16 +61,22 @@ A organização de diretórios reflete a separação modular de responsabilidade
 │   │   ├── navbar.ts       # Comportamento dinâmico da ilha flutuante de navegação
 │   │   └── reducedMotion.ts# Tratamento para preferência de movimento reduzido
 │   ├── assets/             # Recursos estáticos locais
+│   ├── components/         # Componentes modulares React
+│   │   ├── home/           # Seções da Landing Page (Hero, BentoGrid, CtaSection)
+│   │   └── layout/         # Componentes estruturais (Navbar flutuante, Footer)
+│   ├── context/            # Contextos React (ThemeContext com anti-FOUC)
+│   ├── pages/              # Páginas da aplicação (HomePage)
 │   ├── types/              # Definições de interfaces e tipos TypeScript
 │   │   └── theme.ts        # Tipagens do sistema de tema (claro/escuro)
 │   ├── utils/              # Helpers e utilitários puros
-│   │   └── theme.ts        # Lógica do alternador de tema e persistência
-│   ├── main.ts             # Ponto de entrada (registro de plugins GSAP e bootstrap)
+│   │   └── theme.ts        # Lógica de sincronização de meta theme-color
+│   ├── App.tsx             # Roteador React Router 7 e provedores globais
+│   ├── main.tsx            # Ponto de entrada React e registro de plugins GSAP
 │   └── style.css           # Design tokens, fontes e regras globais do Tailwind v4
-├── index.html              # Estrutura HTML semântica com metadados e script anti-FOUC
+├── index.html              # Shell HTML semântico com metadados e script anti-FOUC
 ├── DESIGN.md               # Especificação detalhada do Design System
 ├── PRODUCT.md              # Documento de produto e direcionamento estratégico
-├── vite.config.ts          # Configuração do Vite com otimização de bundle e alias @/
+├── vite.config.ts          # Configuração do Vite com suporte a React e Tailwind
 └── package.json            # Dependências e scripts do projeto
 ```
 

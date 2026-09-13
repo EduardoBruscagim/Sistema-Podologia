@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 
-export const initCtaAnimation = (): void => {
-  gsap.fromTo(
+export const initCtaAnimation = (): (() => void) => {
+  const tween = gsap.fromTo(
     '.cta-reveal',
     { y: 32, autoAlpha: 0 },
     {
@@ -17,4 +17,11 @@ export const initCtaAnimation = (): void => {
       },
     },
   )
+
+  return () => {
+    if (tween.scrollTrigger) {
+      tween.scrollTrigger.kill()
+    }
+    tween.kill()
+  }
 }

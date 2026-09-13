@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 
-export const initBentoAnimation = (): void => {
+export const initBentoAnimation = (): (() => void) => {
   const bentoTl = gsap.timeline({
     scrollTrigger: {
       trigger: '.bento-header',
@@ -56,47 +56,76 @@ export const initBentoAnimation = (): void => {
     '<0.08',
   )
 
-  // Interações Ricas de Hover (Bento Cards)
-  const bentoCards = document.querySelectorAll('.bento-card')
-  bentoCards.forEach((card) => {
-    const icon = card.querySelector('.bento-icon')
+  // Interações Ricas de Hover (Bento Cards - apenas em dispositivos com suporte a hover real)
+  const hasHoverSupport =
+    typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches
 
-    card.addEventListener('mouseenter', () => {
-      gsap.to(card, {
-        y: -8,
-        scale: 1.015,
-        duration: 0.4,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-      if (icon) {
-        gsap.to(icon, {
-          scale: 1.12,
-          rotation: 4,
-          duration: 0.5,
-          ease: 'back.out(2)',
+  const bentoCards = document.querySelectorAll('.bento-card')
+  const listeners: Array<{
+    el: Element
+    type: string
+    fn: EventListener
+  }> = []
+
+  if (hasHoverSupport) {
+    bentoCards.forEach((card) => {
+      const icon = card.querySelector('.bento-icon')
+
+      const handleEnter = () => {
+        gsap.to(card, {
+          y: -8,
+          scale: 1.015,
+          duration: 0.4,
+          ease: 'power3.out',
           overwrite: 'auto',
         })
+        if (icon) {
+          gsap.to(icon, {
+            scale: 1.12,
+            rotation: 4,
+            duration: 0.5,
+            ease: 'back.out(2)',
+            overwrite: 'auto',
+          })
+        }
       }
-    })
 
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, {
-        y: 0,
-        scale: 1,
-        duration: 0.5,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-      if (icon) {
-        gsap.to(icon, {
+      const handleLeave = () => {
+        gsap.to(card, {
+          y: 0,
           scale: 1,
-          rotation: 0,
           duration: 0.5,
           ease: 'power3.out',
           overwrite: 'auto',
         })
+        if (icon) {
+          gsap.to(icon, {
+            scale: 1,
+            rotation: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            overwrite: 'auto',
+          })
+        }
       }
+
+      card.addEventListener('mouseenter', handleEnter)
+      card.addEventListener('mouseleave', handleLeave)
+
+      listeners.push(
+        { el: card, type: 'mouseenter', fn: handleEnter },
+        { el: card, type: 'mouseleave', fn: handleLeave },
+      )
     })
-  })
+  }
+
+  return () => {
+    if (bentoTl.scrollTrigger) {
+      bentoTl.scrollTrigger.kill()
+    }
+    bentoTl.kill()
+    listeners.forEach(({ el, type, fn }) => el.removeEventListener(type, fn))
+    gsap.killTweensOf('.bento-card')
+    gsap.killTweensOf('.bento-icon')
+  }
 }
