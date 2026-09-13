@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useTheme } from '@/hooks/useTheme'
 import { useAuth } from '@/hooks/useAuth'
 import { initNavbarAnimation } from '@/animations/navbar'
+import { getWhatsAppUrl } from '@/utils/whatsapp'
 
 export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme()
@@ -13,6 +14,16 @@ export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement | null>(null)
   const navRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isMobileMenuOpen])
 
   useGSAP(
     () => {
@@ -64,10 +75,24 @@ export const Navbar: React.FC = () => {
 
           <div className="hidden sm:flex items-center gap-1 mr-2">
             <a
+              href="#precos"
+              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              Preços
+            </a>
+            <a
               href="#faq"
               className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               Dúvidas
+            </a>
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 px-3 py-1.5 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors"
+            >
+              WhatsApp
             </a>
           </div>
 
@@ -181,11 +206,33 @@ export const Navbar: React.FC = () => {
                 <li role="none">
                   <a
                     role="menuitem"
+                    href="#precos"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="min-h-[44px] flex items-center px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue"
+                  >
+                    Serviços & Cuidados
+                  </a>
+                </li>
+                <li role="none">
+                  <a
+                    role="menuitem"
                     href="#faq"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="min-h-[44px] flex items-center px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue"
                   >
                     Perguntas Frequentes
+                  </a>
+                </li>
+                <li role="none">
+                  <a
+                    role="menuitem"
+                    href={getWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="min-h-[44px] flex items-center px-4 rounded-xl text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue font-semibold"
+                  >
+                    Falar no WhatsApp ↗
                   </a>
                 </li>
               </ul>

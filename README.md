@@ -1,13 +1,13 @@
-# Angélica Eduarda | Podologia Especializada
+# Angélica Eduarda | Cuidado para Pés e Mãos em Domicílio
 
-> **Minimalismo clínico premium e autoagendamento de podologia domiciliar.**  
-> Interface moderna inspirada na linguagem de design da Apple, com foco em eliminação de atrito, alta performance e acessibilidade WCAG.
+> **Atendimento domiciliar especializado em Mococa - SP.**  
+> Interface moderna com design elegante, sem taxa de deslocamento e com foco em cuidado humanizado, esterilização em autoclave e acessibilidade WCAG.
 
 ---
 
 ## 🎯 Sobre o Projeto
 
-O **Sistema de Podologia (Angélica Eduarda)** é uma aplicação web focada no atendimento podológico humanizado e especializado. Atualmente, o projeto conta com uma **landing page de autoagendamento B2C de alta conversão**, projetada para permitir que pacientes agendem atendimentos domiciliares com facilidade e clareza, sem a necessidade de trocas demoradas de mensagens, dispondo de uma arquitetura modular preparada para expansão futura para prontuário e gestão clínica.
+O **Sistema de Podologia & Cuidados (Angélica Eduarda)** é uma aplicação web voltada ao atendimento domiciliar humanizado e com alto padrão de higiene na cidade de **Mococa - SP**. A plataforma apresenta com clareza os serviços prestados (cuidado completo de pés e mãos, corte anatômico, desencravamento preventivo e suave, cutilagem, lixamento e pintura/esmaltação), esclarece os protocolos de biossegurança (esterilização em autoclave e descartáveis) e facilita o contato direto para agendamento via WhatsApp sem custos de deslocamento.
 
 Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
@@ -16,21 +16,22 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 ---
 
-## ✨ Principais Funcionalidades
+## ✨ Funcionalidades e Status do Projeto
 
-- **Autoagendamento B2C Sem Atrito**: Apresentação clara dos serviços com chamada para agendamento direto em tempo real.
-- **Design Minimalista Clínico Premium**: Inspirado na elegância editorial da Apple, combinando superfícies translúcidas com Bento Grids e tipografia de alto impacto.
-- **Modo Claro / Escuro Inteligente**:
-  - Alternador de tema acessível com persistência em `localStorage`.
-  - Script síncrono inline no `<head>` para prevenção total de FOUC (_Flash of Unstyled/Incorrect Theme_).
-- **Animações Fluidas com GSAP & ScrollTrigger**:
-  - Transições e revelação escalonada de elementos na rolagem.
-  - Navbar em ilha flutuante com recolhimento e animação responsiva.
-  - Suporte nativo a **`prefers-reduced-motion`** para usuários com sensibilidade a movimento.
-- **Acessibilidade Rigorosa (WCAG)**:
-  - _Skip link_ funcional para navegação por teclado (`#main-content`).
-  - Landmarks semânticos completos (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`).
-  - Alvos de toque otimizados (mínimo 44x44px) e contrastes cromáticos superiores a 4.5:1.
+### Fase 1 (Entregue):
+
+- **Landing Page B2C de Alta Conversão**: Apresentação clara do serviço em domicílio em Mococa - SP, diferenciais em Bento Grid e FAQ detalhado.
+- **Tabela Transparente de Serviços**: Detalhamento dos 3 principais atendimentos (_Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_), tempo estimado e diferenciais inclusos.
+- **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e links inteligentes com mensagens pré-formatadas para agendamento rápido.
+- **Transparência Geográfica e Comercial**: Cobertura em toda a cidade de Mococa - SP com taxa de deslocamento zero (R$ 0) e pagamentos exclusivos via PIX ou dinheiro vivo.
+- **Modo Claro / Escuro com Anti-FOUC**: Alternador de tema acessível com persistência em `localStorage` e script síncrono no `<head>`.
+- **Acessibilidade Rigorosa (WCAG AA)**: _Skip link_ funcional (`#main-content`), suporte estrito a `prefers-reduced-motion`, navegação por setas nas abas do modal e alvos de toque de no mínimo 44x44px.
+- **Simulação de Perfil de Cliente (Frontend Mock)**: Modal de login/cadastro local com persistência em `localStorage` para experimentação de interface.
+
+### Fase 2 (Em Desenvolvimento / Roadmap):
+
+- **Motor de Agendamento Interativo**: Calendário visual para escolha de data, horários disponíveis e endereço em Mococa.
+- **Painel Administrativo da Profissional**: Gestão de rotas do dia, histórico de clientes e atendimentos realizados.
 
 ---
 
@@ -50,32 +51,33 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 ## 📁 Estrutura do Projeto
 
-A organização de diretórios reflete a separação modular de componentes e animações em React 19:
+A organização de diretórios reflete a separação modular de componentes, animações e hooks em React 19:
 
 ```text
 ├── src/
 │   ├── animations/         # Módulos de animações orquestradas via GSAP
-│   │   ├── bento.ts        # Revelação da seção Bento Grid
-│   │   ├── cta.ts          # Animação e glow do CTA final
-│   │   ├── hero.ts         # Revelação tipográfica e mockups da seção Hero
-│   │   ├── navbar.ts       # Comportamento dinâmico da ilha flutuante de navegação
+│   │   ├── bento.ts        # Revelação e efeitos da seção Bento Grid
+│   │   ├── cta.ts          # Animação e descarte do CTA final
+│   │   ├── hero.ts         # Revelação tipográfica e levitação do Hero
+│   │   ├── navbar.ts       # Ilha de navegação retrátil e reativa ao foco
 │   │   └── reducedMotion.ts# Tratamento para preferência de movimento reduzido
-│   ├── assets/             # Recursos estáticos locais
 │   ├── components/         # Componentes modulares React
-│   │   ├── home/           # Seções da Landing Page (Hero, BentoGrid, CtaSection)
-│   │   └── layout/         # Componentes estruturais (Navbar flutuante, Footer)
-│   ├── context/            # Contextos React (ThemeContext com anti-FOUC)
-│   ├── pages/              # Páginas da aplicação (HomePage)
+│   │   ├── auth/           # Modal de autenticação acessível com tabs
+│   │   ├── common/         # Componentes compartilhados (botão WhatsApp)
+│   │   ├── home/           # Seções da Home (Hero, BentoGrid, Preços, FAQ, CTA)
+│   │   └── layout/         # Componentes estruturais (Navbar, Footer)
+│   ├── context/            # Provedores de contexto React (AuthContext, ThemeContext)
+│   ├── hooks/              # Hooks customizados isolados (useAuth, useTheme)
+│   ├── pages/              # Páginas da aplicação (HomePage, DashboardPage)
 │   ├── types/              # Definições de interfaces e tipos TypeScript
-│   │   └── theme.ts        # Tipagens do sistema de tema (claro/escuro)
-│   ├── utils/              # Helpers e utilitários puros
-│   │   └── theme.ts        # Lógica de sincronização de meta theme-color
+│   ├── utils/              # Helpers e utilitários puros (theme.ts)
 │   ├── App.tsx             # Roteador React Router 7 e provedores globais
 │   ├── main.tsx            # Ponto de entrada React e registro de plugins GSAP
-│   └── style.css           # Design tokens, fontes e regras globais do Tailwind v4
-├── index.html              # Shell HTML semântico com metadados e script anti-FOUC
+│   └── style.css           # Tokens de tema semânticos, fontes e Tailwind v4
+├── public/                 # Assets estáticos, robots.txt, sitemap.xml, og-image.jpg
+├── index.html              # Shell HTML semântico com JSON-LD Schema.org e anti-FOUC
 ├── DESIGN.md               # Especificação detalhada do Design System
-├── PRODUCT.md              # Documento de produto e direcionamento estratégico
+├── PRODUCT.md              # Documento de produto, proposta de valor e roadmap
 ├── vite.config.ts          # Configuração do Vite com suporte a React e Tailwind
 └── package.json            # Dependências e scripts do projeto
 ```

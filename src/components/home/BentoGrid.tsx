@@ -69,11 +69,11 @@ export const BentoGrid: React.FC = () => {
               Atendimento Domiciliar
             </span>
             <h3 className="text-2xl font-bold mb-3 tracking-tight text-slate-900 dark:text-slate-50 text-balance">
-              Sem sala de espera
+              No conforto do seu lar
             </h3>
             <p className="text-base text-theme-muted leading-relaxed font-medium">
-              Levo a estrutura completa de um consultório até você. Esqueça o trânsito e o tempo
-              perdido.
+              Cuidado completo para pés e mãos sem você precisar sair de casa, pegar trânsito ou
+              esperar em salão.
             </p>
           </div>
 
@@ -92,19 +92,25 @@ export const BentoGrid: React.FC = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
             </div>
             <span className="badge badge-primary badge-soft text-xs font-semibold mb-3 self-start">
-              Tempo Real
+              Toda Mococa - SP
             </span>
             <h3 className="text-2xl font-bold mb-3 tracking-tight text-slate-900 dark:text-slate-50 text-balance">
-              Marque na hora
+              Sem taxa de deslocamento
             </h3>
             <p className="text-base text-theme-muted font-medium leading-relaxed">
-              Acesse minha agenda real e veja os horários livres na hora, sem precisar esperar eu
-              responder.
+              Atendimento em qualquer bairro de Mococa sem nenhum custo extra de transporte. O valor
+              é transparente e sem surpresas.
             </p>
           </div>
 
@@ -128,14 +134,14 @@ export const BentoGrid: React.FC = () => {
               </svg>
             </div>
             <span className="badge badge-outline border-white/40 text-white text-xs font-semibold mb-3 self-start">
-              Biossegurança Hospitalar
+              Segurança & Cuidado
             </span>
             <h3 className="text-2xl font-bold mb-3 tracking-tight text-white text-balance">
-              Higiene rigorosa
+              Autoclave e descartáveis
             </h3>
             <p className="text-white text-base font-medium leading-relaxed">
-              Todos os materiais são 100% descartáveis ou esterilizados em autoclave, seguindo os
-              protocolos da profissão.
+              Alicates e espátulas 100% esterilizados em autoclave, além de toalhas e lixas
+              descartáveis abertas na sua frente.
             </p>
           </div>
         </div>

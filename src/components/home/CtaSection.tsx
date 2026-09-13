@@ -52,8 +52,9 @@ export const CtaSection: React.FC = () => {
           Eu chego até você.
         </h2>
         <p className="text-base sm:text-lg md:text-2xl text-theme-muted font-medium max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-14 leading-relaxed sm:leading-snug text-balance">
-          Sem espera e sem troca de mensagens: é só selecionar o horário livre que funciona melhor
-          pra sua rotina. O resto, incluindo os materiais e a estrutura, eu levo.
+          Atendimento domiciliar em toda a cidade de Mococa - SP sem taxa de deslocamento. Cuidado
+          completo para seus pés e mãos com materiais esterilizados em autoclave e itens
+          descartáveis.
         </p>
         <button
           type="button"
