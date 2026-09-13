@@ -27,8 +27,5 @@ export const applyReducedMotion = (
     },
   )
 
-  const levitationWrapper = document.querySelector<HTMLElement>('.hero-levitation-wrapper')
-  if (levitationWrapper) {
-    levitationWrapper.style.willChange = 'auto'
-  }
+  gsap.set('.hero-levitation-wrapper', { willChange: 'auto' })
 }
