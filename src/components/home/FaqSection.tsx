@@ -2,24 +2,29 @@ import React from 'react'
 
 const FAQ_ITEMS = [
   {
-    question: 'Como funciona o atendimento de podologia a domicílio?',
+    question: 'Como funciona o atendimento a domicílio?',
     answer:
-      'Levo todo o equipamento profissional necessário até a sua residência: micromotor podológico, instrumentos cirúrgicos esterilizados, iluminação auxiliar e produtos clínicos de alta qualidade. Você recebe o mesmo nível técnico de um consultório particular, com o conforto de não precisar sair de casa.',
+      'Levo todo o material profissional necessário até a sua casa: alicates e espátulas esterilizados em autoclave, toalhas e lixas descartáveis, produtos de hidratação e esmaltes. Você recebe todo o cuidado com seus pés e mãos com o conforto de não precisar sair de casa.',
   },
   {
-    question: 'O que preciso preparar ou disponibilizar na minha casa?',
+    question: 'O que preciso preparar na minha casa para o atendimento?',
     answer:
-      'Apenas uma poltrona, cadeira confortável ou sofá com boa iluminação e uma tomada comum por perto. Todo o resto — incluindo toalhas descartáveis, campos cirúrgicos, EPIs e descarte biológico seguro — é de minha responsabilidade.',
+      'Apenas um local confortável para você se sentar (como sofá ou poltrona) com boa iluminação. Todo o material de proteção, toalhas descartáveis, bacias com protetores e higienização são levados por mim.',
   },
   {
-    question: 'Como é garantida a higiene e biossegurança dos instrumentos?',
+    question: 'Como é garantida a higiene e esterilização dos materiais?',
     answer:
-      'Segurança e saúde são prioridades inegociáveis. Todos os materiais cortantes e de aço inoxidável passam por rigoroso ciclo de lavagem ultrassônica, secagem, envelopamento cirúrgico e esterilização em autoclave. Lixas, lâminas de bisturi e luvas são 100% descartáveis e abertos na sua frente.',
+      'Segurança e higiene são prioridades inegociáveis. Todos os instrumentos de corte e metal passam por esterilização em autoclave hospitalar em envelopes selados. Lixas, toalhas e luvas são 100% descartáveis e abertas na sua presença.',
   },
   {
-    question: 'Como funciona o agendamento e quais as formas de pagamento?',
+    question: 'Quais regiões você atende e existe taxa de deslocamento?',
     answer:
-      'O agendamento é feito diretamente aqui pelo site: você escolhe a data e horário livres na agenda em tempo real. O pagamento é realizado ao final da sessão, aceitando PIX, cartões de crédito/débito e dinheiro.',
+      'Atendo em qualquer bairro de Mococa - SP com taxa de deslocamento zero (R$ 0)! O valor do procedimento é único e você não paga nada a mais pelo transporte.',
+  },
+  {
+    question: 'Quais são as formas de pagamento aceitas?',
+    answer:
+      'O pagamento é realizado somente ao término do atendimento. No momento, aceito exclusivamente PIX ou dinheiro vivo.',
   },
 ]
 

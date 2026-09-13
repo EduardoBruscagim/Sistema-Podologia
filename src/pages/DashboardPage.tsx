@@ -101,7 +101,7 @@ export const DashboardPage: React.FC = () => {
               </span>
             </div>
             <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-              Gerencie seus agendamentos e histórico de podologia especializada.
+              Gerencie seus agendamentos e histórico de cuidados para pés e mãos em Mococa - SP.
             </p>
           </div>
 
@@ -117,7 +117,7 @@ export const DashboardPage: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="stat bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-sm">
             <div className="stat-title text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
-              Próxima Consulta
+              Próxima Visita
             </div>
             <div className="stat-value text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mt-1">
               Nenhuma
@@ -139,7 +139,7 @@ export const DashboardPage: React.FC = () => {
 
           <div className="stat bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-sm">
             <div className="stat-title text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
-              Status do Prontuário
+              Status do Cadastro
             </div>
             <div className="stat-value text-2xl sm:text-3xl text-emerald-600 dark:text-emerald-400 mt-1">
               Ativo
@@ -154,18 +154,18 @@ export const DashboardPage: React.FC = () => {
         <div className="card bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-sm">
           <div className="card-body p-0">
             <h2 className="card-title text-xl font-bold text-slate-900 dark:text-slate-50">
-              Precisa de um atendimento domiciliar?
+              Precisa de um atendimento domiciliar em Mococa?
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-sm max-w-2xl leading-relaxed mt-1 font-medium">
-              O agendamento direto pelo site leva apenas alguns minutos. A profissional leva todo o
-              equipamento esterilizado até a sua residência no horário escolhido.
+              Atendimento em qualquer bairro de Mococa sem cobrança de taxa de deslocamento.
+              Alicates e materiais esterilizados em autoclave com total higiene no seu lar.
             </p>
             <div className="card-actions justify-start mt-4">
               <Link
                 to="/"
                 className="btn btn-outline border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 min-h-[44px]"
               >
-                Conhecer Procedimentos
+                Conhecer Serviços
               </Link>
             </div>
           </div>

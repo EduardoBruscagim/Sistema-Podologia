@@ -55,8 +55,8 @@ export const Hero: React.FC = () => {
             <span className="text-slate-500 dark:text-slate-400">bem cuidados.</span>
           </h1>
           <p className="gsap-hero-reveal text-base sm:text-lg md:text-2xl text-theme-muted font-medium max-w-xl mb-8 sm:mb-12 leading-relaxed sm:leading-snug text-balance">
-            Podologia completa no conforto da sua casa. Agende sua sessão direto pelo site e escolha
-            o melhor horário, sem precisar trocar mensagens.
+            Cuidado profissional para pés e mãos no conforto do seu lar em Mococa - SP. Corte
+            correto, desencravar suave, hidratação e esmaltação sem taxa de deslocamento.
           </p>
           <div className="gsap-hero-reveal flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto">
             <button
@@ -73,7 +73,7 @@ export const Hero: React.FC = () => {
               Agendar horário
             </button>
             <span className="badge badge-primary badge-outline text-xs uppercase font-semibold tracking-wider py-3 px-4 rounded-full self-center sm:self-auto">
-              ✓ Confirmação Imediata
+              ✓ Toda Mococa - SP
             </span>
           </div>
         </div>
@@ -117,10 +117,10 @@ export const Hero: React.FC = () => {
                 <div className="hero-slot aspect-square rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-slate-800" />
                 <div className="hero-slot aspect-square rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-slate-800" />
               </div>
-              {/* Selo de Demonstração de Agenda */}
+              {/* Selo de Demonstração de Atendimento */}
               <div className="absolute inset-0 flex items-center justify-center bg-white/30 dark:bg-slate-950/40 backdrop-blur-[4px]">
                 <span className="badge badge-lg bg-white/95 dark:bg-slate-900/95 text-slate-800 dark:text-slate-100 border border-slate-200/80 dark:border-slate-700/80 font-semibold text-xs tracking-wider uppercase px-4 py-3 rounded-full shadow-md backdrop-blur-md">
-                  Agenda em Tempo Real
+                  Atendimento Domiciliar
                 </span>
               </div>
             </div>
