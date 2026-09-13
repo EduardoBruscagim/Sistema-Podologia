@@ -1,5 +1,4 @@
 import React from 'react'
-import { getWhatsAppUrl } from '@/utils/whatsapp'
 
 interface ServiceItem {
   id: string
@@ -74,7 +73,7 @@ export const ServicesPricing: React.FC = () => {
         {SERVICES.map((service) => (
           <div
             key={service.id}
-            className={`rounded-[1.75rem] sm:rounded-[2rem] p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 border ${
+            className={`rounded-[1.75rem] sm:rounded-[2rem] p-6 sm:p-8 flex flex-col transition-all duration-300 border ${
               service.isHighlight
                 ? 'bg-theme-card border-apple-blue/40 shadow-lg shadow-apple-blue/10 dark:shadow-black/40 ring-1 ring-apple-blue/30 md:-translate-y-1'
                 : 'bg-theme-card border-theme-card-border shadow-sm shadow-slate-900/5'
@@ -117,7 +116,7 @@ export const ServicesPricing: React.FC = () => {
                 {service.description}
               </p>
 
-              <div className="border-t border-slate-200/80 dark:border-slate-800/80 pt-4 mb-6">
+              <div className="border-t border-slate-200/80 dark:border-slate-800/80 pt-4">
                 <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
                   O que está incluso:
                 </div>
@@ -144,54 +143,20 @@ export const ServicesPricing: React.FC = () => {
                 </ul>
               </div>
             </div>
-
-            <a
-              href={getWhatsAppUrl(
-                `Olá, Angélica! Gostaria de agendar o atendimento de ${service.title} em Mococa.`,
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`btn w-full rounded-full min-h-[44px] mt-2 font-medium border-none shadow-sm transition-all active:scale-95 ${
-                service.isHighlight
-                  ? 'bg-apple-blue hover:bg-apple-blue-hover text-white shadow-apple-blue/20'
-                  : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-90'
-              }`}
-            >
-              Agendar no WhatsApp
-            </a>
           </div>
         ))}
       </div>
 
-      {/* Card Informativo: Cidade de Mococa, Sem taxa de deslocamento e PIX/Dinheiro */}
-      <div className="bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="space-y-2 text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start gap-2 text-slate-900 dark:text-slate-100 font-bold text-lg">
-            <span>📍 Atendimento Domiciliar em Mococa - SP</span>
-          </div>
-          <p className="text-theme-muted text-sm sm:text-base font-medium max-w-2xl leading-relaxed">
-            Atendo em qualquer bairro de Mococa sem cobrar nenhuma taxa de deslocamento. Levo todo o
-            material higienizado e toalhas descartáveis até você.
-          </p>
-          <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold pt-1">
-            💵 Formas de pagamento aceitas:{' '}
-            <span className="text-emerald-600 dark:text-emerald-400">
-              Somente PIX ou Dinheiro vivo
-            </span>{' '}
-            ao término do atendimento.
-          </div>
+      {/* Card Informativo: Atendimento em Mococa e Pagamento */}
+      <div className="bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-bold text-lg text-center sm:text-left">
+          <span>📍 Atendimento Domiciliar em Mococa - SP</span>
         </div>
-
-        <a
-          href={getWhatsAppUrl(
-            'Olá, Angélica! Sou de Mococa e gostaria de agendar um horário com você.',
-          )}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn rounded-full bg-emerald-600 hover:bg-emerald-500 text-white min-h-[44px] shrink-0 px-6 font-medium shadow-md shadow-emerald-600/20"
-        >
-          Conversar pelo WhatsApp
-        </a>
+        <div className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium text-center sm:text-right">
+          Formas de pagamento aceitas:{' '}
+          <span className="font-bold text-apple-blue">Somente PIX ou Dinheiro vivo</span> ao término
+          do atendimento.
+        </div>
       </div>
     </section>
   )
