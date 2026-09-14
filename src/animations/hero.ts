@@ -16,11 +16,11 @@ export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => 
         autoAlpha: 1,
         duration: 0.7,
         stagger: 0.12,
-        clearProps: 'transform',
+        clearProps: 'opacity,visibility',
       },
     )
 
-    // Entrada suave do Card de Imagem do Kit Profissional
+    // Entrada suave do Card de Imagem do Kit Profissional (sem clearProps em transform para preservar ScrollTrigger parallax)
     heroTl.fromTo(
       '.gsap-hero-image',
       { y: 32, autoAlpha: 0, scale: 0.98 },
@@ -29,7 +29,7 @@ export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => 
         autoAlpha: 1,
         scale: 1,
         duration: 0.8,
-        clearProps: 'transform,scale',
+        clearProps: 'opacity,visibility',
       },
       '-=0.45',
     )

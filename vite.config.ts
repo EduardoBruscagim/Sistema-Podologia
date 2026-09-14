@@ -20,7 +20,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id: string) {
-          if (id.includes('node_modules/gsap/')) {
+          if (id.includes('node_modules/gsap') || id.includes('node_modules/@gsap/')) {
             return 'vendor-gsap'
           }
           if (

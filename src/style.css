@@ -25,6 +25,9 @@
   --color-secondary: #3a5f94;
   --color-tertiary: #3b5e7c;
   --color-outline: #717785;
+  --color-inverse-primary: #abc7ff;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1eb857;
 
   --shadow-2xs: 0 1px 2px 0 rgba(0, 51, 102, 0.03);
   --shadow-xs: 0 1px 3px 0 rgba(0, 51, 102, 0.05);
@@ -54,19 +57,28 @@
     *,
     *::before,
     *::after {
-      animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
 
-    /* Preserve essential loading spinner indications and subtle opacity fades */
+    /* Preserve essential loading spinner indications */
     .animate-spin {
       animation-duration: 1s !important;
       animation-iteration-count: infinite !important;
     }
 
-    .transition-opacity {
+    /* Explicitly preserve 150ms transitions for opacity, color, background-color, border-color, box-shadow */
+    .transition-opacity,
+    .transition-colors,
+    .transition-shadow,
+    .transition,
+    [class*='transition-'] {
+      transition-duration: 150ms !important;
+    }
+
+    .transition-transform,
+    .transition-all {
+      transition-property: opacity, color, background-color, border-color, box-shadow !important;
       transition-duration: 150ms !important;
     }
   }
@@ -79,6 +91,14 @@
     font-size: 1rem;
     line-height: 1.55;
     background-color: var(--color-surface);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -10;
     background-image:
       radial-gradient(
         circle at 50% -10%,
@@ -89,18 +109,21 @@
       radial-gradient(circle at 85% 25%, rgba(0, 113, 227, 0.025) 0%, transparent 45%),
       radial-gradient(circle at 15% 60%, rgba(58, 95, 148, 0.02) 0%, transparent 50%),
       linear-gradient(180deg, #ffffff 0%, #fbfafd 20%, #f7f6f9 60%, #f2eff3 100%);
-    background-attachment: fixed;
   }
 
   :where(.dark, .dark *) body,
   html.dark body,
   .dark body {
     background-color: #0b0f17;
+    color: #f1f5f9;
+  }
+
+  :where(.dark, .dark *) body::before,
+  html.dark body::before,
+  .dark body::before {
     background-image:
       radial-gradient(circle at 50% -10%, rgba(0, 113, 227, 0.12) 0%, transparent 65%),
       linear-gradient(180deg, #0b0f17 0%, #0f172a 100%);
-    background-attachment: fixed;
-    color: #f1f5f9;
   }
 
   h1,
@@ -133,16 +156,5 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(100, 116, 139, 0.5);
-  }
-
-  /* will-change como dica ao browser para promoção GPU durante hover */
-  /* Não aplicamos backface-visibility nem z:0 antecipados — o GSAP gerencia a layer */
-  .gsap-hero-image,
-  .bento-card,
-  .service-card,
-  .tech-card,
-  .tech-featured,
-  .stat-block {
-    will-change: transform;
   }
 }

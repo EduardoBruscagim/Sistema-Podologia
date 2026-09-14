@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useTheme } from '@/hooks/useTheme'
@@ -117,6 +117,8 @@ export const Navbar: React.FC = () => {
           }
         },
       )
+
+      return () => mm.revert()
     },
     { scope: headerRef },
   )
@@ -130,7 +132,7 @@ export const Navbar: React.FC = () => {
   }
 
   return (
-    <div className="fixed top-5 inset-x-0 z-50 flex justify-center pointer-events-none px-4">
+    <div className="fixed top-[max(1.25rem,env(safe-area-inset-top))] inset-x-0 z-50 flex justify-center pointer-events-none px-4">
       {/* Backdrop Mobile para fechar ao clicar fora */}
       {isMobileMenuOpen && (
         <div
@@ -144,23 +146,34 @@ export const Navbar: React.FC = () => {
         ref={headerRef}
         className="pointer-events-auto max-w-4xl w-full px-3.5 sm:px-5 py-2 rounded-full backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border border-surface-border dark:border-slate-800 shadow-sm flex items-center justify-between transition-colors duration-300 relative z-50"
       >
-        {/* Botão Hambúrguer Mobile com área de toque mínima 44x44px */}
-        <div className="md:hidden flex items-center">
-          <button
-            ref={mobileToggleRef}
-            type="button"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
+        {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Tipográfico */}
+        <div className="flex items-center gap-1 sm:gap-2">
+          {/* Botão Hambúrguer Mobile com área de toque mínima 44x44px */}
+          <div className="md:hidden flex items-center">
+            <button
+              ref={mobileToggleRef}
+              type="button"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              {isMobileMenuOpen ? (
+                <X aria-hidden="true" className="w-6 h-6" />
+              ) : (
+                <Menu aria-hidden="true" className="w-6 h-6" />
+              )}
+            </button>
+          </div>
+
+          {/* Logotipo Tipográfico no lado esquerdo da ilha flutuante */}
+          <Link
+            to="/"
+            className="font-bold text-sm sm:text-base tracking-tight text-on-surface dark:text-white hover:text-primary dark:hover:text-primary transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-2 py-1 select-none"
           >
-            {isMobileMenuOpen ? (
-              <X aria-hidden="true" className="w-6 h-6" />
-            ) : (
-              <Menu aria-hidden="true" className="w-6 h-6" />
-            )}
-          </button>
+            Angélica Eduarda
+          </Link>
         </div>
 
         {/* Navegação Desktop Centralizada */}
@@ -172,7 +185,7 @@ export const Navbar: React.FC = () => {
             className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
             href="#procedimentos"
           >
-            Preços
+            Serviços
           </a>
           <a
             className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
@@ -200,7 +213,7 @@ export const Navbar: React.FC = () => {
         {/* Ações à Direita com áreas de toque mínimas de 44x44px */}
         <div className="flex items-center gap-2 sm:gap-3 ml-auto">
           <button
-            aria-label={isDark ? 'Ativar modo claro' : 'Alternar tema claro e escuro'}
+            aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
             onClick={toggleTheme}
             className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
             type="button"
@@ -237,7 +250,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-on-surface-variant dark:text-slate-200 hover:bg-clinical-teal-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
             >
-              Preços
+              Serviços
             </a>
             <a
               href="#tecnologia"
