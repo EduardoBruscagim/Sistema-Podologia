@@ -1,27 +1,22 @@
 import gsap from 'gsap'
 
-export const initCtaAnimation = (): (() => void) => {
-  const tween = gsap.fromTo(
-    '.cta-reveal',
-    { y: 32, autoAlpha: 0 },
-    {
-      y: 0,
-      autoAlpha: 1,
-      duration: 0.75,
-      ease: 'power3.out',
-      clearProps: 'transform',
+export const initCtaAnimation = (sectionEl?: HTMLElement): (() => void) => {
+  const ctx = gsap.context(() => {
+    gsap.from('.cta-reveal', {
       scrollTrigger: {
         trigger: '.cta-reveal',
-        start: 'top 85%',
+        start: 'top 88%',
         once: true,
       },
-    },
-  )
+      y: 24,
+      opacity: 0,
+      duration: 0.65,
+      ease: 'power2.out',
+      clearProps: 'transform,opacity',
+    })
+  }, sectionEl)
 
   return () => {
-    if (tween.scrollTrigger) {
-      tween.scrollTrigger.kill()
-    }
-    tween.kill()
+    ctx.revert()
   }
 }

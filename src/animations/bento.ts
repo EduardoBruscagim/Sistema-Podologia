@@ -1,131 +1,58 @@
 import gsap from 'gsap'
+import { initCardsHover } from './cardHover'
 
-export const initBentoAnimation = (): (() => void) => {
-  const bentoTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.bento-header',
-      start: 'top 85%',
-      once: true,
-    },
-    defaults: { ease: 'power3.out' },
-  })
+export const initBentoAnimation = (containerEl?: HTMLElement): (() => void) => {
+  const ctx = gsap.context(() => {
+    gsap.fromTo(
+      '.bento-header',
+      { y: 20, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.bento-header',
+          start: 'top 88%',
+          once: true,
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+      },
+    )
 
-  // Cabeçalho do Bento Grid
-  bentoTl.fromTo(
-    '.bento-header',
-    { y: 20, autoAlpha: 0 },
-    {
-      y: 0,
-      autoAlpha: 1,
-      duration: 0.45,
-      clearProps: 'transform',
-    },
-  )
+    gsap.fromTo(
+      '.bento-card',
+      { y: 28, opacity: 0, scale: 0.98 },
+      {
+        scrollTrigger: {
+          trigger: '.bento-grid',
+          start: 'top 88%',
+          once: true,
+        },
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.65,
+        stagger: 0.12,
+        ease: 'power2.out',
+      },
+    )
+  }, containerEl)
 
-  // Cascata fluida nos 3 Cards com micro-escala e autoAlpha
-  bentoTl.fromTo(
-    '.bento-card',
-    {
-      y: 36,
-      scale: 0.96,
-      autoAlpha: 0,
-    },
-    {
-      y: 0,
-      scale: 1,
-      autoAlpha: 1,
-      duration: 0.45,
-      stagger: 0.12,
-      clearProps: 'transform,scale',
-    },
-    '-=0.15',
-  )
-
-  // Micro-pop nos ícones acompanhando cada card
-  bentoTl.fromTo(
-    '.bento-icon',
-    { scale: 0.6, autoAlpha: 0 },
-    {
-      scale: 1,
-      autoAlpha: 1,
-      duration: 0.35,
-      ease: 'back.out(1.8)',
-      stagger: 0.12,
-      clearProps: 'transform,scale',
-    },
-    '<0.08',
-  )
-
-  // Interações Ricas de Hover (Bento Cards - apenas em dispositivos com suporte a hover real)
-  const hasHoverSupport =
-    typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches
-
-  const bentoCards = document.querySelectorAll('.bento-card')
-  const listeners: Array<{
-    el: Element
-    type: string
-    fn: EventListener
-  }> = []
-
-  if (hasHoverSupport) {
-    bentoCards.forEach((card) => {
-      const icon = card.querySelector('.bento-icon')
-
-      const handleEnter = () => {
-        gsap.to(card, {
-          y: -8,
-          scale: 1.015,
-          duration: 0.4,
-          ease: 'power3.out',
-          overwrite: 'auto',
-        })
-        if (icon) {
-          gsap.to(icon, {
-            scale: 1.12,
-            rotation: 4,
-            duration: 0.5,
-            ease: 'back.out(2)',
-            overwrite: 'auto',
-          })
-        }
-      }
-
-      const handleLeave = () => {
-        gsap.to(card, {
-          y: 0,
-          scale: 1,
-          duration: 0.5,
-          ease: 'power3.out',
-          overwrite: 'auto',
-        })
-        if (icon) {
-          gsap.to(icon, {
-            scale: 1,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            overwrite: 'auto',
-          })
-        }
-      }
-
-      card.addEventListener('mouseenter', handleEnter)
-      card.addEventListener('mouseleave', handleLeave)
-
-      listeners.push(
-        { el: card, type: 'mouseenter', fn: handleEnter },
-        { el: card, type: 'mouseleave', fn: handleLeave },
-      )
+  let cleanupHover: (() => void) | undefined
+  if (containerEl) {
+    const cards = containerEl.querySelectorAll<HTMLElement>('.bento-card')
+    cleanupHover = initCardsHover(cards, {
+      y: -5,
+      scale: 1.012,
+      duration: 0.32,
+      iconSelector: '.bento-icon',
+      iconY: -2,
+      iconScale: 1.05,
     })
   }
 
   return () => {
-    if (bentoTl.scrollTrigger) {
-      bentoTl.scrollTrigger.kill()
-    }
-    bentoTl.kill()
-    listeners.forEach(({ el, type, fn }) => el.removeEventListener(type, fn))
-    gsap.killTweensOf('.bento-card')
-    gsap.killTweensOf('.bento-icon')
+    cleanupHover?.()
+    ctx.revert()
   }
 }

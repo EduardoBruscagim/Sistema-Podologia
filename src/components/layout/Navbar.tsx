@@ -1,11 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useTheme } from '@/hooks/useTheme'
 import { useAuth } from '@/hooks/useAuth'
 import { initNavbarAnimation } from '@/animations/navbar'
+import { applyNavbarReducedMotion } from '@/animations/reducedMotion'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
+import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react'
 
 export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme()
@@ -13,23 +15,87 @@ export const Navbar: React.FC = () => {
   const navigate = useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement | null>(null)
-  const navRef = useRef<HTMLElement | null>(null)
+  const mobileToggleRef = useRef<HTMLButtonElement | null>(null)
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null)
+  const prevOpenRef = useRef(false)
 
+  // Gerenciamento de foco: move foco para o primeiro link ao abrir e restaura para o botão ao fechar
   useEffect(() => {
+    if (isMobileMenuOpen) {
+      const firstLink = mobileMenuRef.current?.querySelector<HTMLElement>('a[href]')
+      firstLink?.focus()
+    } else if (prevOpenRef.current) {
+      mobileToggleRef.current?.focus()
+    }
+    prevOpenRef.current = isMobileMenuOpen
+  }, [isMobileMenuOpen])
+
+  // Focus trap, Escape e clique fora para o menu mobile
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setIsMobileMenuOpen(false)
+        return
+      }
+
+      if (e.key === 'Tab') {
+        const menuItems = mobileMenuRef.current
+          ? Array.from(
+              mobileMenuRef.current.querySelectorAll<HTMLElement>(
+                'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+              ),
+            )
+          : []
+
+        if (menuItems.length === 0) return
+
+        const firstItem = menuItems[0]
+        const lastItem = menuItems[menuItems.length - 1]
+        const toggleBtn = mobileToggleRef.current
+
+        if (document.activeElement === toggleBtn) {
+          e.preventDefault()
+          if (e.shiftKey) {
+            lastItem.focus()
+          } else {
+            firstItem.focus()
+          }
+        } else if (document.activeElement === firstItem && e.shiftKey) {
+          e.preventDefault()
+          toggleBtn?.focus()
+        } else if (document.activeElement === lastItem && !e.shiftKey) {
+          e.preventDefault()
+          toggleBtn?.focus()
+        }
+      }
+    }
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(e.target as Node) &&
+        mobileToggleRef.current &&
+        !mobileToggleRef.current.contains(e.target as Node)
+      ) {
         setIsMobileMenuOpen(false)
       }
     }
+
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }, [isMobileMenuOpen])
 
   useGSAP(
     () => {
       const headerEl = headerRef.current
-      const floatingNav = navRef.current
-      if (!headerEl || !floatingNav) return
+      if (!headerEl) return
 
       const mm = gsap.matchMedia()
       mm.add(
@@ -40,49 +106,150 @@ export const Navbar: React.FC = () => {
         (context) => {
           const { isMotionOk } = context.conditions!
           if (!isMotionOk) {
-            headerEl.removeAttribute('inert')
-            headerEl.style.visibility = 'visible'
-            floatingNav.style.pointerEvents = 'auto'
-            gsap.set(floatingNav, { yPercent: 0 })
+            applyNavbarReducedMotion(headerEl, headerEl)
             return
           }
 
-          return initNavbarAnimation(headerEl, floatingNav)
+          const cleanupNavbar = initNavbarAnimation(headerEl, headerEl)
+
+          return () => {
+            cleanupNavbar?.()
+          }
         },
       )
     },
     { scope: headerRef },
   )
 
-  return (
-    <header
-      ref={headerRef}
-      className="fixed top-[max(1.5rem,env(safe-area-inset-top))] left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] max-w-4xl z-40"
-    >
-      <nav
-        ref={navRef}
-        aria-label="Navegação principal"
-        className="w-full bg-theme-nav backdrop-blur-2xl border border-theme-nav-border shadow-xl shadow-slate-900/5 dark:shadow-black/20 rounded-full transition-colors duration-300"
-      >
-        <div className="px-2.5 sm:px-3 py-2.5 sm:py-3 h-16 flex items-center justify-between">
-          <Link
-            to="/"
-            aria-label="Angélica Eduarda - Página inicial"
-            className="font-semibold text-base sm:text-lg tracking-tight truncate mr-2 sm:mr-4 pl-3 sm:pl-4 text-slate-900 dark:text-slate-50 hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 focus-visible:ring-apple-blue rounded-lg"
-          >
-            Angélica Eduarda
-          </Link>
+  const handleAuthClick = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard')
+    } else {
+      openAuthModal('login')
+    }
+  }
 
-          <div className="hidden sm:flex items-center gap-1 mr-2">
+  return (
+    <div className="fixed top-5 inset-x-0 z-50 flex justify-center pointer-events-none px-4">
+      {/* Backdrop Mobile para fechar ao clicar fora */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/25 dark:bg-black/50 backdrop-blur-xs md:hidden pointer-events-auto z-40 transition-opacity duration-200"
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      <header
+        ref={headerRef}
+        className="pointer-events-auto max-w-4xl w-full px-3.5 sm:px-5 py-2 rounded-full backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border border-surface-border dark:border-slate-800 shadow-sm flex items-center justify-between transition-colors duration-300 relative z-50"
+      >
+        {/* Botão Hambúrguer Mobile com área de toque mínima 44x44px */}
+        <div className="md:hidden flex items-center">
+          <button
+            ref={mobileToggleRef}
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+            aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMobileMenuOpen ? (
+              <X aria-hidden="true" className="w-6 h-6" />
+            ) : (
+              <Menu aria-hidden="true" className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+
+        {/* Navegação Desktop Centralizada */}
+        <nav
+          aria-label="Navegação principal"
+          className="hidden md:flex items-center gap-7 text-sm font-medium text-on-surface-variant dark:text-slate-300 absolute left-1/2 -translate-x-1/2"
+        >
+          <a
+            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            href="#procedimentos"
+          >
+            Preços
+          </a>
+          <a
+            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            href="#tecnologia"
+          >
+            Tecnologia
+          </a>
+          <a
+            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            href="#faq"
+          >
+            Dúvidas
+          </a>
+          <a
+            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            href={getWhatsAppUrl()}
+            rel="noopener noreferrer"
+            target="_blank"
+            aria-label="Conversar pelo WhatsApp (abre em uma nova aba)"
+          >
+            WhatsApp
+          </a>
+        </nav>
+
+        {/* Ações à Direita com áreas de toque mínimas de 44x44px */}
+        <div className="flex items-center gap-2 sm:gap-3 ml-auto">
+          <button
+            aria-label={isDark ? 'Ativar modo claro' : 'Alternar tema claro e escuro'}
+            onClick={toggleTheme}
+            className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+            type="button"
+          >
+            {isDark ? (
+              <Sun aria-hidden="true" className="w-5 h-5" />
+            ) : (
+              <Moon aria-hidden="true" className="w-5 h-5" />
+            )}
+          </button>
+          <button
+            aria-label={
+              isAuthenticated ? 'Acessar painel do paciente' : 'Entrar na área do cliente'
+            }
+            onClick={handleAuthClick}
+            className="inline-flex items-center justify-center px-5 sm:px-6 min-h-11 rounded-full bg-primary text-on-primary text-sm font-semibold hover:bg-primary-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+            type="button"
+          >
+            {isAuthenticated ? 'Painel' : 'Entrar'}
+          </button>
+        </div>
+
+        {/* Menu Mobile Dropdown com focus trap, backdrop e anel de foco */}
+        {isMobileMenuOpen && (
+          <div
+            ref={mobileMenuRef}
+            id="mobile-menu"
+            role="region"
+            aria-label="Menu móvel"
+            className="absolute top-full left-0 right-0 mt-2 p-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-surface-border dark:border-slate-800 rounded-2xl shadow-xl flex flex-col gap-1.5 md:hidden z-50"
+          >
             <a
-              href="#precos"
-              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              href="#procedimentos"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-on-surface-variant dark:text-slate-200 hover:bg-clinical-teal-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
             >
               Preços
             </a>
             <a
+              href="#tecnologia"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-on-surface-variant dark:text-slate-200 hover:bg-clinical-teal-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              Tecnologia
+            </a>
+            <a
               href="#faq"
-              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-on-surface-variant dark:text-slate-200 hover:bg-clinical-teal-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
             >
               Dúvidas
             </a>
@@ -90,156 +257,16 @@ export const Navbar: React.FC = () => {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 px-3 py-1.5 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Conversar pelo WhatsApp (abre em uma nova aba)"
+              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
-              WhatsApp
+              <span>WhatsApp</span>
+              <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
             </a>
           </div>
-
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <button
-              id="theme-toggle"
-              type="button"
-              onClick={toggleTheme}
-              className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 focus-visible:ring-apple-blue shrink-0"
-              aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-              aria-pressed={isDark}
-              title={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-            >
-              {/* Ícone de Lua (Modo Claro ativo -> Mostrar Lua para ir pro Escuro) */}
-              <svg
-                id="theme-icon-moon"
-                className="w-5 h-5 block dark:hidden"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                />
-              </svg>
-              {/* Ícone de Sol (Modo Escuro ativo -> Mostrar Sol para voltar pro Claro) */}
-              <svg
-                id="theme-icon-sun"
-                className="w-5 h-5 hidden dark:block"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-            </button>
-            {isAuthenticated ? (
-              <button
-                type="button"
-                onClick={() => navigate('/dashboard')}
-                className="bg-apple-blue hover:bg-apple-blue-hover text-white text-sm font-medium px-5 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-full transition-all active:scale-95 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 focus-visible:ring-apple-blue"
-              >
-                Painel
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => openAuthModal('login')}
-                className="bg-apple-blue hover:bg-apple-blue-hover text-white text-sm font-medium px-5 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-full transition-all active:scale-95 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 focus-visible:ring-apple-blue"
-              >
-                Entrar
-              </button>
-            )}
-
-            {/* Menu Dropdown Mobile DaisyUI */}
-            <div
-              className={`dropdown dropdown-end sm:hidden ${isMobileMenuOpen ? 'dropdown-open' : ''}`}
-            >
-              <button
-                tabIndex={0}
-                type="button"
-                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-apple-blue"
-                aria-label="Menu de navegação"
-                aria-haspopup="menu"
-                aria-expanded={isMobileMenuOpen}
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-              <ul
-                tabIndex={0}
-                role="menu"
-                aria-label="Menu de navegação móvel"
-                className="dropdown-content menu bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-xl w-56 p-2 mt-3 z-50 text-slate-800 dark:text-slate-200 text-sm font-medium space-y-1"
-              >
-                <li role="none">
-                  <a
-                    role="menuitem"
-                    href="#main-content"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="min-h-[44px] flex items-center px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue"
-                  >
-                    Início
-                  </a>
-                </li>
-                <li role="none">
-                  <a
-                    role="menuitem"
-                    href="#precos"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="min-h-[44px] flex items-center px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue"
-                  >
-                    Serviços & Cuidados
-                  </a>
-                </li>
-                <li role="none">
-                  <a
-                    role="menuitem"
-                    href="#faq"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="min-h-[44px] flex items-center px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue"
-                  >
-                    Perguntas Frequentes
-                  </a>
-                </li>
-                <li role="none">
-                  <a
-                    role="menuitem"
-                    href={getWhatsAppUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="min-h-[44px] flex items-center px-4 rounded-xl text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue font-semibold"
-                  >
-                    Falar no WhatsApp ↗
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
+        )}
+      </header>
+    </div>
   )
 }

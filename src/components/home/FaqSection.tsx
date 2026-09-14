@@ -1,62 +1,201 @@
-import React from 'react'
+import React, { useRef, useState, useLayoutEffect } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ChevronDown } from 'lucide-react'
+import { initFaqAnimation } from '@/animations/faq'
+import { applyReducedMotion } from '@/animations/reducedMotion'
 
-const FAQ_ITEMS = [
+interface FaqItem {
+  question: string
+  answer: string
+}
+
+const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Como funciona o atendimento a domicílio?',
     answer:
-      'Levo todo o material profissional necessário até a sua casa: alicates e espátulas esterilizados em autoclave, toalhas e lixas descartáveis, produtos de hidratação e esmaltes. Você recebe todo o cuidado com seus pés e mãos com o conforto de não precisar sair de casa.',
+      'Vou até a sua residência em Mococa com todo o equipamento profissional e maleta esterilizada. Você só precisa escolher um local confortável (sofá ou poltrona). O atendimento é calmo, pontual e sem pressa.',
   },
   {
     question: 'O que preciso preparar na minha casa para o atendimento?',
     answer:
-      'Apenas um local confortável para você se sentar (como sofá ou poltrona) com boa iluminação. Todo o material de proteção, toalhas descartáveis, bacias com protetores e higienização são levados por mim.',
+      'Não precisa se preocupar com nada! Eu levo todo o material descartável, toalhas higienizadas e equipamentos portáteis. Basta um lugar aconchegável para você sentar.',
   },
   {
     question: 'Como é garantida a higiene e esterilização dos materiais?',
     answer:
-      'Segurança e higiene são prioridades inegociáveis. Todos os instrumentos de corte e metal passam por esterilização em autoclave hospitalar em envelopes selados. Lixas, toalhas e luvas são 100% descartáveis e abertas na sua presença.',
+      'Máximo rigor de biossegurança: todos os instrumentos metálicos passam por esterilização a vapor sob pressão em autoclave. Cada conjunto vem em envelope cirúrgico lacrado com indicador químico e aberto exclusivamente na sua frente.',
   },
   {
     question: 'Quais regiões você atende e existe taxa de deslocamento?',
     answer:
-      'Atendo em qualquer bairro de Mococa - SP com taxa de deslocamento zero (R$ 0)! O valor do procedimento é único e você não paga nada a mais pelo transporte.',
+      'Atendo em qualquer bairro da cidade de Mococa - SP sem nenhuma cobrança de taxa de deslocamento. O valor informado é o valor final.',
   },
   {
     question: 'Quais são as formas de pagamento aceitas?',
-    answer:
-      'O pagamento é realizado somente ao término do atendimento. No momento, aceito exclusivamente PIX ou dinheiro vivo.',
+    answer: 'O pagamento é realizado unicamente ao término da sessão, via PIX ou dinheiro vivo.',
   },
 ]
 
-export const FaqSection: React.FC = () => {
+interface FaqAccordionItemProps {
+  item: FaqItem
+  index: number
+  isOpen: boolean
+  onToggle: (index: number) => void
+}
+
+const FaqAccordionItem: React.FC<FaqAccordionItemProps> = ({ item, index, isOpen, onToggle }) => {
+  const panelRef = useRef<HTMLDivElement>(null)
+  const isFirstRender = useRef(true)
+
+  useLayoutEffect(() => {
+    const panel = panelRef.current
+    if (!panel) return
+
+    // Primeiro render: define o estado inicial sem animação
+    if (isFirstRender.current) {
+      gsap.set(panel, { height: 0, opacity: 0 })
+      isFirstRender.current = false
+      return
+    }
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReduced) {
+      // Respeita preferência do usuário: troca instantânea sem animação
+      gsap.set(panel, isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 })
+      return
+    }
+
+    // Cancela qualquer tween em andamento neste painel
+    gsap.killTweensOf(panel)
+
+    if (isOpen) {
+      // Abertura: expande suavemente do topo para baixo
+      gsap.fromTo(
+        panel,
+        { height: 0, opacity: 0 },
+        {
+          height: 'auto',
+          opacity: 1,
+          duration: 0.42,
+          ease: 'power3.out',
+        },
+      )
+    } else {
+      // Fechamento: recolhe com leve aceleração para parecer responsivo
+      gsap.to(panel, {
+        height: 0,
+        opacity: 0,
+        duration: 0.28,
+        ease: 'power2.in',
+      })
+    }
+  }, [isOpen])
+
   return (
-    <section id="faq" className="py-16 sm:py-24 px-4 sm:px-6 max-w-4xl mx-auto w-full">
-      <div className="text-center mb-10 sm:mb-14">
-        <span className="badge badge-primary badge-outline text-xs uppercase font-semibold tracking-wider mb-3">
-          Tire suas dúvidas
-        </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-50 text-balance">
+    <div
+      className={`faq-item rounded-2xl bg-white dark:bg-slate-900 border shadow-2xs transition-colors duration-200 ${
+        isOpen
+          ? 'border-primary/40 dark:border-primary/30'
+          : 'border-surface-border dark:border-slate-800'
+      }`}
+    >
+      <button
+        type="button"
+        id={`faq-btn-${index}`}
+        aria-expanded={isOpen}
+        aria-controls={`faq-panel-${index}`}
+        onClick={() => onToggle(index)}
+        className="w-full flex items-center justify-between cursor-pointer min-h-11 px-5 py-4 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-2xl text-left"
+      >
+        <h3
+          className={`text-base font-semibold pr-4 transition-colors ${
+            isOpen ? 'text-primary' : 'text-on-surface dark:text-white'
+          }`}
+        >
+          {item.question}
+        </h3>
+        <ChevronDown
+          aria-hidden="true"
+          className={`w-5 h-5 shrink-0 transition-transform duration-300 ${
+            isOpen ? 'rotate-180 text-primary' : 'text-text-secondary dark:text-slate-400'
+          }`}
+        />
+      </button>
+
+      {/* Painel sempre no DOM — altura controlada pelo GSAP para animação fluida */}
+      <div ref={panelRef} style={{ overflow: 'hidden' }}>
+        <div className="px-5 pb-4 border-t border-apple-gray dark:border-slate-800 text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
+          <div className="pt-3">{item.answer}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const FaqSection: React.FC = () => {
+  const faqSectionRef = useRef<HTMLElement | null>(null)
+  // null = nenhum item aberto; número = índice do item aberto
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const handleToggle = (index: number) => {
+    setOpenIndex((prev) => (prev === index ? null : index))
+  }
+
+  useGSAP(
+    () => {
+      const el = faqSectionRef.current
+      if (!el) return
+
+      const mm = gsap.matchMedia()
+      mm.add(
+        {
+          isMotionOk: '(prefers-reduced-motion: no-preference)',
+          reduceMotion: '(prefers-reduced-motion: reduce)',
+        },
+        (context) => {
+          const { isMotionOk } = context.conditions!
+          if (!isMotionOk) {
+            applyReducedMotion(['.faq-header', '.faq-item'])
+            return
+          }
+
+          return initFaqAnimation(el)
+        },
+      )
+    },
+    { scope: faqSectionRef },
+  )
+
+  return (
+    <section
+      ref={faqSectionRef}
+      aria-label="Perguntas Frequentes"
+      className="max-w-4xl mx-auto px-6 py-14"
+      id="faq"
+    >
+      <div className="faq-header text-center mb-10">
+        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-bold text-clinical-blue dark:text-sky-400 tracking-wider uppercase mb-3">
+          TIRE SUAS DÚVIDAS
+        </div>
+        <h2 className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight">
           Perguntas Frequentes
         </h2>
-        <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg mt-3 max-w-xl mx-auto font-medium text-balance">
+        <p className="text-sm text-on-surface-variant dark:text-slate-300 mt-2 max-w-lg mx-auto font-normal">
           Tudo o que você precisa saber sobre o atendimento podológico em sua residência.
         </p>
       </div>
 
-      <div className="space-y-3">
+      <div className="faq-list flex flex-col gap-3.5">
         {FAQ_ITEMS.map((item, index) => (
-          <details
+          <FaqAccordionItem
             key={index}
-            name="faq-accordion"
-            className="collapse collapse-arrow bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl sm:rounded-3xl shadow-sm transition-colors duration-200 group cursor-pointer"
-          >
-            <summary className="collapse-title text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 pr-12 select-none list-none rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue focus-visible:ring-offset-2">
-              {item.question}
-            </summary>
-            <div className="collapse-content text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-medium pt-1 cursor-default">
-              <p>{item.answer}</p>
-            </div>
-          </details>
+            item={item}
+            index={index}
+            isOpen={openIndex === index}
+            onToggle={handleToggle}
+          />
         ))}
       </div>
     </section>
