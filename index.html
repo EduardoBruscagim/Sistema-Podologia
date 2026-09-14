@@ -36,7 +36,8 @@
     />
     <meta name="twitter:image" content="https://agendamento-angelica.vercel.app/og-image.jpg" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
+    <link rel="preload" as="image" href="/hero-clinical-bag.jpg" fetchpriority="high" />
     <title>Angélica Eduarda • Pés e mãos bem cuidados em domicílio em Mococa - SP</title>
     <!-- Dados Estruturados Schema.org para SEO Local e Google Busca -->
     <script type="application/ld+json">
@@ -100,7 +101,7 @@
             for (var i = 0; i < metas.length; i++) {
               if (i === 0) {
                 metas[i].removeAttribute('media')
-                metas[i].setAttribute('content', isDark ? '#020617' : '#ffffff')
+                metas[i].setAttribute('content', isDark ? '#0b0f17' : '#ffffff')
               } else if (metas[i].parentNode) {
                 metas[i].parentNode.removeChild(metas[i])
               }
@@ -112,7 +113,7 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body
-    class="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 antialiased font-sans selection:bg-apple-blue selection:text-white transition-colors duration-300 break-words flex flex-col"
+    class="min-h-screen antialiased font-sans selection:bg-apple-blue selection:text-white transition-colors duration-300 break-words flex flex-col"
   >
     <div id="root" class="flex-1 flex flex-col"></div>
 

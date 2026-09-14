@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import type { Theme } from '@/types/theme'
 import { updateThemeColorMeta } from '@/utils/theme'
 import { ThemeContext } from './theme-context'
@@ -22,14 +22,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       document.documentElement.setAttribute('data-theme', 'light')
     }
 
-    try {
-      localStorage.setItem('theme', theme)
-    } catch {
-      // Ignora restrições de sandbox
-    }
-
     updateThemeColorMeta(isDark)
-  }, [theme, isDark])
+  }, [isDark])
 
   // Sincroniza dinamicamente se a preferência do SO mudar e não houver escolha manual salva
   useEffect(() => {
@@ -49,11 +43,26 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [])
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
-  }
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => {
+      const nextTheme: Theme = prev === 'dark' ? 'light' : 'dark'
+      try {
+        localStorage.setItem('theme', nextTheme)
+      } catch {
+        // Ignora restrições de sandbox
+      }
+      return nextTheme
+    })
+  }, [])
 
-  return (
-    <ThemeContext.Provider value={{ theme, isDark, toggleTheme }}>{children}</ThemeContext.Provider>
+  const value = useMemo(
+    () => ({
+      theme,
+      isDark,
+      toggleTheme,
+    }),
+    [theme, isDark, toggleTheme],
   )
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }

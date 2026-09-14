@@ -28,21 +28,25 @@ export const Hero: React.FC = () => {
           return initHeroAnimation(el)
         },
       )
+      return () => mm.revert()
     },
     { scope: heroSectionRef },
   )
 
   return (
-    <section ref={heroSectionRef} className="max-w-6xl mx-auto px-6 pt-10 pb-12 lg:pb-16">
+    <section
+      ref={heroSectionRef}
+      className="max-w-6xl mx-auto px-6 pt-10 pb-12 lg:pb-16"
+      aria-labelledby="hero-title"
+    >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         {/* Left: Headline & Actions */}
         <div className="lg:col-span-6 flex flex-col items-start text-left">
-          <h1 className="gsap-hero-reveal text-4xl sm:text-5xl lg:text-6xl font-bold text-on-surface dark:text-white tracking-tight leading-[1.08] mb-6">
-            Pés e mãos
-            <br />
-            bem
-            <br />
-            cuidados.
+          <h1
+            id="hero-title"
+            className="gsap-hero-reveal text-4xl sm:text-5xl lg:text-6xl font-bold text-on-surface dark:text-white tracking-tight leading-[1.08] mb-6 text-balance"
+          >
+            Pés e mãos bem cuidados.
           </h1>
           <p className="gsap-hero-reveal text-base sm:text-lg text-on-surface-variant dark:text-slate-300 leading-relaxed mb-8 max-w-lg font-normal">
             Cuidado profissional para pés e mãos no conforto do seu lar em Mococa - SP. Corte
@@ -56,7 +60,7 @@ export const Hero: React.FC = () => {
               Agendar horário
             </a>
             <div className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 border border-surface-border dark:border-slate-700 text-xs font-semibold text-on-surface-variant dark:text-slate-300 shadow-2xs">
-              <span className="text-primary font-bold">✓</span>
+              <span className="text-primary dark:text-sky-300 font-bold">✓</span>
               <span>CONFIRMAÇÃO IMEDIATA</span>
             </div>
           </div>
@@ -64,7 +68,7 @@ export const Hero: React.FC = () => {
 
         {/* Right: Real Image Card */}
         <div className="lg:col-span-6 gsap-hero-image">
-          <div className="relative rounded-3xl overflow-hidden border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+          <div className="relative rounded-3xl overflow-hidden border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="absolute top-4 left-4 z-10">
               <span className="px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-white/60 dark:border-slate-700 text-xs font-bold text-on-surface dark:text-white tracking-wider uppercase shadow-xs">
                 ATENDIMENTO DOMICILIAR
