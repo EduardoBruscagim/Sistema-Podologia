@@ -1,217 +1,252 @@
 ---
-name: Angélica Eduarda Podologia
-description: Minimalismo clínico premium e autoagendamento B2C
+name: Clinical Precision & Apple Minimalism
 colors:
-  primary: '#0071e3'
-  primary-hover: '#0077ed'
-  neutral-bg: '#ffffff'
-  neutral-surface: '#f8fafc'
-  neutral-text: '#0f172a'
-  neutral-muted: '#64748b'
-  dark-bg: '#020617'
-  dark-surface: '#0f172a'
-  dark-text: '#f8fafc'
-  dark-muted: '#94a3b8'
-  border-light: 'rgba(226, 232, 240, 0.6)'
-  border-dark: 'rgba(51, 65, 85, 0.6)'
+  surface: '#fcf8fb'
+  surface-dim: '#dcd9dc'
+  surface-bright: '#fcf8fb'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#f6f3f5'
+  surface-container: '#f0edef'
+  surface-container-high: '#eae7ea'
+  surface-container-highest: '#e4e2e4'
+  on-surface: '#1b1b1d'
+  on-surface-variant: '#414753'
+  inverse-surface: '#303032'
+  inverse-on-surface: '#f3f0f2'
+  outline: '#717785'
+  outline-variant: '#c1c6d6'
+  surface-tint: '#005cbb'
+  primary: '#0059b5'
+  on-primary: '#ffffff'
+  primary-container: '#0071e3'
+  on-primary-container: '#fcfbff'
+  inverse-primary: '#abc7ff'
+  secondary: '#3a5f94'
+  on-secondary: '#ffffff'
+  secondary-container: '#9fc2fe'
+  on-secondary-container: '#294f83'
+  tertiary: '#3b5e7c'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#547796'
+  on-tertiary-container: '#fafbff'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#d7e2ff'
+  primary-fixed-dim: '#abc7ff'
+  on-primary-fixed: '#001b3f'
+  on-primary-fixed-variant: '#00458f'
+  secondary-fixed: '#d5e3ff'
+  secondary-fixed-dim: '#a7c8ff'
+  on-secondary-fixed: '#001b3c'
+  on-secondary-fixed-variant: '#1f477b'
+  tertiary-fixed: '#cce5ff'
+  tertiary-fixed-dim: '#a7caed'
+  on-tertiary-fixed: '#001d31'
+  on-tertiary-fixed-variant: '#254a67'
+  background: '#fcf8fb'
+  on-background: '#1b1b1d'
+  surface-variant: '#e4e2e4'
+  apple-gray: '#F5F5F7'
+  pure-white: '#FFFFFF'
+  surface-border: '#E5E5EA'
+  surface-border-subtle: '#D2E4F0'
+  clinical-teal-subtle: '#EBF4F9'
+  clinical-blue: '#0059B5'
+  text-secondary: '#59595E'
 typography:
   display:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: 'clamp(2.5rem, 8vw + 1rem, 7.5rem)'
-    fontWeight: 700
-    lineHeight: 0.95
-    letterSpacing: '-0.05em'
-  display-min:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '2.5rem'
-    fontWeight: 700
-    lineHeight: 0.95
-    letterSpacing: '-0.05em'
-  display-md:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '6.5rem'
-    fontWeight: 700
-    lineHeight: 0.95
-    letterSpacing: '-0.05em'
-  headline:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: 'clamp(1.875rem, 5vw + 0.5rem, 5rem)'
-    fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: '-0.04em'
-  headline-min:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '1.875rem'
-    fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: '-0.04em'
-  title:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '1.5rem'
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: '-0.02em'
-  body:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '1rem'
-    fontWeight: 500
-    lineHeight: 1.6
-    letterSpacing: 'normal'
-  label:
-    fontFamily: "'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-    fontSize: '0.875rem'
-    fontWeight: 600
-    lineHeight: 1.2
-    letterSpacing: '0.15em'
+    fontFamily: Outfit
+    fontSize: 3.5rem
+    fontWeight: '700'
+    lineHeight: '1.1'
+    letterSpacing: -0.035em
+  display-mobile:
+    fontFamily: Outfit
+    fontSize: 2.25rem
+    fontWeight: '700'
+    lineHeight: '1.15'
+    letterSpacing: -0.025em
+  headline-lg:
+    fontFamily: Outfit
+    fontSize: 2.25rem
+    fontWeight: '600'
+    lineHeight: '1.2'
+    letterSpacing: -0.03em
+  headline-lg-mobile:
+    fontFamily: Outfit
+    fontSize: 1.75rem
+    fontWeight: '600'
+    lineHeight: '1.25'
+    letterSpacing: -0.02em
+  headline-md:
+    fontFamily: Outfit
+    fontSize: 1.5rem
+    fontWeight: '600'
+    lineHeight: '1.3'
+    letterSpacing: -0.02em
+  title-md:
+    fontFamily: Outfit
+    fontSize: 1.125rem
+    fontWeight: '600'
+    lineHeight: '1.4'
+    letterSpacing: -0.01em
+  body-lg:
+    fontFamily: Outfit
+    fontSize: 1.125rem
+    fontWeight: '400'
+    lineHeight: '1.6'
+    letterSpacing: -0.01em
+  body-md:
+    fontFamily: Outfit
+    fontSize: 1rem
+    fontWeight: '400'
+    lineHeight: '1.55'
+    letterSpacing: '0'
+  body-sm:
+    fontFamily: Outfit
+    fontSize: 0.875rem
+    fontWeight: '400'
+    lineHeight: '1.5'
+    letterSpacing: '0'
+  label-md:
+    fontFamily: Outfit
+    fontSize: 0.875rem
+    fontWeight: '600'
+    lineHeight: '1.2'
+    letterSpacing: 0.02em
+  label-sm:
+    fontFamily: Outfit
+    fontSize: 0.75rem
+    fontWeight: '600'
+    lineHeight: '1.2'
+    letterSpacing: 0.05em
 rounded:
-  sm: '8px'
-  md: '16px'
-  lg: '28px'
-  full: '9999px'
+  sm: 0.25rem
+  DEFAULT: 0.5rem
+  md: 0.75rem
+  lg: 1rem
+  xl: 1.5rem
+  full: 9999px
 spacing:
-  xs: '8px'
-  sm: '16px'
-  md: '24px'
-  lg: '32px'
-  xl: '48px'
-  2xl: '80px'
-components:
-  button-primary:
-    backgroundColor: '{colors.primary}'
-    textColor: '#ffffff'
-    rounded: '{rounded.full}'
-    padding: '16px 32px'
-  button-primary-hover:
-    backgroundColor: '{colors.primary-hover}'
-  button-compact:
-    backgroundColor: '{colors.primary}'
-    textColor: '#ffffff'
-    rounded: '{rounded.full}'
-    padding: '10px 20px'
-    height: '44px'
+  gutter: 1.5rem
+  gutter-mobile: 1rem
+  margin: 2.5rem
+  margin-mobile: 1.25rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.5rem
+  space-xl: 2.5rem
 ---
 
-# Design System: Angélica Eduarda Podologia
+## Brand & Style
 
-## Overview
+This design system reimagines specialized podiatry and clinical healthcare through the lens of Apple’s signature design philosophy: pristine, calm, highly structured, and uncompromisingly premium. It moves away from traditional, crowded medical interfaces and earthy greens in favor of an atmosphere that conveys surgical precision, advanced diagnostic technology, and thoughtful human care.
 
-**Creative North Star: "O Santuário Clínico Minimalista"**
+### Brand Personality & Emotional Impact
 
-A experiência visual traduz a precisão cirúrgica e o acolhimento do atendimento podológico domiciliar premium. Em vez de recorrer ao repertório saturado de clichês de saúde (tons esverdeados genéricos, ilustrações anatômicas simplistas ou layouts de "clínica de bairro"), o sistema adota a sofisticação da linguagem editorial e tecnológica da Apple.
-
-A atmosfera combina superfícies puras em branco e ardósia profunda com o **Azul Safira (#0071e3)** atuando como assinatura visual única. A navegação acontece através de uma ilha flutuante translúcida, enquanto o conteúdo organiza-se em Bento Grids assimétricos de alta legibilidade, com tipografia monumental orientada à esquerda e transições micro-orquestradas na rolagem.
-
-**Key Characteristics:**
-
-- **Rigor Tipográfico**: Display massivo com kerning ultra-fechado (-0.05em) e alinhamento editorial à esquerda.
-- **Transparência e Camadas**: Vidro fosco (glassmorphism 24px) com desfoque de fundo e bordas translúcidas de 1px.
-- **Aceleração Sensorial**: Interações ágeis (active:scale-95) e foco absoluto na eliminação do atrito do agendamento.
-- **Bipolaridade de Tema Intencional**: Modos claro e escuro desenhados individualmente com contrastes rigorosos acima de 4.5:1.
+- **Emotional Resonance:** Quiet confidence, uncompromising hygiene, cutting-edge medical technology, and serene hospitality. Patients immediately feel they are in the care of elite practitioners who utilize the most sophisticated equipment and methods.
+- **Target Audience:** Health-conscious individuals and professionals seeking expert clinical podiatry, preventative foot care, and biomechanical rehabilitation who prioritize state-of-the-art cleanliness, punctuality, and a polished digital booking experience.
+- **Design Movement:** Apple-inspired Clinical Minimalism. The visual language utilizes luminous light-gray canvasing, pure white raised modular surfaces, precise geometric typography, and surgical accent blues. The layout creates immense breathing room, natural visual hierarchy, and an effortless transition from symptom exploration to appointment booking.
 
 ## Colors
 
-Paleta concisa ancorada no contraste entre neutros cirúrgicos e o impacto confiante do Azul Safira.
+The color palette centers entirely on Apple’s signature neutral ecosystem paired with clinical blues, engineered to evoke high-tech medical instruments, clean-room sterility, and intuitive digital interactions.
 
-### Primary
+### Role Allocations & Intent
 
-- **Azul Safira** (`#0071e3`): Cor primária de ação e autoridade médica. Utilizada em botões de conversão principais, ícones de destaque e estados de foco.
-- **Azul Safira Hover** (`#0077ed`): Estado ativado por passagem de ponteiro ou interação tátil.
-
-### Neutral
-
-- **Branco Puro** (`#ffffff`): Fundo principal do modo claro e cor de contraste para botões e cards de destaque.
-- **Ardósia Hospitalar** (`#0f172a`): Cor de leitura de títulos e textos de alto impacto no modo claro; superfície de cards no modo escuro.
-- **Ardósia Noturna Profunda** (`#020617`): Fundo dominante do modo escuro.
-- **Cinza Clínico Suave** (`#f8fafc`): Fundo de seções secundárias e Bento Grid no modo claro.
-- **Ardósia Média / Neutro Secundário** (`#64748b` no claro, `#94a3b8` no escuro): Textos secundários, legendas e descrições.
-- **Bordas Translúcidas** (`rgba(226, 232, 240, 0.6)` claro / `rgba(51, 65, 85, 0.6)` escuro): Delimitação sutil de ilhas flutuantes e cards sem criar ruído visual.
-
-### Named Rules
-
-**The Sapphire Accent Rule.** O Azul Safira é reservado para intenção direta de conversão ou elementos de confiança clínica. Sua força estética reside na sobriedade com que é aplicado no restante da tela.
-**The No-Raw-Gray Rule.** Em superfícies escuras ou coloridas, o texto secundário nunca é cinza neutro desbotado; é sempre tonalizado com a matiz do fundo para preservar harmonia cromática.
+- **Primary (`#0071E3` - Apple Blue):** The key driver for primary interactions, selected states, high-priority conversion buttons, and active booking dates. It communicates digital immediacy, technological mastery, and trust.
+- **Secondary (`#003366` - Deep Clinical Navy):** Delivers structural gravitas. Applied to primary headings, hero titles, active navigation headers, and authoritative clinical certifications.
+- **Tertiary (`#0F3854` - Deep Slate Blue):** Bridges technical discipline with clinical warmth, used for secondary action triggers, specialized procedure badges, and informational accents.
+- **Neutral (`#1D1D1F` - Apple Off-Black):** Delivers high contrast for standard typography and essential body reading without the sterile severity of pure black.
+- **Named Colors:**
+  - `apple-gray` (`#F5F5F7`): The default page canvas and foundational background layer, establishing the clean, quiet warmth characteristic of Apple retail and hardware displays.
+  - `pure-white` (`#FFFFFF`): The primary container and card color, creating distinct, elevated surfaces over `#F5F5F7`.
+  - `surface-border` (`#E5E5EA`): A crisp, low-contrast boundary line that defines cards and inputs without visual noise.
+  - `surface-border-subtle` (`#D2E4F0`): A delicate light-blue border for badge enclosures and clinical tag containers.
+  - `clinical-teal-subtle` (`#EBF4F9`): Soft background tint for clinical callouts, active calendar dates, and informational chips.
+  - `clinical-blue` (`#0059B5`): A high-contrast medical blue engineered specifically for small badges and tags on `#EBF4F9` (4.7:1+ contrast, WCAG AA compliant).
+  - `text-secondary` (`#59595E`): The standard secondary text color for supporting details, clinical durations, and metadata (7.08:1 contrast on pure white, WCAG AAA compliant).
 
 ## Typography
 
-**Display Font:** `'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
-**Body Font:** `'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
-**Label / Mono Font:** `'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
+The type system pairs the architectural precision and humanist warmth of Outfit across all levels, producing an interface that feels both technologically cutting-edge and clinically approachable.
 
-**Character:** Tipografia geométrica humanista (Outfit) carregada via Google Fonts com conexões `preconnect` otimizadas. Combina clareza digital contemporânea com formas curvas acolhedoras e suaves, traduzindo bem-estar, biossegurança e cuidado clínico de alta precisão.
+### Typographic Principles
 
-### Hierarchy
+- **Controlled Optical Tracking:** Large headings and display types feature deliberate negative letter-spacing (`-0.02em` to `-0.035em`), commanding attention and delivering the editorial confidence seen in modern consumer technology interfaces.
+- **Clinical Labels & Overlines:** Category badges, diagnostic tags, and status trackers employ slightly expanded tracking (`0.02em` to `0.05em`) to balance small font sizes with immediate legibility.
+- **Reading Comfort:** Clinical procedure explanations and doctor bios utilize a relaxed `1.55` to `1.6` line height to prevent ocular fatigue and ensure critical treatment details are easily digested.
 
-- **Display** (Bold 700, `clamp(2.5rem, 8vw + 1rem, 7.5rem)`, line-height: 0.95, tracking: -0.05em): Título principal do Hero ("Pés e mãos bem cuidados").
-- **Headline** (Bold 700, `clamp(1.875rem, 5vw + 0.5rem, 5rem)`, line-height: 1.05, tracking: -0.04em): Títulos de seções como Bento Grid e CTA final.
-- **Title** (Bold 700, `1.5rem` / 24px, line-height: 1.2, tracking: -0.02em): Títulos de cards de diferencial e subseções.
-- **Body** (Medium 500, `1rem` a `1.5rem` / 16px-24px, line-height: 1.6): Descrições clínicas e parágrafos explicativos com `text-balance`.
-- **Label** (SemiBold 600, `0.875rem` / 14px, tracking: 0.15em a 0.2em, uppercase): Selos de confirmação imediata e pré-cabeçalhos de seção.
+### Iconography
 
-### Named Rules
+- **System:** Lucide Icons (`lucide-react`). Inline accessible SVG components engineered for crisp geometric alignment, consistent 2px stroke weight, and harmonious Apple Minimalist aesthetics.
+- **Styling:** Contextual sizing via Tailwind utility classes:
+  - `w-4 h-4` (16px): Inline list bullets, secondary link accents, button companion icons (`Check`, `ArrowUpRight`, `LogOut`, `Home`, `CalendarPlus`).
+  - `w-5 h-5` (20px): Accordion triggers and control switches (`ChevronDown`, `Sun`, `Moon`).
+  - `w-6 h-6` (24px): Bento grid feature icons, procedure representations, and modal identifiers (`Home`, `MapPin`, `Clock`, `Sparkles`, `Footprints`, `Hand`, `Calendar`, `ShieldCheck`, `User`, `X`, `Menu`).
+  - `w-8 h-8` (32px): High-priority clinical trust badges and safety anchors (`ShieldCheck`).
+- **Accessibility:** All decorative icons render with `aria-hidden="true"`; interactive icon buttons declare an explicit `aria-label`.
 
-**The Tight Headline Rule.** Quanto maior a escala do título, mais fechado o tracking e menor a entrelinha. Headings de exibição não toleram entrelinha padrão de leitura.
+## Layout & Spacing
 
-## Layout
+The layout philosophy mirrors modern hardware presentation sites: clean, modular Bento grids, generous perimeter breathing space, and centered viewports that keep information dense yet uncluttered.
 
-O spatial model baseia-se em um contêiner central fluido (`max-w-6xl` e `max-w-4xl`) com grids modulares de 12 colunas e Bento Grids assimétricos de 3 colunas.
+### Grid Architecture
 
-- **Navbar**: Ilha flutuante desacoplada do topo (`top-[max(1.5rem,env(safe-area-inset-top))]`), centralizada com bordas arredondadas totais (`rounded-full`).
-- **Ritmo Vertical**: Separações generosas entre blocos (`py-16 sm:py-24 md:py-32`), permitindo que cada mensagem respire.
-- **Safe-Area Inset**: Todas as margens extremas respeitam os limites de hardware de dispositivos móveis.
+- **Desktop (1024px+):** 12-column grid constrained to an elegant `max-w-6xl` (1152px) or `max-w-7xl` (1280px) centered container. Spaced with `1.5rem` gutters and minimum `2.5rem` outer canvas padding.
+- **Tablet (640px – 1023px):** 6-column fluid structure with `1.5rem` gutters and `2rem` screen margins.
+- **Mobile (<640px):** Single-column stacked composition utilizing `1rem` column gutters and `1.25rem` screen margins to maximize horizontal real estate on smaller viewports.
+
+### Rhythm & Structure
+
+- Modular blocks (service highlights, diagnostic equipment specs, scheduling tools) employ internal card padding of `space-lg` (1.5rem / 24px) for desktop and `space-md` (1rem / 16px) for mobile.
+- Vertical space between major clinical sections scales gracefully from `space-xl` (2.5rem / 40px) on mobile up to 5rem (80px) on desktop, establishing clear cognitive separation between distinct phases of care.
 
 ## Elevation & Depth
 
-O sistema rejeita sombras projetadas pesadas ou blocos neobrutalistas rígidos. A profundidade é obtida pela sobreposição de materiais translúcidos (vidro fosco) e halos de dispersão suave.
+Visual hierarchy is communicated through soft, layered physical planes and subtle frosted diffusion rather than dark or prominent drop shadows.
 
-### Shadow Vocabulary
-
-- **Island Ambient** (`box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05)`): Ilha de navegação flutuante no modo claro.
-- **Night Glow** (`box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2)`): Ilha flutuante no modo escuro.
-- **Accent Elevation** (`box-shadow: 0 10px 15px -3px rgba(0, 113, 227, 0.3)`): Botão primário de agendamento no CTA.
-
-### Named Rules
-
-**The Material-Over-Shadow Rule.** A profundidade deve ser transmitida primariamente por desfoque de fundo (`backdrop-blur-2xl`) e bordas translúcidas de 1px; sombras atuam apenas como dispersão ambiental secundária.
+- **Level 0 (Canvas Base):** Ground layer finished in Apple Gray (`#F5F5F7`), completely flat with zero elevation.
+- **Level 1 (Card & Module Resting):** Pure White (`#FFFFFF`) surfaces situated directly on `#F5F5F7`, bounded by a crisp 1px border (`#E5E5EA`) and an ultra-diffuse ambient contact shadow: `0 2px 8px -2px rgba(0, 51, 102, 0.04)`.
+- **Level 2 (Hover & Active Containers):** Lifted interactive cards, hovered time slots, and dropdown menus. Elevated with a refined multidirectional bloom: `0 12px 24px -4px rgba(0, 51, 102, 0.08)`.
+- **Level 3 (Floating Bars & Modals):** Sticky booking navigation bars, doctor profile sheets, and confirmation dialogs. Features backdrop blur (`backdrop-blur-xl`, `rgba(255, 255, 255, 0.82)`) paired with `0 20px 40px -10px rgba(0, 51, 102, 0.12)` and a hairline border of `rgba(229, 229, 234, 0.6)`.
 
 ## Shapes
 
-- **Bordas Pílula (`rounded-full` / 9999px)**: Utilizadas em todos os botões interativos, badges e no contêiner da barra de navegação.
-- **Bento Containers (`rounded-[1.75rem] sm:rounded-[2rem]` / 28px-32px)**: Cards de serviços com cantos acentuadamente orgânicos e generosos.
-- **Ícones e Chips (`rounded-2xl` / 16px)**: Envoltórios de ícones funcionais.
+The design system maintains a balanced roundedness scale (`roundedness: 2`), reflecting the continuous curvature (squircle-like softness) of modern consumer hardware.
+
+- **Standard Elements & Cards:** UI elements use `0.5rem` (8px) as a base, with `rounded-lg` (1rem / 16px) for service cards, bento modules, and modal containers.
+- **Hero Containers & Visual Showcases:** Major clinical highlight banners and interactive modules scale to `rounded-xl` (1.5rem / 24px) for soft, approachable enclosures.
+- **Form Controls & Inputs:** Inputs, text areas, and date selector tiles apply `0.75rem` (12px) for a solid, modern touch surface.
+- **Capsules & Full Pills:** The full pill geometry (`9999px`) is applied to call-to-action buttons, filter chips, clinical category badges, and floating navigation pills.
 
 ## Components
 
 ### Buttons
 
-- **Shape:** Pílula completa (`rounded-full`).
-- **Primary:** Fundo `#0071e3`, texto `#ffffff`, padding `16px 32px` (Hero) ou `10px 20px` (Navbar), altura mínima de 44px para toque.
-- **Hover / Active:** Transição suave com escala tátil (`active:scale-95`) e hover `#0077ed`.
-- **Focus:** Anel acessível `focus-visible:ring-2 focus-visible:ring-apple-blue` com deslocamento de fundo.
+- **Primary CTA:** Full pill (`rounded-full`) with a solid `#0071E3` fill and `#FFFFFF` bold typography. Height: 48px desktop / 44px mobile. Hover triggers `#0077ED` with a smooth 150ms scale-down (`active:scale-[0.98]`).
+- **Secondary CTA:** Full pill in Pure White (`#FFFFFF`) with a 1px border in `#E5E5EA` and `#0071E3` or `#003366` typography. Hover transitions to `#F5F5F7`.
+- **Tertiary / Ghost Button:** Transparent background, `#0071E3` text with subtle chevron icon, underlined on hover.
 
-### Navigation Island
+### Chips & Badges
 
-- **Shape:** Pílula flutuante (`rounded-full`).
-- **Material:** Vidro fosco translúcido (`backdrop-blur-2xl bg-white/80 dark:bg-slate-900/80`).
-- **Interação:** Alternador de tema embutido (44x44px) e botão de ação direta.
+- **Clinical Category Pills:** Small capsules with `#F5F5F7` background, 1px border `#E5E5EA`, and `#1D1D1F` text. Active state switches to `#0071E3` background with crisp white text.
+- **Status Badges (Sterilization, Immediate Slot, Tech Specs):** Pill containers with `#EBF4F9` background, `#0059B5` text (4.7:1+ contrast), and an optional 6px pulsating dot indicator.
 
-### Cards / Bento Containers
+### Input Fields & Selectors
 
-- **Corner Style:** Curvatura generosa de 28px a 32px.
-- **Background:** Branco sólido ou ardósia 900 com borda translúcida sutil de 1px.
-- **Card Destaque:** Versão invertida em `#0071e3` com texto branco sólido para quebra de ritmo e ênfase visual.
+- **Text Inputs:** Pure White background, 1px border `#E5E5EA`, text in `#1D1D1F`, placeholder in `#59595E`. Minimum height: 48px with generous internal padding (12px 16px).
+- **Focus State:** 2px ring in `#0071E3` with zero default browser outline.
+- **Date & Time Slot Pickers:** Modular white tiles (`rounded-md`, 12px) with `#E5E5EA` border. Disabled slots are muted at 40% opacity with no hover. Selected slots invert to `#0071E3` background and Pure White text.
 
-## Do's and Don'ts
+### Cards & Bento Modules
 
-### Do:
+- **Standard Service Card:** Pure White `#FFFFFF` surface with 1px `#E5E5EA` border and 16px radius (`rounded-lg`). Clear visual hierarchy: procedure category label in `#59595E`, title in `#003366`, duration/specs, and an unobtrusive bottom action link.
+- **Featured Treatment Card:** High-tech variant utilizing a solid Deep Navy `#003366` background with Pure White `#FFFFFF` headings, `#59595E` muted descriptions, and an active `#0071E3` primary button to establish an immediate focal point.
 
-- **Do** manter todos os botões de ação em formato pílula (`rounded-full`) com altura de toque de no mínimo 44px.
-- **Do** utilizar contraste mínimo de 4.5:1 para textos em qualquer estado de cor ou tema.
-- **Do** utilizar alinhamento à esquerda e tipografia em escala clamp para manter a autoridade editorial.
-- **Do** preservar o script síncrono no `<head>` para evitar FOUC no modo escuro.
+### Doctor & Equipment Profile
 
-### Don't:
-
-- **Don't** introduzir cantos retos (sharp) ou bordas espessas (> 1px) em cards e contêineres.
-- **Don't** aplicar gradientes multicoloridos ou efeitos de neon; a saturação é exclusiva do Azul Safira.
-- **Don't** usar sombras duras sem difusão (`box-shadow: 4px 4px 0`).
-- **Don't** quebrar a navegação por teclado ou ocultar o link de salto (`skip link`).
+- **Clinical Bio Module:** Clean two-column or split Bento module pairing high-resolution imagery with structured metadata tags (specialty, CRM/registry, technological certifications) framed in low-contrast `#E5E5EA` containers.

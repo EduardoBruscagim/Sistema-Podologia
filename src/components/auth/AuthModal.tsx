@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import type { AuthModalTab } from '@/types/auth'
+import { X, User, AlertCircle } from 'lucide-react'
 
 export const AuthModal: React.FC = () => {
   const { isAuthModalOpen, authModalTab, setAuthModalTab, closeAuthModal, login, register } =
@@ -96,36 +97,39 @@ export const AuthModal: React.FC = () => {
       ref={dialogRef}
       onClose={closeAuthModal}
       aria-labelledby="auth-modal-title"
-      className="modal modal-bottom sm:modal-middle bg-slate-950/40 backdrop-blur-sm transition-all"
+      className="modal modal-bottom sm:modal-middle backdrop:backdrop-blur-sm"
     >
-      <div className="modal-box bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl shadow-slate-900/10 dark:shadow-black/50 relative">
+      <div className="modal-box bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
         {/* Botão Fechar com área de toque mínima de 44x44px */}
         <button
           type="button"
           onClick={closeAuthModal}
-          className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center absolute right-3 top-3 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue"
+          className="w-11 h-11 shrink-0 flex items-center justify-center absolute right-3 top-3 text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white rounded-full hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
           aria-label="Fechar formulário de autenticação"
         >
-          ✕
+          <X aria-hidden="true" className="w-6 h-6" />
         </button>
 
         <div className="text-center mb-6">
+          <div className="w-12 h-12 mx-auto rounded-2xl bg-clinical-teal-subtle dark:bg-slate-800 flex items-center justify-center text-primary mb-3">
+            <User aria-hidden="true" className="w-6 h-6" />
+          </div>
           <h3
             id="auth-modal-title"
-            className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50"
+            className="text-2xl font-bold tracking-tight text-on-surface dark:text-white"
           >
             Angélica Eduarda
           </h3>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium">
-            Podologia Especializada a Domicílio
+          <p className="text-xs text-text-secondary dark:text-slate-400 mt-1 font-normal">
+            Podologia Especializada a Domicílio em Mococa - SP
           </p>
         </div>
 
-        {/* Segmented Control / Tabs DaisyUI acessível */}
+        {/* Segmented Control / Tabs acessível */}
         <div
           role="tablist"
           aria-label="Opções de autenticação"
-          className="tabs tabs-box bg-slate-100 dark:bg-slate-800/90 p-1 rounded-full mb-6"
+          className="flex p-1 rounded-full bg-apple-gray dark:bg-slate-800 border border-surface-border dark:border-slate-700/60 mb-6"
         >
           <button
             ref={loginTabRef}
@@ -136,10 +140,10 @@ export const AuthModal: React.FC = () => {
             aria-selected={authModalTab === 'login'}
             aria-controls="auth-tabpanel-login"
             onKeyDown={(e) => handleKeyDownTab(e, 'login')}
-            className={`tab flex-1 rounded-full text-sm font-semibold transition-all min-h-[40px] focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue ${
+            className={`flex-1 rounded-full text-xs sm:text-sm font-semibold transition-all min-h-[40px] flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary ${
               authModalTab === 'login'
-                ? 'tab-active bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 shadow-sm'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'bg-white dark:bg-slate-900 text-on-surface dark:text-white shadow-xs'
+                : 'text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white'
             }`}
             onClick={() => handleTabChange('login')}
           >
@@ -154,10 +158,10 @@ export const AuthModal: React.FC = () => {
             aria-selected={authModalTab === 'register'}
             aria-controls="auth-tabpanel-register"
             onKeyDown={(e) => handleKeyDownTab(e, 'register')}
-            className={`tab flex-1 rounded-full text-sm font-semibold transition-all min-h-[40px] focus:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue ${
+            className={`flex-1 rounded-full text-xs sm:text-sm font-semibold transition-all min-h-[40px] flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary ${
               authModalTab === 'register'
-                ? 'tab-active bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 shadow-sm'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'bg-white dark:bg-slate-900 text-on-surface dark:text-white shadow-xs'
+                : 'text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white'
             }`}
             onClick={() => handleTabChange('register')}
           >
@@ -165,27 +169,14 @@ export const AuthModal: React.FC = () => {
           </button>
         </div>
 
-        {/* Alerta de erro DaisyUI */}
+        {/* Alerta de erro acessível */}
         {errorMessage && (
           <div
             role="alert"
             aria-live="assertive"
-            className="alert alert-error text-xs rounded-2xl py-2.5 px-4 mb-4 flex items-center gap-2"
+            className="text-xs rounded-2xl py-2.5 px-4 mb-4 flex items-center gap-2.5 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 font-medium"
           >
-            <svg
-              className="w-4 h-4 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
+            <AlertCircle aria-hidden="true" className="w-4 h-4 shrink-0" />
             <span>{errorMessage}</span>
           </div>
         )}
@@ -202,7 +193,7 @@ export const AuthModal: React.FC = () => {
             <div>
               <label
                 htmlFor="auth-login-email"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5 ml-1"
+                className="block text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-slate-400 mb-1.5 ml-1"
               >
                 E-mail
               </label>
@@ -214,14 +205,14 @@ export const AuthModal: React.FC = () => {
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="input input-bordered w-full rounded-full bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-apple-blue focus:outline-none text-sm px-4 h-12"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-12 transition-all"
               />
             </div>
 
             <div>
               <label
                 htmlFor="auth-login-password"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5 ml-1"
+                className="block text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-slate-400 mb-1.5 ml-1"
               >
                 Senha
               </label>
@@ -233,17 +224,20 @@ export const AuthModal: React.FC = () => {
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 placeholder="••••••••"
-                className="input input-bordered w-full rounded-full bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-apple-blue focus:outline-none text-sm px-4 h-12"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-12 transition-all"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="btn w-full rounded-full bg-apple-blue hover:bg-apple-blue-hover text-white border-none shadow-md shadow-apple-blue/20 active:scale-95 transition-all text-base font-medium h-12 mt-2 disabled:opacity-50"
+              className="w-full rounded-full bg-primary hover:bg-primary-hover text-on-primary text-sm sm:text-base font-semibold h-[46px] shadow-sm active:scale-[0.98] transition-[background-color,transform,box-shadow] flex items-center justify-center gap-2 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed mt-2"
             >
               {isLoading ? (
-                <span className="loading loading-spinner loading-sm" />
+                <div
+                  aria-label="Carregando..."
+                  className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
+                />
               ) : (
                 'Entrar na conta'
               )}
@@ -263,7 +257,7 @@ export const AuthModal: React.FC = () => {
             <div>
               <label
                 htmlFor="auth-register-name"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 ml-1"
+                className="block text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-slate-400 mb-1 ml-1"
               >
                 Nome Completo
               </label>
@@ -275,14 +269,14 @@ export const AuthModal: React.FC = () => {
                 value={registerName}
                 onChange={(e) => setRegisterName(e.target.value)}
                 placeholder="Ex: Maria Silva"
-                className="input input-bordered w-full rounded-full bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-apple-blue focus:outline-none text-sm px-4 h-11"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
               />
             </div>
 
             <div>
               <label
                 htmlFor="auth-register-email"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 ml-1"
+                className="block text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-slate-400 mb-1 ml-1"
               >
                 E-mail
               </label>
@@ -294,14 +288,14 @@ export const AuthModal: React.FC = () => {
                 value={registerEmail}
                 onChange={(e) => setRegisterEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="input input-bordered w-full rounded-full bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-apple-blue focus:outline-none text-sm px-4 h-11"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
               />
             </div>
 
             <div>
               <label
                 htmlFor="auth-register-phone"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 ml-1"
+                className="block text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-slate-400 mb-1 ml-1"
               >
                 WhatsApp / Telefone
               </label>
@@ -312,14 +306,14 @@ export const AuthModal: React.FC = () => {
                 value={registerPhone}
                 onChange={(e) => setRegisterPhone(e.target.value)}
                 placeholder="(11) 99999-9999"
-                className="input input-bordered w-full rounded-full bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-apple-blue focus:outline-none text-sm px-4 h-11"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
               />
             </div>
 
             <div>
               <label
                 htmlFor="auth-register-password"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1 ml-1"
+                className="block text-xs font-bold uppercase tracking-wider text-text-secondary dark:text-slate-400 mb-1 ml-1"
               >
                 Criar Senha (mín. 6 caracteres)
               </label>
@@ -332,17 +326,20 @@ export const AuthModal: React.FC = () => {
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
                 placeholder="••••••••"
-                className="input input-bordered w-full rounded-full bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-apple-blue focus:outline-none text-sm px-4 h-11"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="btn w-full rounded-full bg-apple-blue hover:bg-apple-blue-hover text-white border-none shadow-md shadow-apple-blue/20 active:scale-95 transition-all text-base font-medium h-12 mt-3 disabled:opacity-50"
+              className="w-full rounded-full bg-primary hover:bg-primary-hover text-on-primary text-sm sm:text-base font-semibold h-[46px] shadow-sm active:scale-[0.98] transition-[background-color,transform,box-shadow] flex items-center justify-center gap-2 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed mt-3"
             >
               {isLoading ? (
-                <span className="loading loading-spinner loading-sm" />
+                <div
+                  aria-label="Carregando..."
+                  className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
+                />
               ) : (
                 'Criar conta e continuar'
               )}
@@ -353,9 +350,7 @@ export const AuthModal: React.FC = () => {
 
       {/* Backdrop clicável */}
       <form method="dialog" className="modal-backdrop">
-        <button type="button" onClick={closeAuthModal} aria-label="Fechar modal de autenticação">
-          fechar
-        </button>
+        <button aria-label="Fechar modal de autenticação">fechar</button>
       </form>
     </dialog>
   )

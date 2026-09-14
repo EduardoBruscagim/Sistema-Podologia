@@ -1,17 +1,17 @@
 import React, { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { useAuth } from '@/hooks/useAuth'
 import { initCtaAnimation } from '@/animations/cta'
+import { applyReducedMotion } from '@/animations/reducedMotion'
 
 export const CtaSection: React.FC = () => {
   const ctaSectionRef = useRef<HTMLElement | null>(null)
-  const { isAuthenticated, openAuthModal } = useAuth()
-  const navigate = useNavigate()
 
   useGSAP(
     () => {
+      const el = ctaSectionRef.current
+      if (!el) return
+
       const mm = gsap.matchMedia()
       mm.add(
         {
@@ -21,14 +21,11 @@ export const CtaSection: React.FC = () => {
         (context) => {
           const { isMotionOk } = context.conditions!
           if (!isMotionOk) {
-            gsap.set('.cta-reveal', {
-              autoAlpha: 1,
-              clearProps: 'transform',
-            })
+            applyReducedMotion('.cta-reveal')
             return
           }
 
-          return initCtaAnimation()
+          return initCtaAnimation(el)
         },
       )
     },
@@ -36,39 +33,24 @@ export const CtaSection: React.FC = () => {
   )
 
   return (
-    <section
-      ref={ctaSectionRef}
-      className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-apple-blue/5 dark:bg-slate-950 text-slate-900 dark:text-white text-center relative overflow-hidden transition-colors duration-300"
-    >
-      {/* Glow sutil no fundo do CTA */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-apple-blue/10 dark:from-apple-blue/20 to-transparent pointer-events-none"
-        aria-hidden="true"
-      />
-      <div className="max-w-4xl mx-auto cta-reveal relative z-10 px-2 sm:px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-[5rem] font-bold tracking-tight mb-4 sm:mb-6 md:mb-8 leading-[1.05] text-balance">
+    <section ref={ctaSectionRef} className="max-w-4xl mx-auto px-6 py-16 text-center">
+      <div className="cta-reveal">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-on-surface dark:text-white tracking-tight leading-tight mb-5">
           Escolha o dia.
           <br />
           Eu chego até você.
         </h2>
-        <p className="text-base sm:text-lg md:text-2xl text-theme-muted font-medium max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-14 leading-relaxed sm:leading-snug text-balance">
+        <p className="text-sm sm:text-base text-on-surface-variant dark:text-slate-300 max-w-xl mx-auto leading-relaxed mb-8 font-normal">
           Atendimento domiciliar em toda a cidade de Mococa - SP sem taxa de deslocamento. Cuidado
           completo para seus pés e mãos com materiais esterilizados em autoclave e itens
           descartáveis.
         </p>
-        <button
-          type="button"
-          onClick={() => {
-            if (isAuthenticated) {
-              navigate('/dashboard')
-            } else {
-              openAuthModal('register')
-            }
-          }}
-          className="bg-apple-blue hover:bg-apple-blue-hover text-white text-base sm:text-lg md:text-xl font-medium px-8 py-3.5 sm:py-4 md:px-12 md:py-5 rounded-full transition-all active:scale-95 shadow-lg shadow-apple-blue/30 hover:shadow-xl hover:shadow-apple-blue/40 leading-tight w-full sm:w-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 focus-visible:ring-apple-blue disabled:opacity-50 disabled:cursor-not-allowed"
+        <a
+          className="inline-flex items-center justify-center min-h-11 px-8 rounded-full bg-primary text-on-primary text-sm sm:text-base font-semibold hover:bg-primary-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+          href="#procedimentos"
         >
           Agendar horário
-        </button>
+        </a>
       </div>
     </section>
   )

@@ -1,58 +1,99 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { initStatsAnimation } from '@/animations/stats'
+import { applyReducedMotion } from '@/animations/reducedMotion'
 
 export const TrustStats: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null)
+
+  useGSAP(
+    () => {
+      const el = sectionRef.current
+      if (!el) return
+
+      const mm = gsap.matchMedia()
+      mm.add(
+        {
+          isMotionOk: '(prefers-reduced-motion: no-preference)',
+          reduceMotion: '(prefers-reduced-motion: reduce)',
+        },
+        (context) => {
+          const { isMotionOk } = context.conditions!
+          if (!isMotionOk) {
+            applyReducedMotion('.stat-block')
+            return
+          }
+
+          return initStatsAnimation(el)
+        },
+      )
+    },
+    { scope: sectionRef },
+  )
+
   return (
-    <section className="px-4 sm:px-6 pb-12 sm:pb-16 max-w-6xl mx-auto w-full">
-      <div className="stats stats-vertical lg:stats-horizontal shadow-sm bg-white/70 dark:bg-slate-900/60 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-3xl w-full p-2 transition-colors duration-300">
-        <div className="stat place-items-center py-6 px-4">
-          <div className="stat-title text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-            Experiência Clínica
-          </div>
-          <div className="stat-value text-3xl sm:text-4xl text-slate-900 dark:text-slate-50 tracking-tight font-bold my-1">
+    <section
+      ref={sectionRef}
+      aria-label="Estatísticas e Credenciais"
+      className="max-w-6xl mx-auto px-6 py-4 mb-14"
+    >
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-7 rounded-3xl bg-white dark:bg-slate-900/90 border border-surface-border dark:border-slate-800 shadow-2xs">
+        {/* Bloco 1 */}
+        <div className="stat-block flex flex-col p-3 border-b lg:border-b-0 border-r border-surface-border dark:border-slate-800 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+          <span className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
+            EXPERIÊNCIA CLÍNICA
+          </span>
+          <span className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight">
             Desde 2016
-          </div>
-          <div className="stat-desc text-slate-500 dark:text-slate-400 font-medium">
+          </span>
+          <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
             10 anos de dedicação à saúde dos pés
-          </div>
+          </span>
         </div>
 
-        <div className="stat place-items-center py-6 px-4">
-          <div className="stat-title text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-            Total de Atendimentos
-          </div>
-          <div className="stat-value text-3xl sm:text-4xl text-apple-blue tracking-tight font-bold my-1">
+        {/* Bloco 2 */}
+        <div className="stat-block flex flex-col p-3 border-b lg:border-b-0 lg:border-r border-surface-border dark:border-slate-800 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+          <span className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
+            TOTAL DE ATENDIMENTOS
+          </span>
+          <span className="text-3xl lg:text-4xl font-bold text-primary tracking-tight">
             +20.000
-          </div>
-          <div className="stat-desc text-slate-500 dark:text-slate-400 font-medium">
+          </span>
+          <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
             Média de 10+ pacientes ao dia
-          </div>
+          </span>
         </div>
 
-        <div className="stat place-items-center py-6 px-4">
-          <div className="stat-title text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-            Biossegurança
-          </div>
-          <div className="stat-value text-3xl sm:text-4xl text-slate-900 dark:text-slate-50 tracking-tight font-bold my-1">
+        {/* Bloco 3 */}
+        <div className="stat-block flex flex-col p-3 border-r border-surface-border dark:border-slate-800 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+          <span className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
+            BIOSSEGURANÇA
+          </span>
+          <span className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight">
             100%
-          </div>
-          <div className="stat-desc text-slate-500 dark:text-slate-400 font-medium">
+          </span>
+          <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
             Autoclave e descartáveis individuais
-          </div>
+          </span>
         </div>
 
-        <div className="stat place-items-center py-6 px-4">
-          <div className="stat-title text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-            Satisfação
-          </div>
-          <div className="stat-value text-3xl sm:text-4xl text-amber-700 dark:text-amber-400 tracking-tight font-bold my-1 flex items-center gap-1">
-            <span>5.0</span>
-            <span className="text-2xl text-amber-600 dark:text-amber-400" aria-hidden="true">
+        {/* Bloco 4 */}
+        <div className="stat-block flex flex-col p-3 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+          <span className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
+            SATISFAÇÃO
+          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight">
+              5.0
+            </span>
+            <span aria-hidden="true" className="text-amber-500 text-2xl font-bold">
               ★
             </span>
           </div>
-          <div className="stat-desc text-slate-500 dark:text-slate-400 font-medium">
+          <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
             Excelência aprovada pelos pacientes
-          </div>
+          </span>
         </div>
       </div>
     </section>
