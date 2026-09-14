@@ -1,5 +1,5 @@
 /**
- * Número oficial de WhatsApp para atendimento em domicílio de Angélica Eduarda (Mococa/SP):
+ * Número oficial de WhatsApp para dúvidas e emergências com Angélica Eduarda (Mococa/SP):
  * 55 19 99544-3922 -> '5519995443922'
  * Pode ser customizado via variável de ambiente VITE_WHATSAPP_NUMBER.
  */
@@ -8,7 +8,7 @@ const rawEnvNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined
 export const WHATSAPP_NUMBER = rawEnvNumber ? rawEnvNumber.replace(/\D/g, '') : '5519995443922'
 
 export const WHATSAPP_DEFAULT_MESSAGE =
-  'Olá, Angélica! Sou de Mococa e gostaria de agendar um atendimento de pé e mão em domicílio.'
+  'Olá, Angélica! Gostaria de tirar uma dúvida sobre os atendimentos em domicílio em Mococa.'
 
 export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`

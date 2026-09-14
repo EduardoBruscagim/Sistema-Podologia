@@ -1,18 +1,18 @@
 # Angélica Eduarda | Cuidado para Pés e Mãos em Domicílio
 
-> **Atendimento domiciliar especializado em Mococa - SP.**  
-> Interface moderna com design elegante, sem taxa de deslocamento e com foco em cuidado humanizado, esterilização em autoclave e acessibilidade WCAG.
+> **Atendimento domiciliar em Mococa, SP.**  
+> Interface moderna, sem taxa de deslocamento, com foco em cuidado com os pés e mãos, instrumentos esterilizados e acessibilidade WCAG.
 
 ---
 
 ## 🎯 Sobre o Projeto
 
-O **Sistema de Podologia & Cuidados (Angélica Eduarda)** é uma aplicação web voltada ao atendimento domiciliar humanizado e com alto padrão de higiene na cidade de **Mococa - SP**. A plataforma apresenta com clareza os serviços prestados (cuidado completo de pés e mãos, corte anatômico, desencravamento preventivo e suave, cutilagem, lixamento e pintura/esmaltação), esclarece os protocolos de biossegurança (esterilização em autoclave e descartáveis) e facilita o contato direto para agendamento via WhatsApp sem custos de deslocamento.
+O **Sistema de Podologia & Cuidados (Angélica Eduarda)** é uma aplicação web voltada ao atendimento domiciliar e com alto padrão de higiene na cidade de **Mococa, SP**. A plataforma apresenta com clareza os serviços prestados (cuidado completo de pés e mãos, corte anatômico, desencravamento preventivo e suave, cutilagem, lixamento e pintura/esmaltação), esclarece os cuidados com instrumentos esterilizados e descartáveis, e facilita o contato direto para agendamento via WhatsApp sem custos de deslocamento.
 
 Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
-- 📄 [PRODUCT.md](PRODUCT.md) — Visão de produto, público-alvo e capacidades planejadas.
-- 🎨 [DESIGN.md](DESIGN.md) — Design System "O Santuário Clínico Minimalista", paleta cromática, tokens e tipografia.
+- 📄 [PRODUCT.md](PRODUCT.md): Visão de produto, público-alvo e capacidades planejadas.
+- 🎨 [DESIGN.md](DESIGN.md): Design System, paleta cromática, tokens e tipografia.
 
 ---
 
@@ -20,12 +20,12 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 ### Fase 1 (Entregue):
 
-- **Landing Page B2C de Alta Conversão**: Apresentação clara do serviço em domicílio em Mococa - SP, diferenciais em Bento Grid, métricas de credibilidade e FAQ detalhado.
-- **Métricas e Credenciais de Confiança (`TrustStats`)**: Destaque para experiência clínica sólida (desde 2016 / 10 anos de atuação), contadores dinâmicos (+5.000 atendimentos realizados) e compromisso com 100% de esterilização hospitalar.
-- **Tecnologia & Biossegurança Portátil (`TechnologySection`)**: Apresentação de tratamentos modernos em domicílio — fototerapia terapêutica (luz vermelha), ozonioterapia podológica (alta frequência) e autoclave digital com descartáveis selados.
-- **Tabela Transparente de Serviços**: Detalhamento dos 3 principais atendimentos (_Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_), tempo estimado e diferenciais inclusos.
-- **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e links inteligentes com mensagens pré-formatadas para agendamento rápido sem intermediários.
-- **Transparência Geográfica e Comercial**: Cobertura em toda a cidade de Mococa - SP com taxa de deslocamento zero (R$ 0) e pagamentos exclusivos via PIX ou dinheiro vivo.
+- **Landing Page B2C**: Apresentação clara do serviço em domicílio em Mococa, SP, diferenciais em Bento Grid, métricas de credibilidade e FAQ detalhado.
+- **Métricas e Credenciais de Confiança (`TrustStats`)**: Experiência comprovada desde 2016 e mais de 25.000 atendimentos realizados por uma única especialista.
+- **Equipamentos e Higiene (`TechnologySection`)**: Apresentação dos aparelhos portáteis levados no atendimento (luz vermelha terapêutica, cabine UV) e instrumentos esterilizados com materiais descartáveis.
+- **Tabela Transparente de Serviços**: Detalhamento dos 3 principais atendimentos (_Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_), tempo estimado, diferenciais inclusos e agendamento pelo painel do site.
+- **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e links para tirar dúvidas ou contato de emergência sem intermediários.
+- **Transparência Geográfica e Comercial**: Cobertura em toda a cidade de Mococa, SP com taxa de deslocamento zero (R$ 0) e pagamentos via PIX ou em dinheiro.
 - **Accordion Interativo de FAQ com GSAP**: Expansão fluida com cálculo dinâmico de altura (`height: 'auto'`), teclado navegável e total acessibilidade WAI-ARIA.
 - **Micro-interações e Animações GSAP**: Módulos dedicados com suporte nativo a `prefers-reduced-motion`, efeito `cardHover.ts` com `quickTo` e orquestração de ScrollTrigger em todas as seções.
 - **Modo Claro / Escuro com Anti-FOUC**: Alternador de tema acessível com persistência em `localStorage` e script síncrono no `<head>`.

@@ -127,7 +127,7 @@ export const AuthModal: React.FC = () => {
             Angélica Eduarda
           </h3>
           <p className="text-xs text-text-secondary dark:text-slate-400 mt-1 font-normal">
-            Podologia Especializada a Domicílio em Mococa - SP
+            Podologia e Manicure em Domicílio em Mococa, SP
           </p>
         </div>
 
@@ -208,13 +208,14 @@ export const AuthModal: React.FC = () => {
                 id="auth-login-email"
                 type="email"
                 required
+                spellCheck={false}
                 autoComplete="email"
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
                 placeholder="seu@email.com"
                 aria-invalid={Boolean(errorMessage)}
                 aria-describedby={errorMessage ? 'auth-error-message' : undefined}
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-12 transition-all"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary dark:placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-12 transition-all"
               />
             </div>
 
@@ -235,7 +236,7 @@ export const AuthModal: React.FC = () => {
                 placeholder="••••••••"
                 aria-invalid={Boolean(errorMessage)}
                 aria-describedby={errorMessage ? 'auth-error-message' : undefined}
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-12 transition-all"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary dark:placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-12 transition-all"
               />
             </div>
 
@@ -284,7 +285,7 @@ export const AuthModal: React.FC = () => {
                 placeholder="Ex: Maria Silva"
                 aria-invalid={Boolean(errorMessage)}
                 aria-describedby={errorMessage ? 'auth-error-message' : undefined}
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary dark:placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 
@@ -299,13 +300,14 @@ export const AuthModal: React.FC = () => {
                 id="auth-register-email"
                 type="email"
                 required
+                spellCheck={false}
                 autoComplete="email"
                 value={registerEmail}
                 onChange={(e) => setRegisterEmail(e.target.value)}
                 placeholder="seu@email.com"
                 aria-invalid={Boolean(errorMessage)}
                 aria-describedby={errorMessage ? 'auth-error-message' : undefined}
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary dark:placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 
@@ -319,13 +321,14 @@ export const AuthModal: React.FC = () => {
               <input
                 id="auth-register-phone"
                 type="tel"
+                inputMode="tel"
                 autoComplete="tel"
                 value={registerPhone}
                 onChange={(e) => setRegisterPhone(e.target.value)}
                 placeholder="(11) 99999-9999"
                 aria-invalid={Boolean(errorMessage)}
                 aria-describedby={errorMessage ? 'auth-error-message' : undefined}
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary dark:placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 
@@ -347,7 +350,7 @@ export const AuthModal: React.FC = () => {
                 placeholder="••••••••"
                 aria-invalid={Boolean(errorMessage)}
                 aria-describedby={errorMessage ? 'auth-error-message' : undefined}
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary dark:placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 

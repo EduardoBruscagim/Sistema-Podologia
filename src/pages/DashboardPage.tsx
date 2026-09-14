@@ -11,7 +11,7 @@ import {
   Calendar,
   Sparkles,
   ShieldCheck,
-  CalendarPlus,
+  MessageSquare,
 } from 'lucide-react'
 
 export const DashboardPage: React.FC = () => {
@@ -97,10 +97,8 @@ export const DashboardPage: React.FC = () => {
               className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5 sm:mt-0"
             />
             <p className="text-xs sm:text-sm font-medium leading-relaxed">
-              <strong className="font-semibold">
-                Ambiente de Demonstração (Fase 1 — Mock do Painel do Paciente).
-              </strong>{' '}
-              O agendamento online integrado estará disponível na Fase 2.
+              <strong className="font-semibold">Ambiente de demonstração do painel.</strong> Em
+              breve você poderá acompanhar seus atendimentos e agendar visitas diretamente por aqui.
             </p>
           </div>
           {!user && (
@@ -128,12 +126,12 @@ export const DashboardPage: React.FC = () => {
               <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-on-surface dark:text-white">
                 Olá, {user?.name || 'Paciente'}
               </h1>
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-bold text-clinical-blue dark:text-sky-400 tracking-wider uppercase">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-semibold text-clinical-blue dark:text-sky-400">
                 {user?.role === 'admin' ? 'Administrador' : user ? 'Paciente' : 'Demonstração'}
               </span>
             </div>
             <p className="text-on-surface-variant dark:text-slate-300 text-sm sm:text-base font-normal">
-              Gerencie seus agendamentos e histórico de cuidados para pés e mãos em Mococa - SP.
+              Gerencie seus agendamentos e histórico de cuidados para pés e mãos em Mococa, SP.
             </p>
           </div>
 
@@ -154,7 +152,7 @@ export const DashboardPage: React.FC = () => {
               <div className="w-11 h-11 rounded-2xl bg-clinical-teal-subtle dark:bg-slate-800 flex items-center justify-center text-primary mb-4">
                 <Calendar aria-hidden="true" className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-text-secondary dark:text-slate-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-semibold text-text-secondary dark:text-slate-400 block mb-1">
                 Próxima Visita
               </span>
               <div className="text-2xl sm:text-3xl font-bold text-on-surface dark:text-white tracking-tight">
@@ -172,10 +170,12 @@ export const DashboardPage: React.FC = () => {
               <div className="w-11 h-11 rounded-2xl bg-clinical-teal-subtle dark:bg-slate-800 flex items-center justify-center text-primary mb-4">
                 <Sparkles aria-hidden="true" className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-text-secondary dark:text-slate-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-semibold text-text-secondary dark:text-slate-400 block mb-1">
                 Atendimentos Realizados
               </span>
-              <div className="text-2xl sm:text-3xl font-bold text-primary tracking-tight">0</div>
+              <div className="text-2xl sm:text-3xl font-bold text-primary tracking-tight tabular-nums">
+                0
+              </div>
             </div>
             <div className="mt-4 pt-3 border-t border-surface-border dark:border-slate-800 text-xs text-on-surface-variant dark:text-slate-400 font-normal">
               Histórico completo registrado no sistema.
@@ -188,7 +188,7 @@ export const DashboardPage: React.FC = () => {
               <div className="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4">
                 <ShieldCheck aria-hidden="true" className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-text-secondary dark:text-slate-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-semibold text-text-secondary dark:text-slate-400 block mb-1">
                 Status do Cadastro
               </span>
               <div className="text-2xl sm:text-3xl font-bold text-emerald-600 dark:text-emerald-400 tracking-tight">
@@ -204,33 +204,33 @@ export const DashboardPage: React.FC = () => {
         {/* Card Informativo Alinhado ao Bento Grid */}
         <div className="p-5 sm:p-7 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-bold text-clinical-blue dark:text-sky-400 tracking-wider uppercase mb-3">
-              ATENDIMENTO DOMICILIAR EM MOCOCA - SP
+            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-semibold text-clinical-blue dark:text-sky-400 mb-3">
+              Atendimento domiciliar em Mococa, SP
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-on-surface dark:text-white tracking-tight mb-2">
-              Precisa de um atendimento para seus pés e mãos?
+              Dúvidas ou urgências sobre seu atendimento?
             </h2>
             <p className="text-on-surface-variant dark:text-slate-300 text-sm sm:text-base leading-relaxed font-normal mb-6">
-              Atendimento em qualquer bairro de Mococa sem cobrança de taxa de deslocamento.
-              Alicates e instrumentos esterilizados em autoclave e descartáveis individuais abertos
-              na sua presença.
+              Em breve todos os seus agendamentos serão gerenciados diretamente por este painel. Se
+              precisar tirar dúvidas pontuais ou resolver alguma emergência, entre em contato pelo
+              WhatsApp.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href={getWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Agendar pelo WhatsApp (abre em uma nova aba)"
-                className="inline-flex items-center justify-center gap-2 min-h-[44px] px-6 rounded-full bg-primary hover:bg-primary-hover text-white text-sm font-semibold shadow-sm active:scale-[0.98] transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
+                className="inline-flex items-center justify-center gap-2 min-h-[44px] px-6 rounded-full bg-whatsapp hover:bg-whatsapp-hover text-white text-sm font-semibold shadow-sm active:scale-[0.98] transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-whatsapp"
               >
-                <CalendarPlus aria-hidden="true" className="w-4 h-4" />
-                <span>Agendar pelo WhatsApp</span>
+                <MessageSquare aria-hidden="true" className="w-4 h-4" />
+                <span>Tirar dúvidas no WhatsApp</span>
               </a>
               <Link
                 to="/#procedimentos"
                 className="inline-flex items-center justify-center min-h-[44px] px-6 rounded-full bg-white dark:bg-slate-800 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white text-sm font-semibold hover:bg-apple-gray dark:hover:bg-slate-700 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
               >
-                Conhecer Serviços
+                Ver procedimentos e valores
               </Link>
             </div>
           </div>
