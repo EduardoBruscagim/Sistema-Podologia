@@ -204,7 +204,7 @@ export const Navbar: React.FC = () => {
             href={getWhatsAppUrl()}
             rel="noopener noreferrer"
             target="_blank"
-            aria-label="Conversar pelo WhatsApp (abre em uma nova aba)"
+            aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
           >
             WhatsApp
           </a>
@@ -271,10 +271,10 @@ export const Navbar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              aria-label="Conversar pelo WhatsApp (abre em uma nova aba)"
+              aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
               className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500"
             >
-              <span>WhatsApp</span>
+              <span>Dúvidas no WhatsApp</span>
               <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
             </a>
           </div>

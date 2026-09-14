@@ -36,6 +36,18 @@
     'Outfit', 'Outfit Variable', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
+:where(.dark, .dark *) {
+  --color-surface: #0b0f17;
+  --color-surface-variant: #1e293b;
+  --color-on-surface: #f1f5f9;
+  --color-on-surface-variant: #cbd5e1;
+  --color-surface-border: #1e293b;
+  --color-surface-border-subtle: #334155;
+  --color-clinical-teal-subtle: #0f172a;
+  --color-text-secondary: #94a3b8;
+  --color-clinical-blue: #38bdf8;
+}
+
 @layer base {
   html {
     scroll-padding-top: 6rem;
