@@ -1,32 +1,19 @@
-# RTK - Rust Token Killer (Google Antigravity)
+---
+trigger: always_on
+---
 
-**Usage**: Token-optimized CLI proxy for shell commands.
+# RTK - Rust Token Killer
 
-## Rule
-
-Always prefix shell commands with `rtk` to minimize token consumption.
+Always prefix terminal/shell commands with `rtk` to minimize token consumption.
 
 Examples:
-
-```bash
-rtk git status
-rtk cargo test
-rtk ls src/
-rtk grep "pattern" src/
-rtk find "*.rs" .
-rtk docker ps
-rtk gh pr list
-```
-
-## Meta Commands
-
-```bash
-rtk gain              # Show token savings
-rtk gain --history    # Command history with savings
-rtk discover          # Find missed RTK opportunities
-rtk proxy <cmd>       # Run raw (no filtering, for debugging)
-```
-
-## Why
-
-RTK filters and compresses command output before it reaches the LLM context, cutting up to 90% of the bash output on common operations. Always use `rtk <cmd>` instead of raw commands.
+- `rtk git status`
+- `rtk git diff`
+- `rtk git log -n 5`
+- `rtk git add .`
+- `rtk git commit -m "..."`
+- `rtk npm test`
+- `rtk npm run check`
+- `rtk cargo test`
+- `rtk find ...`
+- `rtk grep ...`
