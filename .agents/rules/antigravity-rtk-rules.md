@@ -7,6 +7,7 @@ trigger: always_on
 Always prefix terminal/shell commands with `rtk` to minimize token consumption.
 
 Examples:
+
 - `rtk git status`
 - `rtk git diff`
 - `rtk git log -n 5`
