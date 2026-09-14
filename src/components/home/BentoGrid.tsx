@@ -46,9 +46,9 @@ export const BentoGrid: React.FC = () => {
           id="bento-heading"
           className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight leading-tight"
         >
-          Feito para se encaixar
+          Como funciona a visita
           <br />
-          na sua rotina.
+          na sua casa.
         </h2>
       </div>
 
@@ -60,20 +60,20 @@ export const BentoGrid: React.FC = () => {
               <Home aria-hidden="true" className="w-6 h-6" />
             </div>
             <span className="text-xs font-semibold text-primary dark:text-sky-300 block mb-1.5">
-              Atendimento Domiciliar
+              Na sua casa
             </span>
             <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-2.5">
-              No conforto do seu lar
+              Tudo pronto na sua sala ou quarto
             </h3>
             <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-              Cuidado completo para pés e mãos sem você precisar sair de casa, enfrentar trânsito ou
-              esperar em salas de espera.
+              Levo os equipamentos, instrumentais esterilizados e materiais descartáveis. Você só
+              precisa escolher um sofá ou poltrona confortável.
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-surface-border dark:border-slate-800 flex items-center justify-between text-xs text-text-secondary dark:text-slate-400 font-medium">
             <span className="flex items-center gap-1.5">
               <Check aria-hidden="true" className="w-4 h-4 text-primary dark:text-sky-300" />
-              <span>Máxima comodidade</span>
+              <span>Sem fila ou sala de espera</span>
             </span>
           </div>
         </div>
@@ -85,20 +85,20 @@ export const BentoGrid: React.FC = () => {
               <MapPin aria-hidden="true" className="w-6 h-6" />
             </div>
             <span className="text-xs font-semibold text-primary dark:text-sky-300 block mb-1.5">
-              Toda Mococa - SP
+              Mococa, SP
             </span>
             <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-2.5">
-              Sem taxa de deslocamento
+              Preço único sem taxa de visita
             </h3>
             <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-              Atendimento em qualquer bairro de Mococa sem acréscimo de custo de transporte. O valor
-              é transparente e sem cobranças extras.
+              Atendo em qualquer bairro de Mococa sem cobrar acréscimo de deslocamento. O valor do
+              procedimento é o preço final.
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-surface-border dark:border-slate-800 flex items-center justify-between text-xs text-text-secondary dark:text-slate-400 font-medium">
             <span className="flex items-center gap-1.5">
               <Check aria-hidden="true" className="w-4 h-4 text-primary dark:text-sky-300" />
-              <span>Sem custos ocultos</span>
+              <span>Sem surpresas no valor</span>
             </span>
           </div>
         </div>
@@ -110,20 +110,20 @@ export const BentoGrid: React.FC = () => {
               <Clock aria-hidden="true" className="w-6 h-6" />
             </div>
             <span className="text-xs font-semibold text-primary dark:text-sky-300 block mb-1.5">
-              Horário Marcado
+              Horário reservado
             </span>
             <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-2.5">
-              Pontualidade e flexibilidade
+              Tempo dedicado a você
             </h3>
             <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-              Agendamento adaptável à sua rotina com horário reservado exclusivamente para você,
-              garantindo atenção calma e sem pressa.
+              A sessão é agendada com calma para realizar o procedimento no seu tempo, com cuidado e
+              sem correria.
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-surface-border dark:border-slate-800 flex items-center justify-between text-xs text-text-secondary dark:text-slate-400 font-medium">
             <span className="flex items-center gap-1.5">
               <Check aria-hidden="true" className="w-4 h-4 text-primary dark:text-sky-300" />
-              <span>Atendimento com hora certa</span>
+              <span>Pontualidade no horário marcado</span>
             </span>
           </div>
         </div>

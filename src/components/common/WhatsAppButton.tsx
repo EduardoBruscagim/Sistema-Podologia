@@ -4,15 +4,15 @@ import { getWhatsAppUrl } from '@/utils/whatsapp'
 export const WhatsAppButton: React.FC = () => {
   return (
     <aside
-      aria-label="Canal direto de atendimento via WhatsApp"
+      aria-label="Canal para tirar dúvidas ou emergências pelo WhatsApp"
       className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-40"
     >
       <a
         href={getWhatsAppUrl()}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Conversar com Angélica Eduarda pelo WhatsApp (abre em uma nova aba)"
-        className="group flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1eb857] text-white px-4 py-3 sm:px-5 sm:py-3.5 rounded-full shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40 transition-[transform,box-shadow,background-color] active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#25D366] min-h-[48px] min-w-[48px]"
+        aria-label="Tirar dúvidas com Angélica Eduarda pelo WhatsApp (abre em uma nova aba)"
+        className="group flex items-center gap-2.5 bg-whatsapp hover:bg-whatsapp-hover text-white px-4 py-3 sm:px-5 sm:py-3.5 rounded-full shadow-lg shadow-whatsapp/30 hover:shadow-xl hover:shadow-whatsapp/40 transition-[transform,box-shadow,background-color] active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-whatsapp min-h-[48px] min-w-[48px]"
       >
         {/* Ícone oficial do WhatsApp */}
         <svg

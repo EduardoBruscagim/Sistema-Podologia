@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { initStatsAnimation } from '@/animations/stats'
 import { applyReducedMotion } from '@/animations/reducedMotion'
+import { initStatsAnimation } from '@/animations/stats'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import React, { useRef } from 'react'
 
 export const TrustStats: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
@@ -43,74 +43,36 @@ export const TrustStats: React.FC = () => {
       <h2 id="trust-stats-heading" className="sr-only">
         Estatísticas e Credenciais
       </h2>
-      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 sm:p-6 rounded-3xl bg-white dark:bg-slate-900/90 border border-surface-border dark:border-slate-800 shadow-2xs">
+      <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 sm:p-6 rounded-3xl bg-white dark:bg-slate-900/90 border border-surface-border dark:border-slate-800 shadow-2xs">
         {/* Bloco 1 */}
-        <div className="stat-block flex flex-col p-3 border-b lg:border-b-0 border-r border-surface-border dark:border-slate-800 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-          <dt className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
-            EXPERIÊNCIA CLÍNICA
+        <div className="stat-block flex flex-col p-4 border-b sm:border-b-0 sm:border-r border-surface-border dark:border-slate-800 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+          <dt className="text-xs font-semibold text-text-secondary dark:text-slate-400 mb-1">
+            Experiência
           </dt>
           <dd className="m-0 flex flex-col">
-            <span className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight">
+            <span className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight tabular-nums">
               Desde 2016
             </span>
             <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
-              10 anos de dedicação à saúde dos pés
+              Atendendo em Mococa
             </span>
           </dd>
         </div>
 
         {/* Bloco 2 */}
-        <div className="stat-block flex flex-col p-3 border-b lg:border-b-0 lg:border-r border-surface-border dark:border-slate-800 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-          <dt className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
-            TOTAL DE ATENDIMENTOS
+        <div className="stat-block flex flex-col p-4 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
+          <dt className="text-xs font-semibold text-text-secondary dark:text-slate-400 mb-1">
+            Atendimentos
           </dt>
           <dd className="m-0 flex flex-col">
             <span
-              className="text-3xl lg:text-4xl font-bold text-primary dark:text-sky-300 tracking-tight"
-              aria-label="+3.500 Atendimentos"
+              className="text-3xl lg:text-4xl font-bold text-primary dark:text-sky-300 tracking-tight tabular-nums"
+              aria-label="Mais de 25.000 atendimentos"
             >
-              +3.500
+              +25.000
             </span>
             <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
-              Cuidado dedicado e exclusivo com hora marcada
-            </span>
-          </dd>
-        </div>
-
-        {/* Bloco 3 */}
-        <div className="stat-block flex flex-col p-3 border-r border-surface-border dark:border-slate-800 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-          <dt className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
-            BIOSSEGURANÇA
-          </dt>
-          <dd className="m-0 flex flex-col">
-            <span className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight">
-              100%
-            </span>
-            <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
-              Autoclave e descartáveis individuais
-            </span>
-          </dd>
-        </div>
-
-        {/* Bloco 4 */}
-        <div
-          className="stat-block flex flex-col p-3 last:border-0 rounded-2xl transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/40"
-          aria-label="Avaliação 5.0 de 5 estrelas"
-        >
-          <dt className="text-xs font-bold text-text-secondary dark:text-slate-400 tracking-wider uppercase mb-1">
-            SATISFAÇÃO
-          </dt>
-          <dd className="m-0 flex flex-col">
-            <div className="flex items-center gap-1.5" aria-label="Avaliação 5.0 de 5 estrelas">
-              <span className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight">
-                5.0
-              </span>
-              <span aria-hidden="true" className="text-amber-500 text-2xl font-bold">
-                ★
-              </span>
-            </div>
-            <span className="text-xs text-on-surface-variant dark:text-slate-400 mt-1 font-normal">
-              Excelência aprovada pelos pacientes
+              Realizados com a dedicação de uma única especialista
             </span>
           </dd>
         </div>

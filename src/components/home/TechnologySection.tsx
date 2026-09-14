@@ -43,18 +43,18 @@ export const TechnologySection: React.FC = () => {
       id="tecnologia"
     >
       <div className="tech-header text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-bold text-clinical-blue dark:text-sky-400 tracking-wider uppercase mb-3">
-          TECNOLOGIA PORTÁTIL
+        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-semibold text-clinical-blue dark:text-sky-400 mb-3">
+          Equipamentos portáteis
         </div>
         <h2
           id="technology-heading"
-          className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight mb-4"
+          className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight mb-4 text-balance"
         >
-          Tecnologia e Segurança no Atendimento
+          Recursos que acompanham o atendimento
         </h2>
         <p className="text-sm sm:text-base text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-          Equipamentos modernos e protocolos clínicos de alta precisão levados diretamente até sua
-          residência.
+          Aparelhos práticos que levo na maleta para cuidar da saúde, da cicatrização e do
+          acabamento das suas unhas.
         </p>
       </div>
 
@@ -66,19 +66,19 @@ export const TechnologySection: React.FC = () => {
               <Sparkles aria-hidden="true" className="w-6 h-6" />
             </div>
             <span className="text-xs font-semibold text-primary dark:text-sky-300 block mb-1.5">
-              Fototerapia Terapêutica
+              Fototerapia LED
             </span>
             <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-2.5">
-              Luz Vermelha (LED Terapêutico)
+              Luz vermelha terapêutica
             </h3>
             <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-              Ajuda a reduzir inflamações, estimula a regeneração celular acelerando a cicatrização
-              e alivia o incômodo na hora.
+              Auxilia na recuperação celular, alivia incômodos imediatos e acelera a cicatrização de
+              cantos de unhas inflamados ou sensíveis.
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-surface-border dark:border-slate-800 flex items-center justify-between text-xs text-on-surface-variant dark:text-slate-300 font-medium">
             <span className="px-3 py-1 rounded-full bg-primary/10 dark:bg-primary/15 text-clinical-blue dark:text-sky-400 text-xs font-semibold">
-              Ação anti-inflamatória e regenerativa
+              Alívio e cicatrização
             </span>
           </div>
         </div>
@@ -90,25 +90,25 @@ export const TechnologySection: React.FC = () => {
               <Zap aria-hidden="true" className="w-6 h-6" />
             </div>
             <span className="text-xs font-semibold text-primary dark:text-sky-300 block mb-1.5">
-              Ação Esterilizante e Fotoativa
+              Secagem e higiene
             </span>
             <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-2.5">
-              Luz Ultravioleta / Violeta
+              Cabine de luz ultravioleta
             </h3>
             <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-              Ação antimicrobiana eficaz contra fungos e bactérias, além de assegurar a secagem
-              rápida e fixação duradoura da esmaltação.
+              Acelera a secagem do esmalte para evitar borrões na hora de calçar o sapato e tem ação
+              auxiliar contra fungos e bactérias.
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-surface-border dark:border-slate-800 flex items-center justify-between text-xs text-on-surface-variant dark:text-slate-300 font-medium">
             <span className="px-3 py-1 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 text-clinical-blue dark:text-sky-400 text-xs font-semibold">
-              Proteção bactericida e antimicótica
+              Secagem rápida e proteção
             </span>
           </div>
         </div>
       </div>
 
-      {/* Card Destacado: Biossegurança Padrão Hospitalar */}
+      {/* Card Destacado: Esterilização e Higiene */}
       <div className="tech-featured p-5 sm:p-7 lg:p-8 rounded-3xl bg-primary text-white shadow-md hover:shadow-lg transition-shadow duration-300">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
           <div className="flex items-start md:items-center gap-4">
@@ -116,23 +116,23 @@ export const TechnologySection: React.FC = () => {
               <ShieldCheck aria-hidden="true" className="w-8 h-8" />
             </div>
             <div>
-              <span className="text-xs font-bold text-white uppercase tracking-wider block mb-1">
-                Biossegurança Padrão Hospitalar
+              <span className="text-xs font-semibold text-white tracking-wide block mb-1">
+                Higiene e esterilização
               </span>
               <h3 className="text-xl font-bold text-white mb-1.5">
-                Protocolo rigoroso de higienização e esterilização
+                Instrumentos esterilizados e materiais descartáveis
               </h3>
               <p className="text-sm text-white leading-relaxed font-normal max-w-2xl">
-                Todos os alicates e espátulas de aço passam por ciclo completo em autoclave e são
-                embalados em envelopes com indicador químico, abertos na sua frente com luvas,
-                toalhas e lixas 100% descartáveis.
+                Todos os alicates e espátulas de aço são higienizados e esterilizados. Cada conjunto
+                vem lacrado em embalagem individual e é aberto na sua frente. Luvas, lixas e toalhas
+                são de uso único e descartadas após o procedimento.
               </p>
             </div>
           </div>
           <div className="shrink-0 pt-2 md:pt-0">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/20 text-xs font-semibold text-white">
               <Shield aria-hidden="true" className="w-4 h-4" />
-              <span>100% Descartáveis &amp; Autoclave</span>
+              <span>Materiais esterilizados e descartáveis</span>
             </span>
           </div>
         </div>

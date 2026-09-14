@@ -4,7 +4,6 @@ import { useGSAP } from '@gsap/react'
 import { Sparkles, Footprints, Hand, Check } from 'lucide-react'
 import { initServicesAnimation } from '@/animations/services'
 import { applyReducedMotion } from '@/animations/reducedMotion'
-import { getWhatsAppUrl } from '@/utils/whatsapp'
 
 export const ServicesPricing: React.FC = () => {
   const servicesSectionRef = useRef<HTMLElement | null>(null)
@@ -44,281 +43,234 @@ export const ServicesPricing: React.FC = () => {
       aria-labelledby="services-pricing-heading"
     >
       <div className="services-header text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-bold text-clinical-blue dark:text-sky-400 tracking-wider uppercase mb-3">
-          ATENDIMENTO EM MOCOCA - SP
+        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-semibold text-clinical-blue dark:text-sky-400 mb-3">
+          Mococa, SP
         </div>
         <h2
           id="services-pricing-heading"
-          className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight mb-4"
+          className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight mb-4 text-balance"
         >
-          Pés e mãos bem cuidados em casa.
+          Procedimentos e valores
         </h2>
         <p className="text-sm sm:text-base text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal mb-3">
-          Corte anatômico, desencravamento suave, cutilagem e pintura de unhas. Levo toda a
-          estrutura higienizada até você, sem taxa de deslocamento em Mococa.
+          Corte correto de unhas, alívio de cantos encravados, cutilagem e esmaltação. Estrutura
+          higienizada levada até a sua casa, sem taxa de visita.
         </p>
         <p className="text-xs sm:text-sm font-semibold text-primary dark:text-sky-300">
-          Taxa de deslocamento R$ 0 em qualquer bairro de Mococa - SP. Pagamento via PIX ou
-          dinheiro.
+          Sem taxa de deslocamento em nenhum bairro de Mococa, SP. Pagamento via PIX ou em dinheiro.
         </p>
       </div>
 
       {/* 3 Cards de Procedimentos */}
       <div className="services-grid grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         {/* Card 1: Pé e Mão Completo */}
-        <div className="service-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between relative overflow-hidden">
+        <div className="service-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col relative overflow-hidden">
           <div className="absolute top-5 right-5">
-            <span className="px-3 py-1 rounded-full bg-primary text-on-primary text-xs font-bold tracking-wide uppercase">
-              Mais Pedido
+            <span className="px-3 py-1 rounded-full bg-primary text-on-primary text-xs font-semibold tracking-wide">
+              Mais pedido
             </span>
           </div>
-          <div>
-            <div className="service-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
-              <Sparkles aria-hidden="true" className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-1.5">
-              Pé e Mão Completo
-            </h3>
-            <span className="text-xs text-text-secondary dark:text-slate-400 block mb-3 font-semibold">
-              Duração: Aproximadamente 1h30
-            </span>
+          <div className="service-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
+            <Sparkles aria-hidden="true" className="w-6 h-6" />
+          </div>
+          <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-1.5">
+            Pé e Mão Completo
+          </h3>
+          <span className="text-xs text-text-secondary dark:text-slate-400 block mb-3 font-semibold">
+            Duração média de 1h30
+          </span>
 
-            {/* Preço transparente */}
-            <div className="my-4 pt-3 pb-3 border-y border-surface-border dark:border-slate-800">
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-on-surface dark:text-white tracking-tight">
-                  R$ 75
-                </span>
-                <span className="text-xs font-semibold text-text-secondary dark:text-slate-400">
-                  • Atendimento Completo
-                </span>
-              </div>
-              <p className="text-xs text-text-secondary dark:text-slate-400 font-medium mt-1">
-                Taxa de deslocamento R$ 0 em qualquer bairro de Mococa - SP. Pagamento via PIX ou
-                dinheiro.
-              </p>
+          {/* Preço transparente */}
+          <div className="my-4 pt-3 pb-3 border-y border-surface-border dark:border-slate-800">
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-on-surface dark:text-white tracking-tight tabular-nums">
+                R$ 75
+              </span>
+              <span className="text-xs font-semibold text-text-secondary dark:text-slate-400">
+                Pé e mão completo
+              </span>
             </div>
-
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6 font-normal">
-              O pacote favorito dos clientes: cuidado completo para pés e mãos no conforto do seu
-              lar, com corte anatômico e esmaltação cuidadosa.
+            <p className="text-xs text-text-secondary dark:text-slate-400 font-medium mt-1">
+              Sem taxa de deslocamento em Mococa, SP. Pagamento via PIX ou em dinheiro.
             </p>
-            <ul
-              aria-label="Benefícios do procedimento Pé e Mão Completo"
-              className="flex flex-col gap-2.5 text-xs text-on-surface-variant dark:text-slate-300"
-            >
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Corte anatômico e desencravar suave</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Esmaltação e pintura completa (pés e mãos)</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Materiais esterilizados em autoclave e descartáveis</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Sem nenhuma taxa de deslocamento em Mococa</span>
-              </li>
-            </ul>
           </div>
 
-          <a
-            href={getWhatsAppUrl(
-              'Olá, Angélica! Gostaria de agendar o atendimento de Pé e Mão Completo em domicílio em Mococa.',
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-full min-h-11 px-6 mt-6 rounded-full bg-primary text-on-primary text-sm font-semibold hover:bg-primary-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+          <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6 font-normal">
+            Cuidado completo para unhas dos pés e das mãos na mesma visita, com corte correto,
+            cutilagem suave e esmaltação.
+          </p>
+          <ul
+            aria-label="Benefícios do procedimento Pé e Mão Completo"
+            className="flex flex-col gap-2.5 text-xs text-on-surface-variant dark:text-slate-300"
           >
-            Agendar pelo WhatsApp
-          </a>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Corte correto e alívio de cantos de unhas</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Cutilagem e esmaltação completa para pés e mãos</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Alicates esterilizados e toalhas descartáveis</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Sem taxa de deslocamento em nenhum bairro de Mococa</span>
+            </li>
+          </ul>
         </div>
 
         {/* Card 2: Cuidado dos Pés */}
-        <div className="service-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
-          <div>
-            <div className="service-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
-              <Footprints aria-hidden="true" className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-1">
-              Cuidado dos Pés (Podologia &amp; Pedicure)
-            </h3>
-            <span className="text-xs text-text-secondary dark:text-slate-400 block mb-3 font-semibold">
-              Duração: Aproximadamente 50 min
-            </span>
+        <div className="service-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col">
+          <div className="service-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
+            <Footprints aria-hidden="true" className="w-6 h-6" />
+          </div>
+          <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-1">
+            Cuidado dos Pés (Podologia e Pedicure)
+          </h3>
+          <span className="text-xs text-text-secondary dark:text-slate-400 block mb-3 font-semibold">
+            Duração média de 50 minutos
+          </span>
 
-            {/* Preço transparente */}
-            <div className="my-4 pt-3 pb-3 border-y border-surface-border dark:border-slate-800">
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-on-surface dark:text-white tracking-tight">
-                  R$ 50
-                </span>
-                <span className="text-xs font-semibold text-text-secondary dark:text-slate-400">
-                  • Podologia &amp; Pedicure
-                </span>
-              </div>
-              <p className="text-xs text-text-secondary dark:text-slate-400 font-medium mt-1">
-                Taxa de deslocamento R$ 0 em qualquer bairro de Mococa - SP. Pagamento via PIX ou
-                dinheiro.
-              </p>
+          {/* Preço transparente */}
+          <div className="my-4 pt-3 pb-3 border-y border-surface-border dark:border-slate-800">
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-on-surface dark:text-white tracking-tight tabular-nums">
+                R$ 50
+              </span>
+              <span className="text-xs font-semibold text-text-secondary dark:text-slate-400">
+                Podologia e pedicure
+              </span>
             </div>
-
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6 font-normal">
-              Alívio de dores, calosidades e unhas encravadas com delicadeza e precisão para você
-              voltar a pisar com total leveza.
+            <p className="text-xs text-text-secondary dark:text-slate-400 font-medium mt-1">
+              Sem taxa de deslocamento em Mococa, SP. Pagamento via PIX ou em dinheiro.
             </p>
-            <ul
-              aria-label="Benefícios do Cuidado dos Pés"
-              className="flex flex-col gap-2.5 text-xs text-on-surface-variant dark:text-slate-300"
-            >
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Desencravamento preventivo e alívio de dores</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Remoção de calosidades e lixamento seguro</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Higienização e corte anatômico das unhas</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Pintura e esmaltação inclusa sem custo adicional</span>
-              </li>
-            </ul>
           </div>
 
-          <a
-            href={getWhatsAppUrl(
-              'Olá, Angélica! Gostaria de agendar o atendimento de Cuidado dos Pés em domicílio em Mococa.',
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-full min-h-11 px-6 mt-6 rounded-full bg-primary text-on-primary text-sm font-semibold hover:bg-primary-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+          <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6 font-normal">
+            Tratamento para aliviar dores, desbastar calosidades e cuidar de unhas encravadas de
+            forma preventiva e suave.
+          </p>
+          <ul
+            aria-label="Benefícios do Cuidado dos Pés"
+            className="flex flex-col gap-2.5 text-xs text-on-surface-variant dark:text-slate-300"
           >
-            Agendar pelo WhatsApp
-          </a>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Desencravamento preventivo e alívio de pressão no canto da unha</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Lixamento seguro e remoção de calosidades</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Higienização e corte correto das unhas</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Esmaltação inclusa se você desejar pintar</span>
+            </li>
+          </ul>
         </div>
 
         {/* Card 3: Cuidado das Mãos */}
-        <div className="service-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
-          <div>
-            <div className="service-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
-              <Hand aria-hidden="true" className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-1">
-              Cuidado das Mãos (Manicure)
-            </h3>
-            <span className="text-xs text-text-secondary dark:text-slate-400 block mb-3 font-semibold">
-              Duração: Aproximadamente 40 min
-            </span>
+        <div className="service-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col">
+          <div className="service-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
+            <Hand aria-hidden="true" className="w-6 h-6" />
+          </div>
+          <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-1">
+            Cuidado das Mãos (Manicure)
+          </h3>
+          <span className="text-xs text-text-secondary dark:text-slate-400 block mb-3 font-semibold">
+            Duração média de 40 minutos
+          </span>
 
-            {/* Preço transparente */}
-            <div className="my-4 pt-3 pb-3 border-y border-surface-border dark:border-slate-800">
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-on-surface dark:text-white tracking-tight">
-                  R$ 40
-                </span>
-                <span className="text-xs font-semibold text-text-secondary dark:text-slate-400">
-                  • Manicure Especializada
-                </span>
-              </div>
-              <p className="text-xs text-text-secondary dark:text-slate-400 font-medium mt-1">
-                Taxa de deslocamento R$ 0 em qualquer bairro de Mococa - SP. Pagamento via PIX ou
-                dinheiro.
-              </p>
+          {/* Preço transparente */}
+          <div className="my-4 pt-3 pb-3 border-y border-surface-border dark:border-slate-800">
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-on-surface dark:text-white tracking-tight tabular-nums">
+                R$ 40
+              </span>
+              <span className="text-xs font-semibold text-text-secondary dark:text-slate-400">
+                Manicure
+              </span>
             </div>
-
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6 font-normal">
-              Unhas bem alinhadas, cutículas tratadas com suavidade e esmaltação duradoura para as
-              suas mãos refletirem bem-estar.
+            <p className="text-xs text-text-secondary dark:text-slate-400 font-medium mt-1">
+              Sem taxa de deslocamento em Mococa, SP. Pagamento via PIX ou em dinheiro.
             </p>
-            <ul
-              aria-label="Benefícios do Cuidado das Mãos"
-              className="flex flex-col gap-2.5 text-xs text-on-surface-variant dark:text-slate-300"
-            >
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Corte e formato anatômico das unhas</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Cutilagem cuidadosa sem machucar</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Esmaltação com secagem rápida e acabamento perfeito</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Check
-                  aria-hidden="true"
-                  className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
-                />
-                <span>Alicates esterilizados em autoclave e descartáveis</span>
-              </li>
-            </ul>
           </div>
 
-          <a
-            href={getWhatsAppUrl(
-              'Olá, Angélica! Gostaria de agendar o atendimento de Cuidado das Mãos em domicílio em Mococa.',
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-full min-h-11 px-6 mt-6 rounded-full bg-primary text-on-primary text-sm font-semibold hover:bg-primary-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+          <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6 font-normal">
+            Unhas alinhadas, cutículas tratadas com suavidade e esmaltação duradoura com a cor da
+            sua preferência.
+          </p>
+          <ul
+            aria-label="Benefícios do Cuidado das Mãos"
+            className="flex flex-col gap-2.5 text-xs text-on-surface-variant dark:text-slate-300"
           >
-            Agendar pelo WhatsApp
-          </a>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Corte, lixamento e alinhamento do formato</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Cutilagem higiênica sem machucar</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Esmaltação com secagem rápida</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Check
+                aria-hidden="true"
+                className="w-4 h-4 text-primary dark:text-sky-300 shrink-0"
+              />
+              <span>Alicates esterilizados e lixas descartáveis</span>
+            </li>
+          </ul>
         </div>
       </div>
 
       {/* Faixa de transparência abaixo dos cards */}
       <div className="services-footer p-4 rounded-2xl bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-surface-border dark:border-slate-800 text-center text-xs text-on-surface-variant dark:text-slate-300 shadow-2xs">
-        📍 Atendimento Domiciliar em Mococa - SP • Taxa de deslocamento R$ 0 em qualquer bairro de
-        Mococa - SP. Pagamento via{' '}
-        <span className="font-semibold text-primary dark:text-sky-300">
-          Somente PIX ou Dinheiro vivo
-        </span>{' '}
-        ao término do atendimento.
+        Atendimento em domicílio em Mococa, SP. Deslocamento incluso em qualquer bairro. Pagamento
+        feito ao término da sessão, em dinheiro ou PIX. Agendamento exclusivo pelo painel do site.
       </div>
     </section>
   )
