@@ -12,7 +12,7 @@ export const WhatsAppButton: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Conversar com Angélica Eduarda pelo WhatsApp (abre em uma nova aba)"
-        className="group flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 sm:px-5 sm:py-3.5 rounded-full shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 transition-[transform,box-shadow,background-color] active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500 min-h-[48px] min-w-[48px]"
+        className="group flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1eb857] text-white px-4 py-3 sm:px-5 sm:py-3.5 rounded-full shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40 transition-[transform,box-shadow,background-color] active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#25D366] min-h-[48px] min-w-[48px]"
       >
         {/* Ícone oficial do WhatsApp */}
         <svg

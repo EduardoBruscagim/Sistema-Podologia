@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
 import type { AuthModalTab } from '@/types/auth'
 import { X, User, AlertCircle } from 'lucide-react'
@@ -6,6 +7,7 @@ import { X, User, AlertCircle } from 'lucide-react'
 export const AuthModal: React.FC = () => {
   const { isAuthModalOpen, authModalTab, setAuthModalTab, closeAuthModal, login, register } =
     useAuth()
+  const navigate = useNavigate()
   const dialogRef = useRef<HTMLDialogElement | null>(null)
   const loginTabRef = useRef<HTMLButtonElement | null>(null)
   const registerTabRef = useRef<HTMLButtonElement | null>(null)
@@ -71,6 +73,8 @@ export const AuthModal: React.FC = () => {
     setIsLoading(false)
     if (!result.success) {
       setErrorMessage(result.error || 'Erro ao efetuar login.')
+    } else {
+      navigate('/dashboard')
     }
   }
 
@@ -89,6 +93,8 @@ export const AuthModal: React.FC = () => {
     setIsLoading(false)
     if (!result.success) {
       setErrorMessage(result.error || 'Erro ao realizar cadastro.')
+    } else {
+      navigate('/dashboard')
     }
   }
 
@@ -140,7 +146,7 @@ export const AuthModal: React.FC = () => {
             aria-selected={authModalTab === 'login'}
             aria-controls="auth-tabpanel-login"
             onKeyDown={(e) => handleKeyDownTab(e, 'login')}
-            className={`flex-1 rounded-full text-xs sm:text-sm font-semibold transition-all min-h-[40px] flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary ${
+            className={`flex-1 rounded-full text-xs sm:text-sm font-semibold transition-all min-h-11 flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary ${
               authModalTab === 'login'
                 ? 'bg-white dark:bg-slate-900 text-on-surface dark:text-white shadow-xs'
                 : 'text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white'
@@ -158,7 +164,7 @@ export const AuthModal: React.FC = () => {
             aria-selected={authModalTab === 'register'}
             aria-controls="auth-tabpanel-register"
             onKeyDown={(e) => handleKeyDownTab(e, 'register')}
-            className={`flex-1 rounded-full text-xs sm:text-sm font-semibold transition-all min-h-[40px] flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary ${
+            className={`flex-1 rounded-full text-xs sm:text-sm font-semibold transition-all min-h-11 flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary ${
               authModalTab === 'register'
                 ? 'bg-white dark:bg-slate-900 text-on-surface dark:text-white shadow-xs'
                 : 'text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white'
@@ -172,6 +178,7 @@ export const AuthModal: React.FC = () => {
         {/* Alerta de erro acessível */}
         {errorMessage && (
           <div
+            id="auth-error-message"
             role="alert"
             aria-live="assertive"
             className="text-xs rounded-2xl py-2.5 px-4 mb-4 flex items-center gap-2.5 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 font-medium"
@@ -205,7 +212,9 @@ export const AuthModal: React.FC = () => {
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-12 transition-all"
+                aria-invalid={Boolean(errorMessage)}
+                aria-describedby={errorMessage ? 'auth-error-message' : undefined}
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-12 transition-all"
               />
             </div>
 
@@ -224,7 +233,9 @@ export const AuthModal: React.FC = () => {
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-12 transition-all"
+                aria-invalid={Boolean(errorMessage)}
+                aria-describedby={errorMessage ? 'auth-error-message' : undefined}
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-12 transition-all"
               />
             </div>
 
@@ -235,6 +246,8 @@ export const AuthModal: React.FC = () => {
             >
               {isLoading ? (
                 <div
+                  role="status"
+                  aria-live="polite"
                   aria-label="Carregando..."
                   className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
                 />
@@ -269,7 +282,9 @@ export const AuthModal: React.FC = () => {
                 value={registerName}
                 onChange={(e) => setRegisterName(e.target.value)}
                 placeholder="Ex: Maria Silva"
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
+                aria-invalid={Boolean(errorMessage)}
+                aria-describedby={errorMessage ? 'auth-error-message' : undefined}
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 
@@ -288,7 +303,9 @@ export const AuthModal: React.FC = () => {
                 value={registerEmail}
                 onChange={(e) => setRegisterEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
+                aria-invalid={Boolean(errorMessage)}
+                aria-describedby={errorMessage ? 'auth-error-message' : undefined}
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 
@@ -306,7 +323,9 @@ export const AuthModal: React.FC = () => {
                 value={registerPhone}
                 onChange={(e) => setRegisterPhone(e.target.value)}
                 placeholder="(11) 99999-9999"
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
+                aria-invalid={Boolean(errorMessage)}
+                aria-describedby={errorMessage ? 'auth-error-message' : undefined}
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 
@@ -326,7 +345,9 @@ export const AuthModal: React.FC = () => {
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/20 text-sm px-4 h-11 transition-all"
+                aria-invalid={Boolean(errorMessage)}
+                aria-describedby={errorMessage ? 'auth-error-message' : undefined}
+                className="w-full rounded-2xl bg-apple-gray/60 dark:bg-slate-800/60 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-primary focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 text-sm px-4 h-11 transition-all"
               />
             </div>
 
@@ -337,6 +358,8 @@ export const AuthModal: React.FC = () => {
             >
               {isLoading ? (
                 <div
+                  role="status"
+                  aria-live="polite"
                   aria-label="Carregando..."
                   className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
                 />

@@ -44,95 +44,114 @@ interface FaqAccordionItemProps {
   onToggle: (index: number) => void
 }
 
-const FaqAccordionItem: React.FC<FaqAccordionItemProps> = ({ item, index, isOpen, onToggle }) => {
-  const panelRef = useRef<HTMLDivElement>(null)
-  const isFirstRender = useRef(true)
+const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
+  ({ item, index, isOpen, onToggle }) => {
+    const panelRef = useRef<HTMLDivElement>(null)
+    const isFirstRender = useRef(true)
 
-  useLayoutEffect(() => {
-    const panel = panelRef.current
-    if (!panel) return
+    useLayoutEffect(() => {
+      const panel = panelRef.current
+      if (!panel) return
 
-    // Primeiro render: define o estado inicial sem animação
-    if (isFirstRender.current) {
-      gsap.set(panel, { height: 0, opacity: 0 })
-      isFirstRender.current = false
-      return
-    }
+      // Primeiro render: define o estado inicial sem animação
+      if (isFirstRender.current) {
+        gsap.set(panel, { height: 0, opacity: 0 })
+        isFirstRender.current = false
+        return () => {
+          gsap.killTweensOf(panel)
+        }
+      }
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    if (prefersReduced) {
-      // Respeita preferência do usuário: troca instantânea sem animação
-      gsap.set(panel, isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 })
-      return
-    }
+      if (prefersReduced) {
+        // Respeita preferência do usuário: troca instantânea sem animação
+        gsap.set(panel, isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 })
+        return () => {
+          gsap.killTweensOf(panel)
+        }
+      }
 
-    // Cancela qualquer tween em andamento neste painel
-    gsap.killTweensOf(panel)
+      // Cancela qualquer tween em andamento neste painel
+      gsap.killTweensOf(panel)
 
-    if (isOpen) {
-      // Abertura: expande suavemente do topo para baixo
-      gsap.fromTo(
-        panel,
-        { height: 0, opacity: 0 },
-        {
-          height: 'auto',
-          opacity: 1,
-          duration: 0.42,
-          ease: 'power3.out',
-        },
-      )
-    } else {
-      // Fechamento: recolhe com leve aceleração para parecer responsivo
-      gsap.to(panel, {
-        height: 0,
-        opacity: 0,
-        duration: 0.28,
-        ease: 'power2.in',
-      })
-    }
-  }, [isOpen])
+      if (isOpen) {
+        // Abertura: expande suavemente do topo para baixo
+        gsap.fromTo(
+          panel,
+          { height: 0, opacity: 0 },
+          {
+            height: 'auto',
+            opacity: 1,
+            duration: 0.42,
+            ease: 'power3.out',
+          },
+        )
+      } else {
+        // Fechamento: recolhe com leve aceleração para parecer responsivo
+        gsap.to(panel, {
+          height: 0,
+          opacity: 0,
+          duration: 0.28,
+          ease: 'power2.in',
+        })
+      }
 
-  return (
-    <div
-      className={`faq-item rounded-2xl bg-white dark:bg-slate-900 border shadow-2xs transition-colors duration-200 ${
-        isOpen
-          ? 'border-primary/40 dark:border-primary/30'
-          : 'border-surface-border dark:border-slate-800'
-      }`}
-    >
-      <button
-        type="button"
-        id={`faq-btn-${index}`}
-        aria-expanded={isOpen}
-        aria-controls={`faq-panel-${index}`}
-        onClick={() => onToggle(index)}
-        className="w-full flex items-center justify-between cursor-pointer min-h-11 px-5 py-4 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-2xl text-left"
+      return () => {
+        gsap.killTweensOf(panel)
+      }
+    }, [isOpen])
+
+    return (
+      <div
+        className={`faq-item rounded-2xl bg-white dark:bg-slate-900 border shadow-2xs transition-colors duration-200 ${
+          isOpen
+            ? 'border-primary/40 dark:border-primary/30'
+            : 'border-surface-border dark:border-slate-800'
+        }`}
       >
-        <h3
-          className={`text-base font-semibold pr-4 transition-colors ${
-            isOpen ? 'text-primary' : 'text-on-surface dark:text-white'
-          }`}
-        >
-          {item.question}
+        <h3 className="text-base font-semibold">
+          <button
+            type="button"
+            id={`faq-btn-${index}`}
+            aria-expanded={isOpen}
+            aria-controls={`faq-panel-${index}`}
+            onClick={() => onToggle(index)}
+            className={`w-full flex items-center justify-between cursor-pointer min-h-11 px-5 py-4 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-2xl text-left transition-colors ${
+              isOpen ? 'text-primary dark:text-sky-300' : 'text-on-surface dark:text-white'
+            }`}
+          >
+            <span className="pr-4">{item.question}</span>
+            <ChevronDown
+              aria-hidden="true"
+              className={`w-5 h-5 shrink-0 transition-transform duration-300 ${
+                isOpen
+                  ? 'rotate-180 text-primary dark:text-sky-300'
+                  : 'text-text-secondary dark:text-slate-400'
+              }`}
+            />
+          </button>
         </h3>
-        <ChevronDown
-          aria-hidden="true"
-          className={`w-5 h-5 shrink-0 transition-transform duration-300 ${
-            isOpen ? 'rotate-180 text-primary' : 'text-text-secondary dark:text-slate-400'
-          }`}
-        />
-      </button>
 
-      {/* Painel sempre no DOM — altura controlada pelo GSAP para animação fluida */}
-      <div ref={panelRef} style={{ overflow: 'hidden' }}>
-        <div className="px-5 pb-4 border-t border-apple-gray dark:border-slate-800 text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-          <div className="pt-3">{item.answer}</div>
+        {/* Painel acessível com WAI-ARIA APG */}
+        <div
+          ref={panelRef}
+          id={`faq-panel-${index}`}
+          role="region"
+          aria-labelledby={`faq-btn-${index}`}
+          hidden={!isOpen}
+          style={{ overflow: 'hidden' }}
+        >
+          <div className="px-5 pb-4 border-t border-surface-border dark:border-slate-800 text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
+            <div className="pt-3">{item.answer}</div>
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
+    )
+  },
+)
+
+FaqAccordionItem.displayName = 'FaqAccordionItem'
 
 export const FaqSection: React.FC = () => {
   const faqSectionRef = useRef<HTMLElement | null>(null)
@@ -164,6 +183,8 @@ export const FaqSection: React.FC = () => {
           return initFaqAnimation(el)
         },
       )
+
+      return () => mm.revert()
     },
     { scope: faqSectionRef },
   )

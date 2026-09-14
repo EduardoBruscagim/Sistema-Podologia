@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 
 export const DashboardPage: React.FC = () => {
-  const { user, logout } = useAuth()
+  const { user, logout, openAuthModal } = useAuth()
   const { isDark, toggleTheme } = useTheme()
   const navigate = useNavigate()
 
@@ -58,14 +58,24 @@ export const DashboardPage: React.FC = () => {
               )}
             </button>
 
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="min-h-11 px-4 inline-flex items-center justify-center gap-1.5 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 rounded-full transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              <LogOut aria-hidden="true" className="w-4 h-4" />
-              <span>Sair</span>
-            </button>
+            {user ? (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="min-h-11 px-4 inline-flex items-center justify-center gap-1.5 text-sm font-medium text-text-secondary dark:text-slate-300 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 rounded-full transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <LogOut aria-hidden="true" className="w-4 h-4" />
+                <span>Sair</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => openAuthModal('login')}
+                className="min-h-11 px-5 inline-flex items-center justify-center gap-1.5 text-sm font-semibold rounded-full bg-primary text-white hover:bg-primary-hover shadow-xs transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <span>Entrar</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -76,6 +86,42 @@ export const DashboardPage: React.FC = () => {
         tabIndex={-1}
         className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 outline-none"
       >
+        {/* Banner de Demonstração (Fase 1) & Proteção / Prompt de Autenticação */}
+        <aside
+          aria-label="Aviso de ambiente de demonstração"
+          className="mb-8 p-4 sm:p-5 rounded-2xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs"
+        >
+          <div className="flex items-start sm:items-center gap-3">
+            <Sparkles
+              aria-hidden="true"
+              className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5 sm:mt-0"
+            />
+            <p className="text-xs sm:text-sm font-medium leading-relaxed">
+              <strong className="font-semibold">
+                Ambiente de Demonstração (Fase 1 — Mock do Painel do Paciente).
+              </strong>{' '}
+              O agendamento online integrado estará disponível na Fase 2.
+            </p>
+          </div>
+          {!user && (
+            <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => openAuthModal('login')}
+                className="flex-1 sm:flex-initial min-h-11 px-5 rounded-full bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-semibold shadow-xs transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary inline-flex items-center justify-center active:scale-[0.98]"
+              >
+                Fazer Login
+              </button>
+              <Link
+                to="/"
+                className="flex-1 sm:flex-initial min-h-11 px-5 rounded-full bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-700 text-on-surface dark:text-white text-xs sm:text-sm font-semibold hover:bg-apple-gray dark:hover:bg-slate-800 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary inline-flex items-center justify-center active:scale-[0.98]"
+              >
+                Voltar ao Início
+              </Link>
+            </div>
+          )}
+        </aside>
+
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <div className="flex items-center gap-3 mb-1.5">
@@ -83,7 +129,7 @@ export const DashboardPage: React.FC = () => {
                 Olá, {user?.name || 'Paciente'}
               </h1>
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-bold text-clinical-blue dark:text-sky-400 tracking-wider uppercase">
-                {user?.role === 'admin' ? 'Administrador' : 'Paciente'}
+                {user?.role === 'admin' ? 'Administrador' : user ? 'Paciente' : 'Demonstração'}
               </span>
             </div>
             <p className="text-on-surface-variant dark:text-slate-300 text-sm sm:text-base font-normal">
@@ -103,7 +149,7 @@ export const DashboardPage: React.FC = () => {
         {/* Stats Grid no padrão Bento Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
           {/* Stat 1: Próxima Visita */}
-          <div className="p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+          <div className="p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
             <div>
               <div className="w-11 h-11 rounded-2xl bg-clinical-teal-subtle dark:bg-slate-800 flex items-center justify-center text-primary mb-4">
                 <Calendar aria-hidden="true" className="w-6 h-6" />
@@ -115,13 +161,13 @@ export const DashboardPage: React.FC = () => {
                 Nenhuma
               </div>
             </div>
-            <div className="mt-4 pt-3 border-t border-apple-gray dark:border-slate-800 text-xs text-on-surface-variant dark:text-slate-400 font-normal">
+            <div className="mt-4 pt-3 border-t border-surface-border dark:border-slate-800 text-xs text-on-surface-variant dark:text-slate-400 font-normal">
               Nenhum atendimento agendado para hoje.
             </div>
           </div>
 
           {/* Stat 2: Atendimentos Realizados */}
-          <div className="p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+          <div className="p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
             <div>
               <div className="w-11 h-11 rounded-2xl bg-clinical-teal-subtle dark:bg-slate-800 flex items-center justify-center text-primary mb-4">
                 <Sparkles aria-hidden="true" className="w-6 h-6" />
@@ -131,13 +177,13 @@ export const DashboardPage: React.FC = () => {
               </span>
               <div className="text-2xl sm:text-3xl font-bold text-primary tracking-tight">0</div>
             </div>
-            <div className="mt-4 pt-3 border-t border-apple-gray dark:border-slate-800 text-xs text-on-surface-variant dark:text-slate-400 font-normal">
+            <div className="mt-4 pt-3 border-t border-surface-border dark:border-slate-800 text-xs text-on-surface-variant dark:text-slate-400 font-normal">
               Histórico completo registrado no sistema.
             </div>
           </div>
 
           {/* Stat 3: Status do Cadastro */}
-          <div className="p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+          <div className="p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
             <div>
               <div className="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4">
                 <ShieldCheck aria-hidden="true" className="w-6 h-6" />
@@ -149,14 +195,14 @@ export const DashboardPage: React.FC = () => {
                 Ativo
               </div>
             </div>
-            <div className="mt-4 pt-3 border-t border-apple-gray dark:border-slate-800 text-xs text-on-surface-variant dark:text-slate-400 font-normal">
+            <div className="mt-4 pt-3 border-t border-surface-border dark:border-slate-800 text-xs text-on-surface-variant dark:text-slate-400 font-normal">
               Cadastro validado com sucesso.
             </div>
           </div>
         </div>
 
         {/* Card Informativo Alinhado ao Bento Grid */}
-        <div className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300">
+        <div className="p-5 sm:p-7 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300">
           <div className="max-w-3xl">
             <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-bold text-clinical-blue dark:text-sky-400 tracking-wider uppercase mb-3">
               ATENDIMENTO DOMICILIAR EM MOCOCA - SP
