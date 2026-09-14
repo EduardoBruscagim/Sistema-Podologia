@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-10T23:26:00.000Z",
-  "title": "Design System: Angélica Eduarda Podologia",
+  "generatedAt": "2026-09-14T02:40:00.000Z",
+  "title": "Design System: Angélica Eduarda | Podologia & Cuidado Domiciliar",
   "extensions": {
     "colorMeta": {
       "primary": {
         "role": "primary",
-        "displayName": "Azul Safira",
+        "displayName": "Azul Safira (Apple Blue)",
         "canonical": "#0071e3",
         "tonalRamp": [
           "#002b5e",
@@ -19,7 +19,37 @@
           "#d9ebfd"
         ]
       },
-      "neutral-bg": {
+      "clinical-blue": {
+        "role": "primary",
+        "displayName": "Azul Clínico",
+        "canonical": "#0059b5",
+        "tonalRamp": [
+          "#001b3f",
+          "#002e60",
+          "#00458f",
+          "#0059b5",
+          "#2d78d9",
+          "#659ef0",
+          "#9fc4fa",
+          "#dce9fd"
+        ]
+      },
+      "apple-gray": {
+        "role": "neutral",
+        "displayName": "Cinza Apple",
+        "canonical": "#f5f5f7",
+        "tonalRamp": [
+          "#1c1c1e",
+          "#3a3a3c",
+          "#636366",
+          "#8e8e93",
+          "#c7c7cc",
+          "#d1d1d6",
+          "#e5e5ea",
+          "#f5f5f7"
+        ]
+      },
+      "pure-white": {
         "role": "neutral",
         "displayName": "Branco Puro",
         "canonical": "#ffffff",
@@ -37,10 +67,10 @@
       "dark-bg": {
         "role": "neutral",
         "displayName": "Ardósia Noturna Profunda",
-        "canonical": "#020617",
+        "canonical": "#0b0f17",
         "tonalRamp": [
           "#020617",
-          "#090d16",
+          "#0b0f17",
           "#0f172a",
           "#1e293b",
           "#334155",
@@ -57,19 +87,19 @@
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Títulos de seções principais (Bento Grid e CTA)."
+        "purpose": "Títulos de seções principais (Bento Grid, Tecnologia, Preços, FAQ)."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Títulos de cartões de serviços e recursos."
+        "purpose": "Títulos de cartões de serviços, diferenciais e tecnologia."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Parágrafos descritivos e explicações clínicas."
+        "purpose": "Parágrafos descritivos e orientações de atendimento domiciliar."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Badges de confirmação e pré-cabeçalhos em caixa alta."
+        "purpose": "Badges de autoclave, chips de tempo e categorias em caixa alta."
       }
     },
     "shadows": [
@@ -87,6 +117,11 @@
         "name": "accent-elevation",
         "value": "0 10px 15px -3px rgba(0, 113, 227, 0.3)",
         "purpose": "Elevação luminosa do botão primário de agendamento."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 12px 24px -4px rgba(0, 51, 102, 0.08)",
+        "purpose": "Elevação tátil dos cartões interativos em estado de foco ou hover."
       }
     ],
     "motion": [
@@ -99,7 +134,8 @@
     "breakpoints": [
       { "name": "sm", "value": "640px" },
       { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" }
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
     ]
   },
   "components": [
@@ -107,69 +143,69 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Botão principal de conversão para agendamento de consultas.",
-      "html": "<button class=\"ds-btn-primary\">Agendar horário</button>",
-      "css": ".ds-btn-primary { background: #0071e3; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; font-size: 1.125rem; font-weight: 500; padding: 16px 32px; border-radius: 9999px; border: none; cursor: pointer; box-shadow: 0 10px 15px -3px rgba(0, 113, 227, 0.3); transition: background-color 0.2s, transform 0.15s; } .ds-btn-primary:hover { background: #0077ed; box-shadow: 0 14px 20px -3px rgba(0, 113, 227, 0.4); } .ds-btn-primary:active { transform: scale(0.96); }"
+      "description": "Botão principal de agendamento e CTA de conversão direta.",
+      "html": "<button class=\"ds-btn-primary\">Agendar Atendimento</button>",
+      "css": ".ds-btn-primary { background: #0071e3; color: #ffffff; padding: 12px 28px; border-radius: 9999px; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: background 0.15s ease, transform 0.15s ease; } .ds-btn-primary:hover { background: #005bb5; } .ds-btn-primary:active { transform: scale(0.98); }"
     },
     {
-      "name": "Navigation Island",
-      "kind": "nav",
-      "refersTo": "nav-island",
-      "description": "Barra de navegação flutuante estilo Apple com vidro fosco.",
-      "html": "<nav class=\"ds-nav-island\"><span>Angélica Eduarda</span><button class=\"ds-btn-compact\">Agendar</button></nav>",
-      "css": ".ds-nav-island { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(226, 232, 240, 0.6); border-radius: 9999px; box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif; font-weight: 600; color: #0f172a; width: 100%; max-width: 600px; } .ds-btn-compact { background: #0071e3; color: #ffffff; padding: 8px 18px; border-radius: 9999px; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s; } .ds-btn-compact:hover { background: #0077ed; }"
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Botão secundário em contorno sutil para consulta de tabela de valores.",
+      "html": "<button class=\"ds-btn-secondary\">Ver Serviços & Valores</button>",
+      "css": ".ds-btn-secondary { background: #ffffff; color: #0071e3; padding: 12px 28px; border-radius: 9999px; font-weight: 600; font-size: 1rem; border: 1px solid #e5e5ea; cursor: pointer; transition: background 0.15s ease; } .ds-btn-secondary:hover { background: #f5f5f7; }"
     },
     {
-      "name": "Bento Feature Card",
+      "name": "Clinical Badge",
+      "kind": "chip",
+      "refersTo": "badge-clinical",
+      "description": "Pílula de destaque clínico para indicar procedimentos de biossegurança e tecnologias.",
+      "html": "<span class=\"ds-badge-clinical\">100% ESTERILIZADO EM AUTOCLAVE</span>",
+      "css": ".ds-badge-clinical { display: inline-flex; align-items: center; background: #ebf4f9; color: #0059b5; border: 1px solid #d2e4f0; padding: 6px 14px; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Service Card",
       "kind": "card",
-      "refersTo": "card-bento",
-      "description": "Cartão do grid de diferenciais clínicos com cantos suaves.",
-      "html": "<div class=\"ds-card-bento\"><div class=\"ds-icon-box\">✓</div><h3>Conforto do Lar</h3><p>Cuidado podológico completo na sua casa. Você escolhe o horário, eu vou até você.</p></div>",
-      "css": ".ds-card-bento { background: #ffffff; border: 1px solid rgba(226, 232, 240, 0.6); border-radius: 28px; padding: 32px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif; } .ds-icon-box { width: 48px; height: 48px; border-radius: 16px; background: rgba(0, 113, 227, 0.1); color: #0071e3; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 24px; } .ds-card-bento h3 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0 0 12px 0; letter-spacing: -0.02em; } .ds-card-bento p { font-size: 1rem; color: #64748b; line-height: 1.6; margin: 0; font-weight: 500; }"
+      "refersTo": "card-surface",
+      "description": "Cartão modulado de procedimento com tempo, descrição e valor transparente.",
+      "html": "<div class=\"ds-card-service\"><div class=\"ds-card-header\"><h3>Pé e Mão Completo</h3><span class=\"ds-card-price\">R$ 85</span></div><p>Cuidado integral unindo saúde preventiva, corte anatômico e esmaltação.</p></div>",
+      "css": ".ds-card-service { background: #ffffff; border: 1px solid #e5e5ea; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px 0 rgba(0, 51, 102, 0.05); } .ds-card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; } .ds-card-header h3 { font-size: 1.25rem; font-weight: 600; color: #1b1b1d; margin: 0; } .ds-card-price { font-size: 1.5rem; font-weight: 700; color: #0071e3; } .ds-card-service p { color: #59595e; font-size: 0.875rem; line-height: 1.5; margin: 0; }"
     }
   ],
   "narrative": {
     "northStar": "O Santuário Clínico Minimalista",
-    "overview": "A experiência visual traduz a precisão cirúrgica e o acolhimento do atendimento podológico domiciliar premium. Em vez de recorrer ao repertório saturado de clichês de saúde, o sistema adota a sofisticação da linguagem editorial e tecnológica da Apple.",
+    "overview": "Este sistema de design reimagina os cuidados especializados em podologia e estética clínica sob a ótica do minimalismo industrial da Apple: prístino, calmo, altamente estruturado e descompromissado com o óbvio. Ele rejeita os padrões visuais antiquados da área médica em favor de uma atmosfera que transmite esterilização rigorosa, tecnologia de ponta e acolhimento humano sereno no conforto do lar da cliente em Mococa - SP.",
     "keyCharacteristics": [
-      "Rigor Tipográfico: Display massivo com kerning ultra-fechado (-0.05em) e alinhamento editorial à esquerda.",
-      "Transparência e Camadas: Vidro fosco (glassmorphism 24px) com desfoque de fundo e bordas translúcidas de 1px.",
-      "Aceleração Sensorial: Interações ágeis (active:scale-95) e foco absoluto na eliminação do atrito do agendamento.",
-      "Bipolaridade de Tema Intencional: Modos claro e escuro desenhados individualmente com contrastes rigorosos acima de 4.5:1."
+      "Rigor e Serenidade: Planos brancos elevados sobre fundo cinza-suave (#F5F5F7).",
+      "Tipografia Esculpida: Família Outfit com kerning deliberadamente fechado nos títulos.",
+      "Micro-interações Previsíveis: Animações GSAP suaves com respeito a prefers-reduced-motion.",
+      "Acessibilidade Universal: Contraste estrito WCAG AA e alvos de toque generosos."
     ],
     "rules": [
       {
-        "name": "The Sapphire Accent Rule",
-        "body": "O Azul Safira é reservado para intenção direta de conversão ou elementos de confiança clínica. Sua força estética reside na sobriedade com que é aplicado no restante da tela.",
+        "name": "A Regra da Pureza Cirúrgica",
+        "body": "As superfícies são predominantemente neutras e alvas; o azul de conversão (#0071E3) é reservado para ações primárias e focos de decisão, nunca excedendo 10% da mancha gráfica de qualquer visualização.",
         "section": "colors"
       },
       {
-        "name": "The No-Raw-Gray Rule",
-        "body": "Em superfícies escuras ou coloridas, o texto secundário nunca é cinza neutro desbotado; é sempre tonalizado com a matiz do fundo para preservar harmonia cromática.",
+        "name": "A Regra do Azul Clínico",
+        "body": "Qualquer badge informativo sobre fundo pastel (#EBF4F9) deve obrigatoriamente renderizar tipografia em #0059B5 para nunca violar a taxa de contraste mínimo exigida pela WCAG AA.",
         "section": "colors"
-      },
-      {
-        "name": "The Tight Headline Rule",
-        "body": "Quanto maior a escala do título, mais fechado o tracking e menor a entrelinha. Headings de exibição não toleram entrelinha padrão de leitura.",
-        "section": "typography"
-      },
-      {
-        "name": "The Material-Over-Shadow Rule",
-        "body": "A profundidade deve ser transmitida primariamente por desfoque de fundo (backdrop-blur-2xl) e bordas translúcidas de 1px; sombras atuam apenas como dispersão ambiental secundária.",
-        "section": "elevation"
       }
     ],
     "dos": [
-      "Do manter todos os botões de ação em formato pílula (rounded-full) com altura de toque de no mínimo 44px.",
-      "Do utilizar contraste mínimo de 4.5:1 para textos em qualquer estado de cor ou tema.",
-      "Do utilizar alinhamento à esquerda e tipografia em escala clamp para manter a autoridade editorial.",
-      "Do preservar o script síncrono no <head> para evitar FOUC no modo escuro."
+      "Do manter a paleta dominada por superfícies alvas (#FFFFFF) e cinza Apple (#F5F5F7), empregando #0071E3 com parcimônia para guiar a conversão.",
+      "Do garantir alvos de toque mínimos de 44x44px em botões, links de navegação e triggers do acordeão.",
+      "Do incluir suporte obrigatório a prefers-reduced-motion: reduce em todas as animações GSAP e transições CSS.",
+      "Do reforçar a transparência comercial em Mococa - SP (taxa de deslocamento zero R$ 0 e pagamentos em PIX/dinheiro) e os protocolos de esterilização 100% em autoclave.",
+      "Do usar ícones da biblioteca Lucide com traço consistente de 2px e declaração de aria-hidden=\"true\" quando puramente decorativos."
     ],
     "donts": [
-      "Don't introduzir cantos retos (sharp) ou bordas espessas (> 1px) em cards e contêineres.",
-      "Don't aplicar gradientes multicoloridos ou efeitos de neon; a saturação é exclusiva do Azul Safira.",
-      "Don't usar sombras duras sem difusão (box-shadow: 4px 4px 0).",
-      "Don't quebrar a navegação por teclado ou ocultar o link de salto (skip link)."
+      "Don't utilizar clichês gráficos médicos antiquados, como cruzes vermelhas agressivas ou verdes hospitalares pesados.",
+      "Don't aplicar sombras escuras ou pesadas com opacidade superior a 15%; a profundidade deve ser comunicada por iluminação suave e bordas refinadas (#E5E5EA).",
+      "Don't omitir rótulos acessíveis (aria-label ou texto visível) em botões de ação ou links de contato externo.",
+      "Don't introduzir animações contínuas, oscilações perpétuas ou efeitos parallax invasivos que concorram com a legibilidade das informações de atendimento.",
+      "Don't quebrar a semântica hierárquica tipográfica do Outfit (Display no Hero, Headline em seções, Title em cards, Body para leitura)."
     ]
   }
 }

@@ -1,6 +1,17 @@
 ---
 name: Clinical Precision & Apple Minimalism
+description: Sistema de Podologia e Cuidado Clínico em Domicílio (Angélica Eduarda) em Mococa - SP
 colors:
+  primary: '#0071e3'
+  primary-hover: '#005bb5'
+  clinical-blue: '#0059b5'
+  apple-blue: '#0071e3'
+  apple-gray: '#f5f5f7'
+  pure-white: '#ffffff'
+  surface-border: '#e5e5ea'
+  surface-border-subtle: '#d2e4f0'
+  clinical-teal-subtle: '#ebf4f9'
+  text-secondary: '#59595e'
   surface: '#fcf8fb'
   surface-dim: '#dcd9dc'
   surface-bright: '#fcf8fb'
@@ -9,6 +20,7 @@ colors:
   surface-container: '#f0edef'
   surface-container-high: '#eae7ea'
   surface-container-highest: '#e4e2e4'
+  surface-variant: '#e4e2e4'
   on-surface: '#1b1b1d'
   on-surface-variant: '#414753'
   inverse-surface: '#303032'
@@ -16,7 +28,6 @@ colors:
   outline: '#717785'
   outline-variant: '#c1c6d6'
   surface-tint: '#005cbb'
-  primary: '#0059b5'
   on-primary: '#ffffff'
   primary-container: '#0071e3'
   on-primary-container: '#fcfbff'
@@ -33,28 +44,8 @@ colors:
   on-error: '#ffffff'
   error-container: '#ffdad6'
   on-error-container: '#93000a'
-  primary-fixed: '#d7e2ff'
-  primary-fixed-dim: '#abc7ff'
-  on-primary-fixed: '#001b3f'
-  on-primary-fixed-variant: '#00458f'
-  secondary-fixed: '#d5e3ff'
-  secondary-fixed-dim: '#a7c8ff'
-  on-secondary-fixed: '#001b3c'
-  on-secondary-fixed-variant: '#1f477b'
-  tertiary-fixed: '#cce5ff'
-  tertiary-fixed-dim: '#a7caed'
-  on-tertiary-fixed: '#001d31'
-  on-tertiary-fixed-variant: '#254a67'
   background: '#fcf8fb'
   on-background: '#1b1b1d'
-  surface-variant: '#e4e2e4'
-  apple-gray: '#F5F5F7'
-  pure-white: '#FFFFFF'
-  surface-border: '#E5E5EA'
-  surface-border-subtle: '#D2E4F0'
-  clinical-teal-subtle: '#EBF4F9'
-  clinical-blue: '#0059B5'
-  text-secondary: '#59595E'
 typography:
   display:
     fontFamily: Outfit
@@ -139,114 +130,189 @@ spacing:
   space-md: 1rem
   space-lg: 1.5rem
   space-xl: 2.5rem
+components:
+  button-primary:
+    backgroundColor: '{colors.primary}'
+    textColor: '{colors.pure-white}'
+    rounded: '{rounded.full}'
+    padding: '12px 28px'
+  button-primary-hover:
+    backgroundColor: '{colors.primary-hover}'
+  button-secondary:
+    backgroundColor: '{colors.pure-white}'
+    textColor: '{colors.primary}'
+    rounded: '{rounded.full}'
+    padding: '12px 28px'
+  badge-clinical:
+    backgroundColor: '{colors.clinical-teal-subtle}'
+    textColor: '{colors.clinical-blue}'
+    rounded: '{rounded.full}'
+    padding: '6px 14px'
+  card-surface:
+    backgroundColor: '{colors.pure-white}'
+    textColor: '{colors.on-surface}'
+    rounded: '{rounded.lg}'
+    padding: '24px'
 ---
 
-## Brand & Style
+# Design System: Angélica Eduarda | Podologia & Cuidado Domiciliar
 
-This design system reimagines specialized podiatry and clinical healthcare through the lens of Apple’s signature design philosophy: pristine, calm, highly structured, and uncompromisingly premium. It moves away from traditional, crowded medical interfaces and earthy greens in favor of an atmosphere that conveys surgical precision, advanced diagnostic technology, and thoughtful human care.
+## Overview
 
-### Brand Personality & Emotional Impact
+**Creative North Star: "O Santuário Clínico Minimalista"**
 
-- **Emotional Resonance:** Quiet confidence, uncompromising hygiene, cutting-edge medical technology, and serene hospitality. Patients immediately feel they are in the care of elite practitioners who utilize the most sophisticated equipment and methods.
-- **Target Audience:** Health-conscious individuals and professionals seeking expert clinical podiatry, preventative foot care, and biomechanical rehabilitation who prioritize state-of-the-art cleanliness, punctuality, and a polished digital booking experience.
-- **Design Movement:** Apple-inspired Clinical Minimalism. The visual language utilizes luminous light-gray canvasing, pure white raised modular surfaces, precise geometric typography, and surgical accent blues. The layout creates immense breathing room, natural visual hierarchy, and an effortless transition from symptom exploration to appointment booking.
+Este sistema de design reimagina os cuidados especializados em podologia e estética clínica sob a ótica do minimalismo industrial da Apple: prístino, calmo, altamente estruturado e descompromissado com o óbvio. Ele rejeita os padrões visuais antiquados da área médica (verdes hospitalares saturados, elementos pesados e interfaces claustrofóbicas) em favor de uma atmosfera que transmite esterilização rigorosa, tecnologia de ponta e acolhimento humano sereno.
+
+A experiência digital reflete a proposta de valor essencial do atendimento em **Mococa - SP**: o alívio do cuidado profissional no conforto do lar da cliente, com instrumentos 100% esterilizados em autoclave, descartáveis individuais e total ausência de custos ocultos (taxa de deslocamento R$ 0).
+
+**Key Characteristics:**
+
+- **Rigor e Serenidade:** Planos brancos elevados sobre fundo cinza-suave (`#F5F5F7`), inspirando assepsia cirúrgica sem frieza institucional.
+- **Tipografia Esculpida:** Família geométrica humanista (Outfit) com kerning deliberadamente fechado nos títulos monumentais e entrelinhamento generoso no corpo de texto.
+- **Micro-interações Previsíveis:** Animações GSAP suaves com respeito absoluto à preferência de movimento reduzido (`prefers-reduced-motion`).
+- **Acessibilidade Universal:** Contraste estrito WCAG AA em todos os estados, alvos de toque generosos (≥44x44px) e navegação integral por teclado.
 
 ## Colors
 
-The color palette centers entirely on Apple’s signature neutral ecosystem paired with clinical blues, engineered to evoke high-tech medical instruments, clean-room sterility, and intuitive digital interactions.
+A paleta cromática combina o ecossistema neutro de alta fidelidade inspirado na Apple com azuis clínicos calibrados, projetados para evocar precisão médica, assepsia de sala limpa e fluidez interativa digital.
 
-### Role Allocations & Intent
+### Primary
 
-- **Primary (`#0071E3` - Apple Blue):** The key driver for primary interactions, selected states, high-priority conversion buttons, and active booking dates. It communicates digital immediacy, technological mastery, and trust.
-- **Secondary (`#003366` - Deep Clinical Navy):** Delivers structural gravitas. Applied to primary headings, hero titles, active navigation headers, and authoritative clinical certifications.
-- **Tertiary (`#0F3854` - Deep Slate Blue):** Bridges technical discipline with clinical warmth, used for secondary action triggers, specialized procedure badges, and informational accents.
-- **Neutral (`#1D1D1F` - Apple Off-Black):** Delivers high contrast for standard typography and essential body reading without the sterile severity of pure black.
-- **Named Colors:**
-  - `apple-gray` (`#F5F5F7`): The default page canvas and foundational background layer, establishing the clean, quiet warmth characteristic of Apple retail and hardware displays.
-  - `pure-white` (`#FFFFFF`): The primary container and card color, creating distinct, elevated surfaces over `#F5F5F7`.
-  - `surface-border` (`#E5E5EA`): A crisp, low-contrast boundary line that defines cards and inputs without visual noise.
-  - `surface-border-subtle` (`#D2E4F0`): A delicate light-blue border for badge enclosures and clinical tag containers.
-  - `clinical-teal-subtle` (`#EBF4F9`): Soft background tint for clinical callouts, active calendar dates, and informational chips.
-  - `clinical-blue` (`#0059B5`): A high-contrast medical blue engineered specifically for small badges and tags on `#EBF4F9` (4.7:1+ contrast, WCAG AA compliant).
-  - `text-secondary` (`#59595E`): The standard secondary text color for supporting details, clinical durations, and metadata (7.08:1 contrast on pure white, WCAG AAA compliant).
+- **Apple Blue / Azul Safira** (`#0071E3`): Principal vetor de ação, botões de conversão (agendamento no WhatsApp), datas ativas e estados de foco interativo.
+- **Azul Safira Escuro (Hover)** (`#005BB5`): Estado ativo e de sobreposição dos botões primários.
+
+### Secondary
+
+- **Deep Clinical Navy** (`#3A5F94` / `#003366`): Confere gravidade estrutural aos títulos heroicos, ícones de confiança e bordas selecionadas.
+
+### Tertiary
+
+- **Deep Slate Blue** (`#3B5E7C`): Elementos de apoio, metadados secundários e acentos de tecnologia clínica.
+
+### Neutral
+
+- **Apple Off-Black** (`#1B1B1D` / `#1D1D1F`): Contraste ideal para leitura do corpo e títulos sem a dureza do preto puro (#000000).
+- **Text Secondary** (`#59595E`): Descrições de suporte, especificações de tempo e legendas técnicas (7.08:1 de contraste em branco puro, em conformidade com WCAG AAA).
+- **Apple Gray** (`#F5F5F7`): Tela base para páginas e contraste tonal de fundo suave.
+- **Pure White** (`#FFFFFF`): Cartões elevados, contêineres Bento e botões secundários.
+- **Surface Border** (`#E5E5EA`): Delimitação sutil e refinada de componentes e inputs.
+- **Surface Border Subtle** (`#D2E4F0`): Borda delicada azulada para tags clínicas e badges.
+- **Clinical Teal Subtle** (`#EBF4F9`): Fundo de destaque para badges de esterilização e tecnologia.
+- **Clinical Blue** (`#0059B5`): Tom azul de alto contraste utilizado exclusivamente sobre o fundo `#EBF4F9` para garantir acessibilidade superior a 4.7:1 (WCAG AA).
+
+### Named Rules
+
+**A Regra da Pureza Cirúrgica.** As superfícies são predominantemente neutras e alvas; o azul de conversão (`#0071E3`) é reservado para ações primárias e focos de decisão, nunca excedendo 10% da mancha gráfica de qualquer visualização.
+**A Regra do Azul Clínico.** Qualquer badge informativo sobre fundo pastel (`#EBF4F9`) deve obrigatoriamente renderizar tipografia em `#0059B5` para nunca violar a taxa de contraste mínimo exigida pela WCAG AA.
 
 ## Typography
 
-The type system pairs the architectural precision and humanist warmth of Outfit across all levels, producing an interface that feels both technologically cutting-edge and clinically approachable.
+O sistema tipográfico utiliza a família **Outfit** (`@fontsource-variable/outfit`), equilibrando precisão geométrica com calor humanista em todas as escalas.
 
 ### Typographic Principles
 
-- **Controlled Optical Tracking:** Large headings and display types feature deliberate negative letter-spacing (`-0.02em` to `-0.035em`), commanding attention and delivering the editorial confidence seen in modern consumer technology interfaces.
-- **Clinical Labels & Overlines:** Category badges, diagnostic tags, and status trackers employ slightly expanded tracking (`0.02em` to `0.05em`) to balance small font sizes with immediate legibility.
-- **Reading Comfort:** Clinical procedure explanations and doctor bios utilize a relaxed `1.55` to `1.6` line height to prevent ocular fatigue and ensure critical treatment details are easily digested.
+- **Controlled Optical Tracking:** Títulos Display e Headline possuem letter-spacing negativo intencional (`-0.02em` a `-0.035em`), criando autoridade editorial moderna.
+- **Clinical Labels & Overlines:** Badges de tecnologia, categorias e marcadores empregam caixa alta e tracking ligeiramente expandido (`0.02em` a `0.05em`) para legibilidade imediata em corpos reduzidos.
+- **Conforto de Leitura:** Textos descritivos e respostas do FAQ utilizam entrelinhamento relaxado (`1.55` a `1.6`) para prevenir fadiga ocular.
+
+### Hierarchy
+
+- **Display** (700, 3.5rem / mobile 2.25rem, line-height 1.1): Título monumental do Hero.
+- **Headline Large** (600, 2.25rem / mobile 1.75rem, line-height 1.2): Títulos de seções principais (Bento Grid, Tecnologia, Preços, FAQ).
+- **Headline Medium** (600, 1.5rem, line-height 1.3): Títulos de cartões de destaque e bento modules.
+- **Title Medium** (600, 1.125rem, line-height 1.4): Nomes de procedimentos, títulos de perguntas do FAQ e diferenciais.
+- **Body Large** (400, 1.125rem, line-height 1.6): Parágrafo de abertura do Hero.
+- **Body Medium** (400, 1rem, line-height 1.55): Textos explicativos dos serviços e respostas do FAQ.
+- **Body Small** (400, 0.875rem, line-height 1.5): Detalhes complementares, notas de rodapé e orientações de biossegurança.
+- **Label Medium/Small** (600, 0.75rem – 0.875rem, letter-spacing 0.02em - 0.05em): Badges de esterilização, chips de tempo e tags clínicas.
 
 ### Iconography
 
-- **System:** Lucide Icons (`lucide-react`). Inline accessible SVG components engineered for crisp geometric alignment, consistent 2px stroke weight, and harmonious Apple Minimalist aesthetics.
-- **Styling:** Contextual sizing via Tailwind utility classes:
-  - `w-4 h-4` (16px): Inline list bullets, secondary link accents, button companion icons (`Check`, `ArrowUpRight`, `LogOut`, `Home`, `CalendarPlus`).
-  - `w-5 h-5` (20px): Accordion triggers and control switches (`ChevronDown`, `Sun`, `Moon`).
-  - `w-6 h-6` (24px): Bento grid feature icons, procedure representations, and modal identifiers (`Home`, `MapPin`, `Clock`, `Sparkles`, `Footprints`, `Hand`, `Calendar`, `ShieldCheck`, `User`, `X`, `Menu`).
-  - `w-8 h-8` (32px): High-priority clinical trust badges and safety anchors (`ShieldCheck`).
-- **Accessibility:** All decorative icons render with `aria-hidden="true"`; interactive icon buttons declare an explicit `aria-label`.
+- **Biblioteca:** Lucide Icons (`lucide-react`) como componentes SVG embutidos de alta definição geométrica com traço padrão de 2px.
+- **Escala de Uso:**
+  - `16px` (`w-4 h-4`): Marcadores de lista, ícones de botão e setas indicativas.
+  - `20px` (`w-5 h-5`): Triggers do accordion de FAQ (`ChevronDown`) e alternador de tema (`Sun`, `Moon`).
+  - `24px` (`w-6 h-6`): Ícones do Bento Grid, cartões de tecnologia (`Sparkles`, `Zap`, `ShieldCheck`).
+  - `32px` (`w-8 h-8`): Selo principal de autoclave e biossegurança.
+- **Acessibilidade:** Ícones decorativos recebem `aria-hidden="true"`; botões de ícone interativos contêm atributo `aria-label` explícito.
 
-## Layout & Spacing
+## Layout
 
-The layout philosophy mirrors modern hardware presentation sites: clean, modular Bento grids, generous perimeter breathing space, and centered viewports that keep information dense yet uncluttered.
+O modelo espacial organiza o conteúdo em blocos modulares concêntricos com proporção áurea, respiração generosa e foco visual direcionado.
 
 ### Grid Architecture
 
-- **Desktop (1024px+):** 12-column grid constrained to an elegant `max-w-6xl` (1152px) or `max-w-7xl` (1280px) centered container. Spaced with `1.5rem` gutters and minimum `2.5rem` outer canvas padding.
-- **Tablet (640px – 1023px):** 6-column fluid structure with `1.5rem` gutters and `2rem` screen margins.
-- **Mobile (<640px):** Single-column stacked composition utilizing `1rem` column gutters and `1.25rem` screen margins to maximize horizontal real estate on smaller viewports.
+- **Desktop (≥1024px):** Grid de 12 colunas circunscrito a `max-w-6xl` (1152px), com espaçamento entre colunas de 1.5rem e preenchimento de segurança externo de no mínimo 2.5rem.
+- **Tablet (640px – 1023px):** Estrutura fluida de 6 colunas com calhas de 1.5rem e margens laterais de 2rem.
+- **Mobile (<640px):** Fluxo vertical empilhado de coluna única com calhas de 1rem e margens laterais de 1.25rem.
 
 ### Rhythm & Structure
 
-- Modular blocks (service highlights, diagnostic equipment specs, scheduling tools) employ internal card padding of `space-lg` (1.5rem / 24px) for desktop and `space-md` (1rem / 16px) for mobile.
-- Vertical space between major clinical sections scales gracefully from `space-xl` (2.5rem / 40px) on mobile up to 5rem (80px) on desktop, establishing clear cognitive separation between distinct phases of care.
+- Preenchimento interno dos cartões: `space-lg` (1.5rem / 24px) no desktop e `space-md` (1rem / 16px) em dispositivos móveis.
+- Distanciamento vertical entre seções: escala fluida de `2.5rem` (40px) no mobile até `5rem` (80px) no desktop.
 
 ## Elevation & Depth
 
-Visual hierarchy is communicated through soft, layered physical planes and subtle frosted diffusion rather than dark or prominent drop shadows.
+A profundidade é expressa por camadas físicas sutis e difusão fosca (frosted glass), sem o peso de sombras artificiais escuras.
 
-- **Level 0 (Canvas Base):** Ground layer finished in Apple Gray (`#F5F5F7`), completely flat with zero elevation.
-- **Level 1 (Card & Module Resting):** Pure White (`#FFFFFF`) surfaces situated directly on `#F5F5F7`, bounded by a crisp 1px border (`#E5E5EA`) and an ultra-diffuse ambient contact shadow: `0 2px 8px -2px rgba(0, 51, 102, 0.04)`.
-- **Level 2 (Hover & Active Containers):** Lifted interactive cards, hovered time slots, and dropdown menus. Elevated with a refined multidirectional bloom: `0 12px 24px -4px rgba(0, 51, 102, 0.08)`.
-- **Level 3 (Floating Bars & Modals):** Sticky booking navigation bars, doctor profile sheets, and confirmation dialogs. Features backdrop blur (`backdrop-blur-xl`, `rgba(255, 255, 255, 0.82)`) paired with `0 20px 40px -10px rgba(0, 51, 102, 0.12)` and a hairline border of `rgba(229, 229, 234, 0.6)`.
+- **Level 0 (Canvas Base):** Fundo plano em Apple Gray (`#F5F5F7`) no tema claro e `#0B0F17` no tema escuro.
+- **Level 1 (Card & Módulo em Repouso):** Superfície em Branco Puro (`#FFFFFF`) com borda fina de 1px (`#E5E5EA`) e dispersão sutil de contato: `0 1px 3px 0 rgba(0, 51, 102, 0.05)`.
+- **Level 2 (Hover & Cards Elevados):** Elevação magnética sutil com transição via GSAP `quickTo` (`cardHover.ts`) e dispersão multidirecional suave.
+- **Level 3 (Ilha Flutuante & Modais):** Navbar fixa e modal de autenticação com desfoque de fundo (`backdrop-blur-xl`, `rgba(255, 255, 255, 0.85)` no claro / `rgba(15, 23, 42, 0.85)` no escuro), sombra de flutuação e borda semitransparente.
 
 ## Shapes
 
-The design system maintains a balanced roundedness scale (`roundedness: 2`), reflecting the continuous curvature (squircle-like softness) of modern consumer hardware.
+O sistema segue a curvatura contínua das quinas arredondadas modernas (estética squircle):
 
-- **Standard Elements & Cards:** UI elements use `0.5rem` (8px) as a base, with `rounded-lg` (1rem / 16px) for service cards, bento modules, and modal containers.
-- **Hero Containers & Visual Showcases:** Major clinical highlight banners and interactive modules scale to `rounded-xl` (1.5rem / 24px) for soft, approachable enclosures.
-- **Form Controls & Inputs:** Inputs, text areas, and date selector tiles apply `0.75rem` (12px) for a solid, modern touch surface.
-- **Capsules & Full Pills:** The full pill geometry (`9999px`) is applied to call-to-action buttons, filter chips, clinical category badges, and floating navigation pills.
+- **Controles e Pequenos Elementos:** `0.25rem` a `0.5rem` (4px - 8px) para pequenas abas e botões compactos.
+- **Cartões e Módulos Bento:** `1rem` a `1.5rem` (16px - 24px) para cartões de serviços, tecnologia e modal principal.
+- **Contêineres de Métricas:** `1.5rem` (24px) para o bloco de estatísticas de confiança (`TrustStats`).
+- **Pills e Cápsulas Totais (`9999px`):** Botões de CTA, botão flutuante de WhatsApp, badges clínicos, chips de filtro e a ilha de navegação (Navbar).
 
 ## Components
 
 ### Buttons
 
-- **Primary CTA:** Full pill (`rounded-full`) with a solid `#0071E3` fill and `#FFFFFF` bold typography. Height: 48px desktop / 44px mobile. Hover triggers `#0077ED` with a smooth 150ms scale-down (`active:scale-[0.98]`).
-- **Secondary CTA:** Full pill in Pure White (`#FFFFFF`) with a 1px border in `#E5E5EA` and `#0071E3` or `#003366` typography. Hover transitions to `#F5F5F7`.
-- **Tertiary / Ghost Button:** Transparent background, `#0071E3` text with subtle chevron icon, underlined on hover.
+- **Primary CTA:** Formato cápsula (`rounded-full`), fundo `#0071E3`, texto em branco com peso semibold. Hover com transição para `#005BB5` e feedback tátil em clique (`active:scale-[0.98]`).
+- **Secondary Action:** Cápsula em fundo branco puro com borda de 1px em `#E5E5EA` e texto em `#0071E3`.
+- **Floating WhatsApp Button:** Botão circular/pílula flutuante no canto inferior direito com verde autêntico WhatsApp (`#25D366`), ícone nítido, sombra de elevação e `aria-label` descritivo.
 
 ### Chips & Badges
 
-- **Clinical Category Pills:** Small capsules with `#F5F5F7` background, 1px border `#E5E5EA`, and `#1D1D1F` text. Active state switches to `#0071E3` background with crisp white text.
-- **Status Badges (Sterilization, Immediate Slot, Tech Specs):** Pill containers with `#EBF4F9` background, `#0059B5` text (4.7:1+ contrast), and an optional 6px pulsating dot indicator.
-
-### Input Fields & Selectors
-
-- **Text Inputs:** Pure White background, 1px border `#E5E5EA`, text in `#1D1D1F`, placeholder in `#59595E`. Minimum height: 48px with generous internal padding (12px 16px).
-- **Focus State:** 2px ring in `#0071E3` with zero default browser outline.
-- **Date & Time Slot Pickers:** Modular white tiles (`rounded-md`, 12px) with `#E5E5EA` border. Disabled slots are muted at 40% opacity with no hover. Selected slots invert to `#0071E3` background and Pure White text.
+- **Status de Esterilização & Tecnologia:** Cápsula suave com fundo `#EBF4F9`, borda `#D2E4F0` e tipografia em `#0059B5` (WCAG AA compliant).
+- **Tags de Categoria:** Fundo `#F5F5F7` com texto neutro em `#1B1B1D`.
 
 ### Cards & Bento Modules
 
-- **Standard Service Card:** Pure White `#FFFFFF` surface with 1px `#E5E5EA` border and 16px radius (`rounded-lg`). Clear visual hierarchy: procedure category label in `#59595E`, title in `#003366`, duration/specs, and an unobtrusive bottom action link.
-- **Featured Treatment Card:** High-tech variant utilizing a solid Deep Navy `#003366` background with Pure White `#FFFFFF` headings, `#59595E` muted descriptions, and an active `#0071E3` primary button to establish an immediate focal point.
+- **Service Cards:** Superfície branca com hierarquia clara: nome do atendimento, valor em destaque transparente, tempo estimado e lista com ícones de verificação.
+- **Technology Cards:** Módulos com ícone em destaque colorido, selo de categoria e texto esclarecedor sobre os equipamentos hospitalares portáteis.
+- **Trust Stats Blocks:** Grid 4-colunas de métricas clínicas com tipografia monumental e contadores numéricos animados.
 
-### Doctor & Equipment Profile
+### Interactive FAQ Accordion
 
-- **Clinical Bio Module:** Clean two-column or split Bento module pairing high-resolution imagery with structured metadata tags (specialty, CRM/registry, technological certifications) framed in low-contrast `#E5E5EA` containers.
+- **Estrutura:** Lista acessível de perguntas e respostas (`<div role="region">` e `<button aria-expanded="...">`).
+- **Animação GSAP:** Interpolação suave de altura de zero para automática (`height: 'auto'`), rotação sutil de 180° no ícone `ChevronDown` e tratamento de cancelamento em cliques rápidos.
+
+### Floating Navigation
+
+- **Navbar:** Ilha flutuante centralizada com efeito de vidro fosco (`backdrop-blur-xl`), logotipo tipográfico, links de seção e alternador acessível de modo claro/escuro.
+
+## Do's and Don'ts
+
+Diretrizes concretas de design e experiência para assegurar consistência visual e integridade da marca.
+
+### Do:
+
+- **Do** manter a paleta dominada por superfícies alvas (`#FFFFFF`) e cinza Apple (`#F5F5F7`), empregando `#0071E3` com parcimônia para guiar a conversão.
+- **Do** garantir alvos de toque mínimos de 44x44px em botões, links de navegação e triggers do acordeão.
+- **Do** incluir suporte obrigatório a `prefers-reduced-motion: reduce` em todas as animações GSAP e transições CSS, preservando a utilidade funcional instantânea.
+- **Do** reforçar a transparência comercial em Mococa - SP (taxa de deslocamento zero R$ 0 e pagamentos em PIX/dinheiro) e os protocolos de esterilização 100% em autoclave.
+- **Do** usar ícones da biblioteca Lucide com traço consistente de 2px e declaração de `aria-hidden="true"` quando puramente decorativos.
+
+### Don't:
+
+- **Don't** utilizar clichês gráficos médicos antiquados, como cruzes vermelhas agressivas ou verdes hospitalares pesados.
+- **Don't** aplicar sombras escuras ou pesadas com opacidade superior a 15%; a profundidade deve ser comunicada por iluminação suave e bordas refinadas (`#E5E5EA`).
+- **Don't** omitir rótulos acessíveis (`aria-label` ou texto visível) em botões de ação ou links de contato externo.
+- **Don't** introduzir animações contínuas, oscilações perpétuas ou efeitos parallax invasivos que concorram com a legibilidade das informações de atendimento.
+- **Don't** quebrar a semântica hierárquica tipográfica do Outfit (Display no Hero, Headline em seções, Title em cards, Body para leitura).

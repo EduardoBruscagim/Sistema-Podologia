@@ -20,10 +20,14 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 ### Fase 1 (Entregue):
 
-- **Landing Page B2C de Alta Conversão**: Apresentação clara do serviço em domicílio em Mococa - SP, diferenciais em Bento Grid e FAQ detalhado.
+- **Landing Page B2C de Alta Conversão**: Apresentação clara do serviço em domicílio em Mococa - SP, diferenciais em Bento Grid, métricas de credibilidade e FAQ detalhado.
+- **Métricas e Credenciais de Confiança (`TrustStats`)**: Destaque para experiência clínica sólida (desde 2016 / 10 anos de atuação), contadores dinâmicos (+5.000 atendimentos realizados) e compromisso com 100% de esterilização hospitalar.
+- **Tecnologia & Biossegurança Portátil (`TechnologySection`)**: Apresentação de tratamentos modernos em domicílio — fototerapia terapêutica (luz vermelha), ozonioterapia podológica (alta frequência) e autoclave digital com descartáveis selados.
 - **Tabela Transparente de Serviços**: Detalhamento dos 3 principais atendimentos (_Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_), tempo estimado e diferenciais inclusos.
-- **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e links inteligentes com mensagens pré-formatadas para agendamento rápido.
+- **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e links inteligentes com mensagens pré-formatadas para agendamento rápido sem intermediários.
 - **Transparência Geográfica e Comercial**: Cobertura em toda a cidade de Mococa - SP com taxa de deslocamento zero (R$ 0) e pagamentos exclusivos via PIX ou dinheiro vivo.
+- **Accordion Interativo de FAQ com GSAP**: Expansão fluida com cálculo dinâmico de altura (`height: 'auto'`), teclado navegável e total acessibilidade WAI-ARIA.
+- **Micro-interações e Animações GSAP**: Módulos dedicados com suporte nativo a `prefers-reduced-motion`, efeito `cardHover.ts` com `quickTo` e orquestração de ScrollTrigger em todas as seções.
 - **Modo Claro / Escuro com Anti-FOUC**: Alternador de tema acessível com persistência em `localStorage` e script síncrono no `<head>`.
 - **Acessibilidade Rigorosa (WCAG AA)**: _Skip link_ funcional (`#main-content`), suporte estrito a `prefers-reduced-motion`, navegação por setas nas abas do modal e alvos de toque de no mínimo 44x44px.
 - **Simulação de Perfil de Cliente (Frontend Mock)**: Modal de login/cadastro local com persistência em `localStorage` para experimentação de interface.
@@ -44,6 +48,7 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 | **Estilização**                        | [Tailwind CSS v4](https://tailwindcss.com/), [daisyUI v5](https://daisyui.com/)        |
 | **Tipografia**                         | [Outfit Variable](https://fontsource.org/fonts/outfit) (`@fontsource-variable/outfit`) |
 | **Animações**                          | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger + `@gsap/react`                  |
+| **Ícones & Acessibilidade**            | [Lucide React](https://lucide.dev/) (SVGs inline acessíveis com `aria-hidden`)         |
 | **Qualidade & Padronização**           | ESLint 10 (`typescript-eslint`), Prettier 3                                            |
 | **Backend / Persistência (Planejado)** | Supabase (PostgreSQL, Auth, Storage)                                                   |
 
@@ -57,20 +62,25 @@ A organização de diretórios reflete a separação modular de componentes, ani
 ├── src/
 │   ├── animations/         # Módulos de animações orquestradas via GSAP
 │   │   ├── bento.ts        # Revelação e efeitos da seção Bento Grid
+│   │   ├── cardHover.ts    # Elevação e inclinação magnética em cards
 │   │   ├── cta.ts          # Animação e descarte do CTA final
+│   │   ├── faq.ts          # Altura dinâmica e rotação do accordion de FAQ
 │   │   ├── hero.ts         # Revelação tipográfica e levitação do Hero
 │   │   ├── navbar.ts       # Ilha de navegação retrátil e reativa ao foco
-│   │   └── reducedMotion.ts# Tratamento para preferência de movimento reduzido
+│   │   ├── reducedMotion.ts# Tratamento para preferência de movimento reduzido
+│   │   ├── services.ts     # Entrada escalonada dos cartões de serviços
+│   │   ├── stats.ts        # Contadores numéricos e métricas de confiança
+│   │   └── technology.ts   # Revelação dos diferenciais tecnológicos e autoclave
 │   ├── components/         # Componentes modulares React
 │   │   ├── auth/           # Modal de autenticação acessível com tabs
-│   │   ├── common/         # Componentes compartilhados (botão WhatsApp)
-│   │   ├── home/           # Seções da Home (Hero, BentoGrid, Preços, FAQ, CTA)
+│   │   ├── common/         # Componentes compartilhados (botão WhatsApp flutuante)
+│   │   ├── home/           # Seções da Home (Hero, Stats, Bento, Serviços, Tech, FAQ, CTA)
 │   │   └── layout/         # Componentes estruturais (Navbar, Footer)
 │   ├── context/            # Provedores de contexto React (AuthContext, ThemeContext)
 │   ├── hooks/              # Hooks customizados isolados (useAuth, useTheme)
 │   ├── pages/              # Páginas da aplicação (HomePage, DashboardPage)
 │   ├── types/              # Definições de interfaces e tipos TypeScript
-│   ├── utils/              # Helpers e utilitários puros (theme.ts)
+│   ├── utils/              # Helpers e utilitários puros (theme.ts, whatsapp.ts)
 │   ├── App.tsx             # Roteador React Router 7 e provedores globais
 │   ├── main.tsx            # Ponto de entrada React e registro de plugins GSAP
 │   └── style.css           # Tokens de tema semânticos, fontes e Tailwind v4
