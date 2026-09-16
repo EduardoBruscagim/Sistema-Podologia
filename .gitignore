@@ -38,3 +38,8 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# AI Agents & Local Rules
+.agents/
+AGENTS.md
+GEMINI.md
