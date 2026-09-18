@@ -4,46 +4,46 @@ import { initCardsHover } from './cardHover'
 export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     const heroTl = gsap.timeline({
-      defaults: { ease: 'power3.out' },
+      defaults: { ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
     })
 
-    // Cascata de tipografia do Hero (Título, Descrição, Ações)
+    // Revelação tipográfica editorial suave (Título, Descrição, Ações)
     heroTl.fromTo(
       '.gsap-hero-reveal',
-      { y: 24, autoAlpha: 0 },
+      { y: 12, autoAlpha: 0 },
       {
         y: 0,
         autoAlpha: 1,
-        duration: 0.7,
-        stagger: 0.12,
-        clearProps: 'opacity,visibility',
+        duration: 0.75,
+        stagger: 0.08,
+        clearProps: 'transform,opacity,visibility',
       },
     )
 
-    // Entrada suave do Card de Imagem do Kit Profissional (sem clearProps em transform para preservar ScrollTrigger parallax)
+    // Entrada da fotografia da maleta com micro-ajuste focal (sem borrar fontes)
     heroTl.fromTo(
       '.gsap-hero-image',
-      { y: 32, autoAlpha: 0, scale: 0.98 },
+      { y: 16, autoAlpha: 0, scale: 1.02 },
       {
         y: 0,
         autoAlpha: 1,
         scale: 1,
-        duration: 0.8,
+        duration: 0.85,
         clearProps: 'opacity,visibility',
       },
       '-=0.45',
     )
 
-    // Sutil efeito de profundidade/parallax orgânico ao rolar a página para baixo
+    // Parallax contido e silencioso durante a rolagem
     if (heroSectionEl) {
       gsap.to('.gsap-hero-image', {
         scrollTrigger: {
           trigger: heroSectionEl,
           start: 'top top',
           end: 'bottom top',
-          scrub: 0.8,
+          scrub: 1.0,
         },
-        yPercent: 6,
+        yPercent: 4,
         ease: 'none',
       })
     }
@@ -53,9 +53,8 @@ export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => 
   if (heroSectionEl) {
     const heroCard = heroSectionEl.querySelectorAll<HTMLElement>('.gsap-hero-image > div')
     cleanupHover = initCardsHover(heroCard, {
-      y: -4,
-      scale: 1.008,
-      duration: 0.35,
+      y: -2,
+      duration: 0.3,
     })
   }
 

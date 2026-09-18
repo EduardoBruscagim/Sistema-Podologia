@@ -1,134 +1,88 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-14T02:40:00.000Z",
+  "generatedAt": "2026-09-17T20:53:00.000Z",
   "title": "Design System: Angélica Eduarda | Podologia & Cuidado Domiciliar",
   "extensions": {
     "colorMeta": {
       "primary": {
         "role": "primary",
-        "displayName": "Azul Safira (Apple Blue)",
-        "canonical": "#0071e3",
+        "displayName": "Obsidian Espresso",
+        "canonical": "#181615",
         "tonalRamp": [
-          "#002b5e",
-          "#004595",
-          "#005cc9",
-          "#0071e3",
-          "#2e8df8",
-          "#66acfa",
-          "#9ecbfb",
-          "#d9ebfd"
+          "#11100f",
+          "#181615",
+          "#24211f",
+          "#34302c",
+          "#595550",
+          "#8c857e",
+          "#c8c3bb",
+          "#faf8f5"
         ]
       },
-      "clinical-blue": {
-        "role": "primary",
-        "displayName": "Azul Clínico",
-        "canonical": "#0059b5",
-        "tonalRamp": [
-          "#001b3f",
-          "#002e60",
-          "#00458f",
-          "#0059b5",
-          "#2d78d9",
-          "#659ef0",
-          "#9fc4fa",
-          "#dce9fd"
-        ]
-      },
-      "apple-gray": {
+      "surface": {
         "role": "neutral",
-        "displayName": "Cinza Apple",
-        "canonical": "#f5f5f7",
-        "tonalRamp": [
-          "#1c1c1e",
-          "#3a3a3c",
-          "#636366",
-          "#8e8e93",
-          "#c7c7cc",
-          "#d1d1d6",
-          "#e5e5ea",
-          "#f5f5f7"
-        ]
+        "displayName": "Warm Alabaster",
+        "canonical": "#faf8f5",
+        "tonalRamp": ["#11100f", "#1e1b19", "#eae4dc", "#f2eee8", "#faf8f5", "#ffffff"]
+      },
+      "sage": {
+        "role": "accent",
+        "displayName": "Botanical Sage",
+        "canonical": "#3b5346",
+        "tonalRamp": ["#19261f", "#2c4035", "#3b5346", "#4a6355", "#7ea08e", "#9ab9a8", "#eaf0ec"]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Muted Slate",
+        "canonical": "#635e59",
+        "tonalRamp": ["#181615", "#383532", "#595550", "#635e59", "#8c857b", "#b5afa6"]
       },
       "pure-white": {
         "role": "neutral",
         "displayName": "Branco Puro",
         "canonical": "#ffffff",
-        "tonalRamp": [
-          "#0f172a",
-          "#1e293b",
-          "#334155",
-          "#64748b",
-          "#94a3b8",
-          "#cbd5e1",
-          "#f1f5f9",
-          "#ffffff"
-        ]
-      },
-      "dark-bg": {
-        "role": "neutral",
-        "displayName": "Ardósia Noturna Profunda",
-        "canonical": "#0b0f17",
-        "tonalRamp": [
-          "#020617",
-          "#0b0f17",
-          "#0f172a",
-          "#1e293b",
-          "#334155",
-          "#475569",
-          "#64748b",
-          "#94a3b8"
-        ]
+        "tonalRamp": ["#11100f", "#181615", "#faf8f5", "#ffffff"]
       }
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Display",
-        "purpose": "Título principal do Hero com impacto monumental e kerning fechado."
+        "displayName": "Display (Newsreader)",
+        "purpose": "Título principal com impacto editorial monumental e sofisticação clínica clássica."
       },
       "headline": {
-        "displayName": "Headline",
-        "purpose": "Títulos de seções principais (Bento Grid, Tecnologia, Preços, FAQ)."
+        "displayName": "Headline (Newsreader)",
+        "purpose": "Títulos de seções principais (Procedimentos, Biossegurança, FAQ)."
       },
       "title": {
-        "displayName": "Title",
-        "purpose": "Títulos de cartões de serviços, diferenciais e tecnologia."
+        "displayName": "Title (Outfit Variable)",
+        "purpose": "Títulos de itens de serviços, diferenciais e tecnologia técnica."
       },
       "body": {
-        "displayName": "Body",
-        "purpose": "Parágrafos descritivos e orientações de atendimento domiciliar."
+        "displayName": "Body (Outfit Variable)",
+        "purpose": "Parágrafos descritivos, orientações de assepsia e respostas de dúvidas."
       },
       "label": {
-        "displayName": "Label",
-        "purpose": "Badges de autoclave, chips de tempo e categorias em caixa alta."
+        "displayName": "Label (Outfit Variable)",
+        "purpose": "Numerais cronológicos (01 /), chips de autoclave a 134°C e badges de tempo."
       }
     },
     "shadows": [
       {
-        "name": "island-ambient",
-        "value": "0 20px 25px -5px rgba(15, 23, 42, 0.05)",
-        "purpose": "Dispersão ambiental sob a ilha flutuante no modo claro."
+        "name": "shadow-2xs",
+        "value": "0 1px 2px 0 rgba(24, 22, 21, 0.03)",
+        "purpose": "Microsombra sutil de ancoragem em botões de ação."
       },
       {
-        "name": "night-glow",
-        "value": "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
-        "purpose": "Sombra suave de profundidade no modo escuro."
-      },
-      {
-        "name": "accent-elevation",
-        "value": "0 10px 15px -3px rgba(0, 113, 227, 0.3)",
-        "purpose": "Elevação luminosa do botão primário de agendamento."
-      },
-      {
-        "name": "card-hover",
-        "value": "0 12px 24px -4px rgba(0, 51, 102, 0.08)",
-        "purpose": "Elevação tátil dos cartões interativos em estado de foco ou hover."
+        "name": "shadow-xs",
+        "value": "0 1px 3px 0 rgba(24, 22, 21, 0.05)",
+        "purpose": "Elevação tátil refinada para cartões de procedimentos e painel de agendamento."
       }
     ],
     "motion": [
       {
         "name": "ease-out-power3",
         "value": "cubic-bezier(0.215, 0.61, 0.355, 1)",
-        "purpose": "Entrada suave da revelação de títulos e transições de hover."
+        "purpose": "Entrada suave física para tipografia editorial e acordeão de dúvidas."
       }
     ],
     "breakpoints": [
@@ -143,69 +97,69 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Botão principal de agendamento e CTA de conversão direta.",
-      "html": "<button class=\"ds-btn-primary\">Agendar Atendimento</button>",
-      "css": ".ds-btn-primary { background: #0071e3; color: #ffffff; padding: 12px 28px; border-radius: 9999px; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: background 0.15s ease, transform 0.15s ease; } .ds-btn-primary:hover { background: #005bb5; } .ds-btn-primary:active { transform: scale(0.98); }"
+      "description": "Botão principal de agendamento com altura tátil mínima de 44px (WCAG 2.5.5).",
+      "html": "<button class=\"ds-btn-primary\">Agendar Horário</button>",
+      "css": ".ds-btn-primary { background: #181615; color: #faf8f5; min-height: 44px; padding: 10px 24px; border-radius: 9999px; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.15s ease, transform 0.15s ease; } .ds-btn-primary:hover { background: #2d2927; } .ds-btn-primary:active { transform: scale(0.98); }"
     },
     {
-      "name": "Secondary Button",
+      "name": "Theme Toggle Button",
       "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "Botão secundário em contorno sutil para consulta de tabela de valores.",
-      "html": "<button class=\"ds-btn-secondary\">Ver Serviços & Valores</button>",
-      "css": ".ds-btn-secondary { background: #ffffff; color: #0071e3; padding: 12px 28px; border-radius: 9999px; font-weight: 600; font-size: 1rem; border: 1px solid #e5e5ea; cursor: pointer; transition: background 0.15s ease; } .ds-btn-secondary:hover { background: #f5f5f7; }"
+      "refersTo": "button-theme",
+      "description": "Alternador de tema claro/escuro com alvo tátil de 44x44px.",
+      "html": "<button class=\"ds-btn-theme\" aria-label=\"Ativar modo escuro\"><svg></svg></button>",
+      "css": ".ds-btn-theme { min-width: 44px; min-height: 44px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; background: transparent; border: none; cursor: pointer; }"
     },
     {
-      "name": "Clinical Badge",
+      "name": "Biosafety Chip",
       "kind": "chip",
-      "refersTo": "badge-clinical",
-      "description": "Pílula de destaque clínico para indicar procedimentos de biossegurança e tecnologias.",
-      "html": "<span class=\"ds-badge-clinical\">100% ESTERILIZADO EM AUTOCLAVE</span>",
-      "css": ".ds-badge-clinical { display: inline-flex; align-items: center; background: #ebf4f9; color: #0059b5; border: 1px solid #d2e4f0; padding: 6px 14px; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }"
+      "refersTo": "chip-biosafety",
+      "description": "Marcador de autoclave a 134°C com alto contraste e tom mineral botânico.",
+      "html": "<span class=\"ds-chip-biosafety\">Autoclave 134°C</span>",
+      "css": ".ds-chip-biosafety { display: inline-flex; align-items: center; background: #edf3ef; color: #2a4736; border: 1px solid rgba(42, 71, 54, 0.15); padding: 4px 12px; border-radius: 9999px; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }"
     },
     {
-      "name": "Service Card",
+      "name": "Editorial Service Row",
       "kind": "card",
-      "refersTo": "card-surface",
-      "description": "Cartão modulado de procedimento com tempo, descrição e valor transparente.",
-      "html": "<div class=\"ds-card-service\"><div class=\"ds-card-header\"><h3>Pé e Mão Completo</h3><span class=\"ds-card-price\">R$ 85</span></div><p>Cuidado integral unindo saúde preventiva, corte anatômico e esmaltação.</p></div>",
-      "css": ".ds-card-service { background: #ffffff; border: 1px solid #e5e5ea; border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px 0 rgba(0, 51, 102, 0.05); } .ds-card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; } .ds-card-header h3 { font-size: 1.25rem; font-weight: 600; color: #1b1b1d; margin: 0; } .ds-card-price { font-size: 1.5rem; font-weight: 700; color: #0071e3; } .ds-card-service p { color: #59595e; font-size: 0.875rem; line-height: 1.5; margin: 0; }"
+      "refersTo": "card-editorial",
+      "description": "Linha editorial de procedimento com tipografia serifa, valor tabular e garantia em destaque.",
+      "html": "<div class=\"ds-service-row\"><h3>Pé e Mão</h3><span class=\"ds-price\">R$ 75</span></div>",
+      "css": ".ds-service-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(24, 22, 21, 0.08); padding: 24px 0; }"
     }
   ],
   "narrative": {
-    "northStar": "O Santuário Clínico Minimalista",
-    "overview": "Este sistema de design reimagina os cuidados especializados em podologia e estética clínica sob a ótica do minimalismo industrial da Apple: prístino, calmo, altamente estruturado e descompromissado com o óbvio. Ele rejeita os padrões visuais antiquados da área médica em favor de uma atmosfera que transmite esterilização rigorosa, tecnologia de ponta e acolhimento humano sereno no conforto do lar da cliente em Mococa - SP.",
+    "northStar": "Quiet Luxury through Restraint & Authentic Personal Brand",
+    "overview": "Este sistema de design estabelece a identidade visual e a linguagem de produto de Angélica Eduarda, especialista em podologia clínica e cuidado integral dos pés e mãos em domicílio em Mococa - SP. Ele expressa a excelência médica através de uma direção de arte editorial e sóbria: rejeita intencionalmente clichês de luxo artificial em favor de sofisticação autêntica ancorada em rigor clínico, composições assimétricas e tipografia editorial impecável.",
     "keyCharacteristics": [
-      "Rigor e Serenidade: Planos brancos elevados sobre fundo cinza-suave (#F5F5F7).",
-      "Tipografia Esculpida: Família Outfit com kerning deliberadamente fechado nos títulos.",
-      "Micro-interações Previsíveis: Animações GSAP suaves com respeito a prefers-reduced-motion.",
-      "Acessibilidade Universal: Contraste estrito WCAG AA e alvos de toque generosos."
+      "Rigor Mineral e Serenidade: Tons Warm Alabaster (#FAF8F5) e Obsidian Espresso (#181615) com acentos Botanical Sage (#3B5346).",
+      "Dupla Tipográfica: Newsreader clássica para títulos editoriais monumentais e Outfit Variable para precisão funcional.",
+      "Composição Contínua: Linhas capilares divisórias e numeração cronológica (01 /, 02 /) substituindo cards dentro de cards.",
+      "Acessibilidade Universal: Mínimo 44x44px em alvos táteis e contraste superior a 7:1 em textos auxiliares (WCAG AAA)."
     ],
     "rules": [
       {
-        "name": "A Regra da Pureza Cirúrgica",
-        "body": "As superfícies são predominantemente neutras e alvas; o azul de conversão (#0071E3) é reservado para ações primárias e focos de decisão, nunca excedendo 10% da mancha gráfica de qualquer visualização.",
+        "name": "A Regra da Sobriedade Mineral",
+        "body": "As superfícies mantêm-se em Warm Alabaster (#FAF8F5) e Obsidian Espresso (#181615); o acento Botanical Sage (#3B5346) conecta o bem-estar e o cuidado corporal sem nunca recorrer a verdes hospitalares pesados ou dourados artificiais.",
         "section": "colors"
       },
       {
-        "name": "A Regra do Azul Clínico",
-        "body": "Qualquer badge informativo sobre fundo pastel (#EBF4F9) deve obrigatoriamente renderizar tipografia em #0059B5 para nunca violar a taxa de contraste mínimo exigida pela WCAG AA.",
-        "section": "colors"
+        "name": "A Regra dos Alvos de Toque Mínimos",
+        "body": "Todos os elementos interativos (botões, alternadores e seletores) devem possuir área física de toque de no mínimo 44x44px em dispositivos móveis e desktop, atendendo a WCAG 2.5.5 / 2.5.8.",
+        "section": "accessibility"
       }
     ],
     "dos": [
-      "Do manter a paleta dominada por superfícies alvas (#FFFFFF) e cinza Apple (#F5F5F7), empregando #0071E3 com parcimônia para guiar a conversão.",
+      "Do manter a paleta dominada por tons minerais acolhedores (#FAF8F5, #181615) e linhas divisórias ultrafinas de 1px.",
       "Do garantir alvos de toque mínimos de 44x44px em botões, links de navegação e triggers do acordeão.",
       "Do incluir suporte obrigatório a prefers-reduced-motion: reduce em todas as animações GSAP e transições CSS.",
-      "Do reforçar a transparência comercial em Mococa - SP (taxa de deslocamento zero R$ 0 e pagamentos em PIX/dinheiro) e os protocolos de esterilização 100% em autoclave.",
-      "Do usar ícones da biblioteca Lucide com traço consistente de 2px e declaração de aria-hidden=\"true\" quando puramente decorativos."
+      "Do reforçar a transparência comercial em Mococa - SP (taxa de deslocamento zero R$ 0 e pagamentos em PIX/dinheiro) e os protocolos de esterilização 100% em autoclave a 134°C.",
+      "Do usar ícones da biblioteca Lucide com traço sutil e declaração de aria-hidden=\"true\" quando decorativos."
     ],
     "donts": [
-      "Don't utilizar clichês gráficos médicos antiquados, como cruzes vermelhas agressivas ou verdes hospitalares pesados.",
-      "Don't aplicar sombras escuras ou pesadas com opacidade superior a 15%; a profundidade deve ser comunicada por iluminação suave e bordas refinadas (#E5E5EA).",
+      "Don't utilizar clichês gráficos de falso luxo como selos de cera, plintos de pedra simulados, brasões heráldicos ou dourados reflexivos.",
+      "Don't aplicar sombras pesadas ou glows de néon que poluam a serenidade médica e a estética editorial.",
       "Don't omitir rótulos acessíveis (aria-label ou texto visível) em botões de ação ou links de contato externo.",
       "Don't introduzir animações contínuas, oscilações perpétuas ou efeitos parallax invasivos que concorram com a legibilidade das informações de atendimento.",
-      "Don't quebrar a semântica hierárquica tipográfica do Outfit (Display no Hero, Headline em seções, Title em cards, Body para leitura)."
+      "Don't misturar mais de duas famílias tipográficas além de Newsreader (serif) e Outfit Variable (sans)."
     ]
   }
 }
