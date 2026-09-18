@@ -135,7 +135,19 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
     }, [isOpen, prefersReduced])
 
     return (
-      <div className="faq-item">
+      <div
+        className={`faq-item relative transition-all duration-300 ${
+          isOpen ? 'pl-4 sm:pl-5 -ml-1' : 'pl-0'
+        }`}
+      >
+        {/* Hairline Accent Indicator Vertical */}
+        <span
+          aria-hidden="true"
+          className={`absolute left-0 top-6 bottom-6 w-[2px] rounded-full bg-accent transition-all duration-300 ${
+            isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-50'
+          }`}
+        />
+
         <h3>
           <button
             type="button"
@@ -153,16 +165,16 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
               {item.question}
             </span>
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+              className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
                 isOpen
-                  ? 'bg-accent/10 text-accent'
+                  ? 'bg-accent text-white shadow-2xs'
                   : 'bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-400 group-hover:bg-accent/10 group-hover:text-accent'
               }`}
             >
               <ChevronDown
                 aria-hidden="true"
                 className={`w-4 h-4 transition-transform duration-300 ${
-                  isOpen ? 'rotate-180 text-accent' : 'text-current group-hover:text-accent'
+                  isOpen ? 'rotate-180 text-white' : 'text-current group-hover:text-accent'
                 }`}
               />
             </div>
