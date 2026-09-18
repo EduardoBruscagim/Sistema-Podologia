@@ -60,7 +60,8 @@ export const Hero: React.FC = () => {
           >
             O cuidado clínico e especializado para seus pés e mãos,
             <br className="hidden sm:inline" /> no{' '}
-            <span className="italic font-light">conforto silencioso</span> da sua casa.
+            <span className="italic font-light whitespace-nowrap">conforto silencioso</span> da sua
+            casa.
           </h1>
 
           <p className="gsap-hero-reveal font-sans text-base sm:text-lg text-on-surface-variant dark:text-slate-300 leading-relaxed mb-8 max-w-[48ch] font-light text-pretty">

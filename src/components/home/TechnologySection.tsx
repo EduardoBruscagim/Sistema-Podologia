@@ -56,17 +56,17 @@ export const TechnologySection: React.FC = () => {
       </div>
 
       {/* Bento Grid Tecnológico e Biossegurança */}
-      <div className="tech-grid grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      <div className="tech-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Célula Principal de Autoridade: Esterilização em Autoclave a 134°C + 100% Descartáveis */}
-        <div className="tech-featured lg:col-span-12 p-6 sm:p-8 lg:p-10 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-colors duration-200 shadow-xs">
+        <div className="tech-featured col-span-1 md:col-span-2 lg:col-span-12 p-6 sm:p-8 lg:p-10 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 flex flex-col justify-between h-full">
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent">
+                  <div className="featured-icon inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent">
                     <ShieldCheck aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
                     Biossegurança Hospitalar
-                  </span>
+                  </div>
                   <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-300">
                     Autoclave a 134°C
                   </span>
@@ -137,7 +137,7 @@ export const TechnologySection: React.FC = () => {
               </div>
             </div>
 
-            {/* Prova Visual Autêntica */}
+            {/* Prova Visual Autêntica: Setup Real em Mesa de Atendimento */}
             <div className="lg:col-span-5">
               <div className="relative rounded-xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-surface-variant/30 group aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
                 <img
@@ -163,8 +163,8 @@ export const TechnologySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Célula de Apoio 1: Fototerapia LED */}
-        <div className="tech-card lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-colors duration-200 shadow-xs flex flex-col justify-between">
+        {/* Card Secundário 1: Fototerapia LED */}
+        <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent">
@@ -178,6 +178,7 @@ export const TechnologySection: React.FC = () => {
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-2.5 leading-snug">
               Fototerapia LED de luz vermelha
             </h3>
+
             <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[42ch] text-pretty">
               Atua na regeneração celular dos tecidos, aliviando processos inflamatórios imediatos e
               acelerando a cicatrização de cantos de unhas doloridos ou sensibilizados.
@@ -193,8 +194,8 @@ export const TechnologySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Célula de Apoio 2: Cabine UV */}
-        <div className="tech-card lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-colors duration-200 shadow-xs flex flex-col justify-between">
+        {/* Card Secundário 2: Cabine UV Portátil */}
+        <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent">
@@ -208,6 +209,7 @@ export const TechnologySection: React.FC = () => {
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-2.5 leading-snug">
               Cabine portátil de luz ultravioleta
             </h3>
+
             <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[42ch] text-pretty">
               Acelera a polimerização e a secagem profunda do esmalte, impedindo borrões no calçado
               e proporcionando ação auxiliar contra fungos e bactérias.

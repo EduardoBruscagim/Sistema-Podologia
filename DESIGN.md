@@ -21,6 +21,12 @@ colors:
   sage-dark: '#7ea08e'
   sage-subtle: '#eaf0ec'
   sage-subtle-dark: '#19261f'
+  accent: '#9b4124'
+  accent-hover: '#82351c'
+  accent-dark: '#e08264'
+  accent-dark-hover: '#e8957c'
+  on-accent: '#ffffff'
+  on-accent-dark: '#11100f'
   surface-border: 'rgba(24, 22, 21, 0.08)'
   surface-border-dark: 'rgba(250, 248, 245, 0.08)'
   surface-border-subtle: 'rgba(24, 22, 21, 0.04)'
@@ -169,6 +175,11 @@ A paleta mineral é inspirada em matérias-primas nobres, assepsia cirúrgica e 
 
 - **Botanical Sage** (`#3B5346` / Dark `#7EA08E`): Acento sutil e natural que conecta os cuidados corporais e a podologia à saúde preventiva, transmitindo acolhimento e bem-estar.
 - **Sage Subtle** (`#EAF0EC` / Dark `#19261F`): Fundo suave para detalhes de biossegurança e chips informativos.
+
+### Functional Accent: Rich Warm Terracotta
+
+- **Rich Warm Terracotta** (`#9B4124` / Dark `#E08264`): Cor de ação estritamente funcional reservada com exclusividade para gatilhos interativos primários (CTAs de agendamento, anéis de foco, itens ativos de acordeão e estados hover de procedimento). Possui taxa de contraste de 6.25:1 contra o fundo Warm Alabaster e 6.6:1 com texto branco, superando WCAG AA (> 5:1).
+- **Radius Pill (`rounded-full`) vs Card Radius (`rounded-xl`)**: O formato pílula (`rounded-full`) é restrito exclusivamente aos botões de conversão principais. Cartões utilizam curvatura discreta (`rounded-xl` / 12px) e badges informativos adotam curvatura mínima (`rounded-md` / 4px a 6px).
 
 ### Neutrals & Borders
 
