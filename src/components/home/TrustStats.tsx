@@ -61,7 +61,7 @@ export const TrustStats: React.FC = () => {
               >
                 +25.000
               </span>
-              <span className="font-sans text-sm sm:text-base text-text-secondary dark:text-slate-300 mt-3 sm:mt-4 font-light leading-relaxed max-w-[44ch]">
+              <span className="font-sans text-sm sm:text-base text-text-secondary mt-3 sm:mt-4 font-light leading-relaxed max-w-[44ch]">
                 Procedimentos conduzidos com prontuário individual e a dedicação atenta de uma única
                 especialista.
               </span>
@@ -72,14 +72,14 @@ export const TrustStats: React.FC = () => {
         {/* Célula 2: Trajetória Clínica (Desde 2016) */}
         <div className="stat-block col-span-1 md:col-span-1 lg:col-span-3 bg-white dark:bg-[#161413] p-6 sm:p-7 lg:p-8 flex flex-col justify-between transition-colors duration-200">
           <div>
-            <dt className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-sage dark:text-emerald-400/90 mb-3">
+            <dt className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-sage mb-3">
               02 / Trajetória Clínica
             </dt>
             <dd className="m-0 flex flex-col">
               <span className="font-serif text-3xl sm:text-4xl lg:text-4xl font-light text-on-surface dark:text-white tracking-tight leading-none tabular-nums">
                 Desde 2016
               </span>
-              <span className="font-sans text-xs sm:text-sm text-text-secondary dark:text-slate-400 mt-3 font-light leading-relaxed">
+              <span className="font-sans text-xs sm:text-sm text-text-secondary mt-3 font-light leading-relaxed">
                 Uma década aperfeiçoando o protocolo de podologia clínica domiciliar em Mococa.
               </span>
             </dd>
@@ -89,14 +89,14 @@ export const TrustStats: React.FC = () => {
         {/* Célula 3: Deslocamento Cortesia (Taxa R$ 0) */}
         <div className="stat-block col-span-1 md:col-span-1 lg:col-span-3 bg-white dark:bg-[#161413] p-6 sm:p-7 lg:p-8 flex flex-col justify-between transition-colors duration-200">
           <div>
-            <dt className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-sage dark:text-emerald-400/90 mb-3">
+            <dt className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-sage mb-3">
               03 / Conveniência & Rigor
             </dt>
             <dd className="m-0 flex flex-col">
               <span className="font-serif text-3xl sm:text-4xl lg:text-4xl font-light text-on-surface dark:text-white tracking-tight leading-none tabular-nums">
                 Taxa R$ 0
               </span>
-              <span className="font-sans text-xs sm:text-sm text-text-secondary dark:text-slate-400 mt-3 font-light leading-relaxed">
+              <span className="font-sans text-xs sm:text-sm text-text-secondary mt-3 font-light leading-relaxed">
                 Deslocamento cortesia em qualquer bairro de Mococa, com instrumentos esterilizados.
               </span>
             </dd>

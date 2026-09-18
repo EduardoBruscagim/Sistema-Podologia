@@ -48,7 +48,7 @@ export const BentoGrid: React.FC = () => {
         >
           Como funciona o atendimento clínico na sua residência.
         </h2>
-        <p className="text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed max-w-[48ch] text-pretty">
+        <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
           Estrutura técnica completa, biossegurança cirúrgica e conforto absoluto levados até você,
           com discrição e pontualidade.
         </p>
@@ -59,10 +59,8 @@ export const BentoGrid: React.FC = () => {
         <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#161413] border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
-              <span className="font-serif text-lg text-sage dark:text-[#7EA08E] tracking-widest font-normal">
-                01
-              </span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage dark:text-[#7EA08E]">
+              <span className="font-serif text-lg text-sage tracking-widest font-normal">01</span>
+              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage">
                 <Home aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
@@ -70,13 +68,13 @@ export const BentoGrid: React.FC = () => {
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-3 leading-snug">
               Tudo pronto na sua sala ou quarto
             </h3>
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[38ch] text-pretty">
+            <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[38ch] text-pretty">
               Levo os equipamentos, instrumentais esterilizados e materiais descartáveis. Você só
               precisa escolher um sofá ou poltrona confortável.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary dark:text-slate-400 font-light">
+          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary font-light">
             <span className="flex items-center gap-2">
               <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
               <span>Sem fila ou sala de espera</span>
@@ -88,10 +86,8 @@ export const BentoGrid: React.FC = () => {
         <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#161413] border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
-              <span className="font-serif text-lg text-sage dark:text-[#7EA08E] tracking-widest font-normal">
-                02
-              </span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage dark:text-[#7EA08E]">
+              <span className="font-serif text-lg text-sage tracking-widest font-normal">02</span>
+              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage">
                 <MapPin aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
@@ -99,13 +95,13 @@ export const BentoGrid: React.FC = () => {
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-3 leading-snug">
               Preço único sem taxa de visita
             </h3>
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[38ch] text-pretty">
+            <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[38ch] text-pretty">
               Atendo em qualquer bairro de Mococa sem acréscimo de deslocamento. O valor do
               procedimento é exatamente o preço final.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary dark:text-slate-400 font-light">
+          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary font-light">
             <span className="flex items-center gap-2">
               <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
               <span>Sem surpresas no valor</span>
@@ -117,10 +113,8 @@ export const BentoGrid: React.FC = () => {
         <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#161413] border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
-              <span className="font-serif text-lg text-sage dark:text-[#7EA08E] tracking-widest font-normal">
-                03
-              </span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage dark:text-[#7EA08E]">
+              <span className="font-serif text-lg text-sage tracking-widest font-normal">03</span>
+              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage">
                 <Clock aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
@@ -128,13 +122,13 @@ export const BentoGrid: React.FC = () => {
             <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-3 leading-snug">
               Sessão dedicada no seu tempo
             </h3>
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[38ch] text-pretty">
+            <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[38ch] text-pretty">
               A sessão é agendada com calma e dedicação exclusiva para realizar o procedimento sem
               pressa, com precisão técnica e atenção aos detalhes.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary dark:text-slate-400 font-light">
+          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary font-light">
             <span className="flex items-center gap-2">
               <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
               <span>Pontualidade no horário marcado</span>

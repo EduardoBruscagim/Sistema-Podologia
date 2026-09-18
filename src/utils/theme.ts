@@ -1,5 +1,5 @@
 export const updateThemeColorMeta = (isDark: boolean): void => {
-  const color = isDark ? '#020617' : '#ffffff'
+  const color = isDark ? '#11100f' : '#faf8f5'
   const metaTags = document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')
 
   if (metaTags.length > 0) {
