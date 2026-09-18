@@ -21,7 +21,12 @@ export const HomePage: React.FC = () => {
         Pular para o conteúdo principal
       </a>
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="w-full pt-28 pb-16 outline-none">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="w-full pt-28 pb-16 outline-none scroll-mt-28"
+      >
+        <div id="inicio" className="sr-only" aria-hidden="true" />
         <Hero />
         <TrustStats />
         <BentoGrid />

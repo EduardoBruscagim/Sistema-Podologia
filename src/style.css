@@ -36,14 +36,14 @@
   --radius-pill: 9999px;
   --radius-badge: 0.25rem;
 
-  /* Neutralização de sombras em favor de bordas capilares de 1px */
-  --shadow-2xs: none;
-  --shadow-xs: none;
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
-  --shadow-xl: none;
-  --shadow-2xl: none;
+  /* Neutralização de sombras sem quebrar o anel de foco focus-visible */
+  --shadow-2xs: 0 0 #0000;
+  --shadow-xs: 0 0 #0000;
+  --shadow-sm: 0 0 #0000;
+  --shadow-md: 0 0 #0000;
+  --shadow-lg: 0 0 #0000;
+  --shadow-xl: 0 0 #0000;
+  --shadow-2xl: 0 0 #0000;
 
   /* Tipografia Editorial */
   --font-serif: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;

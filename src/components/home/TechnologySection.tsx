@@ -38,18 +38,18 @@ export const TechnologySection: React.FC = () => {
   return (
     <section
       ref={techSectionRef}
-      aria-labelledby="technology-heading"
+      aria-labelledby="tech-heading"
       className="max-w-6xl mx-auto px-6 py-16 lg:py-24"
       id="tecnologia"
     >
       <div className="tech-header mb-12 lg:mb-16 max-w-2xl">
         <h2
-          id="technology-heading"
+          id="tech-heading"
           className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.12] mb-4 text-balance"
         >
           Biossegurança cirúrgica e recursos portáteis.
         </h2>
-        <p className="text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed max-w-[48ch] text-pretty">
+        <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
           Aparelhos portáteis selecionados para regeneração, conforto e acabamento impecável, com o
           mesmo nível de assepsia de um consultório clínico.
         </p>
@@ -67,10 +67,10 @@ export const TechnologySection: React.FC = () => {
                     <ShieldCheck aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
                     Biossegurança Hospitalar
                   </div>
-                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-300">
+                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 text-text-secondary">
                     Autoclave a 134°C
                   </span>
-                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-300">
+                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 text-text-secondary">
                     100% Descartáveis
                   </span>
                 </div>
@@ -79,7 +79,7 @@ export const TechnologySection: React.FC = () => {
                   Esterilização cirúrgica em autoclave a 134°C e materiais 100% descartáveis
                 </h3>
 
-                <p className="text-sm sm:text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed mb-6 max-w-[56ch] text-pretty">
+                <p className="text-sm sm:text-base text-on-surface-variant font-light leading-relaxed mb-6 max-w-[56ch] text-pretty">
                   Todos os alicates e instrumentais de aço inoxidável passam por ciclo completo de
                   esterilização em autoclave sob alta temperatura (134°C) e pressão de vapor. Cada
                   kit permanece lacrado em envelope cirúrgico com barreira biológica e indicador
@@ -99,9 +99,7 @@ export const TechnologySection: React.FC = () => {
                     <strong className="block font-medium text-on-surface dark:text-white">
                       Autoclave a 134°C
                     </strong>
-                    <span className="text-text-secondary dark:text-slate-400 font-light">
-                      Eliminação de esporos
-                    </span>
+                    <span className="text-text-secondary font-light">Eliminação de esporos</span>
                   </div>
                 </div>
 
@@ -114,9 +112,7 @@ export const TechnologySection: React.FC = () => {
                     <strong className="block font-medium text-on-surface dark:text-white">
                       Kit Selado Individual
                     </strong>
-                    <span className="text-text-secondary dark:text-slate-400 font-light">
-                      Aberto na sua presença
-                    </span>
+                    <span className="text-text-secondary font-light">Aberto na sua presença</span>
                   </div>
                 </div>
 
@@ -129,9 +125,7 @@ export const TechnologySection: React.FC = () => {
                     <strong className="block font-medium text-on-surface dark:text-white">
                       100% Descartáveis
                     </strong>
-                    <span className="text-text-secondary dark:text-slate-400 font-light">
-                      Uso único garantido
-                    </span>
+                    <span className="text-text-secondary font-light">Uso único garantido</span>
                   </div>
                 </div>
               </div>
@@ -179,13 +173,13 @@ export const TechnologySection: React.FC = () => {
               Fototerapia LED de luz vermelha
             </h3>
 
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[42ch] text-pretty">
+            <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[42ch] text-pretty">
               Atua na regeneração celular dos tecidos, aliviando processos inflamatórios imediatos e
               acelerando a cicatrização de cantos de unhas doloridos ou sensibilizados.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400 font-light">
+          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2 text-xs text-text-secondary font-light">
             <Check
               aria-hidden="true"
               className="w-3.5 h-3.5 text-accent dark:text-accent shrink-0"
@@ -210,13 +204,13 @@ export const TechnologySection: React.FC = () => {
               Cabine portátil de luz ultravioleta
             </h3>
 
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[42ch] text-pretty">
+            <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[42ch] text-pretty">
               Acelera a polimerização e a secagem profunda do esmalte, impedindo borrões no calçado
               e proporcionando ação auxiliar contra fungos e bactérias.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400 font-light">
+          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2 text-xs text-text-secondary font-light">
             <Check
               aria-hidden="true"
               className="w-3.5 h-3.5 text-accent dark:text-accent shrink-0"
