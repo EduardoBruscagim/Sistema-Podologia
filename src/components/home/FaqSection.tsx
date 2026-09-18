@@ -14,31 +14,32 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Como funciona o atendimento a domicílio?',
     answer:
-      'Vou até a sua casa em Mococa no dia e horário combinados. Levo a maleta com equipamentos portáteis, materiais descartáveis e instrumentais esterilizados. Você só precisa escolher um sofá ou cadeira confortável para relaxar durante a sessão.',
+      'Vou até a sua residência em Mococa no dia e horário reservados. Levo a maleta com equipamentos portáteis, instrumentais esterilizados em autoclave e materiais 100% descartáveis. Você só precisa escolher uma poltrona ou sofá confortável para relaxar durante a sessão.',
   },
   {
     question: 'Como faço para agendar um atendimento?',
     answer:
-      'Todos os agendamentos são realizados diretamente pelo painel aqui do site. Você escolhe o serviço e o melhor dia e horário com calma. O WhatsApp é reservado para esclarecer dúvidas e atender emergências.',
+      'Todos os agendamentos são realizados diretamente pelo painel aqui do site. Você escolhe o procedimento e a data de sua preferência. O canal do WhatsApp permanece disponível para esclarecer dúvidas prévias ou emergências.',
   },
   {
     question: 'O que preciso preparar na minha casa para o atendimento?',
     answer:
-      'Não precisa providenciar nada de material. Eu levo toalhas descartáveis, lixas, algodão e todos os produtos necessários. Só é bom ter uma tomada comum por perto caso usemos a cabine de luz ou o micromotor.',
+      'Não é necessário providenciar nenhum material. Levo toalhas descartáveis, lixas individuais, algodão e todos os dermocosméticos clínicos necessários. Apenas disponibilizar uma tomada comum por perto para a cabine de luz ou micromotor.',
   },
   {
-    question: 'Como é garantida a higiene e esterilização dos materiais?',
+    question: 'Como é garantida a esterilização e higiene dos materiais?',
     answer:
-      'Os alicates e espátulas de aço passam por esterilização rigorosa e ficam guardados em embalagens seladas, abertas apenas na sua frente. Lixas, toalhas e luvas são de uso único e descartadas após cada atendimento.',
+      'Alicates e espátulas de aço cirúrgico passam por ciclo completo de esterilização em autoclave hospitalar a 134°C e são mantidos em envelopes cirúrgicos selados, abertos exclusivamente na sua frente. Lixas, toalhas e luvas são de uso único e descartadas imediatamente.',
   },
   {
-    question: 'Quais regiões você atende e existe taxa de deslocamento?',
+    question: 'Quais regiões você atende e existe cobrança de deslocamento?',
     answer:
-      'Atendo em qualquer bairro de Mococa, SP. Não cobro taxa de visita nem valor adicional de transporte: o preço do procedimento já é o valor final.',
+      'Atendo em qualquer bairro de Mococa, SP, com cortesia integral de deslocamento (taxa R$ 0). O valor informado no menu de procedimentos é exatamente o valor final da sessão.',
   },
   {
     question: 'Quais são as formas de pagamento aceitas?',
-    answer: 'O pagamento é feito ao final da visita, por PIX ou em dinheiro.',
+    answer:
+      'O pagamento é realizado confortavelmente ao final da visita, por meio de PIX ou em dinheiro.',
   },
 ]
 
@@ -94,18 +95,15 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
       }
 
       if (prefersReduced) {
-        // Respeita preferência do usuário: troca instantânea sem animação
         gsap.set(panel, isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 })
         return () => {
           gsap.killTweensOf(panel)
         }
       }
 
-      // Cancela qualquer tween em andamento neste painel
       gsap.killTweensOf(panel)
 
       if (isOpen) {
-        // Abertura: expande suavemente do topo para baixo
         const currentHeight = panel.offsetHeight
         const currentOpacity = Number(gsap.getProperty(panel, 'opacity')) || 0
 
@@ -115,17 +113,16 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
           {
             height: 'auto',
             opacity: 1,
-            duration: 0.42,
+            duration: 0.38,
             ease: 'power3.out',
           },
         )
       } else {
-        // Fechamento: recolhe suavemente e só aplica hidden ao concluir
         gsap.to(panel, {
           height: 0,
           opacity: 0,
           duration: 0.28,
-          ease: 'power2.in',
+          ease: 'power3.out',
           onComplete: () => {
             setIsHidden(true)
           },
@@ -138,33 +135,37 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
     }, [isOpen, prefersReduced])
 
     return (
-      <div
-        className={`faq-item rounded-2xl bg-white dark:bg-slate-900 border shadow-2xs transition-colors duration-200 ${
-          isOpen
-            ? 'border-primary/40 dark:border-primary/30'
-            : 'border-surface-border dark:border-slate-800'
-        }`}
-      >
-        <h3 className="text-base font-semibold">
+      <div className="faq-item">
+        <h3>
           <button
             type="button"
             id={`faq-btn-${index}`}
             aria-expanded={isOpen}
             aria-controls={`faq-panel-${index}`}
             onClick={() => onToggle(index)}
-            className={`w-full flex items-center justify-between cursor-pointer min-h-11 px-5 py-4 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-2xl text-left transition-colors ${
-              isOpen ? 'text-primary dark:text-sky-300' : 'text-on-surface dark:text-white'
-            }`}
+            className="w-full flex items-center justify-between py-6 text-left cursor-pointer group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg transition-colors"
           >
-            <span className="pr-4">{item.question}</span>
-            <ChevronDown
-              aria-hidden="true"
-              className={`w-5 h-5 shrink-0 transition-transform duration-300 ${
-                isOpen
-                  ? 'rotate-180 text-primary dark:text-sky-300'
-                  : 'text-text-secondary dark:text-slate-400'
+            <span
+              className={`font-serif text-lg sm:text-xl font-normal transition-colors pr-6 leading-snug ${
+                isOpen ? 'text-accent' : 'text-on-surface dark:text-white group-hover:text-accent'
               }`}
-            />
+            >
+              {item.question}
+            </span>
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                isOpen
+                  ? 'bg-accent/10 text-accent'
+                  : 'bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-400 group-hover:bg-accent/10 group-hover:text-accent'
+              }`}
+            >
+              <ChevronDown
+                aria-hidden="true"
+                className={`w-4 h-4 transition-transform duration-300 ${
+                  isOpen ? 'rotate-180 text-accent' : 'text-current group-hover:text-accent'
+                }`}
+              />
+            </div>
           </button>
         </h3>
 
@@ -177,8 +178,8 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
           hidden={isHidden}
           style={{ overflow: 'hidden' }}
         >
-          <div className="px-5 pb-4 border-t border-surface-border dark:border-slate-800 text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-            <div className="pt-3">{item.answer}</div>
+          <div className="pb-6 pt-1 text-sm sm:text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed max-w-[55ch] text-pretty">
+            {item.answer}
           </div>
         </div>
       </div>
@@ -190,7 +191,6 @@ FaqAccordionItem.displayName = 'FaqAccordionItem'
 
 export const FaqSection: React.FC = () => {
   const faqSectionRef = useRef<HTMLElement | null>(null)
-  // null = nenhum item aberto; número = índice do item aberto
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const handleToggle = (index: number) => {
@@ -228,22 +228,20 @@ export const FaqSection: React.FC = () => {
     <section
       ref={faqSectionRef}
       aria-label="Perguntas Frequentes"
-      className="max-w-4xl mx-auto px-6 py-14"
+      className="max-w-4xl mx-auto px-6 py-16 lg:py-24"
       id="faq"
     >
-      <div className="faq-header text-center mb-10">
-        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-semibold text-clinical-blue dark:text-sky-400 mb-3">
-          Dúvidas comuns
-        </div>
-        <h2 className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight text-balance">
-          Perguntas Frequentes
+      <div className="faq-header mb-12 lg:mb-16">
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.12] mb-4 text-balance">
+          Perguntas frequentes e orientações.
         </h2>
-        <p className="text-sm text-on-surface-variant dark:text-slate-300 mt-2 max-w-lg mx-auto font-normal">
-          Como funciona a visita, o agendamento e as formas de pagamento.
+        <p className="text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed max-w-[48ch] text-pretty">
+          Detalhes práticos sobre o atendimento em domicílio, biossegurança dos materiais e formas
+          de agendamento.
         </p>
       </div>
 
-      <div className="faq-list flex flex-col gap-3.5">
+      <div className="faq-list divide-y divide-black/[0.08] dark:divide-white/[0.08] border-y border-black/[0.08] dark:border-white/[0.08]">
         {FAQ_ITEMS.map((item, index) => (
           <FaqAccordionItem
             key={index}

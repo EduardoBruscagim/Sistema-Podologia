@@ -6,28 +6,28 @@ export const initStatsAnimation = (containerEl: HTMLElement): (() => void) => {
     // Revelação suave em cascata dos blocos de estatísticas ao rolar
     gsap.fromTo(
       '.stat-block',
-      { y: 20, opacity: 0 },
+      { y: 12, autoAlpha: 0 },
       {
         scrollTrigger: {
           trigger: containerEl,
-          start: 'top 88%',
+          start: 'top 90%',
           once: true,
         },
         y: 0,
-        opacity: 1,
+        autoAlpha: 1,
         duration: 0.65,
-        stagger: 0.1,
-        ease: 'power2.out',
+        stagger: 0.08,
+        ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        clearProps: 'transform,opacity,visibility',
       },
     )
   }, containerEl)
 
-  // Micro-hover sutil nos 4 blocos de métricas
+  // Micro-hover sutil nos blocos de métricas
   const blocks = containerEl.querySelectorAll<HTMLElement>('.stat-block')
   const cleanupHover = initCardsHover(blocks, {
-    y: -3,
-    scale: 1.01,
-    duration: 0.28,
+    y: -2,
+    duration: 0.25,
   })
 
   return () => {

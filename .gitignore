@@ -41,5 +41,10 @@ Thumbs.db
 
 # AI Agents & Local Rules
 .agents/
+skills-lock.json
 AGENTS.md
-GEMINI.md
+GEMINI.md
+.impeccable/live/annotations/
+.impeccable/live/sessions/
+.impeccable/live/inject-journal.json
+.impeccable/live/roots.json

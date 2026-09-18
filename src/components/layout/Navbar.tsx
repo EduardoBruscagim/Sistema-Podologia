@@ -22,8 +22,10 @@ export const Navbar: React.FC = () => {
   // Gerenciamento de foco: move foco para o primeiro link ao abrir e restaura para o botão ao fechar
   useEffect(() => {
     if (isMobileMenuOpen) {
-      const firstLink = mobileMenuRef.current?.querySelector<HTMLElement>('a[href]')
-      firstLink?.focus()
+      const firstFocusable = mobileMenuRef.current?.querySelector<HTMLElement>(
+        'a[href], button:not([disabled])',
+      )
+      firstFocusable?.focus()
     } else if (prevOpenRef.current) {
       mobileToggleRef.current?.focus()
     }
@@ -123,7 +125,7 @@ export const Navbar: React.FC = () => {
     { scope: headerRef },
   )
 
-  const handleAuthClick = () => {
+  const handleAgendarClick = () => {
     if (isAuthenticated) {
       navigate('/dashboard')
     } else {
@@ -132,11 +134,11 @@ export const Navbar: React.FC = () => {
   }
 
   return (
-    <div className="fixed top-[max(1.25rem,env(safe-area-inset-top))] inset-x-0 z-50 flex justify-center pointer-events-none px-4">
+    <div className="fixed top-0 inset-x-0 w-full z-50 pointer-events-none">
       {/* Backdrop Mobile para fechar ao clicar fora */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/25 dark:bg-black/50 backdrop-blur-xs md:hidden pointer-events-auto z-40 transition-opacity duration-200"
+          className="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-xs lg:hidden pointer-events-auto z-40 transition-opacity duration-200"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-hidden="true"
         />
@@ -144,125 +146,156 @@ export const Navbar: React.FC = () => {
 
       <header
         ref={headerRef}
-        className="pointer-events-auto max-w-4xl w-full px-3.5 sm:px-5 py-2 rounded-full backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border border-surface-border dark:border-slate-800 shadow-sm flex items-center justify-between transition-colors duration-300 relative z-50"
+        className="pointer-events-auto w-full transition-[background-color,border-color,backdrop-filter] duration-300 border-b border-transparent [&.is-scrolled]:bg-[#faf8f5]/90 dark:[&.is-scrolled]:bg-[#11100f]/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-black/[0.06] dark:[&.is-scrolled]:border-white/[0.08] relative z-50"
       >
-        {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Tipográfico */}
-        <div className="flex items-center gap-1 sm:gap-2">
-          {/* Botão Hambúrguer Mobile com área de toque mínima 44x44px */}
-          <div className="md:hidden flex items-center">
-            <button
-              ref={mobileToggleRef}
-              type="button"
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label={isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
-              aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+          {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Editorial */}
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+            {/* Botão Hambúrguer Mobile/Tablet com área de toque mínima 44x44px */}
+            <div className="lg:hidden flex items-center">
+              <button
+                ref={mobileToggleRef}
+                type="button"
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                className="min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                aria-label={
+                  isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'
+                }
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X aria-hidden="true" className="w-5 h-5" />
+                ) : (
+                  <Menu aria-hidden="true" className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+
+            {/* Logotipo Tipográfico Editorial */}
+            <Link
+              to="/"
+              className="flex flex-col text-left py-1 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg select-none group"
             >
-              {isMobileMenuOpen ? (
-                <X aria-hidden="true" className="w-6 h-6" />
-              ) : (
-                <Menu aria-hidden="true" className="w-6 h-6" />
-              )}
-            </button>
+              <span className="font-serif text-base sm:text-lg lg:text-xl font-medium tracking-[0.06em] sm:tracking-[0.10em] uppercase text-on-surface dark:text-white group-hover:text-accent transition-colors leading-none whitespace-nowrap">
+                Angélica Eduarda
+              </span>
+              <span className="font-sans text-[11px] sm:text-xs text-accent font-medium mt-1 whitespace-nowrap">
+                <span className="sm:hidden">Podologia · Mococa</span>
+                <span className="hidden sm:inline">Podologia em Domicílio · Mococa</span>
+              </span>
+            </Link>
           </div>
 
-          {/* Logotipo Tipográfico no lado esquerdo da ilha flutuante */}
-          <Link
-            to="/"
-            className="font-bold text-sm sm:text-base tracking-tight text-on-surface dark:text-white hover:text-primary dark:hover:text-primary transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-lg px-2 py-1 select-none"
+          {/* Navegação Desktop Centralizada com tipografia editorial (visível a partir de lg) */}
+          <nav
+            aria-label="Navegação principal"
+            className="hidden lg:flex items-center gap-8 text-xs uppercase tracking-[0.16em] font-medium text-text-secondary dark:text-slate-400 absolute left-1/2 -translate-x-1/2"
           >
-            Angélica Eduarda
-          </Link>
-        </div>
+            <a
+              className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
+              href="#procedimentos"
+            >
+              Procedimentos
+            </a>
+            <a
+              className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
+              href="#tecnologia"
+            >
+              Biossegurança
+            </a>
+            <a
+              className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
+              href="#faq"
+            >
+              Dúvidas
+            </a>
+            <a
+              className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
+              href={getWhatsAppUrl()}
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
+            >
+              WhatsApp
+            </a>
+          </nav>
 
-        {/* Navegação Desktop Centralizada */}
-        <nav
-          aria-label="Navegação principal"
-          className="hidden md:flex items-center gap-7 text-sm font-medium text-on-surface-variant dark:text-slate-300 absolute left-1/2 -translate-x-1/2"
-        >
-          <a
-            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-            href="#procedimentos"
-          >
-            Serviços
-          </a>
-          <a
-            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-            href="#tecnologia"
-          >
-            Tecnologia
-          </a>
-          <a
-            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-            href="#faq"
-          >
-            Dúvidas
-          </a>
-          <a
-            className="hover:text-primary transition-colors py-2 px-1 min-h-11 inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-            href={getWhatsAppUrl()}
-            rel="noopener noreferrer"
-            target="_blank"
-            aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
-          >
-            WhatsApp
-          </a>
-        </nav>
+          {/* Ações à Direita: Tema + Auth & Agendamento */}
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+            <button
+              aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
+              onClick={toggleTheme}
+              className="min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              type="button"
+            >
+              {isDark ? (
+                <Sun aria-hidden="true" className="w-4 h-4" />
+              ) : (
+                <Moon aria-hidden="true" className="w-4 h-4" />
+              )}
+            </button>
 
-        {/* Ações à Direita com áreas de toque mínimas de 44x44px */}
-        <div className="flex items-center gap-2 sm:gap-3 ml-auto">
-          <button
-            aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-            onClick={toggleTheme}
-            className="w-11 h-11 shrink-0 flex items-center justify-center rounded-full text-text-secondary dark:text-slate-400 hover:text-on-surface dark:hover:text-white hover:bg-apple-gray dark:hover:bg-slate-800 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-            type="button"
-          >
-            {isDark ? (
-              <Sun aria-hidden="true" className="w-5 h-5" />
+            {isAuthenticated ? (
+              <button
+                type="button"
+                aria-label="Acessar painel do paciente"
+                onClick={() => navigate('/dashboard')}
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-2xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
+              >
+                Painel
+              </button>
             ) : (
-              <Moon aria-hidden="true" className="w-5 h-5" />
+              <>
+                <button
+                  type="button"
+                  aria-label="Entrar na conta do paciente"
+                  onClick={() => openAuthModal('login')}
+                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-2.5 sm:px-3.5 py-2 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium text-text-secondary dark:text-slate-300 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
+                >
+                  Entrar
+                </button>
+                <button
+                  type="button"
+                  aria-label="Agendar horário de atendimento"
+                  onClick={handleAgendarClick}
+                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-2xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
+                >
+                  <span className="sm:hidden">Agendar</span>
+                  <span className="hidden sm:inline">Agendar Horário</span>
+                </button>
+              </>
             )}
-          </button>
-          <button
-            aria-label={
-              isAuthenticated ? 'Acessar painel do paciente' : 'Entrar na área do cliente'
-            }
-            onClick={handleAuthClick}
-            className="inline-flex items-center justify-center px-5 sm:px-6 min-h-11 rounded-full bg-primary text-on-primary text-sm font-semibold hover:bg-primary-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-            type="button"
-          >
-            {isAuthenticated ? 'Painel' : 'Entrar'}
-          </button>
+          </div>
         </div>
 
-        {/* Menu Mobile Dropdown com focus trap, backdrop e anel de foco */}
+        {/* Menu Mobile/Tablet Dropdown com focus trap, backdrop e anel de foco */}
         {isMobileMenuOpen && (
           <div
             ref={mobileMenuRef}
             id="mobile-menu"
             role="region"
             aria-label="Menu móvel"
-            className="absolute top-full left-0 right-0 mt-2 p-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-surface-border dark:border-slate-800 rounded-2xl shadow-xl flex flex-col gap-1.5 md:hidden z-50"
+            className="absolute top-full left-0 right-0 p-4 bg-[#faf8f5]/98 dark:bg-[#11100f]/98 backdrop-blur-xl border-b border-black/[0.06] dark:border-white/[0.08] shadow-lg flex flex-col gap-2 lg:hidden z-50"
           >
             <a
               href="#procedimentos"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-on-surface-variant dark:text-slate-200 hover:bg-clinical-teal-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface dark:text-slate-200 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
-              Serviços
+              Procedimentos
             </a>
             <a
               href="#tecnologia"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-on-surface-variant dark:text-slate-200 hover:bg-clinical-teal-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface dark:text-slate-200 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
-              Tecnologia
+              Biossegurança
             </a>
             <a
               href="#faq"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-on-surface-variant dark:text-slate-200 hover:bg-clinical-teal-subtle dark:hover:bg-slate-800 hover:text-primary transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface dark:text-slate-200 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               Dúvidas
             </a>
@@ -272,11 +305,50 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
-              className="px-4 py-3 min-h-11 rounded-xl text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500"
+              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-accent dark:text-[#34d399] hover:text-accent-hover hover:bg-sage-subtle dark:hover:bg-[#19261F] transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span>Dúvidas no WhatsApp</span>
               <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
             </a>
+
+            {/* Separador e Ações de Autenticação / Agendamento Mobile */}
+            <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.08] flex flex-col gap-2">
+              {isAuthenticated ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    navigate('/dashboard')
+                  }}
+                  className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                >
+                  Acessar Painel
+                </button>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      openAuthModal('login')
+                    }}
+                    className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                  >
+                    Agendar Horário
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      openAuthModal('login')
+                    }}
+                    className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl text-xs uppercase tracking-[0.14em] font-medium text-text-secondary dark:text-slate-300 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                  >
+                    Entrar
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         )}
       </header>

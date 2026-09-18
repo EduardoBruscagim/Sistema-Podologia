@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { Sparkles, Zap, ShieldCheck, Shield } from 'lucide-react'
+import { Sparkles, Zap, ShieldCheck, Shield, Check } from 'lucide-react'
 import { initTechnologyAnimation } from '@/animations/technology'
 import { applyReducedMotion } from '@/animations/reducedMotion'
 
@@ -39,101 +39,187 @@ export const TechnologySection: React.FC = () => {
     <section
       ref={techSectionRef}
       aria-labelledby="technology-heading"
-      className="max-w-6xl mx-auto px-6 py-12"
+      className="max-w-6xl mx-auto px-6 py-16 lg:py-24"
       id="tecnologia"
     >
-      <div className="tech-header text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 border border-surface-border-subtle dark:border-slate-700 text-xs font-semibold text-clinical-blue dark:text-sky-400 mb-3">
-          Equipamentos portáteis
-        </div>
+      <div className="tech-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="technology-heading"
-          className="text-3xl lg:text-4xl font-bold text-on-surface dark:text-white tracking-tight mb-4 text-balance"
+          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.12] mb-4 text-balance"
         >
-          Recursos que acompanham o atendimento
+          Biossegurança cirúrgica e recursos portáteis.
         </h2>
-        <p className="text-sm sm:text-base text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-          Aparelhos práticos que levo na maleta para cuidar da saúde, da cicatrização e do
-          acabamento das suas unhas.
+        <p className="text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed max-w-[48ch] text-pretty">
+          Aparelhos portáteis selecionados para regeneração, conforto e acabamento impecável, com o
+          mesmo nível de assepsia de um consultório clínico.
         </p>
       </div>
 
-      <div className="tech-grid grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {/* Card 1: Luz Vermelha */}
-        <div className="tech-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
-          <div>
-            <div className="tech-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
-              <Sparkles aria-hidden="true" className="w-6 h-6" />
+      {/* Bento Grid Tecnológico e Biossegurança */}
+      <div className="tech-grid grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        {/* Célula Principal de Autoridade: Esterilização em Autoclave a 134°C + 100% Descartáveis */}
+        <div className="tech-featured lg:col-span-12 p-6 sm:p-8 lg:p-10 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-colors duration-200 shadow-xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 flex flex-col justify-between h-full">
+              <div>
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent">
+                    <ShieldCheck aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
+                    Biossegurança Hospitalar
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-300">
+                    Autoclave a 134°C
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-300">
+                    100% Descartáveis
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-on-surface dark:text-white mb-4 leading-tight">
+                  Esterilização cirúrgica em autoclave a 134°C e materiais 100% descartáveis
+                </h3>
+
+                <p className="text-sm sm:text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed mb-6 max-w-[56ch] text-pretty">
+                  Todos os alicates e instrumentais de aço inoxidável passam por ciclo completo de
+                  esterilização em autoclave sob alta temperatura (134°C) e pressão de vapor. Cada
+                  kit permanece lacrado em envelope cirúrgico com barreira biológica e indicador
+                  químico, sendo aberto exclusivamente na sua presença. Lixas, lâminas, toalhas e
+                  luvas são de uso único e descartadas ao término do procedimento.
+                </p>
+              </div>
+
+              {/* Indicadores de autoridade */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-black/[0.06] dark:border-white/[0.08]">
+                <div className="flex items-start gap-2.5">
+                  <Check
+                    aria-hidden="true"
+                    className="w-4 h-4 text-accent dark:text-accent shrink-0 mt-0.5"
+                  />
+                  <div className="text-xs">
+                    <strong className="block font-medium text-on-surface dark:text-white">
+                      Autoclave a 134°C
+                    </strong>
+                    <span className="text-text-secondary dark:text-slate-400 font-light">
+                      Eliminação de esporos
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <Check
+                    aria-hidden="true"
+                    className="w-4 h-4 text-accent dark:text-accent shrink-0 mt-0.5"
+                  />
+                  <div className="text-xs">
+                    <strong className="block font-medium text-on-surface dark:text-white">
+                      Kit Selado Individual
+                    </strong>
+                    <span className="text-text-secondary dark:text-slate-400 font-light">
+                      Aberto na sua presença
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <Check
+                    aria-hidden="true"
+                    className="w-4 h-4 text-accent dark:text-accent shrink-0 mt-0.5"
+                  />
+                  <div className="text-xs">
+                    <strong className="block font-medium text-on-surface dark:text-white">
+                      100% Descartáveis
+                    </strong>
+                    <span className="text-text-secondary dark:text-slate-400 font-light">
+                      Uso único garantido
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <span className="text-xs font-semibold text-primary dark:text-sky-300 block mb-1.5">
-              Fototerapia LED
-            </span>
-            <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-2.5">
-              Luz vermelha terapêutica
-            </h3>
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-              Auxilia na recuperação celular, alivia incômodos imediatos e acelera a cicatrização de
-              cantos de unhas inflamados ou sensíveis.
-            </p>
-          </div>
-          <div className="mt-6 pt-4 border-t border-surface-border dark:border-slate-800 flex items-center justify-between text-xs text-on-surface-variant dark:text-slate-300 font-medium">
-            <span className="px-3 py-1 rounded-full bg-primary/10 dark:bg-primary/15 text-clinical-blue dark:text-sky-400 text-xs font-semibold">
-              Alívio e cicatrização
-            </span>
+
+            {/* Prova Visual Autêntica */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-surface-variant/30 group aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
+                <img
+                  src="/clinical-care-setup.jpg"
+                  alt="Mesa de atendimento clínico domiciliar com instrumentais esterilizados em envelope cirúrgico e descartáveis"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  width={1200}
+                  height={896}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-xs font-light">
+                    <Shield aria-hidden="true" className="w-3.5 h-3.5 text-emerald-400" />
+                    Kit aberto na sua frente
+                  </span>
+                  <span className="hidden sm:inline-block text-[11px] text-white/80 font-light">
+                    Mococa, SP
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Card 2: Luz Ultravioleta */}
-        <div className="tech-card p-5 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-surface-border dark:border-slate-800 shadow-2xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+        {/* Célula de Apoio 1: Fototerapia LED */}
+        <div className="tech-card lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-colors duration-200 shadow-xs flex flex-col justify-between">
           <div>
-            <div className="tech-icon w-11 h-11 rounded-2xl bg-primary/10 dark:bg-primary/15 flex items-center justify-center text-primary dark:text-sky-300 mb-5">
-              <Zap aria-hidden="true" className="w-6 h-6" />
-            </div>
-            <span className="text-xs font-semibold text-primary dark:text-sky-300 block mb-1.5">
-              Secagem e higiene
-            </span>
-            <h3 className="text-lg font-semibold text-on-surface dark:text-white mb-2.5">
-              Cabine de luz ultravioleta
-            </h3>
-            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-normal">
-              Acelera a secagem do esmalte para evitar borrões na hora de calçar o sapato e tem ação
-              auxiliar contra fungos e bactérias.
-            </p>
-          </div>
-          <div className="mt-6 pt-4 border-t border-surface-border dark:border-slate-800 flex items-center justify-between text-xs text-on-surface-variant dark:text-slate-300 font-medium">
-            <span className="px-3 py-1 rounded-full bg-clinical-teal-subtle dark:bg-slate-800 text-clinical-blue dark:text-sky-400 text-xs font-semibold">
-              Secagem rápida e proteção
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Card Destacado: Esterilização e Higiene */}
-      <div className="tech-featured p-5 sm:p-7 lg:p-8 rounded-3xl bg-primary text-white shadow-md hover:shadow-lg transition-shadow duration-300">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
-          <div className="flex items-start md:items-center gap-4">
-            <div className="featured-icon w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shrink-0">
-              <ShieldCheck aria-hidden="true" className="w-8 h-8" />
-            </div>
-            <div>
-              <span className="text-xs font-semibold text-white tracking-wide block mb-1">
-                Higiene e esterilização
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent">
+                Bioestimulação Celular
               </span>
-              <h3 className="text-xl font-bold text-white mb-1.5">
-                Instrumentos esterilizados e materiais descartáveis
-              </h3>
-              <p className="text-sm text-white leading-relaxed font-normal max-w-2xl">
-                Todos os alicates e espátulas de aço são higienizados e esterilizados. Cada conjunto
-                vem lacrado em embalagem individual e é aberto na sua frente. Luvas, lixas e toalhas
-                são de uso único e descartadas após o procedimento.
-              </p>
+              <div className="tech-icon w-9 h-9 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent dark:text-accent">
+                <Sparkles aria-hidden="true" className="w-4 h-4" />
+              </div>
             </div>
+
+            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-2.5 leading-snug">
+              Fototerapia LED de luz vermelha
+            </h3>
+            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[42ch] text-pretty">
+              Atua na regeneração celular dos tecidos, aliviando processos inflamatórios imediatos e
+              acelerando a cicatrização de cantos de unhas doloridos ou sensibilizados.
+            </p>
           </div>
-          <div className="shrink-0 pt-2 md:pt-0">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/20 text-xs font-semibold text-white">
-              <Shield aria-hidden="true" className="w-4 h-4" />
-              <span>Materiais esterilizados e descartáveis</span>
-            </span>
+
+          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400 font-light">
+            <Check
+              aria-hidden="true"
+              className="w-3.5 h-3.5 text-accent dark:text-accent shrink-0"
+            />
+            <span>Ação anti-inflamatória e regenerativa</span>
+          </div>
+        </div>
+
+        {/* Célula de Apoio 2: Cabine UV */}
+        <div className="tech-card lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-colors duration-200 shadow-xs flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent">
+                Acabamento & Proteção
+              </span>
+              <div className="tech-icon w-9 h-9 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent dark:text-accent">
+                <Zap aria-hidden="true" className="w-4 h-4" />
+              </div>
+            </div>
+
+            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-2.5 leading-snug">
+              Cabine portátil de luz ultravioleta
+            </h3>
+            <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed font-light max-w-[42ch] text-pretty">
+              Acelera a polimerização e a secagem profunda do esmalte, impedindo borrões no calçado
+              e proporcionando ação auxiliar contra fungos e bactérias.
+            </p>
+          </div>
+
+          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400 font-light">
+            <Check
+              aria-hidden="true"
+              className="w-3.5 h-3.5 text-accent dark:text-accent shrink-0"
+            />
+            <span>Secagem rápida sem borrões ao calçar</span>
           </div>
         </div>
       </div>

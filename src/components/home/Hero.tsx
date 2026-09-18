@@ -48,51 +48,52 @@ export const Hero: React.FC = () => {
   return (
     <section
       ref={heroSectionRef}
-      className="max-w-6xl mx-auto px-6 pt-10 pb-12 lg:pb-16"
+      className="max-w-6xl mx-auto px-6 pt-8 pb-16 lg:pt-12 lg:pb-20"
       aria-labelledby="hero-title"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         {/* Left: Headline & Actions */}
-        <div className="lg:col-span-6 flex flex-col items-start text-left">
+        <div className="lg:col-span-7 flex flex-col items-start text-left">
           <h1
             id="hero-title"
-            className="gsap-hero-reveal text-4xl sm:text-5xl lg:text-6xl font-bold text-on-surface dark:text-white tracking-tight leading-[1.08] mb-6 text-balance"
+            className="gsap-hero-reveal font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.08] mb-6 text-balance"
           >
-            Cuidado profissional para seus pés e mãos sem sair de casa.
+            O cuidado clínico e especializado para seus pés e mãos,
+            <br className="hidden sm:inline" /> no{' '}
+            <span className="italic font-light">conforto silencioso</span> da sua casa.
           </h1>
-          <p className="gsap-hero-reveal text-base sm:text-lg text-on-surface-variant dark:text-slate-300 leading-relaxed mb-8 max-w-lg font-normal">
-            Atendimento domiciliar de podologia e manicure em qualquer bairro de Mococa, SP.
-            Instrumentos esterilizados, materiais descartáveis e sem cobrança de taxa de
-            deslocamento.
+
+          <p className="gsap-hero-reveal font-sans text-base sm:text-lg text-on-surface-variant dark:text-slate-300 leading-relaxed mb-8 max-w-[48ch] font-light text-pretty">
+            Atendimento domiciliar de podologia clínica e manicure em Mococa. Esterilização
+            cirúrgica em autoclave, materiais descartáveis e cortesia integral de deslocamento para
+            qualquer bairro.
           </p>
-          <div className="gsap-hero-reveal flex flex-wrap items-center gap-3 w-full sm:w-auto">
+
+          <div className="gsap-hero-reveal flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
             <button
               type="button"
               onClick={handleAgendar}
-              className="inline-flex items-center justify-center min-h-11 px-7 rounded-full bg-primary text-on-primary text-sm sm:text-base font-semibold hover:bg-primary-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform,box-shadow] shadow-xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
             >
-              Agendar horário
+              Solicitar Agendamento
             </button>
-            <div className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 border border-surface-border dark:border-slate-700 text-xs font-semibold text-on-surface-variant dark:text-slate-300 shadow-2xs">
-              <span className="text-primary dark:text-sky-300 font-bold">✓</span>
-              <span>Agendamento online pelo site</span>
+            <div className="inline-flex items-center gap-2 text-xs text-text-secondary dark:text-slate-400 font-light">
+              <span className="text-sage font-semibold" aria-hidden="true">
+                ✓
+              </span>
+              <span>Instrumentais estéreis abertos na sua presença</span>
             </div>
           </div>
         </div>
 
-        {/* Right: Real Image Card */}
-        <div className="lg:col-span-6 gsap-hero-image">
-          <div className="relative rounded-3xl overflow-hidden border border-surface-border dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow duration-300">
-            <div className="absolute top-4 left-4 z-10">
-              <span className="px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-white/60 dark:border-slate-700 text-xs font-semibold text-on-surface dark:text-white shadow-xs">
-                Atendimento em domicílio
-              </span>
-            </div>
+        {/* Right: Real Image Card & Supporting Clinical Setup */}
+        <div className="lg:col-span-5 gsap-hero-image relative">
+          <div className="relative rounded-2xl overflow-hidden border border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#1a1816] shadow-md transition-shadow duration-300">
             <picture>
               <source type="image/webp" srcSet="/hero-clinical-bag.webp" />
               <img
                 alt="Kit profissional higienizado para atendimento domiciliar com toalhas e instrumentais esterilizados"
-                className="w-full h-[400px] lg:h-[460px] object-cover"
+                className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover"
                 src="/hero-clinical-bag.jpg"
                 width={600}
                 height={460}
@@ -100,6 +101,31 @@ export const Hero: React.FC = () => {
                 fetchPriority="high"
               />
             </picture>
+          </div>
+
+          {/* Supporting Clinical Care Setup Preview Card */}
+          <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-[#1e1b19]/95 backdrop-blur-md p-3 rounded-xl border border-black/[0.08] dark:border-white/[0.08] shadow-lg max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
+            <div className="relative w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-lg overflow-hidden border border-black/[0.06] dark:border-white/[0.08]">
+              <img
+                src="/clinical-care-setup.jpg"
+                alt="Instrumentos cirúrgicos autoclavados e insumos descartáveis em envelope selado"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                width={72}
+                height={72}
+              />
+            </div>
+            <div className="flex flex-col justify-center min-w-0 pr-1">
+              <span className="text-[10px] font-semibold tracking-wider uppercase text-sage dark:text-emerald-400">
+                Biossegurança Cirúrgica
+              </span>
+              <p className="text-xs text-on-surface dark:text-white font-medium leading-snug truncate">
+                Envelopes cirúrgicos selados
+              </p>
+              <span className="text-[11px] text-text-secondary dark:text-slate-400 font-light leading-tight mt-0.5">
+                Instrumentos abertos na sua presença
+              </span>
+            </div>
           </div>
         </div>
       </div>
