@@ -26,10 +26,16 @@
         "tonalRamp": ["#11100f", "#1e1b19", "#eae4dc", "#f2eee8", "#faf8f5", "#ffffff"]
       },
       "sage": {
-        "role": "accent",
+        "role": "secondary",
         "displayName": "Botanical Sage",
         "canonical": "#3b5346",
         "tonalRamp": ["#19261f", "#2c4035", "#3b5346", "#4a6355", "#7ea08e", "#9ab9a8", "#eaf0ec"]
+      },
+      "accent": {
+        "role": "accent",
+        "displayName": "Rich Warm Terracotta",
+        "canonical": "#9b4124",
+        "tonalRamp": ["#6e2b16", "#82351c", "#9b4124", "#b25232", "#cc6745", "#e08264", "#f7ede8"]
       },
       "text-secondary": {
         "role": "neutral",

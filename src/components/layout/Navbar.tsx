@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { initNavbarAnimation } from '@/animations/navbar'
 import { applyNavbarReducedMotion } from '@/animations/reducedMotion'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
-import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react'
+import { Sun, Moon, Menu, X, ArrowUpRight, User } from 'lucide-react'
 
 export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme()
@@ -125,6 +125,14 @@ export const Navbar: React.FC = () => {
     { scope: headerRef },
   )
 
+  const handleEntrarClick = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard')
+    } else {
+      openAuthModal('login')
+    }
+  }
+
   const handleAgendarClick = () => {
     if (isAuthenticated) {
       navigate('/dashboard')
@@ -148,9 +156,9 @@ export const Navbar: React.FC = () => {
         ref={headerRef}
         className="pointer-events-auto w-full transition-[background-color,border-color,backdrop-filter] duration-300 border-b border-transparent [&.is-scrolled]:bg-[#faf8f5]/90 dark:[&.is-scrolled]:bg-[#11100f]/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-black/[0.06] dark:[&.is-scrolled]:border-white/[0.08] relative z-50"
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
           {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Editorial */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-3 shrink-0">
             {/* Botão Hambúrguer Mobile/Tablet com área de toque mínima 44x44px */}
             <div className="lg:hidden flex items-center">
               <button
@@ -177,10 +185,10 @@ export const Navbar: React.FC = () => {
               to="/"
               className="flex flex-col text-left py-1 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg select-none group"
             >
-              <span className="font-serif text-base sm:text-lg lg:text-xl font-medium tracking-[0.06em] sm:tracking-[0.10em] uppercase text-on-surface dark:text-white group-hover:text-accent transition-colors leading-none whitespace-nowrap">
+              <span className="font-serif text-sm sm:text-lg lg:text-xl font-medium tracking-[0.04em] sm:tracking-[0.10em] uppercase text-on-surface dark:text-white group-hover:text-accent transition-colors leading-none whitespace-nowrap">
                 Angélica Eduarda
               </span>
-              <span className="font-sans text-[11px] sm:text-xs text-accent font-medium mt-1 whitespace-nowrap">
+              <span className="font-sans text-[10px] sm:text-xs text-accent font-medium mt-1 whitespace-nowrap">
                 <span className="sm:hidden">Podologia · Mococa</span>
                 <span className="hidden sm:inline">Podologia em Domicílio · Mococa</span>
               </span>
@@ -221,8 +229,9 @@ export const Navbar: React.FC = () => {
             </a>
           </nav>
 
-          {/* Ações à Direita: Tema + Auth & Agendamento */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          {/* Ações à Direita: Tema + "Entrar" (Secundário) + "Agendar Horário" (Primário) */}
+          <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
+            {/* Alternador de Tema */}
             <button
               aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
               onClick={toggleTheme}
@@ -236,36 +245,31 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
-            {isAuthenticated ? (
-              <button
-                type="button"
-                aria-label="Acessar painel do paciente"
-                onClick={() => navigate('/dashboard')}
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-2xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
-              >
-                Painel
-              </button>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  aria-label="Entrar na conta do paciente"
-                  onClick={() => openAuthModal('login')}
-                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-2.5 sm:px-3.5 py-2 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium text-text-secondary dark:text-slate-300 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
-                >
-                  Entrar
-                </button>
-                <button
-                  type="button"
-                  aria-label="Agendar horário de atendimento"
-                  onClick={handleAgendarClick}
-                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-2xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
-                >
-                  <span className="sm:hidden">Agendar</span>
-                  <span className="hidden sm:inline">Agendar Horário</span>
-                </button>
-              </>
-            )}
+            {/* Ação Secundária Funcional: "Entrar" / "Painel" (no mobile vive no drawer acessível) */}
+            <button
+              type="button"
+              aria-label={
+                isAuthenticated
+                  ? 'Acessar painel do cliente'
+                  : 'Entrar na conta do paciente (painel do cliente)'
+              }
+              onClick={handleEntrarClick}
+              className="hidden sm:inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 px-3 sm:px-4 py-2 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium text-text-secondary dark:text-slate-300 hover:text-on-surface dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
+            >
+              <User aria-hidden="true" className="w-3.5 h-3.5 opacity-70 shrink-0" />
+              <span>{isAuthenticated ? 'Painel' : 'Entrar'}</span>
+            </button>
+
+            {/* CTA Primário de Conversão: "Agendar Horário" */}
+            <button
+              type="button"
+              aria-label="Agendar horário de atendimento"
+              onClick={handleAgendarClick}
+              className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-3 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform,box-shadow] shadow-2xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
+            >
+              <span className="sm:hidden">Agendar</span>
+              <span className="hidden sm:inline">Agendar Horário</span>
+            </button>
           </div>
         </div>
 
@@ -312,42 +316,34 @@ export const Navbar: React.FC = () => {
             </a>
 
             {/* Separador e Ações de Autenticação / Agendamento Mobile */}
-            <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.08] flex flex-col gap-2">
-              {isAuthenticated ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false)
-                    navigate('/dashboard')
-                  }}
-                  className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
-                >
-                  Acessar Painel
-                </button>
-              ) : (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false)
-                      openAuthModal('login')
-                    }}
-                    className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
-                  >
-                    Agendar Horário
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false)
-                      openAuthModal('login')
-                    }}
-                    className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl text-xs uppercase tracking-[0.14em] font-medium text-text-secondary dark:text-slate-300 hover:text-accent dark:hover:text-accent hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
-                  >
-                    Entrar
-                  </button>
-                </>
-              )}
+            <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.08] flex flex-col gap-2.5">
+              {/* Botão Primário: Agendar Horário */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  handleAgendarClick()
+                }}
+                className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer shadow-xs"
+              >
+                Agendar Horário
+              </button>
+
+              {/* Botão Secundário: Entrar / Painel do Cliente */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  handleEntrarClick()
+                }}
+                className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl border border-black/[0.08] dark:border-white/[0.1] text-xs uppercase tracking-[0.14em] font-medium text-on-surface dark:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-center gap-2 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              >
+                <User
+                  aria-hidden="true"
+                  className="w-4 h-4 text-text-secondary dark:text-slate-400 shrink-0"
+                />
+                <span>{isAuthenticated ? 'Acessar Meu Painel' : 'Entrar (Painel do Cliente)'}</span>
+              </button>
             </div>
           </div>
         )}

@@ -4,37 +4,48 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Obsidian Espresso & Warm Alabaster (Base Editorial) */
   --color-primary: #181615;
   --color-primary-hover: #2d2927;
-  --color-primary-container: #181615;
-  --color-clinical-blue: #2a4736;
   --color-on-primary: #faf8f5;
-  --color-apple-blue: #181615;
-  --color-apple-blue-hover: #2d2927;
-  --color-apple-gray: #f3efe9;
-  --color-pure-white: #ffffff;
-  --color-surface-border: rgba(24, 22, 21, 0.08);
-  --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
-  --color-clinical-teal-subtle: #edf3ef;
-  --color-text-secondary: #635e59;
+
+  /* Accent de Ação Exclusivo: Rich Warm Terracotta (WCAG AA > 5:1) */
+  --color-accent: #9b4124;
+  --color-accent-hover: #82351c;
+  --color-on-accent: #ffffff;
+
+  /* Superfícies e Bordas Capilares */
   --color-surface: #faf8f5;
   --color-surface-variant: #f2eee8;
   --color-on-surface: #181615;
   --color-on-surface-variant: #595550;
-  --color-secondary: #3b5346;
-  --color-tertiary: #4a6355;
-  --color-outline: #8c857e;
-  --color-inverse-primary: #faf8f5;
+  --color-text-secondary: #635e59;
+  --color-pure-white: #ffffff;
+  --color-surface-border: rgba(24, 22, 21, 0.08);
+  --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
+
+  /* Botanical Sage & WhatsApp Reassurance */
+  --color-sage: #3b5346;
+  --color-sage-hover: #2c4035;
+  --color-sage-subtle: #eaf0ec;
   --color-whatsapp: #25d366;
   --color-whatsapp-hover: #1eb857;
 
-  --color-sage: #3b5346;
-  --color-sage-subtle: #eaf0ec;
-  --color-sage-hover: #2c4035;
+  /* Geometria e Raios Rigorosos */
+  --radius-card: 0.75rem;
+  --radius-pill: 9999px;
+  --radius-badge: 0.25rem;
 
-  --shadow-2xs: 0 1px 2px 0 rgba(24, 22, 21, 0.03);
-  --shadow-xs: 0 1px 3px 0 rgba(24, 22, 21, 0.05);
+  /* Neutralização de sombras em favor de bordas capilares de 1px */
+  --shadow-2xs: none;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
 
+  /* Tipografia Editorial */
   --font-serif: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
   --font-sans:
     'Outfit Variable', 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -45,8 +56,10 @@
 [data-theme='light'] {
   --color-primary: #181615;
   --color-primary-hover: #2d2927;
-  --color-primary-container: #181615;
   --color-on-primary: #faf8f5;
+  --color-accent: #9b4124;
+  --color-accent-hover: #82351c;
+  --color-on-accent: #ffffff;
   --color-surface: #faf8f5;
   --color-surface-variant: #f2eee8;
   --color-on-surface: #181615;
@@ -54,32 +67,30 @@
   --color-text-secondary: #635e59;
   --color-surface-border: rgba(24, 22, 21, 0.08);
   --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
+  --radius-card: 0.75rem;
+  --radius-pill: 9999px;
+  --radius-badge: 0.25rem;
 }
 
 :where(.dark, .dark *),
 [data-theme='dark'] {
   --color-primary: #faf8f5;
   --color-primary-hover: #e8e3dc;
-  --color-primary-container: #faf8f5;
-  --color-clinical-blue: #7ea08e;
   --color-on-primary: #141211;
-  --color-apple-blue: #faf8f5;
-  --color-apple-blue-hover: #e8e3dc;
-  --color-apple-gray: #1e1b19;
+  /* Accent em dark mode: Terracotta Silk com contraste > 6:1 contra #11100F */
+  --color-accent: #e08264;
+  --color-accent-hover: #e8957c;
+  --color-on-accent: #11100f;
   --color-surface: #11100f;
   --color-surface-variant: #1a1816;
   --color-on-surface: #faf8f5;
   --color-on-surface-variant: #b5afa6;
+  --color-text-secondary: #8c857b;
   --color-surface-border: rgba(250, 248, 245, 0.08);
   --color-surface-border-subtle: rgba(250, 248, 245, 0.04);
-  --color-clinical-teal-subtle: #19261f;
-  --color-text-secondary: #8c857b;
-  --color-secondary: #7ea08e;
-  --color-tertiary: #9ab9a8;
-
   --color-sage: #7ea08e;
-  --color-sage-subtle: #19261f;
   --color-sage-hover: #9ab9a8;
+  --color-sage-subtle: #19261f;
 }
 
 @layer base {
@@ -135,12 +146,14 @@
     min-height: 100vh;
     font-family: var(--font-sans);
     color: var(--color-on-surface);
-    caret-color: var(--color-primary);
+    caret-color: var(--color-accent);
     font-size: 1rem;
     line-height: 1.55;
     background-color: var(--color-surface);
+    position: relative;
   }
 
+  /* Textura de Grão Tátil (SVG feTurbulence inline) + Gradientes Editoriais */
   body::before {
     content: '';
     position: fixed;
@@ -148,9 +161,16 @@
     pointer-events: none;
     z-index: -10;
     background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E"),
       radial-gradient(circle at 50% 0%, rgba(24, 22, 21, 0.02) 0%, transparent 60%),
       radial-gradient(circle at 90% 20%, rgba(59, 83, 70, 0.02) 0%, transparent 40%),
       linear-gradient(180deg, #faf8f5 0%, #f7f4ee 45%, #faf8f5 100%);
+    background-size:
+      180px 180px,
+      auto,
+      auto,
+      auto;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
   }
 
   :where(.dark, .dark *) body,
@@ -164,8 +184,14 @@
   html.dark body::before,
   .dark body::before {
     background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"),
       radial-gradient(circle at 50% 0%, rgba(126, 160, 142, 0.05) 0%, transparent 60%),
       linear-gradient(180deg, #11100f 0%, #171514 100%);
+    background-size:
+      180px 180px,
+      auto,
+      auto;
+    background-repeat: repeat, no-repeat, no-repeat;
   }
 
   details summary::-webkit-details-marker {
@@ -184,14 +210,14 @@
 
   ::-webkit-scrollbar-thumb {
     background: rgba(148, 163, 184, 0.3);
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(100, 116, 139, 0.5);
   }
 
-  /* Modal de autenticação nativo */
+  /* Modal nativo sem bordas pesadas */
   dialog.modal {
     position: fixed;
     inset: 0;
