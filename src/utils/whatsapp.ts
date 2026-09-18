@@ -15,6 +15,25 @@ export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
 }
 
 /**
+ * Retorna link do WhatsApp para dúvidas específicas sobre procedimentos ou atendimento.
+ */
+export const getWhatsAppDoubtUrl = (topic?: string): string => {
+  const message = topic
+    ? `Olá, Angélica! Gostaria de tirar uma dúvida sobre ${topic} em Mococa.`
+    : 'Olá, Angélica! Gostaria de tirar uma dúvida sobre os atendimentos em domicílio em Mococa.'
+  return getWhatsAppUrl(message)
+}
+
+/**
+ * Retorna link do WhatsApp para situações de urgência podológica (dor aguda, unha encravada inflamada).
+ */
+export const getWhatsAppUrgencyUrl = (): string => {
+  const message =
+    'Olá, Angélica! Estou com uma urgência podológica com dor e preciso de orientação para atendimento em Mococa.'
+  return getWhatsAppUrl(message)
+}
+
+/**
  * Retorna o número de WhatsApp formatado para exibição legível na interface (ex: (19) 99544-3922).
  */
 export const getWhatsAppDisplayNumber = (): string => {

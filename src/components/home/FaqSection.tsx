@@ -19,7 +19,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Como faço para agendar um atendimento?',
     answer:
-      'Todos os agendamentos são realizados diretamente pelo painel aqui do site. Você escolhe o procedimento e a data de sua preferência. O canal do WhatsApp permanece disponível para esclarecer dúvidas prévias ou emergências.',
+      'Os agendamentos são realizados diretamente aqui pelo site, onde você escolhe o procedimento e a data de sua preferência. O canal do WhatsApp permanece disponível para esclarecer dúvidas prévias ou emergências.',
   },
   {
     question: 'O que preciso preparar na minha casa para o atendimento?',
@@ -168,7 +168,7 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
               className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
                 isOpen
                   ? 'bg-accent text-white shadow-2xs'
-                  : 'bg-black/5 dark:bg-white/5 text-text-secondary dark:text-slate-400 group-hover:bg-accent/10 group-hover:text-accent'
+                  : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-accent/10 group-hover:text-accent'
               }`}
             >
               <ChevronDown
@@ -190,7 +190,7 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
           hidden={isHidden}
           style={{ overflow: 'hidden' }}
         >
-          <div className="pb-6 pt-1 text-sm sm:text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed max-w-[55ch] text-pretty">
+          <div className="pb-6 pt-1 text-sm sm:text-base text-on-surface-variant font-light leading-relaxed max-w-[55ch] text-pretty">
             {item.answer}
           </div>
         </div>
@@ -247,7 +247,7 @@ export const FaqSection: React.FC = () => {
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.12] mb-4 text-balance">
           Perguntas frequentes e orientações.
         </h2>
-        <p className="text-base text-on-surface-variant dark:text-slate-300 font-light leading-relaxed max-w-[48ch] text-pretty">
+        <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
           Detalhes práticos sobre o atendimento em domicílio, biossegurança dos materiais e formas
           de agendamento.
         </p>
