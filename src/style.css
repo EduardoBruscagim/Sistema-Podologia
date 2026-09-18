@@ -94,6 +94,17 @@
 }
 
 @layer base {
+  ::selection {
+    background-color: rgba(155, 65, 36, 0.25);
+    color: #181615;
+  }
+
+  :where(.dark, .dark *) ::selection,
+  .dark ::selection {
+    background-color: rgba(224, 130, 100, 0.35);
+    color: #faf8f5;
+  }
+
   html {
     scroll-padding-top: 6rem;
     text-rendering: optimizeLegibility;
