@@ -195,10 +195,10 @@ export const Navbar: React.FC = () => {
             </Link>
           </div>
 
-          {/* Navegação Desktop Centralizada com tipografia editorial (visível a partir de lg) */}
+          {/* Navegação Desktop Centralizada com tipografia editorial sem sobreposição */}
           <nav
             aria-label="Navegação principal"
-            className="hidden lg:flex items-center gap-8 text-xs uppercase tracking-[0.16em] font-medium text-text-secondary dark:text-slate-400 absolute left-1/2 -translate-x-1/2"
+            className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 text-xs uppercase tracking-[0.14em] xl:tracking-[0.16em] font-medium text-text-secondary dark:text-slate-400 flex-1 px-4 max-w-md mx-auto"
           >
             <a
               className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
@@ -217,15 +217,6 @@ export const Navbar: React.FC = () => {
               href="#faq"
             >
               Dúvidas
-            </a>
-            <a
-              className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
-              href={getWhatsAppUrl()}
-              rel="noopener noreferrer"
-              target="_blank"
-              aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
-            >
-              WhatsApp
             </a>
           </nav>
 

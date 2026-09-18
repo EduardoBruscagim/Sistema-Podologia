@@ -71,12 +71,8 @@ export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) =>
 
   const featured = sectionEl.querySelectorAll<HTMLElement>('.tech-featured')
   const cleanupFeaturedHover = initCardsHover(featured, {
-    y: -4,
-    scale: 1.008,
+    y: -3,
     duration: 0.35,
-    iconSelector: '.featured-icon',
-    iconY: -2,
-    iconScale: 1.05,
   })
 
   return () => {

@@ -63,7 +63,7 @@ export const TechnologySection: React.FC = () => {
             <div className="lg:col-span-7 flex flex-col justify-between h-full">
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <div className="featured-icon inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent">
                     <ShieldCheck aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
                     Biossegurança Hospitalar
                   </div>
