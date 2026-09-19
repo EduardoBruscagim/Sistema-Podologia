@@ -77,7 +77,7 @@ export const BrandIntro: React.FC = () => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#FAF8F5] dark:bg-[#11100F] select-none cursor-default"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-surface select-none cursor-default"
       aria-hidden="true"
     >
       <div ref={contentRef} className="flex flex-col items-center text-center px-4">
@@ -98,20 +98,20 @@ export const BrandIntro: React.FC = () => {
             {/* Monograma 'A' Angélica Eduarda */}
             <path
               d="M32 14L45 48H39.2L36.4 40.5H27.6L24.8 48H19L32 14ZM32 23.2L29.3 35.8H34.7L32 23.2Z"
-              className="fill-[#181615] dark:fill-[#FAF8F5]"
+              className="fill-on-surface"
             />
             {/* Ponto Terracota Oficial */}
-            <circle cx="45.5" cy="18.5" r="3.5" fill="#9B4124" />
+            <circle cx="45.5" cy="18.5" r="3.5" className="fill-accent" />
           </svg>
         </div>
 
         {/* Nome Editorial */}
-        <span className="font-serif text-lg sm:text-2xl font-medium tracking-[0.16em] uppercase text-[#181615] dark:text-[#FAF8F5] leading-none mb-2">
+        <span className="font-serif text-lg sm:text-2xl font-medium tracking-[0.16em] uppercase text-on-surface leading-none mb-2">
           Angélica Eduarda
         </span>
 
         {/* Subtítulo Refinado */}
-        <span className="font-sans text-[10px] sm:text-xs tracking-[0.24em] uppercase text-accent font-medium">
+        <span className="font-sans text-[11px] sm:text-xs tracking-[0.22em] uppercase text-accent font-medium">
           Podologia · Mococa
         </span>
       </div>
