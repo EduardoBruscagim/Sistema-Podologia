@@ -6,12 +6,7 @@ import gsap from 'gsap'
  */
 export const applyReducedMotion = (
   targets: gsap.DOMTarget = [
-    '.gsap-hero-badge',
-    '.gsap-hero-title',
-    '.gsap-hero-desc',
-    '.gsap-hero-actions',
-    '.gsap-hero-image-card',
-    '.gsap-hero-preview',
+    '.gsap-hero-reveal',
     '.gsap-hero-image',
     '.stat-block',
     '.bento-header',
