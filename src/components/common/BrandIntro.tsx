@@ -5,13 +5,23 @@ import { useGSAP } from '@gsap/react'
 export const BrandIntro: React.FC = () => {
   const [isComplete, setIsComplete] = useState(() => {
     if (typeof window === 'undefined') return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true
+    try {
+      return sessionStorage.getItem('brand-intro-seen') === 'true'
+    } catch {
+      return false
+    }
   })
   const overlayRef = useRef<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLDivElement | null>(null)
   const timelineRef = useRef<gsap.core.Timeline | null>(null)
 
   const finishIntro = useCallback(() => {
+    try {
+      sessionStorage.setItem('brand-intro-seen', 'true')
+    } catch {
+      // no-op em ambientes restritos de armazenamento
+    }
     setIsComplete(true)
   }, [])
 
@@ -77,7 +87,11 @@ export const BrandIntro: React.FC = () => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-surface select-none cursor-default"
+      onClick={() => {
+        timelineRef.current?.kill()
+        finishIntro()
+      }}
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-surface select-none cursor-pointer"
       aria-hidden="true"
     >
       <div ref={contentRef} className="flex flex-col items-center text-center px-4">

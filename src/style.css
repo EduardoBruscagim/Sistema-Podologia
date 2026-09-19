@@ -19,7 +19,7 @@
   --color-surface-variant: #f2eee8;
   --color-on-surface: #181615;
   --color-on-surface-variant: #595550;
-  --color-text-secondary: #635e59;
+  --color-text-secondary: #514d48;
   --color-pure-white: #ffffff;
   --color-surface-border: rgba(24, 22, 21, 0.08);
   --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
@@ -49,6 +49,9 @@
   --font-serif: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
   --font-sans:
     'Outfit Variable', 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Breakpoint para viewports ultra-estreitos */
+  --breakpoint-xs: 22.5rem;
 }
 
 :root,
@@ -64,7 +67,7 @@
   --color-surface-variant: #f2eee8;
   --color-on-surface: #181615;
   --color-on-surface-variant: #595550;
-  --color-text-secondary: #635e59;
+  --color-text-secondary: #514d48;
   --color-surface-border: rgba(24, 22, 21, 0.08);
   --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
   --radius-card: 0.75rem;
@@ -85,7 +88,7 @@
   --color-surface-variant: #1a1816;
   --color-on-surface: #faf8f5;
   --color-on-surface-variant: #b5afa6;
-  --color-text-secondary: #8c857b;
+  --color-text-secondary: #a39c92;
   --color-surface-border: rgba(250, 248, 245, 0.08);
   --color-surface-border-subtle: rgba(250, 248, 245, 0.04);
   --color-sage: #7ea08e;
@@ -204,6 +207,24 @@
       auto,
       auto;
     background-repeat: repeat, no-repeat, no-repeat;
+  }
+
+  /* Em telas touch móveis, neutraliza feTurbulence SVG procedural em elemento fixed para evitar repintura e microjank */
+  @media (hover: none) and (pointer: coarse) {
+    body::before {
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(24, 22, 21, 0.02) 0%, transparent 60%),
+        radial-gradient(circle at 90% 20%, rgba(59, 83, 70, 0.02) 0%, transparent 40%),
+        linear-gradient(180deg, #faf8f5 0%, #f7f4ee 45%, #faf8f5 100%);
+    }
+
+    :where(.dark, .dark *) body::before,
+    html.dark body::before,
+    .dark body::before {
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(126, 160, 142, 0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #11100f 0%, #171514 100%);
+    }
   }
 
   details summary::-webkit-details-marker {

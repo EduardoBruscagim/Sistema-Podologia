@@ -178,14 +178,16 @@ A paleta mineral é inspirada em matérias-primas nobres, assepsia cirúrgica e 
 
 ### Functional Accent: Rich Warm Terracotta
 
-- **Rich Warm Terracotta** (`#9B4124` / Dark `#E08264`): Cor de ação estritamente funcional reservada com exclusividade para gatilhos interativos primários (CTAs de agendamento, anéis de foco, itens ativos de acordeão e estados hover de procedimento). Possui taxa de contraste de 6.25:1 contra o fundo Warm Alabaster e 6.6:1 com texto branco, superando WCAG AA (> 5:1).
+- **Rich Warm Terracotta** (`#9B4124` / Dark `#E08264`): Cor de ação estritamente funcional reservada com exclusividade para gatilhos interativos primários (CTAs de agendamento, anéis de foco, itens ativos de acordeão e estados hover de procedimento). Possui taxa de contraste de 6.25:1 contra o fundo Warm Alabaster e 6.6:1 com texto branco no modo claro, e 6.47:1 contra `#11100F` com texto escuro no modo escuro.
+- **Regra Sistêmica de Pareamento (`text-on-accent`)**: Qualquer elemento sobre superfície `bg-accent` DEVE utilizar obrigatoriamente `text-on-accent` (`#FFFFFF` no modo claro, `#11100F` no modo escuro). É terminantemente proibido o uso de `text-white` fixo sobre `accent`, prevenindo quebras de contraste em temas escuros.
 - **Radius Pill (`rounded-full`) vs Card Radius (`rounded-xl`)**: O formato pílula (`rounded-full`) é restrito exclusivamente aos botões de conversão principais. Cartões utilizam curvatura discreta (`rounded-xl` / 12px) e badges informativos adotam curvatura mínima (`rounded-md` / 4px a 6px).
 
 ### Neutrals & Borders
 
 - **Text Primary** (`#181615` / Dark `#FAF8F5`): Legibilidade máxima para leitura editorial.
-- **Text Secondary / Muted Slate** (`#635E59` / Dark `#8C857B`): Contraste mínimo de 7:1 em relação ao fundo, atendendo ao nível AAA da WCAG.
+- **Text Secondary / Muted Slate** (`#635E59` / Dark `#A39C92`): Contraste mínimo de 7:1 em relação ao fundo, atendendo ao nível AAA da WCAG.
 - **Hairline Border** (`rgba(24, 22, 21, 0.08)` / Dark `rgba(250, 248, 245, 0.08)`): Delimitação sutil e refinada inspirada em papelaria editorial de luxo.
+- **Superfície Editorial (`bg-pure-white`)**: Cartões destacados e blocos de conteúdo utilizam `--color-pure-white: #ffffff` em modo claro e `--color-surface-variant: #1a1816` em modo escuro, mantendo integridade e desacoplamento do Tailwind base.
 
 ## Typography
 
@@ -206,9 +208,11 @@ Utilizada para interface funcional, menus, tabelas de serviços e leitura confor
 - **Body Small:** 0.875rem, regular (400), leading 1.5.
 - **Editorial Labels / Overlines:** 0.6875rem a 0.75rem, semibold (600), caixa alta, tracking expandido (0.12em a 0.16em) para rotulagem técnica imediata.
 
-## Accessibility & Target Sizes
+## Accessibility & Mobile UX
 
-- **Touch Targets (WCAG 2.5.5 / 2.5.8):** Todos os botões interativos (Navbar, temas, agendamento, acordeões do FAQ e links de navegação) possuem área de clique/toque de no mínimo 44x44px.
-- **Contrast Ratios (WCAG AA / AAA):** Todos os pares de texto e fundo excedem 4.5:1 para texto padrão e 7:1 para legendas secundárias.
-- **Keyboard Navigation:** Todos os componentes interativos contêm anéis de foco visíveis (`focus-visible:ring-2 focus-visible:ring-primary`) e suporte a navegação por teclado (Enter / Espaço / Esc).
+- **Touch Targets (WCAG 2.5.5 / 2.5.8):** Todos os botões interativos (Navbar, temas, agendamento, acordeões do FAQ e links de navegação) possuem área de clique/toque de no mínimo 44x44px (e botão flutuante com 48x48px).
+- **Contrast Ratios (WCAG AA / AAA):** Todos os pares de texto e fundo excedem 4.5:1 para texto padrão e 7:1 para legendas secundárias em ambos os modos claro e escuro.
+- **Keyboard Navigation:** Todos os componentes interativos contêm anéis de foco visíveis (`focus-visible:ring-2 focus-visible:ring-accent`) e suporte a navegação por teclado (Enter / Espaço / Esc).
+- **Scroll Lock & Mobile Modal State:** O menu móvel atua como estado modal com focus trap, bloqueio de rolagem no `body` (`overflow: hidden`) e sincronização com o ScrollTrigger do cabeçalho.
+- **Touch GPU Optimization:** Desativação de filtros de grão contínuos (`feTurbulence`) em telas móveis via `@media (hover: none) and (pointer: coarse)` para garantir rolagem perfeitamente suave a 60/120fps.
 - **Reduced Motion:** Adere fielmente à preferência do sistema operacional, neutralizando durações de animação GSAP caso `prefers-reduced-motion: reduce` esteja ativo.

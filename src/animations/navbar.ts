@@ -30,6 +30,8 @@ export const initNavbarAnimation = (
 
   const hideNavbar = () => {
     if (isHidden) return
+    // Previne recolhimento se o menu mobile estiver aberto
+    if (headerEl.getAttribute('data-mobile-menu-open') === 'true') return
     // Previne recolhimento se o usuário estiver navegando por teclado dentro do menu
     if (headerEl.contains(document.activeElement)) return
 
