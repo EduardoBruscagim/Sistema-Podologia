@@ -106,6 +106,7 @@
   }
 
   html {
+    scrollbar-gutter: stable;
     scroll-padding-top: 6rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

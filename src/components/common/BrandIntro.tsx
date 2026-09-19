@@ -12,7 +12,6 @@ export const BrandIntro: React.FC = () => {
   const timelineRef = useRef<gsap.core.Timeline | null>(null)
 
   const finishIntro = useCallback(() => {
-    document.body.style.overflow = ''
     setIsComplete(true)
   }, [])
 
@@ -30,16 +29,12 @@ export const BrandIntro: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown)
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
     }
   }, [isComplete, finishIntro])
 
   useGSAP(
     () => {
       if (isComplete || !overlayRef.current || !contentRef.current) return
-
-      // Bloqueia rolagem enquanto a intro estiver ativa
-      document.body.style.overflow = 'hidden'
 
       const tl = gsap.timeline({
         onComplete: () => {
