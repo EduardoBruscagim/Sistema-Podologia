@@ -11,7 +11,7 @@ export const WhatsAppButton: React.FC = () => {
         href={getWhatsAppDoubtUrl()}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Tirar dúvidas com Angélica pelo WhatsApp (abre em uma nova aba)"
+        aria-label="Dúvidas no WhatsApp - Falar com Angélica (abre em uma nova aba)"
         className="group flex items-center gap-2.5 bg-sage hover:bg-sage-hover text-white dark:text-surface border border-surface-border px-4 py-3 sm:px-5 sm:py-3.5 rounded-full shadow-lg shadow-black/15 hover:shadow-xl hover:shadow-black/25 dark:shadow-black/40 transition-[transform,box-shadow,background-color] active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-sage min-h-[48px] min-w-[48px]"
       >
         {/* Ícone oficial do WhatsApp */}

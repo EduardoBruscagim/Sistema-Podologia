@@ -81,8 +81,16 @@ export const Hero: React.FC = () => {
         <div className="lg:col-span-5 gsap-hero-image relative">
           <div className="relative rounded-xl overflow-hidden border border-surface-border bg-pure-white dark:bg-surface-variant">
             <picture>
-              <source type="image/webp" srcSet="/hero-clinical-bag.webp" />
-              <source type="image/avif" srcSet="/hero-clinical-bag.avif" />
+              <source
+                media="(max-width: 640px)"
+                type="image/webp"
+                srcSet="/hero-clinical-bag-mobile.webp"
+              />
+              <source
+                media="(min-width: 641px)"
+                type="image/webp"
+                srcSet="/hero-clinical-bag.webp"
+              />
               <img
                 alt="Kit profissional higienizado para atendimento domiciliar com toalhas e instrumentais esterilizados"
                 className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover"

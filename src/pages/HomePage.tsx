@@ -1,5 +1,4 @@
 import React from 'react'
-import { BrandIntro } from '@/components/common/BrandIntro'
 import { Navbar } from '@/components/layout/Navbar'
 import { Hero } from '@/components/home/Hero'
 import { TrustStats } from '@/components/home/TrustStats'
@@ -14,7 +13,6 @@ import { WhatsAppButton } from '@/components/common/WhatsAppButton'
 export const HomePage: React.FC = () => {
   return (
     <div id="app" className="flex-1 flex flex-col">
-      <BrandIntro />
       {/* Link de salto acessível para navegação por teclado */}
       <a
         href="#main-content"

@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/outfit';
+@import '@fontsource-variable/newsreader';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -46,7 +47,7 @@
   --shadow-2xl: 0 0 #0000;
 
   /* Tipografia Editorial */
-  --font-serif: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
+  --font-serif: 'Newsreader Variable', 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
   --font-sans:
     'Outfit Variable', 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
