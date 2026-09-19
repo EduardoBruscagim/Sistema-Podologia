@@ -62,10 +62,11 @@ export const CtaSection: React.FC = () => {
             Solicitar Agendamento
           </a>
           <a
-            className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 rounded-full bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.1] hover:border-black/20 dark:hover:border-white/20 text-on-surface text-xs uppercase tracking-[0.14em] font-medium hover:bg-black/5 dark:hover:bg-white/5 active:scale-[0.98] transition-[background-color,border-color,transform,box-shadow] shadow-2xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 rounded-full bg-white dark:bg-surface-variant border border-black/[0.08] dark:border-white/[0.1] hover:border-black/20 dark:hover:border-white/20 text-on-surface text-xs uppercase tracking-[0.14em] font-medium hover:bg-black/5 dark:hover:bg-white/5 active:scale-[0.98] transition-[background-color,border-color,transform,box-shadow] shadow-2xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             href={getWhatsAppDoubtUrl()}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Tirar dúvidas no WhatsApp (abre em uma nova aba)"
           >
             Tirar Dúvidas no WhatsApp
           </a>

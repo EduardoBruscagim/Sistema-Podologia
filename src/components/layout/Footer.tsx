@@ -3,8 +3,9 @@ import { getWhatsAppUrl } from '@/utils/whatsapp'
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="pt-16 pb-12 px-6 border-t border-black/[0.06] dark:border-white/[0.06] bg-[#FAF8F5] dark:bg-[#11100F] transition-colors duration-300">
+    <footer className="pt-16 pb-12 px-6 border-t border-black/[0.06] dark:border-white/[0.06] bg-surface transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
+        <h2 className="sr-only">Navegação e Informações Complementares</h2>
         {/* Grid Multicolunas que colapsa com divisores hairline no mobile */}
         <div className="flex flex-col divide-y divide-black/[0.06] dark:divide-white/[0.06] md:divide-y-0 md:grid md:grid-cols-2 lg:grid-cols-12 md:gap-10 lg:gap-8 pb-12 border-b border-black/[0.06] dark:border-white/[0.06]">
           {/* Col 1: Identidade / Marca */}
@@ -26,40 +27,42 @@ export const Footer: React.FC = () => {
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface dark:text-white mb-4">
               Navegação Rápida
             </h3>
-            <ul className="flex flex-col text-xs text-on-surface-variant font-light">
-              <li>
-                <a
-                  href="#inicio"
-                  className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
-                >
-                  Início
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#procedimentos"
-                  className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
-                >
-                  Procedimentos & Valores
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#tecnologia"
-                  className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
-                >
-                  Biossegurança & Recursos
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#faq"
-                  className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
-                >
-                  Perguntas Frequentes
-                </a>
-              </li>
-            </ul>
+            <nav aria-label="Navegação do rodapé">
+              <ul className="flex flex-col text-xs text-on-surface-variant font-light">
+                <li>
+                  <a
+                    href="#inicio"
+                    className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
+                  >
+                    Início
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#procedimentos"
+                    className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
+                  >
+                    Procedimentos & Valores
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#tecnologia"
+                    className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
+                  >
+                    Biossegurança & Recursos
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#faq"
+                    className="py-2.5 inline-flex items-center min-h-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
+                  >
+                    Perguntas Frequentes
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
 
           {/* Col 3: Biossegurança Hospitalar */}
@@ -101,6 +104,7 @@ export const Footer: React.FC = () => {
               )}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
               className="inline-flex items-center gap-1.5 min-h-[44px] py-1 text-xs text-accent hover:text-accent-hover font-medium transition-colors group focus:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
             >
               <span>Dúvidas no WhatsApp</span>

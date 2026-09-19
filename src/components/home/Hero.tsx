@@ -81,7 +81,7 @@ export const Hero: React.FC = () => {
 
         {/* Right: Real Image Card & Supporting Clinical Setup */}
         <div className="lg:col-span-5 gsap-hero-image relative">
-          <div className="relative rounded-2xl overflow-hidden border border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#1a1816] shadow-md transition-shadow duration-300">
+          <div className="relative rounded-2xl overflow-hidden border border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-surface-variant shadow-md transition-shadow duration-300">
             <picture>
               <source type="image/webp" srcSet="/hero-clinical-bag.webp" />
               <img
@@ -97,19 +97,22 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Supporting Clinical Care Setup Preview Card */}
-          <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-[#1e1b19]/95 backdrop-blur-md p-3 rounded-xl border border-black/[0.08] dark:border-white/[0.08] shadow-lg max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
+          <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-surface-variant/95 backdrop-blur-md p-3 rounded-xl border border-black/[0.08] dark:border-white/[0.08] shadow-lg max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
             <div className="relative w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-lg overflow-hidden border border-black/[0.06] dark:border-white/[0.08]">
-              <img
-                src="/clinical-care-setup.jpg"
-                alt="Instrumentos cirúrgicos autoclavados e insumos descartáveis em envelope selado"
-                className="w-full h-full object-cover"
-                loading="lazy"
-                width={72}
-                height={72}
-              />
+              <picture>
+                <source type="image/webp" srcSet="/clinical-care-setup-thumb.webp" />
+                <img
+                  src="/clinical-care-setup.jpg"
+                  alt="Instrumentos cirúrgicos autoclavados e insumos descartáveis em envelope selado"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  width={72}
+                  height={72}
+                />
+              </picture>
             </div>
             <div className="flex flex-col justify-center min-w-0 pr-1">
-              <span className="text-[10px] font-semibold tracking-wider uppercase text-sage">
+              <span className="text-[11px] font-semibold tracking-wider uppercase text-sage">
                 Biossegurança Cirúrgica
               </span>
               <p className="text-xs text-on-surface dark:text-white font-medium leading-snug truncate">

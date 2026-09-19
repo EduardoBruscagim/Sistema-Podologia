@@ -58,7 +58,7 @@ export const TechnologySection: React.FC = () => {
       {/* Bento Grid Tecnológico e Biossegurança */}
       <div className="tech-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Célula Principal de Autoridade: Esterilização em Autoclave a 134°C + 100% Descartáveis */}
-        <div className="tech-featured col-span-1 md:col-span-2 lg:col-span-12 p-6 sm:p-8 lg:p-10 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs">
+        <div className="tech-featured col-span-1 md:col-span-2 lg:col-span-12 p-6 sm:p-8 lg:p-10 rounded-xl bg-white dark:bg-surface-variant border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 flex flex-col justify-between h-full">
               <div>
@@ -134,18 +134,21 @@ export const TechnologySection: React.FC = () => {
             {/* Prova Visual Autêntica: Setup Real em Mesa de Atendimento */}
             <div className="lg:col-span-5">
               <div className="relative rounded-xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-surface-variant/30 group aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
-                <img
-                  src="/clinical-care-setup.jpg"
-                  alt="Mesa de atendimento clínico domiciliar com instrumentais esterilizados em envelope cirúrgico e descartáveis"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                  width={1200}
-                  height={896}
-                />
+                <picture>
+                  <source type="image/webp" srcSet="/clinical-care-setup.webp" />
+                  <img
+                    src="/clinical-care-setup.jpg"
+                    alt="Mesa de atendimento clínico domiciliar com instrumentais esterilizados em envelope cirúrgico e descartáveis"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    width={1200}
+                    height={896}
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-xs font-light">
-                    <Shield aria-hidden="true" className="w-3.5 h-3.5 text-emerald-400" />
+                    <Shield aria-hidden="true" className="w-3.5 h-3.5 text-sage" />
                     Kit aberto na sua frente
                   </span>
                   <span className="hidden sm:inline-block text-[11px] text-white/80 font-light">
@@ -158,7 +161,7 @@ export const TechnologySection: React.FC = () => {
         </div>
 
         {/* Card Secundário 1: Fototerapia LED */}
-        <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs flex flex-col justify-between">
+        <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-surface-variant border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent">
@@ -189,7 +192,7 @@ export const TechnologySection: React.FC = () => {
         </div>
 
         {/* Card Secundário 2: Cabine UV Portátil */}
-        <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-[#161413] border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs flex flex-col justify-between">
+        <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 p-6 sm:p-8 rounded-xl bg-white dark:bg-surface-variant border border-black/[0.08] dark:border-white/[0.08] hover:border-accent/40 transition-[border-color,background-color] duration-300 shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent">

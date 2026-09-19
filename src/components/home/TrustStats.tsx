@@ -45,13 +45,10 @@ export const TrustStats: React.FC = () => {
       </h2>
       <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-px rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.08] dark:bg-white/[0.08] overflow-hidden shadow-xs">
         {/* Célula 1: Destaque Principal (+25.000) */}
-        <div className="stat-block col-span-1 md:col-span-2 lg:col-span-6 bg-white dark:bg-[#161413] p-6 sm:p-8 lg:p-10 flex flex-col justify-between transition-colors duration-200">
+        <div className="stat-block col-span-1 md:col-span-2 lg:col-span-6 bg-white dark:bg-surface-variant p-6 sm:p-8 lg:p-10 flex flex-col justify-between transition-colors duration-200">
           <div>
-            <dt className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-sage dark:text-emerald-400/90 mb-3 flex items-center gap-2">
-              <span
-                className="w-2 h-2 rounded-full bg-sage dark:bg-emerald-400 inline-block"
-                aria-hidden="true"
-              />
+            <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-sage mb-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-sage inline-block" aria-hidden="true" />
               01 / Atendimentos Realizados
             </dt>
             <dd className="m-0 flex flex-col">
@@ -70,9 +67,9 @@ export const TrustStats: React.FC = () => {
         </div>
 
         {/* Célula 2: Trajetória Clínica (Desde 2016) */}
-        <div className="stat-block col-span-1 md:col-span-1 lg:col-span-3 bg-white dark:bg-[#161413] p-6 sm:p-7 lg:p-8 flex flex-col justify-between transition-colors duration-200">
+        <div className="stat-block col-span-1 md:col-span-1 lg:col-span-3 bg-white dark:bg-surface-variant p-6 sm:p-7 lg:p-8 flex flex-col justify-between transition-colors duration-200">
           <div>
-            <dt className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-sage mb-3">
+            <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-sage mb-3">
               02 / Trajetória Clínica
             </dt>
             <dd className="m-0 flex flex-col">
@@ -87,9 +84,9 @@ export const TrustStats: React.FC = () => {
         </div>
 
         {/* Célula 3: Deslocamento Cortesia (Taxa R$ 0) */}
-        <div className="stat-block col-span-1 md:col-span-1 lg:col-span-3 bg-white dark:bg-[#161413] p-6 sm:p-7 lg:p-8 flex flex-col justify-between transition-colors duration-200">
+        <div className="stat-block col-span-1 md:col-span-1 lg:col-span-3 bg-white dark:bg-surface-variant p-6 sm:p-7 lg:p-8 flex flex-col justify-between transition-colors duration-200">
           <div>
-            <dt className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.2em] text-sage mb-3">
+            <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-sage mb-3">
               03 / Conveniência & Rigor
             </dt>
             <dd className="m-0 flex flex-col">

@@ -56,11 +56,11 @@ export const BentoGrid: React.FC = () => {
 
       <div className="bento-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         {/* Card 1: Conforto do lar */}
-        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#161413] border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-surface-variant border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="font-serif text-lg text-sage tracking-widest font-normal">01</span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage">
+              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-sage-subtle flex items-center justify-center text-sage">
                 <Home aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
@@ -83,11 +83,11 @@ export const BentoGrid: React.FC = () => {
         </div>
 
         {/* Card 2: Toda Mococa */}
-        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#161413] border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-surface-variant border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="font-serif text-lg text-sage tracking-widest font-normal">02</span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage">
+              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-sage-subtle flex items-center justify-center text-sage">
                 <MapPin aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
@@ -110,11 +110,11 @@ export const BentoGrid: React.FC = () => {
         </div>
 
         {/* Card 3: Pontualidade & Dedicação */}
-        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#161413] border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-surface-variant border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="font-serif text-lg text-sage tracking-widest font-normal">03</span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-[#19261F] flex items-center justify-center text-sage">
+              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-sage-subtle flex items-center justify-center text-sage">
                 <Clock aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>

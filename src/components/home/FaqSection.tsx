@@ -175,7 +175,7 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
           id={`faq-panel-${index}`}
           role="region"
           aria-labelledby={`faq-btn-${index}`}
-          style={{ overflow: 'hidden' }}
+          className="overflow-hidden"
         >
           <div className="pb-6 pt-1 text-sm sm:text-base text-on-surface-variant font-light leading-relaxed max-w-[55ch] text-pretty">
             {item.answer}
