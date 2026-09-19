@@ -54,19 +54,11 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
   ({ item, index, isOpen, onToggle }) => {
     const panelRef = useRef<HTMLDivElement>(null)
     const prevIsOpenRef = useRef<boolean | null>(null)
-    const [isHidden, setIsHidden] = useState(!isOpen)
 
     const prefersReduced =
       typeof window !== 'undefined' && window.matchMedia
         ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
         : false
-
-    // Ajusta visibilidade do painel sincronamente durante a renderização
-    if (isOpen && isHidden) {
-      setIsHidden(false)
-    } else if (!isOpen && !isHidden && prefersReduced) {
-      setIsHidden(true)
-    }
 
     useLayoutEffect(() => {
       const panel = panelRef.current
@@ -78,53 +70,47 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
 
       if (isInitialMount) {
         if (isOpen) {
-          gsap.set(panel, { height: 'auto', opacity: 1 })
+          gsap.set(panel, { height: 'auto', opacity: 1, display: 'block' })
         } else {
-          gsap.set(panel, { height: 0, opacity: 0 })
+          gsap.set(panel, { height: 0, opacity: 0, display: 'none' })
         }
-        return () => {
-          gsap.killTweensOf(panel)
-        }
+        return
       }
 
-      // Evita re-executar animações em remounts do StrictMode
-      if (wasOpen === isOpen) {
-        return () => {
-          gsap.killTweensOf(panel)
-        }
-      }
-
-      if (prefersReduced) {
-        gsap.set(panel, isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 })
-        return () => {
-          gsap.killTweensOf(panel)
-        }
-      }
+      if (wasOpen === isOpen) return
 
       gsap.killTweensOf(panel)
 
-      if (isOpen) {
-        const currentHeight = panel.offsetHeight
-        const currentOpacity = Number(gsap.getProperty(panel, 'opacity')) || 0
+      if (prefersReduced) {
+        gsap.set(
+          panel,
+          isOpen
+            ? { height: 'auto', opacity: 1, display: 'block' }
+            : { height: 0, opacity: 0, display: 'none' },
+        )
+        return
+      }
 
+      if (isOpen) {
+        gsap.set(panel, { display: 'block' })
         gsap.fromTo(
           panel,
-          { height: currentHeight, opacity: currentOpacity },
+          { height: 0, opacity: 0 },
           {
             height: 'auto',
             opacity: 1,
-            duration: 0.38,
-            ease: 'power3.out',
+            duration: 0.32,
+            ease: 'power2.out',
           },
         )
       } else {
         gsap.to(panel, {
           height: 0,
           opacity: 0,
-          duration: 0.28,
-          ease: 'power3.out',
+          duration: 0.24,
+          ease: 'power2.out',
           onComplete: () => {
-            setIsHidden(true)
+            gsap.set(panel, { display: 'none' })
           },
         })
       }
@@ -158,8 +144,10 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
             className="w-full flex items-center justify-between py-6 text-left cursor-pointer group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg transition-colors"
           >
             <span
-              className={`font-serif text-lg sm:text-xl font-normal transition-colors pr-6 leading-snug ${
-                isOpen ? 'text-accent' : 'text-on-surface dark:text-white group-hover:text-accent'
+              className={`font-serif text-lg sm:text-xl font-normal transition-colors duration-200 ${
+                isOpen
+                  ? 'text-accent dark:text-accent font-medium'
+                  : 'text-on-surface dark:text-white group-hover:text-accent'
               }`}
             >
               {item.question}
@@ -187,7 +175,6 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
           id={`faq-panel-${index}`}
           role="region"
           aria-labelledby={`faq-btn-${index}`}
-          hidden={isHidden}
           style={{ overflow: 'hidden' }}
         >
           <div className="pb-6 pt-1 text-sm sm:text-base text-on-surface-variant font-light leading-relaxed max-w-[55ch] text-pretty">

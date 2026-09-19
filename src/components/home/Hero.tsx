@@ -22,7 +22,7 @@ export const Hero: React.FC = () => {
         (context) => {
           const { isMotionOk } = context.conditions!
           if (!isMotionOk) {
-            applyReducedMotion(['.gsap-hero-reveal', '.gsap-hero-image'])
+            applyReducedMotion('.gsap-hero-image')
             return
           }
 
@@ -43,27 +43,27 @@ export const Hero: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         {/* Left: Headline & Actions */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
-          <span className="gsap-hero-reveal inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent mb-4">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent mb-4">
             <MapPin aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
             Podologia em Domicílio · Mococa, SP
           </span>
 
           <h1
             id="hero-title"
-            className="gsap-hero-reveal font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.08] mb-6 text-balance"
+            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.08] mb-6 text-balance"
           >
             O cuidado clínico e especializado para seus pés e mãos,
             <br className="hidden sm:inline" /> no{' '}
             <span className="italic font-light">conforto</span> da sua casa em Mococa.
           </h1>
 
-          <p className="gsap-hero-reveal font-sans text-base sm:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-[48ch] font-light text-pretty">
+          <p className="font-sans text-base sm:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-[48ch] font-light text-pretty">
             Atendimento domiciliar de podologia clínica e manicure em Mococa. Esterilização em
             autoclave, materiais descartáveis e cortesia integral de deslocamento para qualquer
             bairro.
           </p>
 
-          <div className="gsap-hero-reveal flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
             <a
               href="#procedimentos"
               className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform,box-shadow] shadow-xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
