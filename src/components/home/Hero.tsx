@@ -36,37 +36,35 @@ export const Hero: React.FC = () => {
 
   return (
     <section
+      id="inicio"
       ref={heroSectionRef}
-      className="max-w-6xl mx-auto px-6 pt-8 pb-16 lg:pt-12 lg:pb-20"
+      className="max-w-6xl mx-auto px-6 pt-8 pb-16 lg:pt-12 lg:pb-20 scroll-mt-28"
       aria-labelledby="hero-title"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         {/* Left: Headline & Actions */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent mb-4">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 mb-4">
             <MapPin aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
-            Podologia em Domicílio · Mococa, SP
+            Podologia e Manicure em Domicílio · Mococa, SP
           </span>
 
           <h1
             id="hero-title"
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.08] mb-6 text-balance"
+            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-on-surface tracking-tight leading-[1.08] mb-6 text-balance"
           >
-            O cuidado clínico e especializado para seus pés e mãos,
-            <br className="hidden sm:inline" /> no{' '}
-            <span className="italic font-light">conforto</span> da sua casa em Mococa.
+            Podologia e manicure no <span className="italic font-light">conforto</span> da sua casa.
           </h1>
 
           <p className="font-sans text-base sm:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-[48ch] font-light text-pretty">
-            Atendimento domiciliar de podologia clínica e manicure em Mococa. Esterilização em
-            autoclave, materiais descartáveis e cortesia integral de deslocamento para qualquer
-            bairro.
+            Atendimento em domicílio em qualquer bairro de Mococa, sem taxa de visita. Instrumentos
+            esterilizados e materiais descartáveis.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
             <a
               href="#procedimentos"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform,box-shadow] shadow-xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
             >
               Solicitar Agendamento
             </a>
@@ -74,16 +72,17 @@ export const Hero: React.FC = () => {
               <span className="text-sage font-semibold" aria-hidden="true">
                 ✓
               </span>
-              <span>Instrumentais estéreis abertos na sua presença</span>
+              <span>Atendimento individual com hora marcada</span>
             </div>
           </div>
         </div>
 
         {/* Right: Real Image Card & Supporting Clinical Setup */}
         <div className="lg:col-span-5 gsap-hero-image relative">
-          <div className="relative rounded-2xl overflow-hidden border border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-surface-variant shadow-md transition-shadow duration-300">
+          <div className="relative rounded-xl overflow-hidden border border-surface-border bg-pure-white dark:bg-surface-variant">
             <picture>
               <source type="image/webp" srcSet="/hero-clinical-bag.webp" />
+              <source type="image/avif" srcSet="/hero-clinical-bag.avif" />
               <img
                 alt="Kit profissional higienizado para atendimento domiciliar com toalhas e instrumentais esterilizados"
                 className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover"
@@ -92,20 +91,23 @@ export const Hero: React.FC = () => {
                 height={460}
                 loading="eager"
                 fetchPriority="high"
+                decoding="async"
               />
             </picture>
           </div>
 
           {/* Supporting Clinical Care Setup Preview Card */}
-          <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-surface-variant/95 backdrop-blur-md p-3 rounded-xl border border-black/[0.08] dark:border-white/[0.08] shadow-lg max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
-            <div className="relative w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-lg overflow-hidden border border-black/[0.06] dark:border-white/[0.08]">
+          <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-surface-variant/95 backdrop-blur-md p-3 rounded-xl border border-surface-border max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
+            <div className="relative w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-lg overflow-hidden border border-surface-border">
               <picture>
+                <source type="image/avif" srcSet="/clinical-care-setup-thumb.avif" />
                 <source type="image/webp" srcSet="/clinical-care-setup-thumb.webp" />
                 <img
-                  src="/clinical-care-setup.jpg"
+                  src="/clinical-care-setup-thumb.jpg"
                   alt="Instrumentos cirúrgicos autoclavados e insumos descartáveis em envelope selado"
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  decoding="async"
                   width={72}
                   height={72}
                 />
@@ -113,13 +115,13 @@ export const Hero: React.FC = () => {
             </div>
             <div className="flex flex-col justify-center min-w-0 pr-1">
               <span className="text-[11px] font-semibold tracking-wider uppercase text-sage">
-                Biossegurança Cirúrgica
+                Higiene
               </span>
-              <p className="text-xs text-on-surface dark:text-white font-medium leading-snug truncate">
-                Envelopes cirúrgicos selados
+              <p className="text-xs text-on-surface font-medium leading-snug truncate">
+                Envelopes lacrados
               </p>
               <span className="text-[11px] text-text-secondary font-light leading-tight mt-0.5">
-                Instrumentos abertos na sua presença
+                Abertos no momento do atendimento
               </span>
             </div>
           </div>

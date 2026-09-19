@@ -33,8 +33,8 @@ Cuidado especializado e higiênico para pés e mãos no conforto da sua residên
   - Informação clara sobre a cobertura em toda a cidade de Mococa - SP e confirmação de taxa de deslocamento zero (R$ 0).
   - Canal direto via botão flutuante e atalhos customizados de WhatsApp para combinação de datas e horários.
   - SEO local focado em Mococa - SP com Open Graph em alta resolução, robots.txt, sitemap.xml e Schema.org (`HealthAndBeautyBusiness`) via JSON-LD.
-  - Simulação de perfil do cliente em frontend (mock com `localStorage`), com navegação acessível e tema claro/escuro anti-FOUC.
-  - Conformidade estrita de acessibilidade WCAG AA (skip-link, contraste, roving tabIndex e prefers-reduced-motion).
+  - Apresentação institucional focada em conversão direta com navegação acessível, canal WhatsApp contextualizado e tema claro/escuro anti-FOUC.
+  - Conformidade estrita de acessibilidade WCAG AA/AAA (skip-link, contrastes calibrados, focus trap em menu mobile e prefers-reduced-motion).
 
 - **Fase 2 (Em Desenvolvimento — Motor de Agendamento & Integração):**
   - Fluxo de solicitação de horário com seleção de serviço, preferências de data e endereço residencial em Mococa.
@@ -42,7 +42,7 @@ Cuidado especializado e higiênico para pés e mãos no conforto da sua residên
 
 ## Evidence on Hand
 
-- Código-fonte funcional em React 19 + Vite com rotas `/` (Home) e `/dashboard` (Painel do Cliente).
+- Código-fonte funcional em React 19 + Vite focado na experiência de alta performance e acessibilidade da página principal (Home).
 - Sistema de design documentado em `DESIGN.md` com tokens semânticos e escala de tipografia geométrica humanista (Outfit).
 - Animações GSAP modulares em `src/animations/` integradas ao ciclo de vida de componentes via `@gsap/react`.
 
