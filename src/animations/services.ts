@@ -6,24 +6,25 @@ export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
     // Cabeçalho da seção
     gsap.fromTo(
       '.services-header',
-      { y: 20, opacity: 0 },
+      { y: 16, autoAlpha: 0 },
       {
         scrollTrigger: {
           trigger: '.services-header',
-          start: 'top 88%',
+          start: 'top 85%',
           once: true,
         },
         y: 0,
-        opacity: 1,
-        duration: 0.6,
+        autoAlpha: 1,
+        duration: 0.55,
         ease: 'power2.out',
+        clearProps: 'transform,opacity,visibility',
       },
     )
 
-    // Cascata dos 3 cards de procedimentos
+    // Cascata dos 3 cards de procedimentos (sem scale para manter fontes perfeitamente nítidas)
     gsap.fromTo(
       '.service-card',
-      { y: 30, opacity: 0, scale: 0.98 },
+      { y: 24, autoAlpha: 0 },
       {
         scrollTrigger: {
           trigger: '.services-grid',
@@ -31,18 +32,18 @@ export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.65,
-        stagger: 0.12,
+        autoAlpha: 1,
+        duration: 0.6,
+        stagger: 0.1,
         ease: 'power2.out',
+        clearProps: 'transform,opacity,visibility',
       },
     )
 
     // Faixa informativa inferior (Mococa / PIX)
     gsap.fromTo(
       '.services-footer',
-      { y: 16, opacity: 0 },
+      { y: 14, autoAlpha: 0 },
       {
         scrollTrigger: {
           trigger: '.services-grid',
@@ -50,22 +51,22 @@ export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        opacity: 1,
+        autoAlpha: 1,
         duration: 0.5,
         ease: 'power2.out',
+        clearProps: 'transform,opacity,visibility',
       },
     )
   }, sectionEl)
 
-  // Efeito de hover fluido e suave nos cards
+  // Efeito de hover fluido e suave nos cards de serviço
   const cards = sectionEl.querySelectorAll<HTMLElement>('.service-card')
   const cleanupHover = initCardsHover(cards, {
-    y: -5,
-    scale: 1.012,
-    duration: 0.32,
+    y: -4,
+    duration: 0.28,
     iconSelector: '.service-icon',
     iconY: -2,
-    iconScale: 1.05,
+    iconScale: 1.08,
   })
 
   return () => {
