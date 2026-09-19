@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="stylesheet" href="/src/style.css" />
     <meta
       name="description"
       content="Angélica Eduarda: atendimento domiciliar de podologia e manicure em qualquer bairro de Mococa, SP. Instrumentos esterilizados, materiais descartáveis e sem taxa de visita."
@@ -31,28 +32,20 @@
     <meta name="twitter:image" content="https://agendamento-angelica.vercel.app/og-image.jpg" />
     <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#11100f" media="(prefers-color-scheme: dark)" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap"
-      as="style"
-      onload="
-        this.onload = null
-        this.rel = 'stylesheet'
-      "
+      as="image"
+      href="/hero-clinical-bag-mobile.webp"
+      type="image/webp"
+      media="(max-width: 640px)"
+      fetchpriority="high"
     />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
     <link
       rel="preload"
       as="image"
       href="/hero-clinical-bag.webp"
       type="image/webp"
+      media="(min-width: 641px)"
       fetchpriority="high"
     />
     <title>Angélica Eduarda | Podologia em Domicílio · Mococa, SP</title>
@@ -127,7 +120,6 @@
         } catch (_) {}
       })()
     </script>
-    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body
     class="min-h-screen antialiased font-sans transition-colors duration-300 break-words flex flex-col"
