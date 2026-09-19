@@ -135,7 +135,7 @@ export const Navbar: React.FC = () => {
 
       <header
         ref={headerRef}
-        className="pointer-events-auto w-full transition-[background-color,border-color,backdrop-filter] duration-300 border-b border-transparent [&.is-scrolled]:bg-[#faf8f5]/90 dark:[&.is-scrolled]:bg-[#11100f]/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-black/[0.06] dark:[&.is-scrolled]:border-white/[0.08] relative z-50"
+        className="pointer-events-auto w-full transition-[background-color,border-color,backdrop-filter] duration-300 border-b border-transparent [&.is-scrolled]:bg-surface/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-black/[0.06] dark:[&.is-scrolled]:border-white/[0.08] relative z-50"
       >
         <div className="max-w-6xl mx-auto px-3 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
           {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Editorial */}
@@ -169,7 +169,7 @@ export const Navbar: React.FC = () => {
               <span className="font-serif text-sm sm:text-lg lg:text-xl font-medium tracking-[0.04em] sm:tracking-[0.10em] uppercase text-on-surface dark:text-white group-hover:text-accent transition-colors leading-none whitespace-nowrap">
                 Angélica Eduarda
               </span>
-              <span className="font-sans text-[10px] sm:text-xs text-accent font-medium mt-1 whitespace-nowrap">
+              <span className="font-sans text-[11px] sm:text-xs text-accent font-medium mt-1 whitespace-nowrap">
                 <span className="sm:hidden">Podologia · Mococa</span>
                 <span className="hidden sm:inline">Podologia em Domicílio · Mococa</span>
               </span>
@@ -236,7 +236,7 @@ export const Navbar: React.FC = () => {
             id="mobile-menu"
             role="region"
             aria-label="Menu móvel"
-            className="absolute top-full left-0 right-0 p-4 bg-[#faf8f5]/98 dark:bg-[#11100f]/98 backdrop-blur-xl border-b border-black/[0.06] dark:border-white/[0.08] shadow-lg flex flex-col gap-2 lg:hidden z-50"
+            className="absolute top-full left-0 right-0 p-4 bg-surface/98 backdrop-blur-xl border-b border-black/[0.06] dark:border-white/[0.08] shadow-lg flex flex-col gap-2 lg:hidden z-50"
           >
             <a
               href="#procedimentos"
@@ -265,7 +265,7 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Tirar dúvidas pelo WhatsApp (abre em uma nova aba)"
-              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-accent dark:text-[#7ea08e] hover:text-accent-hover hover:bg-sage-subtle dark:hover:bg-[#19261F] transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-accent dark:text-sage hover:text-accent-hover hover:bg-sage-subtle dark:hover:bg-sage-subtle transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span>Dúvidas no WhatsApp</span>
               <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
@@ -276,7 +276,7 @@ export const Navbar: React.FC = () => {
               <a
                 href="#procedimentos"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-xl bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer shadow-xs"
+                className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer shadow-xs"
               >
                 Agendar Horário
               </a>
