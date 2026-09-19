@@ -44,94 +44,89 @@ export const BentoGrid: React.FC = () => {
       <div className="bento-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="bento-heading"
-          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface dark:text-white tracking-tight leading-[1.12] mb-4 text-balance"
+          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance"
         >
-          Como funciona o atendimento clínico na sua residência.
+          Como funciona o atendimento
         </h2>
-        <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
-          Estrutura técnica completa, biossegurança cirúrgica e conforto absoluto levados até você,
-          com discrição e pontualidade.
-        </p>
       </div>
 
       <div className="bento-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         {/* Card 1: Conforto do lar */}
-        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-surface-variant border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+        <div className="bento-card p-6 sm:p-8 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="font-serif text-lg text-sage tracking-widest font-normal">01</span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-sage-subtle flex items-center justify-center text-sage">
+              <div className="bento-icon w-9 h-9 rounded-lg bg-sage-subtle flex items-center justify-center text-sage">
                 <Home aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
 
-            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-3 leading-snug">
-              Tudo pronto na sua sala ou quarto
+            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-3 leading-snug">
+              Espaço simples
             </h3>
             <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[38ch] text-pretty">
-              Levo os equipamentos, instrumentais esterilizados e materiais descartáveis. Você só
-              precisa escolher um sofá ou poltrona confortável.
+              Levo os materiais e aparelhos. É necessário apenas um lugar para sentar e uma tomada
+              por perto.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary font-light">
+          <div className="mt-8 pt-4 border-t border-surface-border flex items-center text-xs text-text-secondary font-light">
             <span className="flex items-center gap-2">
               <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
-              <span>Sem fila ou sala de espera</span>
+              <span>Não precisa providenciar materiais</span>
             </span>
           </div>
         </div>
 
         {/* Card 2: Toda Mococa */}
-        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-surface-variant border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+        <div className="bento-card p-6 sm:p-8 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="font-serif text-lg text-sage tracking-widest font-normal">02</span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-sage-subtle flex items-center justify-center text-sage">
+              <div className="bento-icon w-9 h-9 rounded-lg bg-sage-subtle flex items-center justify-center text-sage">
                 <MapPin aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
 
-            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-3 leading-snug">
-              Preço único sem taxa de visita
+            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-3 leading-snug">
+              Sem taxa de visita
             </h3>
             <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[38ch] text-pretty">
-              Atendo em qualquer bairro de Mococa sem acréscimo de deslocamento. O valor do
-              procedimento é exatamente o preço final.
+              Atendimento em qualquer bairro de Mococa pelo valor da tabela, sem cobrança extra de
+              deslocamento.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary font-light">
+          <div className="mt-8 pt-4 border-t border-surface-border flex items-center text-xs text-text-secondary font-light">
             <span className="flex items-center gap-2">
               <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
-              <span>Sem surpresas no valor</span>
+              <span>Preço final sem acréscimo</span>
             </span>
           </div>
         </div>
 
         {/* Card 3: Pontualidade & Dedicação */}
-        <div className="bento-card p-6 sm:p-8 rounded-2xl bg-white dark:bg-surface-variant border border-black/[0.06] dark:border-white/[0.08] shadow-xs hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+        <div className="bento-card p-6 sm:p-8 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
               <span className="font-serif text-lg text-sage tracking-widest font-normal">03</span>
-              <div className="bento-icon w-9 h-9 rounded-full bg-sage-subtle dark:bg-sage-subtle flex items-center justify-center text-sage">
+              <div className="bento-icon w-9 h-9 rounded-lg bg-sage-subtle flex items-center justify-center text-sage">
                 <Clock aria-hidden="true" className="w-4 h-4" />
               </div>
             </div>
 
-            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface dark:text-white mb-3 leading-snug">
-              Sessão dedicada no seu tempo
+            <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-3 leading-snug">
+              Horário marcado
             </h3>
             <p className="text-sm text-on-surface-variant leading-relaxed font-light max-w-[38ch] text-pretty">
-              A sessão é agendada com calma e dedicação exclusiva para realizar o procedimento sem
-              pressa, com precisão técnica e atenção aos detalhes.
+              Atendimento com horário reservado, sem atender outra pessoa ao mesmo tempo.
             </p>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center text-xs text-text-secondary font-light">
+          <div className="mt-8 pt-4 border-t border-surface-border flex items-center text-xs text-text-secondary font-light">
             <span className="flex items-center gap-2">
               <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
-              <span>Pontualidade no horário marcado</span>
+              <span>Atendimento individual</span>
             </span>
           </div>
         </div>

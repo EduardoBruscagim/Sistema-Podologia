@@ -6,7 +6,6 @@ import gsap from 'gsap'
  */
 export const applyReducedMotion = (
   targets: gsap.DOMTarget = [
-    '.gsap-hero-reveal',
     '.gsap-hero-image',
     '.stat-block',
     '.bento-header',
@@ -44,8 +43,4 @@ export const applyNavbarReducedMotion = (
   headerEl.style.visibility = 'visible'
   floatingNav.style.pointerEvents = 'auto'
   gsap.set(floatingNav, { yPercent: 0, clearProps: 'transform' })
-  const progressLine = headerEl.querySelector<HTMLElement>('.origin-left')
-  if (progressLine) {
-    gsap.set(progressLine, { clearProps: 'transform' })
-  }
 }

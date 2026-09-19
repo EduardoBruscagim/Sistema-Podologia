@@ -8,7 +8,7 @@ const rawEnvNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined
 export const WHATSAPP_NUMBER = rawEnvNumber ? rawEnvNumber.replace(/\D/g, '') : '5519995443922'
 
 export const WHATSAPP_DEFAULT_MESSAGE =
-  'Olá, Angélica! Gostaria de tirar uma dúvida sobre os atendimentos em domicílio em Mococa.'
+  'Olá, Angélica! Gostaria de tirar uma dúvida sobre o atendimento em domicílio em Mococa.'
 
 export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
@@ -20,7 +20,7 @@ export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
 export const getWhatsAppDoubtUrl = (topic?: string): string => {
   const message = topic
     ? `Olá, Angélica! Gostaria de tirar uma dúvida sobre ${topic} em Mococa.`
-    : 'Olá, Angélica! Gostaria de tirar uma dúvida sobre os atendimentos em domicílio em Mococa.'
+    : 'Olá, Angélica! Gostaria de tirar uma dúvida sobre o atendimento em domicílio em Mococa.'
   return getWhatsAppUrl(message)
 }
 
@@ -29,7 +29,7 @@ export const getWhatsAppDoubtUrl = (topic?: string): string => {
  */
 export const getWhatsAppUrgencyUrl = (): string => {
   const message =
-    'Olá, Angélica! Estou com uma urgência podológica com dor e preciso de orientação para atendimento em Mococa.'
+    'Olá, Angélica! Estou com a unha doendo e gostaria de ver um horário para atendimento em Mococa.'
   return getWhatsAppUrl(message)
 }
 
