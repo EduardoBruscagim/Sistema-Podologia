@@ -27,14 +27,16 @@ Cuidado especializado e higiênico para pés e mãos no conforto da sua residên
 
 ## Capabilities and Roadmap
 
-- **Fase 1 (Entregue — Landing de Alta Conversão, CRO & Acessibilidade):**
-  - Landing page institucional moderna e elegante com Bento Grid de diferenciais, apresentação de serviços e FAQ.
+- **Fase 1 (Entregue — Landing de Alta Conversão, CRO, Performance & Acessibilidade):**
+  - Landing page institucional moderna e elegante com Bento Grid de diferenciais, apresentação de serviços e FAQ desdobrável com tipografia arejada.
+  - Pacote de microinterações e animações editoriais de alto padrão a 60 FPS: odômetro numérico de credibilidade (+25.000), parallax óptico em 2 planos no Hero, botões magnéticos no desktop e spotlight dinâmico nos procedimentos.
+  - Pré-renderização estática (SSG) de alta velocidade com inlining automático de CSS crítico em `dist/index.html`, eliminando bloqueios de renderização no mobile.
+  - Arquitetura Anti-FOUC definitiva via classes síncronas no `<head>` e sincronização com `requestAnimationFrame`, eliminando saltos ou piscadas visuais.
   - Tabela transparente com os 3 principais serviços prestados: _Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_.
   - Informação clara sobre a cobertura em toda a cidade de Mococa - SP e confirmação de taxa de deslocamento zero (R$ 0).
   - Canal direto via botão flutuante e atalhos customizados de WhatsApp para combinação de datas e horários.
   - SEO local focado em Mococa - SP com Open Graph em alta resolução, robots.txt, sitemap.xml e Schema.org (`HealthAndBeautyBusiness`) via JSON-LD.
-  - Apresentação institucional focada em conversão direta com navegação acessível, canal WhatsApp contextualizado e tema claro/escuro anti-FOUC.
-  - Conformidade estrita de acessibilidade WCAG AA/AAA (skip-link, contrastes calibrados, focus trap em menu mobile e prefers-reduced-motion).
+  - Fontes 100% auto-hospedadas e conformidade estrita de acessibilidade WCAG AA/AAA (skip-link, contrastes calibrados, focus trap em menu mobile e prefers-reduced-motion).
 
 - **Fase 2 (Em Desenvolvimento — Motor de Agendamento & Integração):**
   - Fluxo de solicitação de horário com seleção de serviço, preferências de data e endereço residencial em Mococa.
@@ -42,9 +44,10 @@ Cuidado especializado e higiênico para pés e mãos no conforto da sua residên
 
 ## Evidence on Hand
 
-- Código-fonte funcional em React 19 + Vite focado na experiência de alta performance e acessibilidade da página principal (Home).
-- Sistema de design documentado em `DESIGN.md` com tokens semânticos e escala de tipografia geométrica humanista (Outfit).
-- Animações GSAP modulares em `src/animations/` integradas ao ciclo de vida de componentes via `@gsap/react`.
+- Código-fonte funcional em React 19 + Vite focado na experiência de alta performance, ausência de jank e acessibilidade da página principal (Home).
+- Sistema de design documentado em `DESIGN.md` com tokens semânticos, paleta mineral e tokens de movimento refinados.
+- Animações GSAP modulares em `src/animations/` e hook `useMagneticButton` integrados ao ciclo de vida de componentes via `@gsap/react`.
+- Script de pré-renderização estática SSG (`scripts/prerender.mjs`) integrado ao pipeline de build.
 
 ## Product Principles
 
