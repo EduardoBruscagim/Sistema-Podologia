@@ -1,13 +1,12 @@
 import React, { useRef } from 'react'
+import { initCtaAnimation } from '@/animations/cta'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { getWhatsAppUrl, getWhatsAppDoubtUrl } from '@/utils/whatsapp'
-
-const loadCtaAnimation = () => import('@/animations/cta').then((m) => m.initCtaAnimation)
 
 export const CtaSection: React.FC = () => {
   const ctaSectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(ctaSectionRef, loadCtaAnimation)
+  useSectionAnimation(ctaSectionRef, initCtaAnimation, '.cta-reveal')
 
   return (
     <section

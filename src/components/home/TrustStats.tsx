@@ -1,12 +1,11 @@
 import React, { useRef } from 'react'
+import { initStatsAnimation } from '@/animations/stats'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
-
-const loadStatsAnimation = () => import('@/animations/stats').then((m) => m.initStatsAnimation)
 
 export const TrustStats: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(sectionRef, loadStatsAnimation)
+  useSectionAnimation(sectionRef, initStatsAnimation, '.stat-block')
 
   return (
     <section
