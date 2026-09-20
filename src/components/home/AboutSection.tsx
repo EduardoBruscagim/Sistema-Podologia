@@ -64,7 +64,7 @@ export const AboutSection: React.FC = () => {
                   <circle cx="43" cy="20" r="3" className="fill-accent" />
                 </svg>
               </div>
-              <div className="absolute -bottom-2 -right-1 px-3 py-1 rounded-full bg-sage text-white text-[10px] uppercase font-semibold tracking-wider shadow-xs">
+              <div className="absolute -bottom-2 -right-1 px-3 py-1 rounded-full bg-sage text-white text-[11px] uppercase font-semibold tracking-wider shadow-xs">
                 Mococa · SP
               </div>
             </div>
