@@ -1,4 +1,4 @@
-import { gsap } from './config'
+import gsap from 'gsap'
 
 /**
  * Animação editorial suave para os blocos de estatísticas e confiança.

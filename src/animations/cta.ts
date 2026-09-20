@@ -1,4 +1,4 @@
-import { gsap } from './config'
+import gsap from 'gsap'
 
 export const initCtaAnimation = (sectionEl?: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {

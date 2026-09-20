@@ -1,4 +1,4 @@
-import { gsap } from './config'
+import gsap from 'gsap'
 import { initCardsHover } from './cardHover'
 
 export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {

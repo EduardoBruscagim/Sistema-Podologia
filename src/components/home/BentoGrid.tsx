@@ -1,13 +1,16 @@
 import React, { useRef } from 'react'
+import { initBentoAnimation } from '@/animations/bento'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { Home, MapPin, Clock, Check } from 'lucide-react'
-
-const loadBentoAnimation = () => import('@/animations/bento').then((m) => m.initBentoAnimation)
 
 export const BentoGrid: React.FC = () => {
   const bentoSectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(bentoSectionRef, loadBentoAnimation)
+  useSectionAnimation(bentoSectionRef, initBentoAnimation, [
+    '.bento-header',
+    '.bento-card',
+    '.bento-icon',
+  ])
 
   return (
     <section
