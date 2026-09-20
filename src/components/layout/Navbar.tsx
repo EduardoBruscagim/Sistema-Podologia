@@ -191,6 +191,12 @@ export const Navbar: React.FC = () => {
           >
             <a
               className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
+              href="#sobre"
+            >
+              Sobre
+            </a>
+            <a
+              className="hover:text-accent dark:hover:text-accent transition-colors py-2 px-1 min-h-[44px] inline-flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
               href="#procedimentos"
             >
               Procedimentos
@@ -245,6 +251,13 @@ export const Navbar: React.FC = () => {
             aria-label="Menu móvel"
             className="absolute top-full left-0 right-0 p-4 bg-surface border-b border-surface-border shadow-lg flex flex-col gap-2 lg:hidden z-50"
           >
+            <a
+              href="#sobre"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              Sobre a Profissional
+            </a>
             <a
               href="#procedimentos"
               onClick={() => setIsMobileMenuOpen(false)}

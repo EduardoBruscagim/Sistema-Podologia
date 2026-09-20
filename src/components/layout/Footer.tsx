@@ -38,6 +38,14 @@ export const Footer: React.FC = () => {
                 </li>
                 <li>
                   <a
+                    href="#sobre"
+                    className="py-2.5 px-2 -mx-2 inline-flex items-center min-h-[44px] min-w-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
+                  >
+                    Sobre a Profissional
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="#procedimentos"
                     className="py-2.5 px-2 -mx-2 inline-flex items-center min-h-[44px] min-w-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
                   >

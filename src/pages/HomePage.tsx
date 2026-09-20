@@ -3,6 +3,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Hero } from '@/components/home/Hero'
 import { TrustStats } from '@/components/home/TrustStats'
 import { BentoGrid } from '@/components/home/BentoGrid'
+import { AboutSection } from '@/components/home/AboutSection'
 import { ServicesPricing } from '@/components/home/ServicesPricing'
 import { TechnologySection } from '@/components/home/TechnologySection'
 import { FaqSection } from '@/components/home/FaqSection'
@@ -29,6 +30,7 @@ export const HomePage: React.FC = () => {
         <Hero />
         <TrustStats />
         <BentoGrid />
+        <AboutSection />
         <ServicesPricing />
         <TechnologySection />
         <FaqSection />
