@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-import { initFaqAnimation } from '@/animations/faq'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
 interface FaqItem {
@@ -114,15 +113,17 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
 
 FaqAccordionItem.displayName = 'FaqAccordionItem'
 
+const loadFaqAnimation = () => import('@/animations/faq').then((m) => m.initFaqAnimation)
+
 export const FaqSection: React.FC = () => {
-  const faqSectionRef = useRef<HTMLElement | null>(null)
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const faqSectionRef = useRef<HTMLElement | null>(null)
 
   const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index))
   }
 
-  useSectionAnimation(faqSectionRef, initFaqAnimation, ['.faq-header', '.faq-item'])
+  useSectionAnimation(faqSectionRef, loadFaqAnimation)
 
   return (
     <section

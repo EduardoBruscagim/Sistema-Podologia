@@ -1,4 +1,4 @@
-import gsap from 'gsap'
+import { gsap } from './config'
 
 export const initAboutAnimation = (containerEl?: HTMLElement): (() => void) => {
   if (!containerEl) return () => {}

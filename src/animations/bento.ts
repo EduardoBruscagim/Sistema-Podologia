@@ -1,4 +1,4 @@
-import gsap from 'gsap'
+import { gsap } from './config'
 import { initCardsHover } from './cardHover'
 
 export const initBentoAnimation = (containerEl?: HTMLElement): (() => void) => {

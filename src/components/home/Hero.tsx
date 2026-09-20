@@ -1,11 +1,12 @@
 import React, { useRef } from 'react'
-import { initHeroAnimation } from '@/animations/hero'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
+
+const loadHeroAnimation = () => import('@/animations/hero').then((m) => m.initHeroAnimation)
 
 export const Hero: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(heroSectionRef, initHeroAnimation, '.gsap-hero-image')
+  useSectionAnimation(heroSectionRef, loadHeroAnimation)
 
   return (
     <section

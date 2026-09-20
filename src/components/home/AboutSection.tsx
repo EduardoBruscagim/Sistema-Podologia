@@ -1,13 +1,14 @@
 import React, { useRef } from 'react'
-import { initAboutAnimation } from '@/animations/about'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
 import { Heart, ShieldCheck, Calendar, Check, ArrowUpRight } from 'lucide-react'
 
+const loadAboutAnimation = () => import('@/animations/about').then((m) => m.initAboutAnimation)
+
 export const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(sectionRef, initAboutAnimation, '.about-reveal')
+  useSectionAnimation(sectionRef, loadAboutAnimation)
 
   return (
     <section
