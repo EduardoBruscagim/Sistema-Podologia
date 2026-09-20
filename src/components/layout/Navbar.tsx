@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react'
-import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useTheme } from '@/hooks/useTheme'
 import { initNavbarAnimation } from '@/animations/navbar'
@@ -264,9 +263,7 @@ export const Navbar: React.FC = () => {
 
             {/* Link direto de dúvidas no WhatsApp */}
             <a
-              href={getWhatsAppUrl(
-                'Olá, Angélica! Gostaria de tirar uma dúvida sobre o atendimento em domicílio em Mococa.',
-              )}
+              href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Tirar dúvidas no WhatsApp (abre em uma nova aba)"

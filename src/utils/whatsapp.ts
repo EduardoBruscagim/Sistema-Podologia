@@ -20,7 +20,7 @@ export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
 export const getWhatsAppDoubtUrl = (topic?: string): string => {
   const message = topic
     ? `Olá, Angélica! Gostaria de tirar uma dúvida sobre ${topic} em Mococa.`
-    : 'Olá, Angélica! Gostaria de tirar uma dúvida sobre o atendimento em domicílio em Mococa.'
+    : WHATSAPP_DEFAULT_MESSAGE
   return getWhatsAppUrl(message)
 }
 

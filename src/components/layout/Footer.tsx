@@ -106,9 +106,7 @@ export const Footer: React.FC = () => {
               Atendimento de segunda a sábado com horário marcado pelo WhatsApp.
             </p>
             <a
-              href={getWhatsAppUrl(
-                'Olá, Angélica! Gostaria de tirar uma dúvida sobre o atendimento em domicílio em Mococa.',
-              )}
+              href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"

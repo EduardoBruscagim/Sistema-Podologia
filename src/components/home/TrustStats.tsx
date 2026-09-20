@@ -1,38 +1,11 @@
-import { applyReducedMotion } from '@/animations/reducedMotion'
-import { initStatsAnimation } from '@/animations/stats'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
 import React, { useRef } from 'react'
+import { initStatsAnimation } from '@/animations/stats'
+import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
 export const TrustStats: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
 
-  useGSAP(
-    () => {
-      const el = sectionRef.current
-      if (!el) return
-
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyReducedMotion('.stat-block')
-            return
-          }
-
-          return initStatsAnimation(el)
-        },
-      )
-
-      return () => mm.revert()
-    },
-    { scope: sectionRef },
-  )
+  useSectionAnimation(sectionRef, initStatsAnimation, '.stat-block')
 
   return (
     <section

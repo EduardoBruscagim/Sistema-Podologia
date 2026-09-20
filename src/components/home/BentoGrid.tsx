@@ -1,39 +1,16 @@
 import React, { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 import { initBentoAnimation } from '@/animations/bento'
-import { applyReducedMotion } from '@/animations/reducedMotion'
+import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { Home, MapPin, Clock, Check } from 'lucide-react'
 
 export const BentoGrid: React.FC = () => {
   const bentoSectionRef = useRef<HTMLElement | null>(null)
 
-  useGSAP(
-    () => {
-      const el = bentoSectionRef.current
-      if (!el) return
-
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyReducedMotion(['.bento-header', '.bento-card', '.bento-icon'])
-            return
-          }
-
-          return initBentoAnimation(el)
-        },
-      )
-
-      return () => mm.revert()
-    },
-    { scope: bentoSectionRef },
-  )
+  useSectionAnimation(bentoSectionRef, initBentoAnimation, [
+    '.bento-header',
+    '.bento-card',
+    '.bento-icon',
+  ])
 
   return (
     <section
@@ -67,7 +44,8 @@ export const BentoGrid: React.FC = () => {
               Espaço simples, conforto absoluto
             </h3>
             <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed font-light max-w-[46ch] text-pretty">
-              Levo todos os aparelhos, toalhas higienizadas e insumos descartáveis. Você só precisa de uma cadeira ou poltrona confortável e uma tomada comum por perto.
+              Levo todos os aparelhos, toalhas higienizadas e insumos descartáveis. Você só precisa
+              de uma cadeira ou poltrona confortável e uma tomada comum por perto.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 pt-6 border-t border-surface-border">
@@ -105,7 +83,8 @@ export const BentoGrid: React.FC = () => {
                 Sem taxa de visita
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Atendimento em qualquer bairro da cidade de Mococa pelo valor exato da tabela, sem acréscimo de deslocamento.
+                Atendimento em qualquer bairro da cidade de Mococa pelo valor exato da tabela, sem
+                acréscimo de deslocamento.
               </p>
             </div>
 
@@ -133,7 +112,8 @@ export const BentoGrid: React.FC = () => {
                 Horário exclusivo
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Seu horário é reservado exclusivamente para você, sem divisão de atenção e com dedicação integral.
+                Seu horário é reservado exclusivamente para você, sem divisão de atenção e com
+                dedicação integral.
               </p>
             </div>
 

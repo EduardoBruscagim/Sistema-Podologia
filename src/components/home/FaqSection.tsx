@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 import { ChevronDown } from 'lucide-react'
 import { initFaqAnimation } from '@/animations/faq'
-import { applyReducedMotion } from '@/animations/reducedMotion'
+import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
 interface FaqItem {
   question: string
@@ -124,32 +122,7 @@ export const FaqSection: React.FC = () => {
     setOpenIndex((prev) => (prev === index ? null : index))
   }
 
-  useGSAP(
-    () => {
-      const el = faqSectionRef.current
-      if (!el) return
-
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyReducedMotion(['.faq-header', '.faq-item'])
-            return
-          }
-
-          return initFaqAnimation(el)
-        },
-      )
-
-      return () => mm.revert()
-    },
-    { scope: faqSectionRef },
-  )
+  useSectionAnimation(faqSectionRef, initFaqAnimation, ['.faq-header', '.faq-item'])
 
   return (
     <section
