@@ -1,4 +1,4 @@
-import gsap from 'gsap'
+import { gsap } from './config'
 
 export const initFaqAnimation = (sectionEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {

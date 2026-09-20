@@ -52,6 +52,9 @@ export default defineConfig({
     cssCodeSplit: true,
     modulePreload: {
       polyfill: false,
+      resolveDependencies: (_filename, deps) => {
+        return deps.filter((dep) => !dep.includes('vendor-gsap') && !dep.includes('animation'))
+      },
     },
     rollupOptions: {
       output: {

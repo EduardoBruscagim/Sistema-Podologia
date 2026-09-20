@@ -33,9 +33,23 @@ async function prerender() {
       `<div id="root" class="flex-1 flex flex-col">${appHtml}</div>`,
     )
 
+    // Injeta o CSS em <style> inline para eliminar a solicitação bloqueadora de renderização (150ms no Mobile)
+    const cssDir = path.join(rootDir, 'dist', 'assets', 'css')
+    if (fs.existsSync(cssDir)) {
+      const cssFiles = fs.readdirSync(cssDir).filter((f) => f.endsWith('.css'))
+      if (cssFiles.length > 0) {
+        const cssPath = path.join(cssDir, cssFiles[0])
+        const cssContent = fs.readFileSync(cssPath, 'utf8')
+        indexHtml = indexHtml.replace(
+          /<link\s+rel="stylesheet"[^>]*href="\/assets\/css\/[^"]*"[^>]*>/i,
+          `<style>${cssContent}</style>`,
+        )
+      }
+    }
+
     fs.writeFileSync(distIndexPath, indexHtml, 'utf8')
     console.log(
-      `✓ Successfully pre-rendered static HTML (${appHtml.length} chars) into dist/index.html`,
+      `✓ Successfully pre-rendered static HTML (${appHtml.length} chars) with inlined CSS into dist/index.html`,
     )
   } catch (error) {
     console.error('Pre-rendering failed:', error)

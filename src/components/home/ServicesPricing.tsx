@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { Sparkles, Footprints, Hand, Check, AlertCircle } from 'lucide-react'
-import { initServicesAnimation } from '@/animations/services'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { SERVICES, type ServiceItem } from '@/data/services'
 import { getWhatsAppUrl, getWhatsAppUrgencyUrl } from '@/utils/whatsapp'
@@ -14,14 +13,13 @@ const SERVICE_ICONS: Record<
   hand: Hand,
 }
 
+const loadServicesAnimation = () =>
+  import('@/animations/services').then((m) => m.initServicesAnimation)
+
 export const ServicesPricing: React.FC = () => {
   const servicesSectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(servicesSectionRef, initServicesAnimation, [
-    '.services-header',
-    '.service-card',
-    '.services-footer',
-  ])
+  useSectionAnimation(servicesSectionRef, loadServicesAnimation)
 
   return (
     <section

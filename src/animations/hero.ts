@@ -1,4 +1,4 @@
-import gsap from 'gsap'
+import { gsap } from './config'
 
 /**
  * Animações da seção Hero.

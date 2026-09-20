@@ -1,4 +1,4 @@
-import gsap from 'gsap'
+import { gsap } from './config'
 
 /**
  * Ensures targets are fully visible and any CSS transforms or scale

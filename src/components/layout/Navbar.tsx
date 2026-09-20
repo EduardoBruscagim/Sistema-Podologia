@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useGSAP } from '@gsap/react'
 import { useTheme } from '@/hooks/useTheme'
 import { initNavbarAnimation } from '@/animations/navbar'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
@@ -96,19 +95,12 @@ export const Navbar: React.FC = () => {
     }
   }, [isMobileMenuOpen])
 
-  useGSAP(
-    () => {
-      const headerEl = headerRef.current
-      if (!headerEl) return
+  useEffect(() => {
+    const headerEl = headerRef.current
+    if (!headerEl) return
 
-      const cleanupNavbar = initNavbarAnimation(headerEl, headerEl)
-
-      return () => {
-        cleanupNavbar?.()
-      }
-    },
-    { scope: headerRef },
-  )
+    return initNavbarAnimation(headerEl, headerEl)
+  }, [])
 
   return (
     <div className="fixed top-0 inset-x-0 w-full z-50 pointer-events-none">
