@@ -3,7 +3,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { initCtaAnimation } from '@/animations/cta'
 import { applyReducedMotion } from '@/animations/reducedMotion'
-import { getWhatsAppDoubtUrl } from '@/utils/whatsapp'
+import { getWhatsAppUrl, getWhatsAppDoubtUrl } from '@/utils/whatsapp'
 
 export const CtaSection: React.FC = () => {
   const ctaSectionRef = useRef<HTMLElement | null>(null)
@@ -54,7 +54,12 @@ export const CtaSection: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
           <a
-            href="#procedimentos"
+            href={getWhatsAppUrl(
+              'Olá, Angélica! Li as informações no site e gostaria de agendar um atendimento em domicílio em Mococa.',
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Solicitar agendamento pelo WhatsApp (abre em nova aba)"
             className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
           >
             Solicitar Agendamento

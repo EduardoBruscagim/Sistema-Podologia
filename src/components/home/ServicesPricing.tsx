@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-import { Sparkles, Footprints, Hand, Check, MapPin } from 'lucide-react'
+import { Sparkles, Footprints, Hand, Check, MapPin, AlertCircle } from 'lucide-react'
 import { initServicesAnimation } from '@/animations/services'
 import { applyReducedMotion } from '@/animations/reducedMotion'
 import { SERVICES, type ServiceItem } from '@/data/services'
-import { getWhatsAppUrl } from '@/utils/whatsapp'
+import { getWhatsAppUrl, getWhatsAppUrgencyUrl } from '@/utils/whatsapp'
 
 export const ServicesPricing: React.FC = () => {
   const servicesSectionRef = useRef<HTMLElement | null>(null)
@@ -56,10 +56,6 @@ export const ServicesPricing: React.FC = () => {
       aria-labelledby="services-pricing-heading"
     >
       <div className="services-header mb-12 lg:mb-16 max-w-2xl">
-        <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 dark:text-accent mb-3">
-          <MapPin aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
-          Atendimento Domiciliar em Mococa, SP
-        </span>
         <h2
           id="services-pricing-heading"
           className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance"
@@ -67,7 +63,7 @@ export const ServicesPricing: React.FC = () => {
           Procedimentos e valores
         </h2>
         <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
-          Serviços disponíveis para atendimento domiciliar em Mococa.
+          Cuidados especializados com instrumentos esterilizados e taxa zero de visita em toda Mococa, SP.
         </p>
       </div>
 
@@ -164,6 +160,32 @@ export const ServicesPricing: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Chamada para Urgência / Dor de Unha Encravada */}
+      <div className="mb-6 p-5 sm:p-6 rounded-xl border border-accent/25 bg-accent/5 dark:bg-accent/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-start gap-3.5">
+          <div className="w-9 h-9 rounded-lg bg-accent/15 text-accent flex items-center justify-center shrink-0 mt-0.5">
+            <AlertCircle aria-hidden="true" className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="font-serif text-lg text-on-surface font-normal leading-snug">
+              Está com dor aguda ou unha encravada?
+            </h3>
+            <p className="text-xs sm:text-sm text-on-surface-variant font-light leading-relaxed mt-0.5 max-w-[55ch]">
+              Atendimento podológico em domicílio para alívio imediato e desencravamento preventivo cuidadoso em Mococa.
+            </p>
+          </div>
+        </div>
+        <a
+          href={getWhatsAppUrgencyUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Pedir atendimento de urgência para unha encravada no WhatsApp (abre em nova aba)"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.12em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+        >
+          Atendimento de Urgência
+        </a>
       </div>
 
       {/* Reafirmação de Deslocamento e Materiais */}
