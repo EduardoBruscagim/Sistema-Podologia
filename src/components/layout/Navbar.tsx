@@ -3,7 +3,6 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useTheme } from '@/hooks/useTheme'
 import { initNavbarAnimation } from '@/animations/navbar'
-import { applyNavbarReducedMotion } from '@/animations/reducedMotion'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
 import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react'
 
@@ -103,28 +102,11 @@ export const Navbar: React.FC = () => {
       const headerEl = headerRef.current
       if (!headerEl) return
 
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyNavbarReducedMotion(headerEl, headerEl)
-            return
-          }
+      const cleanupNavbar = initNavbarAnimation(headerEl, headerEl)
 
-          const cleanupNavbar = initNavbarAnimation(headerEl, headerEl)
-
-          return () => {
-            cleanupNavbar?.()
-          }
-        },
-      )
-
-      return () => mm.revert()
+      return () => {
+        cleanupNavbar?.()
+      }
     },
     { scope: headerRef },
   )

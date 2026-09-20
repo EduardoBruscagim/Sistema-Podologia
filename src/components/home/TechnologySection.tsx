@@ -39,7 +39,7 @@ export const TechnologySection: React.FC = () => {
     <section
       ref={techSectionRef}
       aria-labelledby="tech-heading"
-      className="max-w-6xl mx-auto px-6 py-16 lg:py-24"
+      className="max-w-6xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
       id="tecnologia"
     >
       <div className="tech-header mb-12 lg:mb-16 max-w-2xl">

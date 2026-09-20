@@ -42,5 +42,4 @@ export const applyNavbarReducedMotion = (
   headerEl.removeAttribute('inert')
   headerEl.style.visibility = 'visible'
   floatingNav.style.pointerEvents = 'auto'
-  gsap.set(floatingNav, { yPercent: 0, clearProps: 'transform' })
 }
