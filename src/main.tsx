@@ -24,4 +24,7 @@ if (rootElement) {
       </React.StrictMode>,
     )
   }
+  requestAnimationFrame(() => {
+    document.documentElement.classList.add('gsap-loaded')
+  })
 }

@@ -9,8 +9,8 @@ import gsap from 'gsap'
 export const initStatsAnimation = (containerEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     gsap.fromTo(
-      '.stat-block',
-      { y: 14, autoAlpha: 0 },
+      '.stat-reveal',
+      { y: 12, autoAlpha: 0 },
       {
         scrollTrigger: {
           trigger: containerEl,
