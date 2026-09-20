@@ -1,107 +1,48 @@
-import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
+/**
+ * Gerencia a barra de navegação fixa:
+ * - Mantém a barra permanentemente visível no topo da página (sem ocultar no scroll down).
+ * - Aplica a classe '.is-scrolled' quando a página rolar mais de 20px,
+ *   ativando o efeito translúcido (glassmorphism/blur) e a borda capilar.
+ */
 export const initNavbarAnimation = (
   headerEl: HTMLElement,
-  navContainerEl: HTMLElement,
+  navContainerEl?: HTMLElement,
 ): (() => void) => {
   headerEl.removeAttribute('inert')
   headerEl.style.visibility = 'visible'
-  navContainerEl.style.pointerEvents = 'auto'
-  gsap.set(navContainerEl, { yPercent: 0 })
+  if (navContainerEl) {
+    navContainerEl.style.pointerEvents = 'auto'
+  }
 
-  let isHidden = false
   let isScrolled = false
 
-  const showNavbar = () => {
-    if (!isHidden) return
-    isHidden = false
-    headerEl.removeAttribute('inert')
-    headerEl.style.visibility = 'visible'
-    navContainerEl.style.pointerEvents = 'auto'
-
-    gsap.to(navContainerEl, {
-      yPercent: 0,
-      duration: 0.28,
-      ease: 'power3.out',
-      overwrite: 'auto',
-    })
+  const updateScrolledState = (scrollY: number) => {
+    if (scrollY > 20 && !isScrolled) {
+      isScrolled = true
+      headerEl.classList.add('is-scrolled')
+    } else if (scrollY <= 20 && isScrolled) {
+      isScrolled = false
+      headerEl.classList.remove('is-scrolled')
+    }
   }
 
-  const hideNavbar = () => {
-    if (isHidden) return
-    // Previne recolhimento se o menu mobile estiver aberto
-    if (headerEl.getAttribute('data-mobile-menu-open') === 'true') return
-    // Previne recolhimento se o usuário estiver navegando por teclado dentro do menu
-    if (headerEl.contains(document.activeElement)) return
-
-    isHidden = true
-    gsap.to(navContainerEl, {
-      yPercent: -120,
-      duration: 0.28,
-      ease: 'power3.out',
-      overwrite: 'auto',
-      onComplete: () => {
-        if (isHidden && !headerEl.contains(document.activeElement)) {
-          navContainerEl.style.pointerEvents = 'none'
-        }
-      },
-    })
-  }
-
-  const handleFocusIn = () => {
-    showNavbar()
-  }
-
-  headerEl.addEventListener('focusin', handleFocusIn)
-
-  let lastScrollY = window.scrollY || 0
+  // Verifica estado inicial caso a página seja carregada com scroll prévio
+  const initialScroll = typeof window !== 'undefined' ? window.scrollY || 0 : 0
+  updateScrolledState(initialScroll)
 
   const st = ScrollTrigger.create({
     start: 'top top',
     end: 'max',
     onUpdate: (self) => {
-      const scrollY = self.scroll()
-      const direction = self.direction
-      const delta = Math.abs(scrollY - lastScrollY)
-
-      // Atualiza classe visual de scroll suavemente no header
-      if (scrollY > 20 && !isScrolled) {
-        isScrolled = true
-        headerEl.classList.add('is-scrolled')
-      } else if (scrollY <= 20 && isScrolled) {
-        isScrolled = false
-        headerEl.classList.remove('is-scrolled')
-      }
-
-      // No topo da página (Hero), garante barra sempre visível sem repetições de escrita no DOM
-      if (scrollY < 60) {
-        if (isHidden) showNavbar()
-        lastScrollY = scrollY
-        return
-      }
-
-      // Ignora microvibrações de trackpad (< 8px)
-      if (delta < 8) return
-
-      // Rolando para baixo
-      if (direction === 1 && scrollY > 100) {
-        hideNavbar()
-      }
-      // Rolando para cima
-      else if (direction === -1) {
-        showNavbar()
-      }
-
-      lastScrollY = scrollY
+      updateScrolledState(self.scroll())
     },
   })
 
   return () => {
-    headerEl.removeEventListener('focusin', handleFocusIn)
     headerEl.removeAttribute('inert')
     headerEl.classList.remove('is-scrolled')
     st.kill()
-    gsap.killTweensOf(navContainerEl)
   }
 }

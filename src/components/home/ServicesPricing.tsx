@@ -51,7 +51,7 @@ export const ServicesPricing: React.FC = () => {
   return (
     <section
       ref={servicesSectionRef}
-      className="max-w-6xl mx-auto px-6 py-16 lg:py-24"
+      className="max-w-6xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
       id="procedimentos"
       aria-labelledby="services-pricing-heading"
     >

@@ -155,7 +155,7 @@ export const FaqSection: React.FC = () => {
     <section
       ref={faqSectionRef}
       aria-label="Perguntas Frequentes"
-      className="max-w-4xl mx-auto px-6 py-16 lg:py-24"
+      className="max-w-4xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
       id="faq"
     >
       <div className="faq-header mb-12 lg:mb-16">
