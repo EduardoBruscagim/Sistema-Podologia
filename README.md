@@ -21,18 +21,22 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 ### Fase 1 (Entregue):
 
 - **Landing Page B2C de Alta Conversão**: Apresentação editorial elegante do atendimento domiciliar em Mococa, SP, diferenciais em Bento Grid, métricas de credibilidade e FAQ detalhado.
-- **Métricas e Credenciais de Confiança (`TrustStats`)**: Experiência comprovada desde 2016 e mais de 25.000 atendimentos realizados por especialista dedicada.
+- **Pacote de Animações Premium & Microinterações (60 FPS)**:
+  - **Contador Numérico Fluido (`TrustStats`)**: Interpolação suave de `0` até `+25.000` em 2.4s com curva `power2.out`, com odômetro numérico formatado (`pt-BR`) e preservação integral de acessibilidade (`aria-label`).
+  - **Profundidade Parallax em 2 Camadas (`Hero`)**: Separação espacial de 65px entre a maleta (+35px) e o selo de higiene suspenso (-30px) no desktop, criando efeito autêntico de estúdio fotográfico.
+  - **Desdobramento Tipográfico no FAQ**: Acordeão fluido com 500ms e curva `cubic-bezier(0.16, 1, 0.3, 1)` com descida suave do texto sem caixas internas pesadas, priorizando respiração editorial e leitura limpa.
+  - **Microinterações Magnéticas nos Botões de Ação**: Atração suave na direção do cursor com retorno elástico nos 3 CTAs principais no desktop (`useMagneticButton`), com bypass automático em telas touch.
+  - **Spotlight & Border Sheen nos Procedimentos**: Feixe luminoso animado percorrendo o topo da borda do procedimento recomendado (_Pé e Mão Completo_) e aura âmbar que segue o cursor nos cards.
+- **Arquitetura Anti-FOUC e Estabilidade Visual**: Prevenção rigorosa de saltos visuais ou piscadas através da classe transitória `.js:not(.gsap-loaded)` no CSS, transferindo o controle ao GSAP via `requestAnimationFrame` na montagem.
+- **Pré-renderização Estática (SSG) & CSS Inlined**: Compilação de HTML estático com inlining do CSS crítico em `<style>` no `<head>` via `scripts/prerender.mjs`, eliminando requisições bloqueadoras de 150ms no mobile.
+- **Navegação Inteligente & Mobile UX (`Navbar`)**: Barra de navegação com listener passivo de scroll `{ passive: true }` coordenado por `requestAnimationFrame` a 60/120fps e sincronizado com trava de rolagem no `body` ao abrir o menu mobile.
 - **Equipamentos e Higiene (`TechnologySection`)**: Apresentação dos aparelhos portáteis levados no atendimento (LED vermelho de fototerapia, cabine UV portátil) e esterilização hospitalar em autoclave a 134°C com laudo biológico e 100% descartáveis.
 - **Tabela Transparente de Serviços (`ServicesPricing`)**: Detalhamento dos 3 principais procedimentos (_Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_), tempo estimado, diferenciais e valores pré-definidos.
-- **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e atalhos contextualizados para tirar dúvidas ou agendar sem intermediários.
+- **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e atalhos contextualizados para agendamento sem intermediários.
 - **Transparência Geográfica e Comercial**: Cobertura em toda a cidade de Mococa, SP com taxa de deslocamento zero (R$ 0) e pagamentos via PIX ou dinheiro.
-- **Acordeão Interativo de FAQ com CSS Grid + GSAP**: Expansão fluida sem layout thrashing (`grid-rows-[0fr]` -> `grid-rows-[1fr]`), navegável por teclado e total acessibilidade WAI-ARIA APG.
-- **Introdução Editorial de Marca (`BrandIntro`)**: Monograma de abertura com saída suave, suporte a `sessionStorage`, cancelamento por tecla `Escape` e dispensa imediata por toque/clique no mobile.
-- **Navegação Inteligente & Mobile UX (`Navbar`)**: Cabeçalho retrátil reativo à rolagem com `ScrollTrigger`, sincronizado com trava de rolagem (`overflow: hidden`) no `body` ao abrir o menu mobile.
-- **Micro-interações e Animações GSAP**: Módulos dedicados com suporte estrito a `prefers-reduced-motion: reduce`, efeito magnético `cardHover.ts` e orquestração de ScrollTrigger em todas as seções.
 - **Modo Claro / Escuro com Anti-FOUC**: Alternador de tema acessível com persistência em `localStorage` e script síncrono no `<head>` com sincronização de `theme-color` móvel.
-- **Acessibilidade Universal (WCAG AA/AAA)**: _Skip link_ funcional (`#main-content`), contrastes calibrados (`text-on-accent` e `dark:text-surface`), gerenciamento de foco (focus trap e restauração de foco no menu mobile) e alvos de toque de no mínimo 44x44px.
-- **Otimização de Core Web Vitals**: Preload de imagem LCP de alta prioridade em formato WebP, carregamento não-bloqueante de fontes do Google Fonts e supressão de ruído procedural em telas de toque.
+- **Acessibilidade Universal (WCAG AA/AAA)**: _Skip link_ funcional (`#main-content`), contrastes calibrados (`text-on-accent` e `dark:text-surface`), anéis de foco visíveis e alvos de toque de no mínimo 44x44px.
+- **Fontes 100% Auto-hospedadas**: Fontes variáveis `Newsreader` e `Outfit` servidas localmente em formato WOFF2, eliminando dependências de rede e atrasos de renderização de fontes externas.
 
 ### Fase 2 (Em Desenvolvimento / Roadmap):
 
@@ -43,16 +47,17 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 ## 🛠️ Stack Tecnológica
 
-| Camada                                 | Tecnologias                                                                                                                                                            |
-| :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Core**                               | [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/) (ES2022+)                                                                                |
-| **Build & Dev Tool**                   | [Vite](https://vite.dev/) 8.3+ com `@tailwindcss/vite` e `@vitejs/plugin-react`                                                                                        |
-| **Estilização**                        | [Tailwind CSS v4](https://tailwindcss.com/) com tokens semânticos e paleta mineral                                                                                     |
-| **Tipografia**                         | [Newsreader](https://fonts.google.com/specimen/Newsreader) (Serifa Editorial) e [Outfit Variable](https://fontsource.org/fonts/outfit) (`@fontsource-variable/outfit`) |
-| **Animações**                          | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger + `@gsap/react`                                                                                                  |
-| **Ícones & Acessibilidade**            | [Lucide React](https://lucide.dev/) (SVGs acessíveis com `aria-hidden`)                                                                                                |
-| **Qualidade & Padronização**           | ESLint 10 (`typescript-eslint`), Prettier 3, Impeccable AST Detector                                                                                                   |
-| **Backend / Persistência (Planejado)** | Supabase (PostgreSQL, Auth, Storage)                                                                                                                                   |
+| Camada                                 | Tecnologias                                                                                                                                                        |
+| :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core**                               | [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/) (ES2022+)                                                                            |
+| **Build & Dev Tool**                   | [Vite](https://vite.dev/) 8.3+ com `@tailwindcss/vite` e `@vitejs/plugin-react`                                                                                    |
+| **Estilização**                        | [Tailwind CSS v4](https://tailwindcss.com/) com tokens semânticos e paleta mineral                                                                                 |
+| **Tipografia**                         | [Newsreader Variable](https://fontsource.org/fonts/newsreader) e [Outfit Variable](https://fontsource.org/fonts/outfit) (`@fontsource-variable/*` auto-hospedadas) |
+| **Animações & Motion**                 | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger + `@gsap/react` com microinterações magnéticas                                                               |
+| **Ícones & Acessibilidade**            | [Lucide React](https://lucide.dev/) (SVGs acessíveis com `aria-hidden`)                                                                                            |
+| **Qualidade & Padronização**           | ESLint 10 (`typescript-eslint`), Prettier 3                                                                                                                        |
+| **Pré-renderização (SSG)**             | Script customizado `scripts/prerender.mjs` com React Server DOM e inlining de CSS crítico                                                                          |
+| **Backend / Persistência (Planejado)** | Supabase (PostgreSQL, Auth, Storage)                                                                                                                               |
 
 ---
 
@@ -63,32 +68,35 @@ A organização de diretórios reflete a separação modular de componentes, ani
 ```text
 ├── src/
 │   ├── animations/         # Módulos de animações orquestradas via GSAP
+│   │   ├── about.ts        # Revelação da biografia e credenciais
 │   │   ├── bento.ts        # Revelação e efeitos da seção Bento Grid
-│   │   ├── cardHover.ts    # Elevação e inclinação magnética em cards
-│   │   ├── cta.ts          # Animação do CTA final
-│   │   ├── faq.ts          # Altura dinâmica e rotação do acordeão de FAQ
-│   │   ├── hero.ts         # Revelação tipográfica e levitação do Hero
-│   │   ├── navbar.ts       # Ilha retrátil, reativa ao foco e sincronizada com menu mobile
+│   │   ├── cardHover.ts    # Elevação e inclinação suave em cards interativos
+│   │   ├── cta.ts          # Animação do CTA final de agendamento
+│   │   ├── faq.ts          # Altura dinâmica e transições da seção de perguntas
+│   │   ├── hero.ts         # Parallax de 2 camadas na maleta e badge flutuante
+│   │   ├── navbar.ts       # Ilha retrátil com listener passivo em requestAnimationFrame
 │   │   ├── reducedMotion.ts# Tratamento para preferência de movimento reduzido
-│   │   ├── services.ts     # Entrada escalonada dos cartões de serviços
-│   │   ├── stats.ts        # Contadores numéricos e métricas de confiança
+│   │   ├── services.ts     # Entrada escalonada dos procedimentos
+│   │   ├── stats.ts        # Odômetro numérico (+25.000) e métricas de confiança
 │   │   └── technology.ts   # Revelação dos diferenciais tecnológicos e autoclave
 │   ├── components/         # Componentes modulares React
-│   │   ├── common/         # Componentes compartilhados (BrandIntro, WhatsAppButton)
-│   │   ├── home/           # Seções da Home (Hero, TrustStats, BentoGrid, ServicesPricing, TechnologySection, FaqSection, CtaSection)
+│   │   ├── common/         # Componentes compartilhados (WhatsAppButton com física magnética)
+│   │   ├── home/           # Seções da Home (Hero, TrustStats, BentoGrid, AboutSection, ServicesPricing, TechnologySection, FaqSection, CtaSection)
 │   │   └── layout/         # Componentes estruturais (Navbar, Footer)
 │   ├── context/            # Provedores de contexto React (ThemeContext)
 │   ├── data/               # Modelos e dados estáticos (services.ts)
-│   ├── hooks/              # Hooks customizados isolados (useTheme)
+│   ├── hooks/              # Hooks customizados isolados (useTheme, useMagneticButton, useSectionAnimation)
 │   ├── pages/              # Páginas da aplicação (HomePage)
 │   ├── types/              # Definições de interfaces e tipos TypeScript (theme.ts)
 │   ├── utils/              # Helpers e utilitários puros (theme.ts, whatsapp.ts)
 │   ├── App.tsx             # Ponto de entrada da aplicação e provedor de tema
-│   ├── main.tsx            # Ponto de entrada React e registro de plugins GSAP
-│   └── style.css           # Tokens de tema semânticos, fontes e Tailwind v4
+│   ├── main.tsx            # Ponto de entrada React, registro GSAP e sincronizador anti-FOUC
+│   └── style.css           # Tokens de tema semânticos, fontes variáveis e regras de proteção FOUC
+├── scripts/
+│   └── prerender.mjs       # Pré-renderizador estático (SSG) com inlining de CSS crítico
 ├── public/                 # Assets otimizados (WebP/AVIF), robots.txt, sitemap.xml, og-image.jpg
 ├── index.html              # Shell HTML semântico com JSON-LD Schema.org, anti-FOUC e LCP preloads
-├── DESIGN.md               # Especificação detalhada do Design System
+├── DESIGN.md               # Especificação detalhada do Design System e motion tokens
 ├── PRODUCT.md              # Documento de produto, proposta de valor e roadmap
 ├── vite.config.ts          # Configuração do Vite com suporte a React e Tailwind
 └── package.json            # Dependências e scripts do projeto

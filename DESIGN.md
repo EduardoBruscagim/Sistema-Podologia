@@ -208,11 +208,41 @@ Utilizada para interface funcional, menus, tabelas de serviços e leitura confor
 - **Body Small:** 0.875rem, regular (400), leading 1.5.
 - **Editorial Labels / Overlines:** 0.6875rem a 0.75rem, semibold (600), caixa alta, tracking expandido (0.12em a 0.16em) para rotulagem técnica imediata.
 
-## Accessibility & Mobile UX
+## Motion & Micro-interactions (60 FPS Editorial Experience)
 
-- **Touch Targets (WCAG 2.5.5 / 2.5.8):** Todos os botões interativos (Navbar, temas, agendamento, acordeões do FAQ e links de navegação) possuem área de clique/toque de no mínimo 44x44px (e botão flutuante com 48x48px).
-- **Contrast Ratios (WCAG AA / AAA):** Todos os pares de texto e fundo excedem 4.5:1 para texto padrão e 7:1 para legendas secundárias em ambos os modos claro e escuro.
-- **Keyboard Navigation:** Todos os componentes interativos contêm anéis de foco visíveis (`focus-visible:ring-2 focus-visible:ring-accent`) e suporte a navegação por teclado (Enter / Espaço / Esc).
-- **Scroll Lock & Mobile Modal State:** O menu móvel atua como estado modal com focus trap, bloqueio de rolagem no `body` (`overflow: hidden`) e sincronização com o ScrollTrigger do cabeçalho.
-- **Touch GPU Optimization:** Desativação de filtros de grão contínuos (`feTurbulence`) em telas móveis via `@media (hover: none) and (pointer: coarse)` para garantir rolagem perfeitamente suave a 60/120fps.
-- **Reduced Motion:** Adere fielmente à preferência do sistema operacional, neutralizando durações de animação GSAP caso `prefers-reduced-motion: reduce` esteja ativo.
+O sistema de movimento rejeita animações decorativas desprovidas de função ou transições artificiais aceleradas. Todo o movimento tem propósito narrativo de clareza, autoridade médica e resposta tátil:
+
+### 1. Odômetro Numérico Rítmico (`TrustStats`)
+
+- **Duração e Easing:** 2.4 segundos com curva `power2.out`.
+- **Propósito:** Interpolação numérica progressiva e cadenciada de `0` até `+25.000`, permitindo ao visitante absorver o volume e a credibilidade dos atendimentos em tempo real.
+- **Acessibilidade:** Elemento com `aria-label="Mais de 25.000 atendimentos"`. Sob `prefers-reduced-motion: reduce`, o valor final é renderizado imediatamente sem contagem.
+
+### 2. Profundidade Parallax em 2 Camadas (`Hero`)
+
+- **Deslocamento:** Maleta com `y: 35px` (descida lenta) e badge flutuante de higiene com `y: -30px` (elevação lenta), ativados a partir de `start: 'top 120px'`.
+- **Efeito:** Separação óptica de 65px que emula a profundidade de campo de uma sessão fotográfica de estúdio.
+- **Responsividade:** Aplicado exclusivamente em telas `>= 640px` (quando o badge atua como elemento suspenso `absolute`). Em telas menores, o badge permanece em fluxo estático seguro.
+
+### 3. Desdobramento Tipográfico no FAQ
+
+- **Duração e Easing:** 500ms com curva de desaceleração natural `cubic-bezier(0.16, 1, 0.3, 1)`.
+- **Estética:** O texto da resposta desliza de `-12px` para `0px` com ganho contínuo de opacidade, sem caixas internas ou molduras pesadas, priorizando a leitura arejada de editorial de revista.
+- **Indicadores:** O chevron gira 180° com amortecimento e a barra vertical de terracota na lateral esquerda se desenha de cima para baixo (`origin-top scale-y-100`).
+
+### 4. Resposta Magnética nos Botões de Ação (`useMagneticButton`)
+
+- **Alvos:** Botões primários de conversão (_Solicitar Agendamento_ no Hero, _Solicitar Agendamento_ no CTA final e _WhatsApp Flutuante_).
+- **Física:** Atração na direção do cursor com raio de deslocamento máximo de 8px a 10px e amortecimento `power2.out`. No `mouseleave`, o botão retorna ao repouso com amortecimento elástico `elastic.out(1, 0.4)`.
+- **Restrição de Hardware:** Ativado unicamente em dispositivos com cursor fino (`(hover: hover) and (pointer: fine)`). Em telas touch/mobile, os ouvintes de evento sequer são registrados, garantindo 0% de impacto na bateria e 60 FPS estáveis.
+
+### 5. Spotlight Dinâmico & Border Sheen (`ServicesPricing`)
+
+- **Border Sheen:** Feixe de luz sutil (`2px` de altura) percorrendo ciclicamente o topo da borda de terracota do procedimento carro-chefe (_Pé e Mão Completo_).
+- **Spotlight Radial de Superfície:** Aura de iluminação âmbar/terracota (`rgba(155, 65, 36, 0.14)` claro / `rgba(224, 130, 100, 0.22)` escuro) com raio de 280px que segue as coordenadas do cursor sobre a superfície dos cards de procedimentos.
+
+### 6. Arquitetura Anti-FOUC
+
+- O `<head>` marca o documento imediatamente com `<html class="js">`.
+- A regra CSS `.js:not(.gsap-loaded)` oculta previamente apenas os alvos de revelação GSAP, mantendo o Hero e o Navbar 100% visíveis para o Largest Contentful Paint (LCP) imediato.
+- Após a montagem dos componentes React e registro dos tweens GSAP, a classe `gsap-loaded` é injetada via `requestAnimationFrame`, transferindo o controle ao motor de animação sem saltos de layout ou piscadas.
