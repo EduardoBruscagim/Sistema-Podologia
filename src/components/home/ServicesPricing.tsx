@@ -23,6 +23,13 @@ export const ServicesPricing: React.FC = () => {
     '.services-footer',
   ])
 
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
+    const card = e.currentTarget
+    const rect = card.getBoundingClientRect()
+    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+  }
+
   return (
     <section
       ref={servicesSectionRef}
@@ -50,12 +57,27 @@ export const ServicesPricing: React.FC = () => {
           return (
             <div
               key={service.id}
-              className={`service-card group p-6 sm:p-8 rounded-xl bg-pure-white dark:bg-surface-variant border transition-[border-color,background-color] duration-300 flex flex-col justify-between ${
+              onMouseMove={handleCardMouseMove}
+              className={`service-card group p-6 sm:p-8 rounded-xl bg-pure-white dark:bg-surface-variant border transition-[border-color,background-color,box-shadow] duration-300 flex flex-col justify-between relative overflow-hidden ${
                 service.isFeatured
-                  ? 'border-accent/40 hover:border-accent hover:bg-accent/[0.02] dark:hover:bg-accent/[0.04]'
-                  : 'border-surface-border hover:border-accent/50 hover:bg-accent/[0.015] dark:hover:bg-accent/[0.03]'
+                  ? 'border-accent/60 hover:border-accent hover:shadow-md'
+                  : 'border-surface-border hover:border-accent/60 hover:shadow-sm'
               }`}
             >
+              {/* Feixe sutil de iluminação de borda no procedimento recomendado */}
+              {service.isFeatured && (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent/80 to-transparent animate-border-sheen"
+                />
+              )}
+
+              {/* Spotlight radial editorial que acompanha o cursor (visível e responsivo) */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-[radial-gradient(280px_circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(155,65,36,0.14),transparent_65%)] dark:bg-[radial-gradient(280px_circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(224,130,100,0.22),transparent_65%)]"
+              />
+
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <span

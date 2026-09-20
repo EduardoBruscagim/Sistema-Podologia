@@ -51,11 +51,11 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
   ({ item, index, isOpen, onToggle }) => {
     return (
       <div className="faq-item relative">
-        {/* Hairline Accent Indicator Vertical */}
+        {/* Hairline Accent Indicator Vertical com escala fluida */}
         <span
           aria-hidden="true"
-          className={`absolute left-0 top-6 bottom-6 w-[2px] rounded-full bg-accent transition-opacity duration-300 ${
-            isOpen ? 'opacity-100' : 'opacity-0'
+          className={`absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-accent transition-all duration-400 origin-top ${
+            isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           }`}
         />
 
@@ -66,7 +66,9 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
             aria-expanded={isOpen}
             aria-controls={`faq-panel-${index}`}
             onClick={() => onToggle(index)}
-            className="w-full flex items-center justify-between py-6 text-left cursor-pointer group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg transition-colors pl-3 sm:pl-4"
+            className={`w-full flex items-center justify-between py-5 text-left cursor-pointer group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-xl transition-all duration-300 pl-3 sm:pl-4 pr-2 ${
+              isOpen ? 'bg-surface-variant/40' : 'hover:bg-surface-variant/20'
+            }`}
           >
             <span
               className={`font-serif text-lg sm:text-xl font-normal transition-colors duration-200 ${
@@ -84,7 +86,7 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
             >
               <ChevronDown
                 aria-hidden="true"
-                className={`w-4 h-4 transition-transform duration-300 ${
+                className={`w-4 h-4 transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                   isOpen ? 'rotate-180 text-on-accent' : 'text-current group-hover:text-accent'
                 }`}
               />
@@ -92,17 +94,21 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
           </button>
         </h3>
 
-        {/* Painel acessível com WAI-ARIA APG sem layout thrashing */}
+        {/* Painel com desdobramento tipográfico fluido */}
         <div
           id={`faq-panel-${index}`}
           role="region"
           aria-labelledby={`faq-btn-${index}`}
-          className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out pl-3 sm:pl-4 ${
+          className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pl-3 sm:pl-4 ${
             isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
           }`}
         >
           <div className="overflow-hidden">
-            <div className="pb-6 pt-1 text-sm sm:text-base text-on-surface-variant font-light leading-relaxed max-w-[55ch] text-pretty">
+            <div
+              className={`pb-6 pt-1 text-sm sm:text-base text-on-surface-variant font-light leading-relaxed max-w-[55ch] text-pretty transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+              }`}
+            >
               {item.answer}
             </div>
           </div>
