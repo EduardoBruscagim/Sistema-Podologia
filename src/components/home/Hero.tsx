@@ -3,8 +3,6 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { initHeroAnimation } from '@/animations/hero'
 import { applyReducedMotion } from '@/animations/reducedMotion'
-import { MapPin } from 'lucide-react'
-
 export const Hero: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null)
 
@@ -44,11 +42,6 @@ export const Hero: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         {/* Left: Headline & Actions */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20 mb-4">
-            <MapPin aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
-            Podologia e Manicure em Domicílio · Mococa, SP
-          </span>
-
           <h1
             id="hero-title"
             className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-on-surface tracking-tight leading-[1.08] mb-6 text-balance"

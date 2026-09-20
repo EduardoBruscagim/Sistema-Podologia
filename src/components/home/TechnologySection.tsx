@@ -140,9 +140,9 @@ export const TechnologySection: React.FC = () => {
                 height={896}
               />
             </picture>
-            {/* Gradiente de transição suave / mistura perfeita */}
-            <div className="hidden lg:block absolute inset-y-0 left-0 w-44 xl:w-60 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-surface-variant dark:via-surface-variant/80 dark:to-transparent pointer-events-none" />
-            <div className="lg:hidden absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white via-white/80 to-transparent dark:from-surface-variant dark:via-surface-variant/80 dark:to-transparent pointer-events-none" />
+            {/* Gradiente de transição suave / mistura perfeita com tokens semânticos */}
+            <div className="hidden lg:block absolute inset-y-0 left-0 w-44 xl:w-60 bg-gradient-to-r from-pure-white via-pure-white/80 to-transparent dark:from-surface-variant dark:via-surface-variant/80 dark:to-transparent pointer-events-none" />
+            <div className="lg:hidden absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-pure-white via-pure-white/80 to-transparent dark:from-surface-variant dark:via-surface-variant/80 dark:to-transparent pointer-events-none" />
           </div>
         </div>
 
