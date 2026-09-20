@@ -1,47 +1,89 @@
-import type React from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { applyReducedMotion } from '@/animations/reducedMotion'
+import { useEffect, type RefObject } from 'react'
+
+export type AnimationInitFn = (element: HTMLElement) => (() => void) | void
+export type AnimationLoader = () => Promise<AnimationInitFn>
 
 /**
- * Hook reutilizável para animações GSAP em seções, com suporte nativo e acessível a prefers-reduced-motion.
+ * Hook reutilizável e de altíssima performance para animações em seções:
  *
- * - Configura matchMedia com detecção de movimento reduzido.
- * - Se o usuário preferir movimento reduzido, aplica autoAlpha: 1 e limpa transforms nos alvos.
- * - Caso contrário, invoca initAnimation vinculada ao elemento DOM da seção.
- * - Reverte e limpa automaticamente tweens e ScrollTriggers no unmount.
+ * 1. Zero impacto no carregamento inicial / FCP / LCP:
+ *    - Carrega a animação (e a biblioteca GSAP) via dynamic import de forma preguiçosa (lazy).
+ *    - Remove completamente o GSAP do bundle crítico de hidratação.
+ * 2. Prevenção de Forced Reflow / Layout Thrashing:
+ *    - Não executa medições síncronas de geometria durante a hidratação do React.
+ *    - Aguarda o navegador estar ocioso (requestIdleCallback) ou a primeira interação do usuário.
+ * 3. Acessibilidade nativa:
+ *    - Se 'prefers-reduced-motion: reduce' estiver ativo, não carrega nem executa o GSAP.
+ *    - Todo o conteúdo HTML estático pré-renderizado já se encontra 100% visível e acessível.
  */
 export const useSectionAnimation = (
-  scopeRef: React.RefObject<HTMLElement | null>,
-  initAnimation: (element: HTMLElement) => (() => void) | void,
-  reducedMotionTargets?: gsap.DOMTarget,
+  scopeRef: RefObject<HTMLElement | null>,
+  loadAnimation: AnimationLoader,
 ): void => {
-  useGSAP(
-    () => {
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    // Se o usuário prefere movimento reduzido, não carrega nem executa GSAP
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) return
+
+    let isCancelled = false
+    let cleanupAnimation: (() => void) | void
+    let idleId: number | undefined
+    let timerId: ReturnType<typeof setTimeout> | undefined
+
+    const runAnimation = () => {
+      if (isCancelled) return
       const el = scopeRef.current
       if (!el) return
 
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            if (reducedMotionTargets) {
-              applyReducedMotion(reducedMotionTargets)
-            }
-            return
-          }
+      loadAnimation()
+        .then((initFn) => {
+          if (isCancelled || !scopeRef.current) return
+          cleanupAnimation = initFn(scopeRef.current)
+        })
+        .catch((err) => {
+          console.error('Falha ao carregar animação da seção:', err)
+        })
+    }
 
-          return initAnimation(el)
-        },
-      )
+    const cleanupTriggers = () => {
+      if (idleId && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleId)
+        idleId = undefined
+      }
+      if (timerId) {
+        clearTimeout(timerId)
+        timerId = undefined
+      }
+      window.removeEventListener('scroll', onTrigger)
+      window.removeEventListener('touchstart', onTrigger)
+      window.removeEventListener('mousemove', onTrigger)
+    }
 
-      return () => mm.revert()
-    },
-    { scope: scopeRef },
-  )
+    const onTrigger = () => {
+      cleanupTriggers()
+      runAnimation()
+    }
+
+    // Interações do usuário ativam a inicialização imediatamente
+    window.addEventListener('scroll', onTrigger, { passive: true, once: true })
+    window.addEventListener('touchstart', onTrigger, { passive: true, once: true })
+    window.addEventListener('mousemove', onTrigger, { passive: true, once: true })
+
+    // Se não houver interação prévia, agenda para a ociosidade do navegador
+    if (typeof window.requestIdleCallback === 'function') {
+      idleId = window.requestIdleCallback(onTrigger, { timeout: 1500 })
+    } else {
+      timerId = setTimeout(onTrigger, 1000)
+    }
+
+    return () => {
+      isCancelled = true
+      cleanupTriggers()
+      if (cleanupAnimation) {
+        cleanupAnimation()
+      }
+    }
+  }, [loadAnimation, scopeRef])
 }

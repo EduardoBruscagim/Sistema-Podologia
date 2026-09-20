@@ -1,10 +1,10 @@
-import ScrollTrigger from 'gsap/ScrollTrigger'
-
 /**
  * Gerencia a barra de navegação fixa:
- * - Mantém a barra permanentemente visível no topo da página (sem ocultar no scroll down).
+ * - Mantém a barra permanentemente visível no topo da página.
  * - Aplica a classe '.is-scrolled' quando a página rolar mais de 20px,
  *   ativando o efeito translúcido (glassmorphism/blur) e a borda capilar.
+ * - Usa listener nativo de alta performance ({ passive: true }) com requestAnimationFrame,
+ *   eliminando qualquer reflow forçado ou dependência síncrona do GSAP no caminho crítico.
  */
 export const initNavbarAnimation = (
   headerEl: HTMLElement,
@@ -28,21 +28,25 @@ export const initNavbarAnimation = (
     }
   }
 
-  // Verifica estado inicial caso a página seja carregada com scroll prévio
   const initialScroll = typeof window !== 'undefined' ? window.scrollY || 0 : 0
   updateScrolledState(initialScroll)
 
-  const st = ScrollTrigger.create({
-    start: 'top top',
-    end: 'max',
-    onUpdate: (self) => {
-      updateScrolledState(self.scroll())
-    },
-  })
+  let ticking = false
+  const onScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateScrolledState(window.scrollY || 0)
+        ticking = false
+      })
+      ticking = true
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true })
 
   return () => {
     headerEl.removeAttribute('inert')
     headerEl.classList.remove('is-scrolled')
-    st.kill()
+    window.removeEventListener('scroll', onScroll)
   }
 }

@@ -1,16 +1,14 @@
 import React, { useRef } from 'react'
 import { Sun, Zap, ShieldCheck, Shield, Check, Thermometer, Trash2 } from 'lucide-react'
-import { initTechnologyAnimation } from '@/animations/technology'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
+
+const loadTechnologyAnimation = () =>
+  import('@/animations/technology').then((m) => m.initTechnologyAnimation)
 
 export const TechnologySection: React.FC = () => {
   const techSectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(techSectionRef, initTechnologyAnimation, [
-    '.tech-header',
-    '.tech-card',
-    '.tech-featured',
-  ])
+  useSectionAnimation(techSectionRef, loadTechnologyAnimation)
 
   return (
     <section
