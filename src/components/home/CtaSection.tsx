@@ -1,39 +1,12 @@
 import React, { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 import { initCtaAnimation } from '@/animations/cta'
-import { applyReducedMotion } from '@/animations/reducedMotion'
+import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { getWhatsAppUrl, getWhatsAppDoubtUrl } from '@/utils/whatsapp'
 
 export const CtaSection: React.FC = () => {
   const ctaSectionRef = useRef<HTMLElement | null>(null)
 
-  useGSAP(
-    () => {
-      const el = ctaSectionRef.current
-      if (!el) return
-
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyReducedMotion('.cta-reveal')
-            return
-          }
-
-          return initCtaAnimation(el)
-        },
-      )
-
-      return () => mm.revert()
-    },
-    { scope: ctaSectionRef },
-  )
+  useSectionAnimation(ctaSectionRef, initCtaAnimation, '.cta-reveal')
 
   return (
     <section

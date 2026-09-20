@@ -1,36 +1,11 @@
 import React, { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 import { initHeroAnimation } from '@/animations/hero'
-import { applyReducedMotion } from '@/animations/reducedMotion'
+import { useSectionAnimation } from '@/hooks/useSectionAnimation'
+
 export const Hero: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null)
 
-  useGSAP(
-    () => {
-      const el = heroSectionRef.current
-      if (!el) return
-
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyReducedMotion('.gsap-hero-image')
-            return
-          }
-
-          return initHeroAnimation(el)
-        },
-      )
-      return () => mm.revert()
-    },
-    { scope: heroSectionRef },
-  )
+  useSectionAnimation(heroSectionRef, initHeroAnimation, '.gsap-hero-image')
 
   return (
     <section

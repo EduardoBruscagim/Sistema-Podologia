@@ -59,11 +59,7 @@ export default defineConfig({
           if (id.includes('node_modules/gsap') || id.includes('node_modules/@gsap/')) {
             return 'vendor-gsap'
           }
-          if (
-            id.includes('node_modules/react/') ||
-            id.includes('node_modules/react-dom/') ||
-            id.includes('node_modules/react-router')
-          ) {
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
             return 'vendor-react'
           }
         },

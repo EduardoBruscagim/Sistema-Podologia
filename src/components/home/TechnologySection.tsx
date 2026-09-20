@@ -1,39 +1,16 @@
 import React, { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 import { Sun, Zap, ShieldCheck, Shield, Check, Thermometer, Trash2 } from 'lucide-react'
 import { initTechnologyAnimation } from '@/animations/technology'
-import { applyReducedMotion } from '@/animations/reducedMotion'
+import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
 export const TechnologySection: React.FC = () => {
   const techSectionRef = useRef<HTMLElement | null>(null)
 
-  useGSAP(
-    () => {
-      const el = techSectionRef.current
-      if (!el) return
-
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyReducedMotion(['.tech-header', '.tech-card', '.tech-featured'])
-            return
-          }
-
-          return initTechnologyAnimation(el)
-        },
-      )
-
-      return () => mm.revert()
-    },
-    { scope: techSectionRef },
-  )
+  useSectionAnimation(techSectionRef, initTechnologyAnimation, [
+    '.tech-header',
+    '.tech-card',
+    '.tech-featured',
+  ])
 
   return (
     <section

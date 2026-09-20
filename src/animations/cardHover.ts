@@ -2,11 +2,6 @@ import gsap from 'gsap'
 
 interface CardHoverOptions {
   y?: number
-  /**
-   * @deprecated Escala no card container causa text reflow (texto pixelado/saltando).
-   * O scale é ignorado para o card principal. Use iconScale para escalar o ícone.
-   */
-  scale?: number
   duration?: number
   iconSelector?: string
   iconY?: number

@@ -29,17 +29,3 @@ export const applyReducedMotion = (
     clearProps: 'transform,scale,opacity',
   })
 }
-
-/**
- * Resets the floating navbar to be static, visible and interactive
- * for users with prefers-reduced-motion.
- */
-export const applyNavbarReducedMotion = (
-  headerEl: HTMLElement | null,
-  floatingNav: HTMLElement | null,
-): void => {
-  if (!headerEl || !floatingNav) return
-  headerEl.removeAttribute('inert')
-  headerEl.style.visibility = 'visible'
-  floatingNav.style.pointerEvents = 'auto'
-}
