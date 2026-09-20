@@ -1,40 +1,13 @@
 import React, { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 import { initAboutAnimation } from '@/animations/about'
-import { applyReducedMotion } from '@/animations/reducedMotion'
+import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
-import { Heart, ShieldCheck, MapPin, Calendar, Check, ArrowUpRight } from 'lucide-react'
+import { Heart, ShieldCheck, Calendar, Check, ArrowUpRight } from 'lucide-react'
 
 export const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
 
-  useGSAP(
-    () => {
-      const el = sectionRef.current
-      if (!el) return
-
-      const mm = gsap.matchMedia()
-      mm.add(
-        {
-          isMotionOk: '(prefers-reduced-motion: no-preference)',
-          reduceMotion: '(prefers-reduced-motion: reduce)',
-        },
-        (context) => {
-          const { isMotionOk } = context.conditions!
-          if (!isMotionOk) {
-            applyReducedMotion('.about-reveal')
-            return
-          }
-
-          return initAboutAnimation(el)
-        },
-      )
-
-      return () => mm.revert()
-    },
-    { scope: sectionRef },
-  )
+  useSectionAnimation(sectionRef, initAboutAnimation, '.about-reveal')
 
   return (
     <section
@@ -56,7 +29,15 @@ export const AboutSection: React.FC = () => {
                   className="w-14 h-14 sm:w-16 sm:h-16"
                   aria-hidden="true"
                 >
-                  <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.4" />
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="30"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeDasharray="3 3"
+                    opacity="0.4"
+                  />
                   <path
                     d="M32 16L43 46H37.8L35.2 39H28.8L26.2 46H21L32 16ZM32 24.2L29.6 35H34.4L32 24.2Z"
                     className="fill-on-surface"
@@ -94,7 +75,8 @@ export const AboutSection: React.FC = () => {
 
             {/* Citação Direta de Angélica */}
             <blockquote className="mt-6 pt-5 border-t border-surface-border text-xs text-text-secondary italic font-light leading-relaxed">
-              &ldquo;Cuidar da saúde dos seus pés deve ser um alívio leve e acolhedor, no aconchego e na segurança da sua casa.&rdquo;
+              &ldquo;Cuidar da saúde dos seus pés deve ser um alívio leve e acolhedor, no aconchego
+              e na segurança da sua casa.&rdquo;
             </blockquote>
           </div>
         </div>
@@ -110,13 +92,19 @@ export const AboutSection: React.FC = () => {
 
           <div className="space-y-4 text-base text-on-surface-variant font-light leading-relaxed mb-8 max-w-[54ch] text-pretty">
             <p>
-              Sou <strong>Angélica Eduarda</strong>. Desde 2016 dedico minha vocação ao cuidado da saúde dos pés e das mãos de famílias em Mococa. Entendo que abrir as portas da sua residência requer confiança absoluta, pontualidade e discrição.
+              Sou <strong>Angélica Eduarda</strong>. Desde 2016 dedico minha vocação ao cuidado da
+              saúde dos pés e das mãos de famílias em Mococa. Entendo que abrir as portas da sua
+              residência requer confiança absoluta, pontualidade e discrição.
             </p>
             <p>
-              Meu atendimento foi desenhado para quem busca comodidade sem abrir mão do padrão clínico hospitalar: levo todos os aparelhos, toalhas descartáveis e envelopes cirúrgicos lacrados até a sua sala ou quarto.
+              Meu atendimento foi desenhado para quem busca comodidade sem abrir mão do padrão
+              clínico hospitalar: levo todos os aparelhos, toalhas descartáveis e envelopes
+              cirúrgicos lacrados até a sua sala ou quarto.
             </p>
             <p>
-              Tenho um carinho especial por atender idosos, pessoas com sensibilidade nos pés ou restrições de mobilidade. Todo o procedimento — do corte correto ao desencravamento preventivo — é realizado sem pressa e com a máxima paciência.
+              Tenho um carinho especial por atender idosos, pessoas com sensibilidade nos pés ou
+              restrições de mobilidade. Todo o procedimento — do corte correto ao desencravamento
+              preventivo — é realizado sem pressa e com a máxima paciência.
             </p>
           </div>
 
