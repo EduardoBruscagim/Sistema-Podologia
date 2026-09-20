@@ -26,7 +26,7 @@ export const TrustStats: React.FC = () => {
             </dt>
             <dd className="m-0 flex flex-col">
               <span
-                className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-on-surface tracking-tight leading-none tabular-nums"
+                className="stat-counter-value font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-on-surface tracking-tight leading-none tabular-nums"
                 aria-label="Mais de 25.000 atendimentos"
               >
                 +25.000

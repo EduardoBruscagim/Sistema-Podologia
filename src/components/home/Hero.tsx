@@ -1,11 +1,14 @@
 import React, { useRef } from 'react'
 import { initHeroAnimation } from '@/animations/hero'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
+import { useMagneticButton } from '@/hooks/useMagneticButton'
 
 export const Hero: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null)
+  const ctaBtnRef = useRef<HTMLAnchorElement | null>(null)
 
   useSectionAnimation(heroSectionRef, initHeroAnimation, '.gsap-hero-image')
+  useMagneticButton(ctaBtnRef)
 
   return (
     <section
@@ -31,6 +34,7 @@ export const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
             <a
+              ref={ctaBtnRef}
               href="#procedimentos"
               className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
             >
@@ -73,7 +77,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Supporting Clinical Care Setup Preview Card */}
-          <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-surface-variant/95 backdrop-blur-md p-3 rounded-xl border border-surface-border max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
+          <div className="gsap-hero-badge mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-surface-variant/95 backdrop-blur-md p-3 rounded-xl border border-surface-border max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
             <div className="relative w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-lg overflow-hidden border border-surface-border">
               <picture>
                 <source type="image/avif" srcSet="/clinical-care-setup-thumb.avif" />

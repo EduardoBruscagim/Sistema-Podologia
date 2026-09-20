@@ -338,3 +338,30 @@
     cursor: pointer;
   }
 }
+
+@keyframes border-sheen {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-border-sheen {
+  animation: border-sheen 4.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-border-sheen {
+    animation: none !important;
+  }
+}

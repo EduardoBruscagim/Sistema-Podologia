@@ -1,12 +1,15 @@
 import React, { useRef } from 'react'
 import { initCtaAnimation } from '@/animations/cta'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
+import { useMagneticButton } from '@/hooks/useMagneticButton'
 import { getWhatsAppUrl, getWhatsAppDoubtUrl } from '@/utils/whatsapp'
 
 export const CtaSection: React.FC = () => {
   const ctaSectionRef = useRef<HTMLElement | null>(null)
+  const primaryCtaRef = useRef<HTMLAnchorElement | null>(null)
 
   useSectionAnimation(ctaSectionRef, initCtaAnimation, '.cta-reveal')
+  useMagneticButton(primaryCtaRef)
 
   return (
     <section
@@ -27,6 +30,7 @@ export const CtaSection: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
           <a
+            ref={primaryCtaRef}
             href={getWhatsAppUrl(
               'Olá, Angélica! Li as informações no site e gostaria de agendar um atendimento em domicílio em Mococa.',
             )}
