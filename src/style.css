@@ -124,6 +124,24 @@
     }
   }
 
+  /* Prevenção de FOUC e sobressalto inicial (jump/flash) em elementos com revelação GSAP */
+  .js:not(.gsap-loaded) .stat-reveal,
+  .js:not(.gsap-loaded) .bento-header,
+  .js:not(.gsap-loaded) .bento-card,
+  .js:not(.gsap-loaded) .about-reveal,
+  .js:not(.gsap-loaded) .services-header,
+  .js:not(.gsap-loaded) .service-card,
+  .js:not(.gsap-loaded) .services-footer,
+  .js:not(.gsap-loaded) .tech-header,
+  .js:not(.gsap-loaded) .tech-featured,
+  .js:not(.gsap-loaded) .tech-card,
+  .js:not(.gsap-loaded) .faq-header,
+  .js:not(.gsap-loaded) .faq-item,
+  .js:not(.gsap-loaded) .cta-reveal {
+    opacity: 0;
+    visibility: hidden;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto !important;
@@ -134,6 +152,23 @@
     *::after {
       animation-iteration-count: 1 !important;
       scroll-behavior: auto !important;
+    }
+
+    .js:not(.gsap-loaded) .stat-reveal,
+    .js:not(.gsap-loaded) .bento-header,
+    .js:not(.gsap-loaded) .bento-card,
+    .js:not(.gsap-loaded) .about-reveal,
+    .js:not(.gsap-loaded) .services-header,
+    .js:not(.gsap-loaded) .service-card,
+    .js:not(.gsap-loaded) .services-footer,
+    .js:not(.gsap-loaded) .tech-header,
+    .js:not(.gsap-loaded) .tech-featured,
+    .js:not(.gsap-loaded) .tech-card,
+    .js:not(.gsap-loaded) .faq-header,
+    .js:not(.gsap-loaded) .faq-item,
+    .js:not(.gsap-loaded) .cta-reveal {
+      opacity: 1 !important;
+      visibility: visible !important;
     }
 
     /* Preserve essential loading spinner indications */

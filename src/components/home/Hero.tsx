@@ -47,7 +47,7 @@ export const Hero: React.FC = () => {
 
         {/* Right: Real Image Card & Supporting Clinical Setup */}
         <div className="lg:col-span-5 gsap-hero-image relative">
-          <div className="relative rounded-xl overflow-hidden border border-surface-border bg-pure-white dark:bg-surface-variant">
+          <div className="relative rounded-xl overflow-hidden border border-surface-border bg-surface-variant dark:bg-surface-variant">
             <picture>
               <source
                 media="(max-width: 640px)"
@@ -61,13 +61,13 @@ export const Hero: React.FC = () => {
               />
               <img
                 alt="Kit profissional higienizado para atendimento domiciliar com toalhas e instrumentais esterilizados"
-                className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover"
+                className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover transition-opacity duration-300"
                 src="/hero-clinical-bag.jpg"
                 width={600}
                 height={460}
                 loading="eager"
                 fetchPriority="high"
-                decoding="async"
+                decoding="sync"
               />
             </picture>
           </div>
