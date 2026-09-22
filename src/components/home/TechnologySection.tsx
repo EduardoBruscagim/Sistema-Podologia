@@ -105,10 +105,9 @@ export const TechnologySection: React.FC = () => {
           {/* Imagem sangrando (bleed total) à direita com gradiente de mistura perfeito */}
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-[54%] xl:w-[56%] w-full aspect-[16/10] sm:aspect-[21/9] lg:aspect-auto overflow-hidden">
             <picture className="w-full h-full block">
-              <source type="image/avif" srcSet="/clinical-care-setup.avif" />
               <source type="image/webp" srcSet="/clinical-care-setup.webp" />
               <img
-                src="/clinical-care-setup.jpg"
+                src="/clinical-care-setup.webp"
                 alt="Mesa de atendimento clínico domiciliar com instrumentais esterilizados em envelope cirúrgico e descartáveis"
                 className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
                 loading="lazy"
@@ -127,10 +126,9 @@ export const TechnologySection: React.FC = () => {
         <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent/40 transition-[border-color,background-color] duration-300 overflow-hidden flex flex-col sm:flex-row group">
           <div className="w-full sm:w-[42%] aspect-[16/10] sm:aspect-auto shrink-0 relative overflow-hidden bg-surface-variant/30">
             <picture className="w-full h-full block">
-              <source type="image/avif" srcSet="/tech-fototerapia.avif" />
               <source type="image/webp" srcSet="/tech-fototerapia.webp" />
               <img
-                src="/tech-fototerapia.jpg"
+                src="/tech-fototerapia.webp"
                 alt="Aparelho de fototerapia LED de luz vermelha para podologia"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
@@ -168,10 +166,9 @@ export const TechnologySection: React.FC = () => {
         <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent/40 transition-[border-color,background-color] duration-300 overflow-hidden flex flex-col sm:flex-row group">
           <div className="w-full sm:w-[42%] aspect-[16/10] sm:aspect-auto shrink-0 relative overflow-hidden bg-surface-variant/30">
             <picture className="w-full h-full block">
-              <source type="image/avif" srcSet="/tech-cabine-uv.avif" />
               <source type="image/webp" srcSet="/tech-cabine-uv.webp" />
               <img
-                src="/tech-cabine-uv.jpg"
+                src="/tech-cabine-uv.webp"
                 alt="Cabine LED UV portátil para secagem rápida de esmalte"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"

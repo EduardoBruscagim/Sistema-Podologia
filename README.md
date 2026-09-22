@@ -94,7 +94,7 @@ A organização de diretórios reflete a separação modular de componentes, ani
 │   └── style.css           # Tokens de tema semânticos, fontes variáveis e regras de proteção FOUC
 ├── scripts/
 │   └── prerender.mjs       # Pré-renderizador estático (SSG) com inlining de CSS crítico
-├── public/                 # Assets otimizados (WebP/AVIF), robots.txt, sitemap.xml, og-image.jpg
+├── public/                 # Assets otimizados (WebP), robots.txt, sitemap.xml, og-image.webp
 ├── index.html              # Shell HTML semântico com JSON-LD Schema.org, anti-FOUC e LCP preloads
 ├── DESIGN.md               # Especificação detalhada do Design System e motion tokens
 ├── PRODUCT.md              # Documento de produto, proposta de valor e roadmap
