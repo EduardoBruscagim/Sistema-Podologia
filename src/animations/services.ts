@@ -14,6 +14,7 @@ import { initCardsHover } from './cardHover'
  * @param sectionEl - Elemento raiz da seção `<section id="procedimentos">`.
  * @returns Função de cleanup para remoção dos listeners de hover e reversão do contexto GSAP.
  */
+
 export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     // Cabeçalho da seção

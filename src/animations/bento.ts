@@ -13,6 +13,7 @@ import { initCardsHover } from './cardHover'
  * @param containerEl - Elemento raiz da seção `<section>`.
  * @returns Função de cleanup que cancela hovers e reverte o contexto GSAP.
  */
+
 export const initBentoAnimation = (containerEl?: HTMLElement): (() => void) => {
   if (!containerEl) return () => {}
 

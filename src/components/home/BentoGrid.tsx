@@ -15,6 +15,7 @@ import { Home, MapPin, Clock, Check } from 'lucide-react'
  *
  * Microinterações de hover suaves (`initCardsHover`) são vinculadas via GSAP nos ponteiros finos.
  */
+
 export const BentoGrid: React.FC = () => {
   const bentoSectionRef = useRef<HTMLElement | null>(null)
 

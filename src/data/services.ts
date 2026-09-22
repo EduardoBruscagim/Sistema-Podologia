@@ -1,6 +1,7 @@
 /**
  * Estrutura representativa de um procedimento clínico/estético de podologia ou manicure.
  */
+
 export interface ServiceItem {
   /** Identificador único do procedimento (usado como chave React e âncora/slug). */
   id: string
@@ -30,6 +31,7 @@ export interface ServiceItem {
  * Todos os valores incluem deslocamento gratuito em qualquer bairro da cidade,
  * uso de instrumentais esterilizados em autoclave e insumos 100% descartáveis.
  */
+
 export const SERVICES: ServiceItem[] = [
   {
     id: 'pe-e-mao-completo',

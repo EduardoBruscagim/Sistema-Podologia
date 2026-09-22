@@ -3,6 +3,7 @@ import gsap from 'gsap'
 /**
  * Opções de customização da microinteração de hover em cards.
  */
+
 interface CardHoverOptions {
   /** Deslocamento vertical em pixels do card no hover (padrão: -5px). */
   y?: number
@@ -38,6 +39,7 @@ interface CardHoverOptions {
  * @param options - Parâmetros opcionais de animação e seletores internos.
  * @returns Função de limpeza que desvincula listeners e remove tweens do GSAP.
  */
+
 export const initCardsHover = (
   cards: HTMLElement[] | NodeListOf<HTMLElement>,
   options: CardHoverOptions = {},

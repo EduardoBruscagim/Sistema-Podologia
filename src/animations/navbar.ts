@@ -15,6 +15,7 @@
  * @param navContainerEl - Container pai opcional para ajuste de propriedades de ponteiro.
  * @returns Função de cleanup para remoção do listener e restauração de estado.
  */
+
 export const initNavbarAnimation = (
   headerEl: HTMLElement,
   navContainerEl?: HTMLElement,

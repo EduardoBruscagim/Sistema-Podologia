@@ -17,6 +17,7 @@ import { useSectionAnimation } from '@/hooks/useSectionAnimation'
  * 3. **Hierarquia Semântica:**
  *    - Contém o único `<h1>` da aplicação, marcando o propósito central do serviço.
  */
+
 export const Hero: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null)
 

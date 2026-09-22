@@ -24,6 +24,7 @@ import { WhatsAppButton } from '@/components/common/WhatsAppButton'
  * 3. **Sequência da Página:**
  *    - Hero -> TrustStats -> BentoGrid -> AboutSection -> ServicesPricing -> TechnologySection -> FaqSection -> CtaSection.
  */
+
 export const HomePage: React.FC = () => {
   return (
     <div id="app" className="flex-1 flex flex-col">

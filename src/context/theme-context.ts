@@ -8,4 +8,5 @@ import type { ThemeContextType } from '@/types/theme'
  * para evitar dependências circulares entre o provedor e o hook `useTheme()`,
  * além de otimizar o Fast Refresh no ambiente de desenvolvimento do Vite.
  */
+
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined)

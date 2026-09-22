@@ -11,6 +11,7 @@ import gsap from 'gsap'
  *
  * @param targets - Coleção de seletores ou referências DOM a serem normalizados.
  */
+
 export const applyReducedMotion = (
   targets: gsap.DOMTarget = [
     '.gsap-hero-image',

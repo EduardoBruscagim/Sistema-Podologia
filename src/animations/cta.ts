@@ -9,6 +9,7 @@ import gsap from 'gsap'
  * @param sectionEl - Elemento raiz da seção `<section>`.
  * @returns Função de reversão do contexto GSAP.
  */
+
 export const initCtaAnimation = (sectionEl?: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     gsap.fromTo(

@@ -16,6 +16,7 @@ import gsap from 'gsap'
  * @param heroSectionEl - Elemento raiz da seção Hero `<section id="inicio">`.
  * @returns Função de reversão do contexto GSAP para desmontagem segura.
  */
+
 export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => {
   if (!heroSectionEl) return () => {}
 
