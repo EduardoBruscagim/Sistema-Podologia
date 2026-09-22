@@ -3,9 +3,24 @@ import { Sun, Zap, ShieldCheck, Shield, Thermometer, Trash2 } from 'lucide-react
 import { initTechnologyAnimation } from '@/animations/technology'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
+/**
+ * Seção de Higiene, Biossegurança e Equipamentos (TechnologySection).
+ *
+ * ### Destaques de Comunicação e Autoridade Clínica:
+ * 1. **Célula Principal (Full Bleed Image):**
+ *    - Apresenta a garantia máxima de esterilização hospitalar em autoclave a 134°C,
+ *      envelopes com indicador de esterilização abertos no momento do atendimento
+ *      e descarte estrito de lixas, lâminas e toalhas de uso único.
+ *    - A fotografia em sangria total (`/clinical-care-setup.webp`) utiliza gradientes de fusão
+ *      suaves (`bg-gradient-to-r` e `bg-gradient-to-b`) para integração harmoniosa com o tema claro e escuro.
+ * 2. **Cards Secundários de Equipamentos Portáteis:**
+ *    - **Fototerapia LED de Luz Vermelha:** Aparelho portátil que acelera a cicatrização e acalma inflamações.
+ *    - **Cabine LED UV Portátil:** Secagem ultrarrápida de esmalte para conveniência domiciliar imediata.
+ */
 export const TechnologySection: React.FC = () => {
   const techSectionRef = useRef<HTMLElement | null>(null)
 
+  // Dispara animações de ScrollTrigger nos cards tecnológicos e no destaque de biossegurança
   useSectionAnimation(techSectionRef, initTechnologyAnimation, [
     '.tech-header',
     '.tech-card',
@@ -19,6 +34,9 @@ export const TechnologySection: React.FC = () => {
       className="max-w-6xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
       id="tecnologia"
     >
+      {/* ----------------------------------------------------------------- */}
+      {/* Cabeçalho Editorial da Seção de Higiene                          */}
+      {/* ----------------------------------------------------------------- */}
       <div className="tech-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="tech-heading"
@@ -31,9 +49,11 @@ export const TechnologySection: React.FC = () => {
         </p>
       </div>
 
-      {/* Bento Grid Tecnológico e Biossegurança */}
+      {/* ----------------------------------------------------------------- */}
+      {/* Bento Grid: Célula Principal de Autoclave + 2 Cards Secundários   */}
+      {/* ----------------------------------------------------------------- */}
       <div className="tech-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
-        {/* Célula Principal de Autoridade: Esterilização em Autoclave a 134°C + 100% Descartáveis com Sangria Total da Foto */}
+        {/* Célula Principal de Autoridade: Esterilização em Autoclave e 100% Descartáveis */}
         <div className="tech-featured col-span-1 md:col-span-2 lg:col-span-12 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent/40 transition-[border-color,background-color] duration-300 relative overflow-hidden flex flex-col lg:block">
           {/* Conteúdo textual e indicadores de autoridade */}
           <div className="relative z-10 lg:max-w-[56%] xl:max-w-[54%] p-6 sm:p-8 lg:p-10 flex flex-col lg:justify-between lg:h-full">

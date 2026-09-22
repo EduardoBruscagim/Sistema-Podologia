@@ -1,14 +1,27 @@
 import React from 'react'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
 
+/**
+ * Componente de Rodapé Editorial (Footer).
+ *
+ * ### Organização das Colunas:
+ * - **Coluna 1 (Identidade):** Marca pessoal, síntese do serviço e atuação regional em Mococa, SP.
+ * - **Coluna 2 (Navegação Rápida):** Links âncora internos com touch targets de no mínimo 44x44px.
+ * - **Coluna 3 (Biossegurança & Higiene):** Garantias de autoclave, uso único e taxa zero de visita.
+ * - **Coluna 4 (Atendimento & Contato):** Dias de funcionamento e link com call-to-action para o WhatsApp.
+ * - **Linha Inferior:** Direitos autorais com ano dinâmico e localização geográfica.
+ */
 export const Footer: React.FC = () => {
   return (
     <footer className="pt-16 pb-12 px-6 border-t border-surface-border bg-surface transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <h2 className="sr-only">Navegação e Informações Complementares</h2>
+
         {/* Grid Multicolunas que colapsa com divisores hairline no mobile */}
         <div className="flex flex-col divide-y divide-surface-border md:divide-y-0 md:grid md:grid-cols-2 lg:grid-cols-12 md:gap-10 lg:gap-8 pb-12 border-b border-surface-border">
-          {/* Col 1: Identidade / Marca */}
+          {/* ----------------------------------------------------------------- */}
+          {/* Coluna 1: Identidade e Marca Editorial                           */}
+          {/* ----------------------------------------------------------------- */}
           <div className="py-6 first:pt-0 md:py-0 md:col-span-1 lg:col-span-4 flex flex-col items-start">
             <span className="font-serif text-lg lg:text-xl font-normal tracking-wide text-on-surface mb-3">
               Angélica Eduarda
@@ -21,7 +34,9 @@ export const Footer: React.FC = () => {
             </span>
           </div>
 
-          {/* Col 2: Navegação Rápida com Touch Targets Otimizados (min 44px) */}
+          {/* ----------------------------------------------------------------- */}
+          {/* Coluna 2: Navegação Rápida (Touch Targets Mínimos 44x44px)        */}
+          {/* ----------------------------------------------------------------- */}
           <div className="py-6 md:py-0 md:col-span-1 lg:col-span-2">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
               Navegação Rápida
@@ -72,7 +87,9 @@ export const Footer: React.FC = () => {
             </nav>
           </div>
 
-          {/* Col 3: Higiene e materiais */}
+          {/* ----------------------------------------------------------------- */}
+          {/* Coluna 3: Higiene e Materiais de Biossegurança                    */}
+          {/* ----------------------------------------------------------------- */}
           <div className="py-6 md:py-0 md:col-span-1 lg:col-span-3">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
               Higiene e materiais
@@ -97,7 +114,9 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Col 4: Atendimento & Contato */}
+          {/* ----------------------------------------------------------------- */}
+          {/* Coluna 4: Atendimento & Agendamento no WhatsApp                   */}
+          {/* ----------------------------------------------------------------- */}
           <div className="py-6 last:pb-0 md:py-0 md:col-span-1 lg:col-span-3">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
               Atendimento & Contato
@@ -120,7 +139,9 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Linha inferior de direitos autorais com alinhamento responsivo */}
+        {/* ----------------------------------------------------------------- */}
+        {/* Linha Inferior: Direitos Autorais e Localidade                    */}
+        {/* ----------------------------------------------------------------- */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-secondary font-light text-center sm:text-left">
           <p>
             &copy; {new Date().getFullYear()} Angélica Eduarda Amaro Bruscagim. Todos os direitos

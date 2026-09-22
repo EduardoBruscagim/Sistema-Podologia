@@ -3,6 +3,13 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath, URL } from 'node:url'
 
+/**
+ * Plugin customizado para injeção automática de `<link rel="preload">` das fontes críticas WOFF2.
+ *
+ * Durante o build de produção, examina o bundle gerado e injeta preloads no `<head>` do HTML
+ * para os subsets essenciais das fontes Newsreader e Outfit, eliminando flash de texto invisível (FOIT)
+ * e acelerando o First Contentful Paint (FCP).
+ */
 function preloadFontsPlugin(): Plugin {
   return {
     name: 'preload-fonts',
@@ -39,6 +46,15 @@ function preloadFontsPlugin(): Plugin {
   }
 }
 
+/**
+ * Configuração de Build do Vite.
+ *
+ * - Plugins: React com Fast Refresh, Tailwind CSS v4 e plugin de preload de fontes.
+ * - Alias de importação: `@/` apontando para o diretório `./src`.
+ * - Divisão de Chunks Manual (Rollup):
+ *   - `vendor-gsap`: Isola GSAP, ScrollTrigger e @gsap/react em cache de longo prazo.
+ *   - `vendor-react`: Isola o runtime do React e React-DOM.
+ */
 export default defineConfig({
   plugins: [react(), tailwindcss(), preloadFontsPlugin()],
   resolve: {

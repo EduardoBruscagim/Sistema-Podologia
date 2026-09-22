@@ -9,6 +9,21 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const distIndexPath = path.join(rootDir, 'dist', 'index.html')
 
+/**
+ * Runner Automatizado de Auditoria de Acessibilidade (Axe-Core + JSDOM).
+ *
+ * ### Cobertura de Regras:
+ * - WCAG 2.0 (Níveis A e AA)
+ * - WCAG 2.1 (Níveis A e AA)
+ * - WCAG 2.2 (Nível AA)
+ * - Boas Práticas W3C / ARIA (`best-practice`)
+ *
+ * ### Funcionamento:
+ * 1. Carrega o arquivo estático final pré-renderizado `dist/index.html`.
+ * 2. Instancia um ambiente de DOM virtual no Node.js via `jsdom`.
+ * 3. Injeta e executa a suíte de testes de regras do motor oficial `axe-core`.
+ * 4. Reporta detalhadamente violações, nós afetados e impacto ou confirma pontuação 100/100.
+ */
 async function runAudit() {
   if (!fs.existsSync(distIndexPath)) {
     console.error('dist/index.html not found. Please build the project first (npm run build).')
@@ -21,10 +36,10 @@ async function runAudit() {
     runScripts: 'dangerously',
   })
 
-  // Inject axe source into jsdom window
+  // Injeta o código-fonte do motor axe-core na janela do JSDOM
   dom.window.eval(axe.source)
 
-  // Execute axe in jsdom window
+  // Executa o axe sobre o documento JSDOM avaliando as tags WCAG selecionadas
   const results = await dom.window.axe.run(dom.window.document, {
     runOnly: {
       type: 'tag',

@@ -4,9 +4,21 @@ import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
 import { Heart, ShieldCheck, Calendar, Check, ArrowUpRight } from 'lucide-react'
 
+/**
+ * Seção Sobre a Profissional (AboutSection).
+ *
+ * ### Estrutura Editorial e Humanização:
+ * - **Lado Esquerdo (Card de Credenciais):**
+ *   Monograma tipográfico em SVG (iniciais e agulha/ponto de cuidado), badge de Mococa/SP
+ *   e lista de credenciais fundamentais (experiência desde 2016, autoclave cirúrgica e foco em idosos).
+ * - **Lado Direito (Narrativa Pessoal e Diferenciais):**
+ *   Texto humanizado que detalha a discrição e a biossegurança no atendimento domiciliar,
+ *   lista de 4 compromissos práticos e botão de contato direto com a Angélica pelo WhatsApp.
+ */
 export const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
 
+  // Dispara animação de entrada da seção About com revelação suave
   useSectionAnimation(sectionRef, initAboutAnimation, '.about-reveal')
 
   return (
@@ -17,7 +29,9 @@ export const AboutSection: React.FC = () => {
       aria-labelledby="about-heading"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        {/* Left: Cartão de Apresentação e Credenciais Humanas */}
+        {/* ----------------------------------------------------------------- */}
+        {/* Lado Esquerdo: Cartão de Apresentação e Credenciais Humanas       */}
+        {/* ----------------------------------------------------------------- */}
         <div className="about-reveal lg:col-span-5 flex flex-col items-center">
           <div className="w-full max-w-sm rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border p-7 sm:p-8 flex flex-col items-center text-center shadow-xs">
             {/* Emblema Editorial com Monograma */}
@@ -77,7 +91,9 @@ export const AboutSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: História, Filosofia de Atendimento e Confiança */}
+        {/* ----------------------------------------------------------------- */}
+        {/* Lado Direito: História, Filosofia de Atendimento e Confiança      */}
+        {/* ----------------------------------------------------------------- */}
         <div className="about-reveal lg:col-span-7 flex flex-col items-start text-left">
           <h2
             id="about-heading"
@@ -105,7 +121,7 @@ export const AboutSection: React.FC = () => {
             </p>
           </div>
 
-          {/* Destaques Práticos */}
+          {/* Destaques Práticos de Conveniência */}
           <ul
             role="list"
             aria-label="Diferenciais do atendimento"
