@@ -37,6 +37,7 @@ export const TrustStats: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
         {/* Célula 1: Destaque de Atendimentos Realizados (+25.000)           */}
         {/* ----------------------------------------------------------------- */}
+
         <div className="stat-block stat-reveal col-span-1 bg-pure-white dark:bg-surface-variant border-b md:border-b-0 md:border-r border-surface-border p-6 sm:p-8 lg:p-10 flex flex-col justify-center transition-colors duration-200">
           <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-sage mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-sage inline-block" aria-hidden="true" />
@@ -56,6 +57,7 @@ export const TrustStats: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
         {/* Célula 2: Deslocamento Cortesia (Taxa R$ 0 em Mococa)             */}
         {/* ----------------------------------------------------------------- */}
+
         <div className="stat-block stat-reveal col-span-1 bg-pure-white dark:bg-surface-variant p-6 sm:p-8 lg:p-10 flex flex-col justify-center transition-colors duration-200">
           <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent inline-block" aria-hidden="true" />

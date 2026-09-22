@@ -23,6 +23,7 @@ export const Footer: React.FC = () => {
           {/* ----------------------------------------------------------------- */}
           {/* Coluna 1: Identidade e Marca Editorial                           */}
           {/* ----------------------------------------------------------------- */}
+
           <div className="py-6 first:pt-0 md:py-0 md:col-span-1 lg:col-span-4 flex flex-col items-start">
             <span className="font-serif text-lg lg:text-xl font-normal tracking-wide text-on-surface mb-3">
               Angélica Eduarda
@@ -38,6 +39,7 @@ export const Footer: React.FC = () => {
           {/* ----------------------------------------------------------------- */}
           {/* Coluna 2: Navegação Rápida (Touch Targets Mínimos 44x44px)        */}
           {/* ----------------------------------------------------------------- */}
+
           <div className="py-6 md:py-0 md:col-span-1 lg:col-span-2">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
               Navegação Rápida
@@ -91,6 +93,7 @@ export const Footer: React.FC = () => {
           {/* ----------------------------------------------------------------- */}
           {/* Coluna 3: Higiene e Materiais de Biossegurança                    */}
           {/* ----------------------------------------------------------------- */}
+
           <div className="py-6 md:py-0 md:col-span-1 lg:col-span-3">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
               Higiene e materiais
@@ -118,6 +121,7 @@ export const Footer: React.FC = () => {
           {/* ----------------------------------------------------------------- */}
           {/* Coluna 4: Atendimento & Agendamento no WhatsApp                   */}
           {/* ----------------------------------------------------------------- */}
+
           <div className="py-6 last:pb-0 md:py-0 md:col-span-1 lg:col-span-3">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
               Atendimento & Contato
@@ -143,6 +147,7 @@ export const Footer: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
         {/* Linha Inferior: Direitos Autorais e Localidade                    */}
         {/* ----------------------------------------------------------------- */}
+
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-secondary font-light text-center sm:text-left">
           <p>
             &copy; {new Date().getFullYear()} Angélica Eduarda Amaro Bruscagim. Todos os direitos
