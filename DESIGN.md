@@ -230,11 +230,10 @@ O sistema de movimento rejeita animações decorativas desprovidas de função o
 - **Estética:** O texto da resposta desliza de `-12px` para `0px` com ganho contínuo de opacidade, sem caixas internas ou molduras pesadas, priorizando a leitura arejada de editorial de revista.
 - **Indicadores:** O chevron gira 180° com amortecimento e a barra vertical de terracota na lateral esquerda se desenha de cima para baixo (`origin-top scale-y-100`).
 
-### 4. Resposta Magnética nos Botões de Ação (`useMagneticButton`)
+### 4. Resposta Tátil Uniforme nos Botões de Ação
 
-- **Alvos:** Botões primários de conversão (_Solicitar Agendamento_ no Hero, _Solicitar Agendamento_ no CTA final e _WhatsApp Flutuante_).
-- **Física:** Atração na direção do cursor com raio de deslocamento máximo de 8px a 10px e amortecimento `power2.out`. No `mouseleave`, o botão retorna ao repouso com amortecimento elástico `elastic.out(1, 0.4)`.
-- **Restrição de Hardware:** Ativado unicamente em dispositivos com cursor fino (`(hover: hover) and (pointer: fine)`). Em telas touch/mobile, os ouvintes de evento sequer são registrados, garantindo 0% de impacto na bateria e 60 FPS estáveis.
+- **Padrão de Interação:** Efeito de transição de cor refinada (`hover:bg-accent-hover`) e microcompressão tátil ao clique (`active:scale-[0.98]`), padronizado em todos os botões de conversão (Hero, Navbar, Procedimentos, CTA final e WhatsApp).
+- **Previsibilidade e Foco:** Deslocamentos laterais ou efeitos magnéticos artificiais foram eliminados após testes com usuários, garantindo estabilidade espacial, clareza funcional e ausência de ruído perceptual.
 
 ### 5. Spotlight Dinâmico & Border Sheen (`ServicesPricing`)
 
