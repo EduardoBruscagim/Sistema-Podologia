@@ -7,7 +7,7 @@ export const initBentoAnimation = (containerEl?: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     gsap.fromTo(
       '.bento-header',
-      { y: 16, autoAlpha: 0 },
+      { y: 16, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.bento-header',
@@ -15,16 +15,16 @@ export const initBentoAnimation = (containerEl?: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.55,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
 
     gsap.fromTo(
       '.bento-card',
-      { y: 22, autoAlpha: 0 },
+      { y: 22, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.bento-grid',
@@ -32,11 +32,11 @@ export const initBentoAnimation = (containerEl?: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.6,
         stagger: 0.1,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
   }, containerEl)

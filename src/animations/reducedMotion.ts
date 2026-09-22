@@ -25,7 +25,7 @@ export const applyReducedMotion = (
   ],
 ): void => {
   gsap.set(targets, {
-    autoAlpha: 1,
-    clearProps: 'transform,scale,opacity',
+    opacity: 1,
+    clearProps: 'transform,scale,opacity,visibility',
   })
 }
