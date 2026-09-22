@@ -38,6 +38,7 @@ export const TechnologySection: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Cabeçalho Editorial da Seção de Higiene                          */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="tech-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="tech-heading"
@@ -53,6 +54,7 @@ export const TechnologySection: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Bento Grid: Célula Principal de Autoclave + 2 Cards Secundários   */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="tech-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Célula Principal de Autoridade: Esterilização em Autoclave e 100% Descartáveis */}
         <div className="tech-featured col-span-1 md:col-span-2 lg:col-span-12 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent/40 transition-[border-color,background-color] duration-300 relative overflow-hidden flex flex-col lg:block">

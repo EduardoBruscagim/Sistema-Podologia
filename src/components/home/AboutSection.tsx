@@ -33,6 +33,7 @@ export const AboutSection: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
         {/* Lado Esquerdo: Cartão de Apresentação e Credenciais Humanas       */}
         {/* ----------------------------------------------------------------- */}
+
         <div className="about-reveal lg:col-span-5 flex flex-col items-center">
           <div className="w-full max-w-sm rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border p-7 sm:p-8 flex flex-col items-center text-center shadow-xs">
             {/* Emblema Editorial com Monograma */}
@@ -95,6 +96,7 @@ export const AboutSection: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
         {/* Lado Direito: História, Filosofia de Atendimento e Confiança      */}
         {/* ----------------------------------------------------------------- */}
+
         <div className="about-reveal lg:col-span-7 flex flex-col items-start text-left">
           <h2
             id="about-heading"

@@ -35,6 +35,7 @@ export const Hero: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
         {/* Lado Esquerdo: Proposta de Valor e Chamada de Ação Primária        */}
         {/* ----------------------------------------------------------------- */}
+
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           <h1
             id="hero-title"
@@ -61,6 +62,7 @@ export const Hero: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
         {/* Lado Direito: Imagem Principal de Atendimento e Card de Higiene   */}
         {/* ----------------------------------------------------------------- */}
+
         <div className="lg:col-span-5 gsap-hero-image relative">
           <div className="relative rounded-xl overflow-hidden border border-surface-border bg-surface-variant dark:bg-surface-variant">
             <img
