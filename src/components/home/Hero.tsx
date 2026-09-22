@@ -2,9 +2,25 @@ import React, { useRef } from 'react'
 import { initHeroAnimation } from '@/animations/hero'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
+/**
+ * Seção Principal de Apresentação (Hero Section).
+ *
+ * ### Decisões de Arquitetura e Performance:
+ * 1. **Otimização Extrema de LCP (Largest Contentful Paint):**
+ *    - A imagem principal (`/hero-clinical-bag.webp`) utiliza `loading="eager"`, `fetchPriority="high"`
+ *      e `decoding="sync"` para que o navegador priorize imediatamente seu download e renderização.
+ *    - Não há animação inicial de entrada com fade-in ou scale nesta seção para evitar qualquer
+ *      atraso na medição do LCP pelos Core Web Vitals.
+ * 2. **Scroll Parallax Dinâmico:**
+ *    - O hook `useSectionAnimation` aciona um parallax suave na rolagem via `initHeroAnimation`,
+ *      comportando-se de forma estática quando o usuário tiver `prefers-reduced-motion: reduce`.
+ * 3. **Hierarquia Semântica:**
+ *    - Contém o único `<h1>` da aplicação, marcando o propósito central do serviço.
+ */
 export const Hero: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null)
 
+  // Vincula a animação reativa de rolagem ao escopo da seção Hero
   useSectionAnimation(heroSectionRef, initHeroAnimation, ['.gsap-hero-image', '.gsap-hero-badge'])
 
   return (
@@ -15,7 +31,9 @@ export const Hero: React.FC = () => {
       aria-labelledby="hero-title"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        {/* Left: Headline & Actions */}
+        {/* ----------------------------------------------------------------- */}
+        {/* Lado Esquerdo: Proposta de Valor e Chamada de Ação Primária        */}
+        {/* ----------------------------------------------------------------- */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           <h1
             id="hero-title"
@@ -39,7 +57,9 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: Real Image Card & Supporting Clinical Setup */}
+        {/* ----------------------------------------------------------------- */}
+        {/* Lado Direito: Imagem Principal de Atendimento e Card de Higiene   */}
+        {/* ----------------------------------------------------------------- */}
         <div className="lg:col-span-5 gsap-hero-image relative">
           <div className="relative rounded-xl overflow-hidden border border-surface-border bg-surface-variant dark:bg-surface-variant">
             <img
@@ -54,7 +74,7 @@ export const Hero: React.FC = () => {
             />
           </div>
 
-          {/* Supporting Clinical Care Setup Preview Card */}
+          {/* Card Flutuante de Destaque: Envelopes Lacrados de Higiene */}
           <div className="gsap-hero-badge mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-surface-variant/95 backdrop-blur-md p-3 rounded-xl border border-surface-border max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
             <div className="relative w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-lg overflow-hidden border border-surface-border">
               <img

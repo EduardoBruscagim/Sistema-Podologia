@@ -1,5 +1,14 @@
 import gsap from 'gsap'
 
+/**
+ * Animação de revelação da seção de Chamada para Ação Final (CtaSection).
+ *
+ * Aplica elevação com fade no bloco de conversão final (`.cta-reveal`),
+ * ativada quando o elemento entra na zona de 85% da viewport.
+ *
+ * @param sectionEl - Elemento raiz da seção `<section>`.
+ * @returns Função de reversão do contexto GSAP.
+ */
 export const initCtaAnimation = (sectionEl?: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     gsap.fromTo(

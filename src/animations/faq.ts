@@ -1,5 +1,15 @@
 import gsap from 'gsap'
 
+/**
+ * Animação de entrada da seção de Perguntas Frequentes (FaqSection).
+ *
+ * Dispara uma revelação fluida do cabeçalho da seção e uma cascata rápida
+ * (`stagger: 0.06`) nos itens do acordeão, ativada uma única vez quando a lista
+ * entra no campo de visão (`start: 'top 85%'`).
+ *
+ * @param sectionEl - Elemento raiz da seção `<section id="faq">`.
+ * @returns Função de reversão do contexto GSAP para desmontagem segura.
+ */
 export const initFaqAnimation = (sectionEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     // Cabeçalho do FAQ

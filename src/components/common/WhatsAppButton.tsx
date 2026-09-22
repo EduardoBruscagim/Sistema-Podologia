@@ -1,6 +1,18 @@
 import React from 'react'
 import { getWhatsAppDoubtUrl } from '@/utils/whatsapp'
 
+/**
+ * Botão flutuante de acesso rápido ao WhatsApp.
+ *
+ * ### Características de UX e Acessibilidade:
+ * 1. **Semântica HTML5:** Envolvido em tag `<aside>` com `aria-label` descritivo,
+ *    permitindo que tecnologias assistivas o identifiquem como conteúdo complementar.
+ * 2. **Compatibilidade com Telas com Notch / Barra de Gestos:**
+ *    Usa `env(safe-area-inset-bottom)` e `env(safe-area-inset-right)` para nunca
+ *    colidir com a barra de navegação inferior do iPhone ou Android.
+ * 3. **Área de Toque Generosa:**
+ *    Dimensão mínima de 48x48px (`min-h-[48px] min-w-[48px]`) atendendo ao critério AAA da WCAG 2.2.
+ */
 export const WhatsAppButton: React.FC = () => {
   return (
     <aside
@@ -14,7 +26,7 @@ export const WhatsAppButton: React.FC = () => {
         aria-label="Dúvidas no WhatsApp - Falar com Angélica (abre em uma nova aba)"
         className="group flex items-center gap-2.5 bg-sage hover:bg-sage-hover text-on-sage border border-surface-border px-4 py-3 sm:px-5 sm:py-3.5 rounded-full shadow-md hover:shadow-lg shadow-primary/10 hover:shadow-primary/20 dark:shadow-black/40 transition-[transform,box-shadow,background-color] active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-surface min-h-[48px] min-w-[48px]"
       >
-        {/* Ícone oficial do WhatsApp */}
+        {/* Ícone oficial vetorial do WhatsApp */}
         <svg
           className="w-6 h-6 shrink-0 fill-current"
           viewBox="0 0 24 24"

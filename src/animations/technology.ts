@@ -1,6 +1,18 @@
 import gsap from 'gsap'
 import { initCardsHover } from './cardHover'
 
+/**
+ * Animação de entrada e microinterações de hover para a seção de Higiene e Equipamentos (TechnologySection).
+ *
+ * ### Estrutura de Animação:
+ * 1. Revelação suave do cabeçalho da seção (`.tech-header`).
+ * 2. Entrada do card de destaque de biossegurança e autoclave hospitalar (`.tech-featured`).
+ * 3. Entrada escalonada dos cards de tecnologia secundários (`.tech-card`).
+ * 4. Ativação de microinterações de hover exclusivamente nos cards secundários clicáveis/interativos.
+ *
+ * @param sectionEl - Elemento raiz da seção `<section id="tecnologia">`.
+ * @returns Função de cleanup para remoção de hovers e reversão do contexto GSAP.
+ */
 export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     // Cabeçalho da seção
@@ -39,7 +51,7 @@ export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) =>
       },
     )
 
-    // Cartões de tecnologia (Luz Vermelha / Luz Ultravioleta)
+    // Cartões de tecnologia (Luz Vermelha / Cabine UV)
     gsap.fromTo(
       '.tech-card',
       { y: 22, opacity: 0 },

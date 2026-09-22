@@ -1,22 +1,42 @@
 import gsap from 'gsap'
 
+/**
+ * Opções de customização da microinteração de hover em cards.
+ */
 interface CardHoverOptions {
+  /** Deslocamento vertical em pixels do card no hover (padrão: -5px). */
   y?: number
+  /** Duração da transição do tween em segundos (padrão: 0.3s). */
   duration?: number
+  /** Seletor CSS do elemento de ícone interno para animação síncrona. */
   iconSelector?: string
+  /** Deslocamento vertical adicional no ícone interno (padrão: -2px). */
   iconY?: number
+  /** Fator de escala aplicado exclusivamente ao ícone interno (padrão: 1.05). */
   iconScale?: number
 }
 
 /**
- * Ativa micro-interações de hover refinadas e fluidas em elementos de card.
- * Apenas ativa em ponteiros precisos (mouse/desktop) para evitar estados travados no touch.
+ * Ativa microinterações de hover refinadas e fluidas em elementos de card.
  *
- * Performance:
- * - Somente translateY no card: evita text reflow/blur causado por scale em container com texto
- * - Scale permitido apenas no icon (elemento pequeno sem texto)
- * - force3D: true ativado apenas durante o tween (GSAP promove/despromove a layer)
- * - overwrite: 'auto' cancela tweens conflitantes sem flicker
+ * ### Decisões Críticas de Performance e UX:
+ * 1. **Filtro de Ponteiro Fino (`pointer: fine`):**
+ *    Executa apenas em dispositivos desktop com mouse/trackpad. Não é ativado em telas de toque (touch),
+ *    evitando o clássico problema de "hover travado" após o tap no smartphone.
+ * 2. **Prevenção de Text Blurry / Reflow:**
+ *    Aplica exclusivamente `translateY` no card — **nunca `scale`** no container pai com texto,
+ *    pois `scale` em elementos com tipografia causa borrões subpixel e recalculação de layout nos motores Chromium/WebKit.
+ * 3. **Escala Segura em Ícones:**
+ *    O `scale` é restrito ao ícone gráfico interno (`iconEl`), onde não afeta a nitidez das fontes.
+ * 4. **Hardware Acceleration Sob Demanda:**
+ *    O GSAP gerencia a promoção de camada (`force3D: true`) durante a transição e despromove ao concluir.
+ * 5. **Ciclo de Vida Limpo:**
+ *    Retorna uma função de cleanup que remove todos os event listeners, cancela tweens ativos
+ *    e restaura as propriedades CSS para seus valores padrão.
+ *
+ * @param cards - Lista ou array de elementos DOM a receberem a microinteração.
+ * @param options - Parâmetros opcionais de animação e seletores internos.
+ * @returns Função de limpeza que desvincula listeners e remove tweens do GSAP.
  */
 export const initCardsHover = (
   cards: HTMLElement[] | NodeListOf<HTMLElement>,
@@ -24,7 +44,7 @@ export const initCardsHover = (
 ): (() => void) => {
   if (typeof window === 'undefined') return () => {}
 
-  // Não ativa hover em dispositivos touch sem ponteiro fino
+  // Não ativa hover em dispositivos touch sem ponteiro fino ou com preferência de movimento reduzido
   const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
