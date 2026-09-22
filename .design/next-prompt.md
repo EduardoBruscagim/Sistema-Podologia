@@ -6,6 +6,7 @@ layout: standard
 Construir a página completa de agendamento clínico em domicílio (`agendamento.html`) para a podóloga Angélica Eduarda em Mococa - SP. A página deve oferecer uma experiência guiada, serena, transparente e acessível (Quiet Luxury), permitindo ao cliente ou seu familiar selecionar o procedimento desejado, a data e o período preferencial (manhã ou tarde), preencher o endereço em Mococa (reafirmando Taxa de Deslocamento R$ 0 em qualquer bairro) e gerar uma mensagem estruturada com validação completa para envio direto ao WhatsApp da profissional.
 
 **DESIGN SYSTEM (REQUIRED):**
+
 - **Plataforma:** Web, Desktop-first, totalmente responsivo (mobile, tablet, desktop).
 - **Atmosfera & Estilo:** Quiet Luxury através de contenção, estética mineral quente e rigor clínico hospitalar acolhedor.
 - **Paleta Mineral de Cores:**
@@ -30,6 +31,7 @@ Construir a página completa de agendamento clínico em domicílio (`agendamento
   - Navegação por teclado total e indicação de etapa acessível via `aria-current="step"`.
 
 **Page Structure:**
+
 1. **Header & Navegação Global:**
    - Idêntico ao da página inicial (`Navbar`), com logotipo editorial, link ativo de navegação, alternador de tema e botão de retorno à Home.
 2. **Hero da Página de Agendamento:**
@@ -39,14 +41,14 @@ Construir a página completa de agendamento clínico em domicílio (`agendamento
 3. **Fluxo Interativo de Agendamento:**
    - **Passo 1 / Procedimento Clínico:**
      - Cards de seleção em radio buttons acessíveis para os 3 serviços tabelados:
-       - *Pé e Mão Completo* — R$ 75 (1h30) — Badge "Mais Procurado"
-       - *Cuidado dos Pés* — R$ 45 (1h00) — Podologia clínica e unhas encravadas
-       - *Cuidado das Mãos* — R$ 35 (40min) — Manicure com cabine LED UV
+       - _Pé e Mão Completo_ — R$ 75 (1h30) — Badge "Mais Procurado"
+       - _Cuidado dos Pés_ — R$ 45 (1h00) — Podologia clínica e unhas encravadas
+       - _Cuidado das Mãos_ — R$ 35 (40min) — Manicure com cabine LED UV
      - Opção adicional: Alerta de Urgência Podológica (para dor aguda ou unha inflamada).
    - **Passo 2 / Data & Período Preferencial:**
      - Seletor de data (bloqueando datas passadas) e botões de período:
-       - *Manhã:* 08:30 às 12:00
-       - *Tarde:* 13:30 às 18:00
+       - _Manhã:_ 08:30 às 12:00
+       - _Tarde:_ 13:30 às 18:00
      - Nota explicativa: confirmação do horário exato será ajustada com a Angélica para otimização do trajeto.
    - **Passo 3 / Endereço & Necessidades:**
      - Nome completo do cliente ou familiar responsável.
