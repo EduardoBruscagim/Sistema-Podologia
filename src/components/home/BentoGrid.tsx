@@ -35,6 +35,7 @@ export const BentoGrid: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Cabeçalho Editorial da Seção                                     */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="bento-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="bento-heading"
@@ -47,6 +48,7 @@ export const BentoGrid: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Grade Bento: Card Principal à Esquerda + 2 Cards Empilhados      */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="bento-grid grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Card 1 (Destaque Principal / Hero Card do Bento): Conforto do lar */}
         <div className="bento-card lg:col-span-7 p-7 sm:p-9 rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-between shadow-xs">

@@ -90,6 +90,7 @@ export const ServicesPricing: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Cabeçalho da Seção de Procedimentos                               */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="services-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="services-pricing-heading"
@@ -106,6 +107,7 @@ export const ServicesPricing: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Grade de Cards de Procedimentos (3 Colunas)                       */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="services-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-8">
         {SERVICES.map((service) => {
           const ServiceIcon = SERVICE_ICONS[service.icon]
@@ -223,6 +225,7 @@ export const ServicesPricing: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Chamada para Urgência / Dor de Unha Encravada                     */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="mb-6 p-5 sm:p-6 rounded-xl border border-accent/25 bg-accent/5 dark:bg-accent/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-start gap-3.5">
           <div className="w-9 h-9 rounded-lg bg-accent/15 text-accent flex items-center justify-center shrink-0 mt-0.5">
@@ -252,6 +255,7 @@ export const ServicesPricing: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* Reafirmação de Deslocamento e Materiais                          */}
       {/* ----------------------------------------------------------------- */}
+
       <div className="services-footer p-6 rounded-xl border border-surface-border bg-surface-variant/30 backdrop-blur-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-secondary font-light">
         <div className="flex items-center gap-2 text-center sm:text-left">
           <span className="text-sage font-medium" aria-hidden="true">
