@@ -27,7 +27,7 @@ export const TrustStats: React.FC = () => {
     <section
       ref={sectionRef}
       aria-labelledby="trust-stats-heading"
-      className="max-w-6xl mx-auto px-6 pt-4 pb-16 lg:pb-20"
+      className="max-w-6xl mx-auto px-6 pt-4 pb-12 lg:pb-16"
     >
       <h2 id="trust-stats-heading" className="sr-only">
         Estatísticas e Credenciais

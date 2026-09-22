@@ -20,13 +20,13 @@ export const CtaSection: React.FC = () => {
   return (
     <section
       ref={ctaSectionRef}
-      className="max-w-4xl mx-auto px-6 py-20 lg:py-28 text-center"
+      className="max-w-4xl mx-auto px-6 pt-16 pb-20 lg:pt-20 lg:pb-24 text-center"
       aria-labelledby="cta-heading"
     >
       <div className="cta-reveal flex flex-col items-center">
         <h2
           id="cta-heading"
-          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-5 max-w-[26ch] text-balance"
+          className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-5 max-w-[26ch] text-balance"
         >
           Agende seu atendimento em domicílio
         </h2>

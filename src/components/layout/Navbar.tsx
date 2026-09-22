@@ -232,7 +232,7 @@ export const Navbar: React.FC = () => {
               href="/"
               className="flex flex-col justify-center min-h-[44px] text-left py-1 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg select-none group min-w-0"
             >
-              <span className="font-serif text-sm sm:text-lg lg:text-xl font-medium tracking-[0.04em] sm:tracking-[0.10em] uppercase text-on-surface group-hover:text-accent transition-colors leading-none whitespace-nowrap truncate">
+              <span className="font-serif text-[13px] xs:text-sm sm:text-lg lg:text-xl font-medium tracking-[0.06em] sm:tracking-[0.10em] uppercase text-on-surface group-hover:text-accent transition-colors leading-none whitespace-nowrap">
                 Angélica Eduarda
               </span>
               <span className="font-sans text-[11px] sm:text-xs text-accent font-medium mt-1 whitespace-nowrap truncate">

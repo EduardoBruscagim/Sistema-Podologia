@@ -32,7 +32,7 @@ export const TechnologySection: React.FC = () => {
     <section
       ref={techSectionRef}
       aria-labelledby="tech-heading"
-      className="max-w-6xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
+      className="max-w-6xl mx-auto px-6 py-12 lg:py-16 scroll-mt-28"
       id="tecnologia"
     >
       {/* ----------------------------------------------------------------- */}
@@ -42,7 +42,7 @@ export const TechnologySection: React.FC = () => {
       <div className="tech-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="tech-heading"
-          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance"
+          className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-4 text-balance"
         >
           Higiene e equipamentos
         </h2>
@@ -62,7 +62,7 @@ export const TechnologySection: React.FC = () => {
           <div className="relative z-10 lg:max-w-[56%] xl:max-w-[54%] p-6 sm:p-8 lg:p-10 flex flex-col lg:justify-between lg:h-full">
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-4">
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20">
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20">
                   <ShieldCheck aria-hidden="true" className="w-3.5 h-3.5 shrink-0" />
                   Esterilização
                 </div>
@@ -164,7 +164,7 @@ export const TechnologySection: React.FC = () => {
           <div className="flex-1 p-6 sm:p-7 flex flex-col justify-center">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent">
+                <span className="text-[11px] font-semibold tracking-[0.16em] uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent">
                   Fototerapia
                 </span>
                 <div className="tech-icon w-8 h-8 rounded-lg bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent">
@@ -201,10 +201,10 @@ export const TechnologySection: React.FC = () => {
           <div className="flex-1 p-6 sm:p-7 flex flex-col justify-center">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-sage-subtle text-sage dark:bg-sage-subtle/20 dark:text-sage">
+                <span className="text-[11px] font-semibold tracking-[0.16em] uppercase px-2.5 py-1 rounded-md bg-sage-subtle text-sage">
                   Secagem
                 </span>
-                <div className="tech-icon w-8 h-8 rounded-lg bg-sage-subtle text-sage dark:bg-sage-subtle/20 dark:text-sage flex items-center justify-center">
+                <div className="tech-icon w-8 h-8 rounded-lg bg-sage-subtle text-sage flex items-center justify-center">
                   <Zap aria-hidden="true" className="w-4 h-4" />
                 </div>
               </div>

@@ -39,7 +39,7 @@ export const Hero: React.FC = () => {
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           <h1
             id="hero-title"
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-on-surface tracking-tight leading-[1.08] mb-6 text-balance"
+            className="font-serif text-[2.75rem] sm:text-5xl lg:text-[4rem] font-normal text-on-surface tracking-[-0.025em] leading-[1.08] mb-6 text-balance"
           >
             Podologia e manicure no <span className="italic font-light">conforto</span> da sua casa.
           </h1>
@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
             <a
               href="#procedimentos"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.14em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
             >
               Solicitar Agendamento
             </a>
@@ -91,7 +91,7 @@ export const Hero: React.FC = () => {
               />
             </div>
             <div className="flex flex-col justify-center min-w-0 pr-1">
-              <span className="text-[11px] font-semibold tracking-wider uppercase text-sage">
+              <span className="text-[11px] font-semibold tracking-[0.16em] uppercase text-sage">
                 Higiene
               </span>
               <p className="text-xs text-on-surface font-medium leading-snug truncate">
