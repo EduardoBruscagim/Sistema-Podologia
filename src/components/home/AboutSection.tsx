@@ -86,19 +86,20 @@ export const AboutSection: React.FC = () => {
 
           <div className="space-y-4 text-base text-on-surface-variant font-light leading-relaxed mb-8 max-w-[54ch] text-pretty">
             <p>
-              Sou <strong>Angélica Eduarda</strong>. Desde 2016 dedico minha vocação ao cuidado da
-              saúde dos pés e das mãos de famílias em Mococa. Entendo que abrir as portas da sua
-              residência requer confiança absoluta, pontualidade e discrição.
+              Sou <strong>Angélica Eduarda</strong> e, desde 2016, dedico minha vocação ao cuidado
+              com a saúde dos pés e das mãos, sei que receber um profissional em sua residência
+              exige confiança, pontualidade e discrição.
             </p>
             <p>
-              Meu atendimento foi desenhado para quem busca comodidade sem abrir mão do padrão
-              clínico hospitalar: levo todos os aparelhos, toalhas descartáveis e envelopes
-              cirúrgicos lacrados até a sua sala ou quarto.
+              Meu atendimento foi pensado para quem busca comodidade sem abrir mão de um padrão
+              clínico de qualidade, levo todos os aparelhos, toalhas descartáveis e envelopes
+              cirúrgicos lacrados até a sua sala ou quarto, proporcionando um atendimento completo,
+              seguro e confortável.
             </p>
             <p>
-              Tenho um carinho especial por atender idosos, pessoas com sensibilidade nos pés ou
-              restrições de mobilidade. Todo o procedimento — do corte correto ao desencravamento
-              preventivo — é realizado sem pressa e com a máxima paciência.
+              Tenho um carinho especial pelo atendimento de idosos, pessoas com sensibilidade nos
+              pés ou com restrições de mobilidade, todo o procedimento, desde o corte correto até o
+              desencravamento preventivo, é realizado sem pressa, com cuidado e com muita paciência.
             </p>
           </div>
 
