@@ -56,7 +56,7 @@ export const Hero: React.FC = () => {
               <img
                 alt="Kit profissional higienizado para atendimento domiciliar com toalhas e instrumentais esterilizados"
                 className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover transition-opacity duration-300"
-                src="/hero-clinical-bag.jpg"
+                src="/hero-clinical-bag.webp"
                 width={600}
                 height={460}
                 loading="eager"
@@ -69,19 +69,15 @@ export const Hero: React.FC = () => {
           {/* Supporting Clinical Care Setup Preview Card */}
           <div className="gsap-hero-badge mt-4 sm:mt-0 sm:absolute sm:-bottom-5 sm:-left-5 lg:-bottom-6 lg:-left-6 bg-surface/95 dark:bg-surface-variant/95 backdrop-blur-md p-3 rounded-xl border border-surface-border max-w-xs flex items-center gap-3.5 z-10 transition-transform duration-200">
             <div className="relative w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-lg overflow-hidden border border-surface-border">
-              <picture>
-                <source type="image/avif" srcSet="/clinical-care-setup-thumb.avif" />
-                <source type="image/webp" srcSet="/clinical-care-setup-thumb.webp" />
-                <img
-                  src="/clinical-care-setup-thumb.jpg"
-                  alt="Instrumentos cirúrgicos autoclavados e insumos descartáveis em envelope selado"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                  width={72}
-                  height={72}
-                />
-              </picture>
+              <img
+                src="/clinical-care-setup-thumb.webp"
+                alt="Instrumentos cirúrgicos autoclavados e insumos descartáveis em envelope selado"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width={72}
+                height={72}
+              />
             </div>
             <div className="flex flex-col justify-center min-w-0 pr-1">
               <span className="text-[11px] font-semibold tracking-wider uppercase text-sage">
