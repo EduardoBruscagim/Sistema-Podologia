@@ -63,8 +63,12 @@ export const TechnologySection: React.FC = () => {
             </div>
 
             {/* Indicadores de autoridade com ícones em círculo */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-surface-border">
-              <div className="flex items-center gap-3">
+            <ul
+              role="list"
+              aria-label="Garantias de esterilização e biossegurança"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-surface-border"
+            >
+              <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent shrink-0">
                   <Thermometer aria-hidden="true" className="w-4 h-4" />
                 </div>
@@ -74,9 +78,9 @@ export const TechnologySection: React.FC = () => {
                     Esterilização em alta temperatura
                   </span>
                 </div>
-              </div>
+              </li>
 
-              <div className="flex items-center gap-3">
+              <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent shrink-0">
                   <Shield aria-hidden="true" className="w-4 h-4" />
                 </div>
@@ -86,9 +90,9 @@ export const TechnologySection: React.FC = () => {
                     Abertos no início do atendimento
                   </span>
                 </div>
-              </div>
+              </li>
 
-              <div className="flex items-center gap-3">
+              <li className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent shrink-0">
                   <Trash2 aria-hidden="true" className="w-4 h-4" />
                 </div>
@@ -98,24 +102,21 @@ export const TechnologySection: React.FC = () => {
                     Lixas, toalhas e luvas de uso único
                   </span>
                 </div>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
 
           {/* Imagem sangrando (bleed total) à direita com gradiente de mistura perfeito */}
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-[54%] xl:w-[56%] w-full aspect-[16/10] sm:aspect-[21/9] lg:aspect-auto overflow-hidden">
-            <picture className="w-full h-full block">
-              <source type="image/webp" srcSet="/clinical-care-setup.webp" />
-              <img
-                src="/clinical-care-setup.webp"
-                alt="Mesa de atendimento clínico domiciliar com instrumentais esterilizados em envelope cirúrgico e descartáveis"
-                className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                loading="lazy"
-                decoding="async"
-                width={1200}
-                height={896}
-              />
-            </picture>
+            <img
+              src="/clinical-care-setup.webp"
+              alt="Mesa de atendimento clínico domiciliar com instrumentais esterilizados em envelope cirúrgico e descartáveis"
+              className="w-full h-full object-cover object-center"
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={896}
+            />
             {/* Gradiente de transição suave / mistura perfeita com tokens semânticos */}
             <div className="hidden lg:block absolute inset-y-0 left-0 w-44 xl:w-60 bg-gradient-to-r from-pure-white via-pure-white/80 to-transparent dark:from-surface-variant dark:via-surface-variant/80 dark:to-transparent pointer-events-none" />
             <div className="lg:hidden absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-pure-white via-pure-white/80 to-transparent dark:from-surface-variant dark:via-surface-variant/80 dark:to-transparent pointer-events-none" />
@@ -125,19 +126,16 @@ export const TechnologySection: React.FC = () => {
         {/* Card Secundário 1: Fototerapia LED */}
         <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent/40 transition-[border-color,background-color] duration-300 overflow-hidden flex flex-col sm:flex-row group">
           <div className="w-full sm:w-[42%] aspect-[16/10] sm:aspect-auto shrink-0 relative overflow-hidden bg-surface-variant/30">
-            <picture className="w-full h-full block">
-              <source type="image/webp" srcSet="/tech-fototerapia.webp" />
-              <img
-                src="/tech-fototerapia.webp"
-                alt="Aparelho de fototerapia LED de luz vermelha para podologia"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-                decoding="async"
-                width={600}
-                height={600}
-              />
-            </picture>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none sm:hidden" />
+            <img
+              src="/tech-fototerapia.webp"
+              alt="Aparelho de fototerapia LED de luz vermelha para podologia"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              width={600}
+              height={600}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none sm:hidden" />
           </div>
 
           <div className="flex-1 p-6 sm:p-7 flex flex-col justify-center">
@@ -165,19 +163,16 @@ export const TechnologySection: React.FC = () => {
         {/* Card Secundário 2: Cabine UV Portátil */}
         <div className="tech-card col-span-1 md:col-span-1 lg:col-span-6 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent/40 transition-[border-color,background-color] duration-300 overflow-hidden flex flex-col sm:flex-row group">
           <div className="w-full sm:w-[42%] aspect-[16/10] sm:aspect-auto shrink-0 relative overflow-hidden bg-surface-variant/30">
-            <picture className="w-full h-full block">
-              <source type="image/webp" srcSet="/tech-cabine-uv.webp" />
-              <img
-                src="/tech-cabine-uv.webp"
-                alt="Cabine LED UV portátil para secagem rápida de esmalte"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-                decoding="async"
-                width={600}
-                height={600}
-              />
-            </picture>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none sm:hidden" />
+            <img
+              src="/tech-cabine-uv.webp"
+              alt="Cabine LED UV portátil para secagem rápida de esmalte"
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              width={600}
+              height={600}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none sm:hidden" />
           </div>
 
           <div className="flex-1 p-6 sm:p-7 flex flex-col justify-center">

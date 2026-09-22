@@ -6,7 +6,7 @@ export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
     // Cabeçalho da seção
     gsap.fromTo(
       '.services-header',
-      { y: 16, autoAlpha: 0 },
+      { y: 16, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.services-header',
@@ -14,17 +14,17 @@ export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.55,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
 
     // Cascata dos 3 cards de procedimentos (sem scale para manter fontes perfeitamente nítidas)
     gsap.fromTo(
       '.service-card',
-      { y: 24, autoAlpha: 0 },
+      { y: 24, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.services-grid',
@@ -32,18 +32,18 @@ export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.6,
         stagger: 0.1,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
 
     // Faixa informativa inferior (Mococa / PIX)
     gsap.fromTo(
       '.services-footer',
-      { y: 14, autoAlpha: 0 },
+      { y: 14, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.services-grid',
@@ -51,10 +51,10 @@ export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.5,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
   }, sectionEl)

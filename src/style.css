@@ -19,7 +19,7 @@
   --color-surface: #faf8f5;
   --color-surface-variant: #f2eee8;
   --color-on-surface: #181615;
-  --color-on-surface-variant: #595550;
+  --color-on-surface-variant: #514d48;
   --color-text-secondary: #514d48;
   --color-pure-white: #ffffff;
   --color-surface-border: rgba(24, 22, 21, 0.08);
@@ -29,6 +29,7 @@
   --color-sage: #3b5346;
   --color-sage-hover: #2c4035;
   --color-sage-subtle: #eaf0ec;
+  --color-on-sage: #ffffff;
   --color-whatsapp: #25d366;
   --color-whatsapp-hover: #1eb857;
 
@@ -67,10 +68,15 @@
   --color-surface: #faf8f5;
   --color-surface-variant: #f2eee8;
   --color-on-surface: #181615;
-  --color-on-surface-variant: #595550;
+  --color-on-surface-variant: #514d48;
   --color-text-secondary: #514d48;
+  --color-pure-white: #ffffff;
   --color-surface-border: rgba(24, 22, 21, 0.08);
   --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
+  --color-sage: #3b5346;
+  --color-sage-hover: #2c4035;
+  --color-sage-subtle: #eaf0ec;
+  --color-on-sage: #ffffff;
   --radius-card: 0.75rem;
   --radius-pill: 9999px;
   --radius-badge: 0.25rem;
@@ -90,11 +96,13 @@
   --color-on-surface: #faf8f5;
   --color-on-surface-variant: #b5afa6;
   --color-text-secondary: #a39c92;
+  --color-pure-white: #1a1816;
   --color-surface-border: rgba(250, 248, 245, 0.08);
   --color-surface-border-subtle: rgba(250, 248, 245, 0.04);
   --color-sage: #7ea08e;
   --color-sage-hover: #9ab9a8;
   --color-sage-subtle: #19261f;
+  --color-on-sage: #11100f;
 }
 
 @layer base {
@@ -112,6 +120,7 @@
   html {
     scrollbar-gutter: stable;
     scroll-padding-top: 6rem;
+    scroll-padding-bottom: 6rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -121,6 +130,36 @@
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    :root,
+    [data-theme='light'] {
+      --color-surface-border: rgba(24, 22, 21, 0.25);
+      --color-surface-border-subtle: rgba(24, 22, 21, 0.15);
+      --color-text-secondary: #2d2927;
+      --color-on-surface-variant: #2d2927;
+    }
+
+    :where(.dark, .dark *),
+    [data-theme='dark'] {
+      --color-surface-border: rgba(250, 248, 245, 0.3);
+      --color-surface-border-subtle: rgba(250, 248, 245, 0.2);
+      --color-text-secondary: #dcd7cf;
+      --color-on-surface-variant: #dcd7cf;
+    }
+
+    button,
+    a {
+      outline-color: currentColor;
+    }
+  }
+
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline: 2px solid Highlight !important;
+      outline-offset: 2px !important;
     }
   }
 
@@ -139,7 +178,23 @@
   .js:not(.gsap-loaded) .faq-item,
   .js:not(.gsap-loaded) .cta-reveal {
     opacity: 0;
-    visibility: hidden;
+  }
+
+  /* Garante acessibilidade total por teclado e leitor de tela: qualquer elemento com foco interno torna-se 100% visível */
+  .stat-reveal:focus-within,
+  .bento-header:focus-within,
+  .bento-card:focus-within,
+  .about-reveal:focus-within,
+  .services-header:focus-within,
+  .service-card:focus-within,
+  .services-footer:focus-within,
+  .tech-header:focus-within,
+  .tech-featured:focus-within,
+  .tech-card:focus-within,
+  .faq-header:focus-within,
+  .faq-item:focus-within,
+  .cta-reveal:focus-within {
+    opacity: 1 !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -297,46 +352,6 @@
   .dark ::-webkit-scrollbar-thumb:hover {
     background: rgba(250, 248, 245, 0.35);
   }
-
-  /* Modal nativo sem bordas pesadas */
-  dialog.modal {
-    position: fixed;
-    inset: 0;
-    margin: auto;
-    max-width: none;
-    max-height: none;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    display: grid;
-    place-items: center;
-    border: 0;
-    padding: 1rem;
-    z-index: 999;
-  }
-
-  dialog.modal:not([open]) {
-    display: none;
-  }
-
-  dialog.modal::backdrop {
-    background-color: rgba(24, 22, 21, 0.5);
-    backdrop-filter: blur(4px);
-  }
-
-  dialog.modal .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: transparent;
-  }
-
-  dialog.modal .modal-backdrop button {
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-  }
 }
 
 @keyframes border-sheen {
@@ -357,11 +372,16 @@
 }
 
 .animate-border-sheen {
-  animation: border-sheen 4.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation: border-sheen 3s cubic-bezier(0.16, 1, 0.3, 1) 2;
+}
+
+.group:hover .animate-border-sheen {
+  animation: border-sheen 2.5s cubic-bezier(0.16, 1, 0.3, 1) 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-border-sheen {
+  .animate-border-sheen,
+  .group:hover .animate-border-sheen {
     animation: none !important;
   }
 }

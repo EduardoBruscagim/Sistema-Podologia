@@ -14,10 +14,9 @@ import { WhatsAppButton } from '@/components/common/WhatsAppButton'
 export const HomePage: React.FC = () => {
   return (
     <div id="app" className="flex-1 flex flex-col">
-      {/* Link de salto acessível para navegação por teclado */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[110] px-5 py-2.5 bg-primary text-on-primary font-semibold rounded-full shadow-lg focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-60 focus:px-4 focus:py-2.5 focus:bg-accent focus:text-on-accent focus:text-xs focus:uppercase focus:tracking-[0.14em] focus:font-medium focus:rounded-full focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface shadow-md transition-all"
       >
         Pular para o conteúdo principal
       </a>

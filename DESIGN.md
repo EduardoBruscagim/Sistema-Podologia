@@ -12,15 +12,17 @@ colors:
   pure-white: '#ffffff'
   on-surface: '#181615'
   on-surface-dark: '#faf8f5'
-  on-surface-variant: '#595550'
+  on-surface-variant: '#514d48'
   on-surface-variant-dark: '#b5afa6'
-  text-secondary: '#635e59'
-  text-secondary-dark: '#8c857b'
+  text-secondary: '#514d48'
+  text-secondary-dark: '#a39c92'
   sage: '#3b5346'
   sage-hover: '#2c4035'
   sage-dark: '#7ea08e'
   sage-subtle: '#eaf0ec'
   sage-subtle-dark: '#19261f'
+  on-sage: '#ffffff'
+  on-sage-dark: '#11100f'
   accent: '#9b4124'
   accent-hover: '#82351c'
   accent-dark: '#e08264'
@@ -175,6 +177,7 @@ A paleta mineral é inspirada em matérias-primas nobres, assepsia cirúrgica e 
 
 - **Botanical Sage** (`#3B5346` / Dark `#7EA08E`): Acento sutil e natural que conecta os cuidados corporais e a podologia à saúde preventiva, transmitindo acolhimento e bem-estar.
 - **Sage Subtle** (`#EAF0EC` / Dark `#19261F`): Fundo suave para detalhes de biossegurança e chips informativos.
+- **Regra de Pareamento Botânico (`text-on-sage`)**: Qualquer elemento sobre `bg-sage` deve utilizar obrigatoriamente `text-on-sage` (`#FFFFFF` no modo claro, `#11100F` no modo escuro).
 
 ### Functional Accent: Rich Warm Terracotta
 
@@ -185,7 +188,7 @@ A paleta mineral é inspirada em matérias-primas nobres, assepsia cirúrgica e 
 ### Neutrals & Borders
 
 - **Text Primary** (`#181615` / Dark `#FAF8F5`): Legibilidade máxima para leitura editorial.
-- **Text Secondary / Muted Slate** (`#635E59` / Dark `#A39C92`): Contraste mínimo de 7:1 em relação ao fundo, atendendo ao nível AAA da WCAG.
+- **Text Secondary / Muted Slate** (`#514d48` / Dark `#A39C92`): Contraste mínimo de 7.5:1 em relação ao fundo, atendendo com folga ao nível AAA da WCAG.
 - **Hairline Border** (`rgba(24, 22, 21, 0.08)` / Dark `rgba(250, 248, 245, 0.08)`): Delimitação sutil e refinada inspirada em papelaria editorial de luxo.
 - **Superfície Editorial (`bg-pure-white`)**: Cartões destacados e blocos de conteúdo utilizam `--color-pure-white: #ffffff` em modo claro e `--color-surface-variant: #1a1816` em modo escuro, mantendo integridade e desacoplamento do Tailwind base.
 

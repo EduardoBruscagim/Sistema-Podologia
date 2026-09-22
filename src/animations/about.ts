@@ -6,7 +6,7 @@ export const initAboutAnimation = (containerEl?: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     gsap.fromTo(
       '.about-reveal',
-      { y: 20, autoAlpha: 0 },
+      { y: 20, opacity: 0 },
       {
         scrollTrigger: {
           trigger: containerEl,
@@ -14,11 +14,11 @@ export const initAboutAnimation = (containerEl?: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.6,
         stagger: 0.12,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
   }, containerEl)

@@ -7,18 +7,57 @@ import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react'
 export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [themeStatusMessage, setThemeStatusMessage] = useState('')
   const headerRef = useRef<HTMLElement | null>(null)
   const mobileToggleRef = useRef<HTMLButtonElement | null>(null)
   const mobileMenuRef = useRef<HTMLDivElement | null>(null)
   const prevOpenRef = useRef(false)
 
-  // Trava a rolagem da página quando o menu mobile estiver aberto
+  const handleToggleTheme = () => {
+    toggleTheme()
+    setThemeStatusMessage(isDark ? 'Modo claro ativado' : 'Modo escuro ativado')
+  }
+
+  // Trava a rolagem e isola o conteúdo de fundo com inert quando o menu mobile estiver aberto
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
+    const mainEl = document.getElementById('main-content')
+    const footerEl = document.querySelector('footer')
+    const asideEl = document.querySelector('aside')
+
+    if (isMobileMenuOpen) {
+      mainEl?.setAttribute('inert', '')
+      footerEl?.setAttribute('inert', '')
+      asideEl?.setAttribute('inert', '')
+    } else {
+      mainEl?.removeAttribute('inert')
+      footerEl?.removeAttribute('inert')
+      asideEl?.removeAttribute('inert')
+    }
+
     return () => {
       document.body.style.overflow = ''
+      mainEl?.removeAttribute('inert')
+      footerEl?.removeAttribute('inert')
+      asideEl?.removeAttribute('inert')
     }
   }, [isMobileMenuOpen])
+
+  // Fecha o menu mobile e libera a rolagem se a tela for redimensionada para desktop (>= 1024px)
+  useEffect(() => {
+    try {
+      const mql = window.matchMedia('(min-width: 1024px)')
+      const handleResize = (e: MediaQueryListEvent) => {
+        if (e.matches) {
+          setIsMobileMenuOpen(false)
+        }
+      }
+      mql.addEventListener('change', handleResize)
+      return () => mql.removeEventListener('change', handleResize)
+    } catch {
+      // MatchMedia indisponível
+    }
+  }, [])
 
   // Gerenciamento de foco: move foco para o primeiro link ao abrir e restaura para o botão ao fechar
   useEffect(() => {
@@ -107,7 +146,7 @@ export const Navbar: React.FC = () => {
       {/* Backdrop Mobile para fechar ao clicar fora */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/40 lg:hidden pointer-events-auto z-40 transition-opacity duration-200"
+          className="fixed inset-0 bg-primary/40 lg:hidden pointer-events-auto z-40 transition-opacity duration-200"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-hidden="true"
         />
@@ -193,7 +232,8 @@ export const Navbar: React.FC = () => {
             {/* Alternador de Tema */}
             <button
               aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-              onClick={toggleTheme}
+              aria-pressed={isDark}
+              onClick={handleToggleTheme}
               className="min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
               type="button"
             >
@@ -204,11 +244,16 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
+            {/* Região ao vivo para anúncio de status do tema para leitores de tela */}
+            <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+              {themeStatusMessage}
+            </div>
+
             {/* CTA Primário: Oculto em < 360px para evitar colisão na barra superior */}
             <a
               href="#procedimentos"
               aria-label="Agendar Horário - Ver procedimentos e horários"
-              className="hidden xs:inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer whitespace-nowrap shrink-0"
+              className="hidden xs:inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer whitespace-nowrap shrink-0"
             >
               <span className="sm:hidden">Agendar</span>
               <span className="hidden sm:inline">Agendar Horário</span>
@@ -217,67 +262,68 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Menu Mobile/Tablet Dropdown com focus trap, backdrop e navegação semântica */}
-        {isMobileMenuOpen && (
-          <nav
-            ref={mobileMenuRef}
-            id="mobile-menu"
-            aria-label="Menu móvel"
-            className="absolute top-full left-0 right-0 p-4 bg-surface border-b border-surface-border shadow-lg flex flex-col gap-2 lg:hidden z-50"
+        <nav
+          ref={mobileMenuRef}
+          id="mobile-menu"
+          aria-label="Menu móvel"
+          hidden={!isMobileMenuOpen}
+          className={`absolute top-full left-0 right-0 p-4 bg-surface border-b border-surface-border shadow-lg flex flex-col gap-2 lg:hidden z-50 transition-all duration-200 ${
+            isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+          }`}
+        >
+          <a
+            href="#sobre"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <a
-              href="#sobre"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              Sobre a Profissional
-            </a>
+            Sobre a Profissional
+          </a>
+          <a
+            href="#procedimentos"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            Procedimentos
+          </a>
+          <a
+            href="#tecnologia"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            Higiene & Equipamentos
+          </a>
+          <a
+            href="#faq"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            Dúvidas Frequentes
+          </a>
+
+          {/* Link direto de dúvidas no WhatsApp */}
+          <a
+            href={getWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-accent hover:bg-surface-variant transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            <span>Dúvidas no WhatsApp</span>
+            <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
+          </a>
+
+          {/* Separador e Ação de Agendamento Mobile */}
+          <div className="pt-3 border-t border-surface-border flex flex-col gap-2.5">
             <a
               href="#procedimentos"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+              className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
             >
-              Procedimentos
+              Agendar Horário
             </a>
-            <a
-              href="#tecnologia"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              Higiene & Equipamentos
-            </a>
-            <a
-              href="#faq"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              Dúvidas Frequentes
-            </a>
-
-            {/* Link direto de dúvidas no WhatsApp */}
-            <a
-              href={getWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Tirar dúvidas no WhatsApp (abre em uma nova aba)"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-accent hover:bg-surface-variant transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              <span>Dúvidas no WhatsApp</span>
-              <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
-            </a>
-
-            {/* Separador e Ação de Agendamento Mobile */}
-            <div className="pt-3 border-t border-surface-border flex flex-col gap-2.5">
-              <a
-                href="#procedimentos"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
-              >
-                Agendar Horário
-              </a>
-            </div>
-          </nav>
-        )}
+          </div>
+        </nav>
       </header>
     </div>
   )

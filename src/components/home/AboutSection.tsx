@@ -45,33 +45,35 @@ export const AboutSection: React.FC = () => {
                   <circle cx="43" cy="20" r="3" className="fill-accent" />
                 </svg>
               </div>
-              <div className="absolute -bottom-2 -right-1 px-3 py-1 rounded-full bg-sage text-white text-[11px] uppercase font-semibold tracking-wider shadow-xs">
+              <div className="absolute -bottom-2 -right-1 px-3 py-1 rounded-full bg-sage text-on-sage text-[11px] uppercase font-semibold tracking-wider shadow-xs">
                 Mococa · SP
               </div>
             </div>
 
-            <h3 className="font-serif text-2xl font-normal text-on-surface mb-1">
-              Angélica Eduarda
-            </h3>
+            <p className="font-serif text-2xl font-normal text-on-surface mb-1">Angélica Eduarda</p>
             <span className="font-sans text-xs uppercase tracking-[0.16em] text-accent font-medium mb-4">
               Podologia & Manicure em Domicílio
             </span>
 
             {/* Credenciais em pílulas discretas */}
-            <div className="w-full flex flex-col gap-2 pt-4 border-t border-surface-border text-left">
-              <div className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
+            <ul
+              role="list"
+              aria-label="Credenciais profissionais"
+              className="w-full flex flex-col gap-2 pt-4 border-t border-surface-border text-left"
+            >
+              <li className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
                 <Calendar aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
                 <span>Atuação profissional em Mococa desde 2016</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
+              </li>
+              <li className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
                 <ShieldCheck aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
                 <span>Instrumentos cirúrgicos esterilizados em autoclave</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
+              </li>
+              <li className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
                 <Heart aria-hidden="true" className="w-4 h-4 text-accent shrink-0" />
                 <span>Atenção e carinho especial para idosos e acamados</span>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -104,24 +106,28 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Destaques Práticos */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full mb-8">
-            <div className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
+          <ul
+            role="list"
+            aria-label="Diferenciais do atendimento"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full mb-8"
+          >
+            <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
               <span>Sem taxa de visita em toda Mococa</span>
-            </div>
-            <div className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
+            </li>
+            <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
               <span>Horário individual reservado</span>
-            </div>
-            <div className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
+            </li>
+            <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
               <span>Materiais abertos na sua frente</span>
-            </div>
-            <div className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
+            </li>
+            <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
               <span>Pagamento no final por PIX ou dinheiro</span>
-            </div>
-          </div>
+            </li>
+          </ul>
 
           {/* Ação Direta de Contato Humanizado */}
           <a
@@ -130,8 +136,8 @@ export const AboutSection: React.FC = () => {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Conversar com Angélica Eduarda no WhatsApp (abre em nova aba)"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[44px] cursor-pointer"
+            aria-label="Falar com a Angélica no WhatsApp (abre em uma nova aba)"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface min-h-[44px] cursor-pointer"
           >
             <span>Falar com a Angélica</span>
             <ArrowUpRight aria-hidden="true" className="w-4 h-4" />

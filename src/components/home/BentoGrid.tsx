@@ -48,16 +48,19 @@ export const BentoGrid: React.FC = () => {
               de uma cadeira ou poltrona confortável e uma tomada comum por perto.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 pt-6 border-t border-surface-border">
-              <div className="flex items-center gap-2 text-xs text-text-secondary font-light">
+            <ul
+              role="list"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 pt-6 border-t border-surface-border"
+            >
+              <li className="flex items-center gap-2 text-xs text-text-secondary font-light">
                 <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
                 <span>Sem trânsito ou filas de salão</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-text-secondary font-light">
+              </li>
+              <li className="flex items-center gap-2 text-xs text-text-secondary font-light">
                 <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
                 <span>Insumos 100% esterilizados</span>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
 

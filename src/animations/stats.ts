@@ -10,7 +10,7 @@ export const initStatsAnimation = (containerEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     gsap.fromTo(
       '.stat-reveal',
-      { y: 12, autoAlpha: 0 },
+      { y: 12, opacity: 0 },
       {
         scrollTrigger: {
           trigger: containerEl,
@@ -18,11 +18,11 @@ export const initStatsAnimation = (containerEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.55,
         stagger: 0.08,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
 

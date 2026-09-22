@@ -8,6 +8,7 @@ import gsap from 'gsap'
 export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => {
   if (!heroSectionEl) return () => {}
 
+  const mm = gsap.matchMedia()
   const ctx = gsap.context(() => {
     // Parallax suave na imagem da maleta a partir do primeiro scroll
     gsap.to('.gsap-hero-image', {
@@ -22,7 +23,6 @@ export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => 
     })
 
     // Parallax oposto pronunciado no badge flutuante de higiene (telas >= 640px)
-    const mm = gsap.matchMedia()
     mm.add('(min-width: 640px)', () => {
       gsap.to('.gsap-hero-badge', {
         scrollTrigger: {
@@ -38,6 +38,7 @@ export const initHeroAnimation = (heroSectionEl?: HTMLElement): (() => void) => 
   }, heroSectionEl)
 
   return () => {
+    mm.revert()
     ctx.revert()
   }
 }
