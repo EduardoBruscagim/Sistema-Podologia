@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Sun, Zap, ShieldCheck, Shield, Check, Thermometer, Trash2 } from 'lucide-react'
+import { Sun, Zap, ShieldCheck, Shield, Thermometer, Trash2 } from 'lucide-react'
 import { initTechnologyAnimation } from '@/animations/technology'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
@@ -142,7 +142,7 @@ export const TechnologySection: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none sm:hidden" />
           </div>
 
-          <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between">
+          <div className="flex-1 p-6 sm:p-7 flex flex-col justify-center">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-accent/10 dark:bg-accent/20 text-accent">
@@ -160,13 +160,6 @@ export const TechnologySection: React.FC = () => {
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
                 Auxilia na cicatrização e no alívio de desconfortos nas unhas.
               </p>
-            </div>
-
-            <div className="mt-6 pt-3.5 border-t border-surface-border flex items-center gap-2.5 text-xs text-text-secondary font-light">
-              <div className="w-5 h-5 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent shrink-0">
-                <Check aria-hidden="true" className="w-3 h-3" />
-              </div>
-              <span>Auxilia na cicatrização de cantos de unhas</span>
             </div>
           </div>
         </div>
@@ -190,7 +183,7 @@ export const TechnologySection: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none sm:hidden" />
           </div>
 
-          <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between">
+          <div className="flex-1 p-6 sm:p-7 flex flex-col justify-center">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md bg-sage-subtle text-sage dark:bg-sage-subtle/20 dark:text-sage">
@@ -208,13 +201,6 @@ export const TechnologySection: React.FC = () => {
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
                 Seca o esmalte rapidamente para você poder calçar sapatos ou chinelos sem borrar.
               </p>
-            </div>
-
-            <div className="mt-6 pt-3.5 border-t border-surface-border flex items-center gap-2.5 text-xs text-text-secondary font-light">
-              <div className="w-5 h-5 rounded-full bg-sage-subtle text-sage dark:bg-sage-subtle/20 dark:text-sage flex items-center justify-center shrink-0">
-                <Check aria-hidden="true" className="w-3 h-3" />
-              </div>
-              <span>Secagem rápida do esmalte</span>
             </div>
           </div>
         </div>

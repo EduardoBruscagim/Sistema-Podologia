@@ -72,12 +72,6 @@ export const AboutSection: React.FC = () => {
                 <span>Atenção e carinho especial para idosos e acamados</span>
               </div>
             </div>
-
-            {/* Citação Direta de Angélica */}
-            <blockquote className="mt-6 pt-5 border-t border-surface-border text-xs text-text-secondary italic font-light leading-relaxed">
-              &ldquo;Cuidar da saúde dos seus pés deve ser um alívio leve e acolhedor, no aconchego
-              e na segurança da sua casa.&rdquo;
-            </blockquote>
           </div>
         </div>
 

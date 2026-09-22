@@ -29,7 +29,7 @@ Cuidado especializado e higiênico para pés e mãos no conforto da sua residên
 
 - **Fase 1 (Entregue — Landing de Alta Conversão, CRO, Performance & Acessibilidade):**
   - Landing page institucional moderna e elegante com Bento Grid de diferenciais, apresentação de serviços e FAQ desdobrável com tipografia arejada.
-  - Pacote de microinterações e animações editoriais de alto padrão a 60 FPS: odômetro numérico de credibilidade (+25.000), parallax óptico em 2 planos no Hero, botões magnéticos no desktop e spotlight dinâmico nos procedimentos.
+  - Pacote de microinterações e animações editoriais de alto padrão a 60 FPS: odômetro numérico de credibilidade (+25.000), parallax óptico em 2 planos no Hero, resposta tátil uniforme em botões e spotlight dinâmico nos procedimentos.
   - Pré-renderização estática (SSG) de alta velocidade com inlining automático de CSS crítico em `dist/index.html`, eliminando bloqueios de renderização no mobile.
   - Arquitetura Anti-FOUC definitiva via classes síncronas no `<head>` e sincronização com `requestAnimationFrame`, eliminando saltos ou piscadas visuais.
   - Tabela transparente com os 3 principais serviços prestados: _Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_.
@@ -46,7 +46,7 @@ Cuidado especializado e higiênico para pés e mãos no conforto da sua residên
 
 - Código-fonte funcional em React 19 + Vite focado na experiência de alta performance, ausência de jank e acessibilidade da página principal (Home).
 - Sistema de design documentado em `DESIGN.md` com tokens semânticos, paleta mineral e tokens de movimento refinados.
-- Animações GSAP modulares em `src/animations/` e hook `useMagneticButton` integrados ao ciclo de vida de componentes via `@gsap/react`.
+- Animações GSAP modulares em `src/animations/` e orquestração limpa com `@gsap/react`.
 - Script de pré-renderização estática SSG (`scripts/prerender.mjs`) integrado ao pipeline de build.
 
 ## Product Principles

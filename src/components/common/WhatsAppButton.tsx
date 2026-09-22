@@ -1,18 +1,13 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { getWhatsAppDoubtUrl } from '@/utils/whatsapp'
-import { useMagneticButton } from '@/hooks/useMagneticButton'
 
 export const WhatsAppButton: React.FC = () => {
-  const btnRef = useRef<HTMLAnchorElement | null>(null)
-  useMagneticButton(btnRef, { maxDisplacement: 10, strength: 0.25 })
-
   return (
     <aside
       aria-label="Canal para tirar dúvidas ou agendar pelo WhatsApp"
       className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-40"
     >
       <a
-        ref={btnRef}
         href={getWhatsAppDoubtUrl()}
         target="_blank"
         rel="noopener noreferrer"

@@ -53,7 +53,7 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 | **Build & Dev Tool**                   | [Vite](https://vite.dev/) 8.3+ com `@tailwindcss/vite` e `@vitejs/plugin-react`                                                                                    |
 | **Estilização**                        | [Tailwind CSS v4](https://tailwindcss.com/) com tokens semânticos e paleta mineral                                                                                 |
 | **Tipografia**                         | [Newsreader Variable](https://fontsource.org/fonts/newsreader) e [Outfit Variable](https://fontsource.org/fonts/outfit) (`@fontsource-variable/*` auto-hospedadas) |
-| **Animações & Motion**                 | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger + `@gsap/react` com microinterações magnéticas                                                               |
+| **Animações & Motion**                 | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger + `@gsap/react` com microinterações refinadas                                                                |
 | **Ícones & Acessibilidade**            | [Lucide React](https://lucide.dev/) (SVGs acessíveis com `aria-hidden`)                                                                                            |
 | **Qualidade & Padronização**           | ESLint 10 (`typescript-eslint`), Prettier 3                                                                                                                        |
 | **Pré-renderização (SSG)**             | Script customizado `scripts/prerender.mjs` com React Server DOM e inlining de CSS crítico                                                                          |
@@ -80,12 +80,12 @@ A organização de diretórios reflete a separação modular de componentes, ani
 │   │   ├── stats.ts        # Odômetro numérico (+25.000) e métricas de confiança
 │   │   └── technology.ts   # Revelação dos diferenciais tecnológicos e autoclave
 │   ├── components/         # Componentes modulares React
-│   │   ├── common/         # Componentes compartilhados (WhatsAppButton com física magnética)
+│   │   ├── common/         # Componentes compartilhados (WhatsAppButton, BrandIntro)
 │   │   ├── home/           # Seções da Home (Hero, TrustStats, BentoGrid, AboutSection, ServicesPricing, TechnologySection, FaqSection, CtaSection)
 │   │   └── layout/         # Componentes estruturais (Navbar, Footer)
 │   ├── context/            # Provedores de contexto React (ThemeContext)
 │   ├── data/               # Modelos e dados estáticos (services.ts)
-│   ├── hooks/              # Hooks customizados isolados (useTheme, useMagneticButton, useSectionAnimation)
+│   ├── hooks/              # Hooks customizados isolados (useTheme, useSectionAnimation)
 │   ├── pages/              # Páginas da aplicação (HomePage)
 │   ├── types/              # Definições de interfaces e tipos TypeScript (theme.ts)
 │   ├── utils/              # Helpers e utilitários puros (theme.ts, whatsapp.ts)
