@@ -17,6 +17,7 @@ import { useSectionAnimation } from '@/hooks/useSectionAnimation'
  *    - **Fototerapia LED de Luz Vermelha:** Aparelho portátil que acelera a cicatrização e acalma inflamações.
  *    - **Cabine LED UV Portátil:** Secagem ultrarrápida de esmalte para conveniência domiciliar imediata.
  */
+
 export const TechnologySection: React.FC = () => {
   const techSectionRef = useRef<HTMLElement | null>(null)
 

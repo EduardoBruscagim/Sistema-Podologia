@@ -16,6 +16,7 @@ import { useSectionAnimation } from '@/hooks/useSectionAnimation'
  *    - A classe `tabular-nums` garante larguras fixas de caracteres numéricos,
  *      evitando tremor/oscilação horizontal durante o rollup numérico do GSAP.
  */
+
 export const TrustStats: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
 

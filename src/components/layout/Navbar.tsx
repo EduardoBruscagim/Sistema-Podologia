@@ -22,10 +22,12 @@ import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react'
  * 4. **Touch Targets Conformes (WCAG 2.2):**
  *    - Todas as áreas interativas possuem dimensões mínimas de 44x44px.
  */
+
 export const Navbar: React.FC = () => {
   // ---------------------------------------------------------------------------
   // 1. Estados e Referências DOM
   // ---------------------------------------------------------------------------
+
   const { isDark, toggleTheme } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [themeStatusMessage, setThemeStatusMessage] = useState('')
@@ -38,6 +40,7 @@ export const Navbar: React.FC = () => {
   // ---------------------------------------------------------------------------
   // 2. Manipulação de Tema
   // ---------------------------------------------------------------------------
+
   const handleToggleTheme = () => {
     toggleTheme()
     setThemeStatusMessage(isDark ? 'Modo claro ativado' : 'Modo escuro ativado')
@@ -46,6 +49,7 @@ export const Navbar: React.FC = () => {
   // ---------------------------------------------------------------------------
   // 3. Trava de Rolagem e Isolamento Semântico (`inert`)
   // ---------------------------------------------------------------------------
+
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
     const mainEl = document.getElementById('main-content')
@@ -73,6 +77,7 @@ export const Navbar: React.FC = () => {
   // ---------------------------------------------------------------------------
   // 4. Auto-fechamento ao Redimensionar para Desktop (>= 1024px)
   // ---------------------------------------------------------------------------
+
   useEffect(() => {
     try {
       const mql = window.matchMedia('(min-width: 1024px)')
@@ -91,6 +96,7 @@ export const Navbar: React.FC = () => {
   // ---------------------------------------------------------------------------
   // 5. Gerenciamento e Restauração de Foco
   // ---------------------------------------------------------------------------
+
   useEffect(() => {
     if (isMobileMenuOpen) {
       // Move o foco para o primeiro elemento navegável dentro do menu
@@ -108,6 +114,7 @@ export const Navbar: React.FC = () => {
   // ---------------------------------------------------------------------------
   // 6. Focus Trap, Tecla Escape e Clique Externo
   // ---------------------------------------------------------------------------
+
   useEffect(() => {
     if (!isMobileMenuOpen) return
 
@@ -172,6 +179,7 @@ export const Navbar: React.FC = () => {
   // ---------------------------------------------------------------------------
   // 7. Inicialização da Animação do Header
   // ---------------------------------------------------------------------------
+
   useEffect(() => {
     const headerEl = headerRef.current
     if (!headerEl) return

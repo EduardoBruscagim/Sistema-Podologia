@@ -11,6 +11,7 @@ import { getWhatsAppUrl } from '@/utils/whatsapp'
  * - **Coluna 4 (Atendimento & Contato):** Dias de funcionamento e link com call-to-action para o WhatsApp.
  * - **Linha Inferior:** Direitos autorais com ano dinâmico e localização geográfica.
  */
+
 export const Footer: React.FC = () => {
   return (
     <footer className="pt-16 pb-12 px-6 border-t border-surface-border bg-surface transition-colors duration-300">

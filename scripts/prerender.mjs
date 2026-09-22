@@ -24,6 +24,7 @@ const distIndexPath = path.join(rootDir, 'dist', 'index.html')
  *    substituindo a tag `<link rel="stylesheet">` externa. Isso elimina o bloqueio de renderização
  *    (economizando ~150ms na conexão de rede móvel) e zera o tempo até o First Contentful Paint.
  */
+
 async function prerender() {
   if (!fs.existsSync(distIndexPath)) {
     console.error('dist/index.html not found. Run vite build first.')

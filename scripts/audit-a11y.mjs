@@ -24,6 +24,7 @@ const distIndexPath = path.join(rootDir, 'dist', 'index.html')
  * 3. Injeta e executa a suíte de testes de regras do motor oficial `axe-core`.
  * 4. Reporta detalhadamente violações, nós afetados e impacto ou confirma pontuação 100/100.
  */
+
 async function runAudit() {
   if (!fs.existsSync(distIndexPath)) {
     console.error('dist/index.html not found. Please build the project first (npm run build).')

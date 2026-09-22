@@ -10,6 +10,7 @@ import { getWhatsAppUrl, getWhatsAppDoubtUrl } from '@/utils/whatsapp'
  * 1. **Botão Primário (Terracotta Accent):** Abertura do WhatsApp com mensagem pronta de agendamento.
  * 2. **Botão Secundário (Borda Editorial):** Abertura do canal direto de esclarecimento de dúvidas prévias.
  */
+
 export const CtaSection: React.FC = () => {
   const ctaSectionRef = useRef<HTMLElement | null>(null)
 
