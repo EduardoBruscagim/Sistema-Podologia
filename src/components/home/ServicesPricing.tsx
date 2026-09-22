@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Sparkles, Footprints, Hand, Check, AlertCircle } from 'lucide-react'
 import { initServicesAnimation } from '@/animations/services'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
@@ -16,6 +16,7 @@ const SERVICE_ICONS: Record<
 
 export const ServicesPricing: React.FC = () => {
   const servicesSectionRef = useRef<HTMLElement | null>(null)
+  const rafRef = useRef<number | null>(null)
 
   useSectionAnimation(servicesSectionRef, initServicesAnimation, [
     '.services-header',
@@ -23,11 +24,31 @@ export const ServicesPricing: React.FC = () => {
     '.services-footer',
   ])
 
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current)
+      }
+    }
+  }, [])
+
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     const card = e.currentTarget
-    const rect = card.getBoundingClientRect()
-    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
-    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+    const clientX = e.clientX
+    const clientY = e.clientY
+
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current)
+    }
+
+    rafRef.current = requestAnimationFrame(() => {
+      const rect = card.getBoundingClientRect()
+      const x = clientX - rect.left
+      const y = clientY - rect.top
+      card.style.setProperty('--mouse-x', `${x}px`)
+      card.style.setProperty('--mouse-y', `${y}px`)
+      rafRef.current = null
+    })
   }
 
   return (
@@ -148,8 +169,8 @@ export const ServicesPricing: React.FC = () => {
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Agendar procedimento ${service.title} pelo WhatsApp (abre em nova aba)`}
-                  className={`w-full min-h-[44px] inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer mt-4 ${
+                  aria-label={`Agendar Horário: ${service.title} pelo WhatsApp (abre em uma nova aba)`}
+                  className={`w-full min-h-[44px] inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer mt-4 ${
                     service.isFeatured
                       ? 'bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98]'
                       : 'bg-surface-variant text-on-surface hover:bg-accent hover:text-on-accent active:scale-[0.98]'
@@ -183,8 +204,8 @@ export const ServicesPricing: React.FC = () => {
           href={getWhatsAppUrgencyUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Pedir atendimento de urgência para unha encravada no WhatsApp (abre em nova aba)"
-          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.12em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+          aria-label="Atendimento de Urgência para unha encravada pelo WhatsApp (abre em uma nova aba)"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.12em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
         >
           Atendimento de Urgência
         </a>

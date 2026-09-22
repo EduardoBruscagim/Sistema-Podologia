@@ -6,7 +6,7 @@ export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) =>
     // Cabeçalho da seção
     gsap.fromTo(
       '.tech-header',
-      { y: 16, autoAlpha: 0 },
+      { y: 16, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.tech-header',
@@ -14,17 +14,17 @@ export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) =>
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.55,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
 
     // Card destacado de Biossegurança Padrão Hospitalar
     gsap.fromTo(
       '.tech-featured',
-      { y: 22, autoAlpha: 0 },
+      { y: 22, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.tech-featured',
@@ -32,17 +32,17 @@ export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) =>
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.6,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
 
     // Cartões de tecnologia (Luz Vermelha / Luz Ultravioleta)
     gsap.fromTo(
       '.tech-card',
-      { y: 22, autoAlpha: 0 },
+      { y: 22, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.tech-grid',
@@ -50,11 +50,11 @@ export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) =>
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.6,
         stagger: 0.1,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
   }, sectionEl)

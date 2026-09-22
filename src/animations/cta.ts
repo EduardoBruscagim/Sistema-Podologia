@@ -4,7 +4,7 @@ export const initCtaAnimation = (sectionEl?: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     gsap.fromTo(
       '.cta-reveal',
-      { y: 20, autoAlpha: 0 },
+      { y: 20, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.cta-reveal',
@@ -12,10 +12,10 @@ export const initCtaAnimation = (sectionEl?: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.6,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
   }, sectionEl)

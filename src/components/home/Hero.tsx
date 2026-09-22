@@ -5,7 +5,7 @@ import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 export const Hero: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement | null>(null)
 
-  useSectionAnimation(heroSectionRef, initHeroAnimation, '.gsap-hero-image')
+  useSectionAnimation(heroSectionRef, initHeroAnimation, ['.gsap-hero-image', '.gsap-hero-badge'])
 
   return (
     <section
@@ -32,7 +32,7 @@ export const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
             <a
               href="#procedimentos"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.12em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
             >
               Solicitar Agendamento
             </a>
@@ -42,28 +42,16 @@ export const Hero: React.FC = () => {
         {/* Right: Real Image Card & Supporting Clinical Setup */}
         <div className="lg:col-span-5 gsap-hero-image relative">
           <div className="relative rounded-xl overflow-hidden border border-surface-border bg-surface-variant dark:bg-surface-variant">
-            <picture>
-              <source
-                media="(max-width: 640px)"
-                type="image/webp"
-                srcSet="/hero-clinical-bag-mobile.webp"
-              />
-              <source
-                media="(min-width: 641px)"
-                type="image/webp"
-                srcSet="/hero-clinical-bag.webp"
-              />
-              <img
-                alt="Kit profissional higienizado para atendimento domiciliar com toalhas e instrumentais esterilizados"
-                className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover transition-opacity duration-300"
-                src="/hero-clinical-bag.webp"
-                width={600}
-                height={460}
-                loading="eager"
-                fetchPriority="high"
-                decoding="sync"
-              />
-            </picture>
+            <img
+              alt="Kit profissional higienizado para atendimento domiciliar com toalhas e instrumentais esterilizados"
+              className="w-full h-[380px] sm:h-[440px] lg:h-[480px] object-cover transition-opacity duration-300"
+              src="/hero-clinical-bag.webp"
+              width={600}
+              height={460}
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+            />
           </div>
 
           {/* Supporting Clinical Care Setup Preview Card */}

@@ -5,7 +5,7 @@ export const initFaqAnimation = (sectionEl: HTMLElement): (() => void) => {
     // Cabeçalho do FAQ
     gsap.fromTo(
       '.faq-header',
-      { y: 16, autoAlpha: 0 },
+      { y: 16, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.faq-header',
@@ -13,17 +13,17 @@ export const initFaqAnimation = (sectionEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.55,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
 
     // Cascata dos itens de perguntas e respostas
     gsap.fromTo(
       '.faq-item',
-      { y: 14, autoAlpha: 0 },
+      { y: 14, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.faq-list',
@@ -31,11 +31,11 @@ export const initFaqAnimation = (sectionEl: HTMLElement): (() => void) => {
           once: true,
         },
         y: 0,
-        autoAlpha: 1,
+        opacity: 1,
         duration: 0.45,
         stagger: 0.06,
         ease: 'power2.out',
-        clearProps: 'transform,opacity,visibility',
+        clearProps: 'transform,opacity',
       },
     )
   }, sectionEl)

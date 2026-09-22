@@ -45,10 +45,11 @@ interface FaqAccordionItemProps {
   index: number
   isOpen: boolean
   onToggle: (index: number) => void
+  onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => void
 }
 
 const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
-  ({ item, index, isOpen, onToggle }) => {
+  ({ item, index, isOpen, onToggle, onKeyDown }) => {
     return (
       <div className="faq-item relative">
         {/* Hairline Accent Indicator Vertical com escala fluida */}
@@ -66,7 +67,8 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
             aria-expanded={isOpen}
             aria-controls={`faq-panel-${index}`}
             onClick={() => onToggle(index)}
-            className={`w-full flex items-center justify-between py-5 text-left cursor-pointer group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-xl transition-all duration-300 pl-3 sm:pl-4 pr-2 ${
+            onKeyDown={(e) => onKeyDown(e, index)}
+            className={`w-full flex items-center justify-between py-5 text-left cursor-pointer group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface rounded-xl transition-all duration-300 pl-3 sm:pl-4 pr-2 ${
               isOpen ? 'bg-surface-variant/40' : 'hover:bg-surface-variant/20'
             }`}
           >
@@ -99,8 +101,9 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
           id={`faq-panel-${index}`}
           role="region"
           aria-labelledby={`faq-btn-${index}`}
-          className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pl-3 sm:pl-4 ${
-            isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+          aria-hidden={!isOpen}
+          className={`grid transition-[grid-template-rows,opacity,visibility] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pl-3 sm:pl-4 ${
+            isOpen ? 'grid-rows-[1fr] opacity-100 visible' : 'grid-rows-[0fr] opacity-0 invisible'
           }`}
         >
           <div className="overflow-hidden">
@@ -128,17 +131,44 @@ export const FaqSection: React.FC = () => {
     setOpenIndex((prev) => (prev === index ? null : index))
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+    const total = FAQ_ITEMS.length
+    let targetIndex: number | null = null
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      targetIndex = (currentIndex + 1) % total
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      targetIndex = (currentIndex - 1 + total) % total
+    } else if (e.key === 'Home') {
+      e.preventDefault()
+      targetIndex = 0
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      targetIndex = total - 1
+    }
+
+    if (targetIndex !== null) {
+      const btn = document.getElementById(`faq-btn-${targetIndex}`)
+      btn?.focus()
+    }
+  }
+
   useSectionAnimation(faqSectionRef, initFaqAnimation, ['.faq-header', '.faq-item'])
 
   return (
     <section
       ref={faqSectionRef}
-      aria-label="Perguntas Frequentes"
+      aria-labelledby="faq-heading"
       className="max-w-4xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
       id="faq"
     >
       <div className="faq-header mb-12 lg:mb-16">
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance">
+        <h2
+          id="faq-heading"
+          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance"
+        >
           Perguntas frequentes
         </h2>
         <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
@@ -154,6 +184,7 @@ export const FaqSection: React.FC = () => {
             index={index}
             isOpen={openIndex === index}
             onToggle={handleToggle}
+            onKeyDown={handleKeyDown}
           />
         ))}
       </div>
