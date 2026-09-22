@@ -13,6 +13,7 @@ import { getWhatsAppDoubtUrl } from '@/utils/whatsapp'
  * 3. **Área de Toque Generosa:**
  *    Dimensão mínima de 48x48px (`min-h-[48px] min-w-[48px]`) atendendo ao critério AAA da WCAG 2.2.
  */
+
 export const WhatsAppButton: React.FC = () => {
   return (
     <aside

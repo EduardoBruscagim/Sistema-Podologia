@@ -13,6 +13,7 @@ import type { ThemeContextType } from '@/types/theme'
  * @throws {Error} Caso o hook seja invocado fora da árvore de um `<ThemeProvider>`.
  * @returns Objeto com o estado e as ações do tema visual.
  */
+
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext)
   if (!context) {

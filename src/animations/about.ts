@@ -9,6 +9,7 @@ import gsap from 'gsap'
  * @param containerEl - Elemento raiz da seção `<section id="sobre">`.
  * @returns Função de reversão do contexto GSAP para desmontagem limpa.
  */
+
 export const initAboutAnimation = (containerEl?: HTMLElement): (() => void) => {
   if (!containerEl) return () => {}
 

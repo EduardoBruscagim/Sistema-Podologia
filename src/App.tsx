@@ -9,6 +9,7 @@ import { HomePage } from '@/pages/HomePage'
  * (`ThemeProvider`), garantindo que tanto a hidratação no cliente quanto o pré-render
  * estático (SSG no Vite SSR) compartilhem a mesma árvore semântica de componentes.
  */
+
 export const App: React.FC = () => {
   return (
     <ThemeProvider>

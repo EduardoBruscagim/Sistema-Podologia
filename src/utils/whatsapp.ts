@@ -6,17 +6,20 @@
 /**
  * Leitura da variável de ambiente opcional para override do número em staging/teste.
  */
+
 const rawEnvNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined
 
 /**
  * Número de telefone oficial sanitizado no padrão E.164 (apenas dígitos, ex: '5519995443922').
  * Padrão: 55 (Brasil) 19 (Mococa/Região) 99544-3922.
  */
+
 export const WHATSAPP_NUMBER = rawEnvNumber ? rawEnvNumber.replace(/\D/g, '') : '5519995443922'
 
 /**
  * Mensagem padrão de saudação inicial ao abrir o canal de dúvidas.
  */
+
 export const WHATSAPP_DEFAULT_MESSAGE =
   'Olá, Angélica! Gostaria de tirar uma dúvida sobre o atendimento em domicílio em Mococa.'
 
@@ -26,6 +29,7 @@ export const WHATSAPP_DEFAULT_MESSAGE =
  * @param message - Texto predefinido que aparecerá na caixa de mensagem do cliente.
  * @returns Link completo para abertura no WhatsApp Web ou aplicativo móvel.
  */
+
 export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
@@ -36,6 +40,7 @@ export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
  * @param topic - Nome do procedimento ou tema de dúvida (ex: "Pé e Mão Completo", "Cabine UV").
  * @returns URL formatada com mensagem contextualizada.
  */
+
 export const getWhatsAppDoubtUrl = (topic?: string): string => {
   const message = topic
     ? `Olá, Angélica! Gostaria de tirar uma dúvida sobre ${topic} em Mococa.`
@@ -49,6 +54,7 @@ export const getWhatsAppDoubtUrl = (topic?: string): string => {
  *
  * @returns URL formatada com solicitação de atendimento prioritário.
  */
+
 export const getWhatsAppUrgencyUrl = (): string => {
   const message =
     'Olá, Angélica! Estou com a unha doendo e gostaria de ver um horário para atendimento em Mococa.'
@@ -61,6 +67,7 @@ export const getWhatsAppUrgencyUrl = (): string => {
  *
  * @returns String formatada com DDD entre parênteses e hífen no número celular.
  */
+
 export const getWhatsAppDisplayNumber = (): string => {
   const digits = WHATSAPP_NUMBER.replace(/\D/g, '')
   if (digits.length === 13 && digits.startsWith('55')) {

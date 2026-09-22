@@ -17,6 +17,7 @@ import gsap from 'gsap'
  * @param containerEl - Elemento raiz da seção de estatísticas `<section>`.
  * @returns Função de reversão do contexto GSAP.
  */
+
 export const initStatsAnimation = (containerEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     // Revelação suave em cascata dos blocos

@@ -23,6 +23,7 @@ import { applyReducedMotion } from '@/animations/reducedMotion'
  * @param initAnimation - Função de fábrica que instancia tweens/ScrollTriggers no elemento DOM.
  * @param reducedMotionTargets - Seletor(es) ou elemento(s) que devem ter estilos inline limpos caso o movimento seja reduzido.
  */
+
 export const useSectionAnimation = (
   scopeRef: React.RefObject<HTMLElement | null>,
   initAnimation: (element: HTMLElement) => (() => void) | void,

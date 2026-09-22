@@ -15,6 +15,7 @@ import { Heart, ShieldCheck, Calendar, Check, ArrowUpRight } from 'lucide-react'
  *   Texto humanizado que detalha a discrição e a biossegurança no atendimento domiciliar,
  *   lista de 4 compromissos práticos e botão de contato direto com a Angélica pelo WhatsApp.
  */
+
 export const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
 

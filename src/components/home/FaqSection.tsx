@@ -6,6 +6,7 @@ import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 /**
  * Interface representativa de uma pergunta e resposta do FAQ.
  */
+
 interface FaqItem {
   question: string
   answer: string
@@ -14,6 +15,7 @@ interface FaqItem {
 /**
  * Lista de perguntas frequentes sobre os atendimentos em Mococa/SP.
  */
+
 const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Como funciona o atendimento em domicílio?',
@@ -49,6 +51,7 @@ const FAQ_ITEMS: FaqItem[] = [
 /**
  * Propriedades para cada item individual do acordeão.
  */
+
 interface FaqAccordionItemProps {
   item: FaqItem
   index: number
@@ -70,6 +73,7 @@ interface FaqAccordionItemProps {
  * 3. **Indicador Visual Hairline:**
  *    - Traço vertical de acento (`w-[3px] bg-accent`) com transição de escala vertical `scale-y`.
  */
+
 const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
   ({ item, index, isOpen, onToggle, onKeyDown }) => {
     return (
@@ -154,6 +158,7 @@ FaqAccordionItem.displayName = 'FaqAccordionItem'
  * - `Home`: Move o foco imediatamente para a primeira pergunta.
  * - `End`: Move o foco imediatamente para a última pergunta.
  */
+
 export const FaqSection: React.FC = () => {
   const faqSectionRef = useRef<HTMLElement | null>(null)
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -165,6 +170,7 @@ export const FaqSection: React.FC = () => {
   // ---------------------------------------------------------------------------
   // Navegação Acessível por Teclado entre Cabeçalhos do Acordeão
   // ---------------------------------------------------------------------------
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
     const total = FAQ_ITEMS.length
     let targetIndex: number | null = null

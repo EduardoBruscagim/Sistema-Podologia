@@ -15,6 +15,7 @@
  *
  * @param isDark - Indica se o tema ativo é o modo escuro (`true` para '#11100f', `false` para '#faf8f5').
  */
+
 export const updateThemeColorMeta = (isDark: boolean): void => {
   const color = isDark ? '#11100f' : '#faf8f5'
   const metaTags = document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')

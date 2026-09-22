@@ -13,6 +13,7 @@ import { initCardsHover } from './cardHover'
  * @param sectionEl - Elemento raiz da seção `<section id="tecnologia">`.
  * @returns Função de cleanup para remoção de hovers e reversão do contexto GSAP.
  */
+
 export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     // Cabeçalho da seção

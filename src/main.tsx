@@ -9,11 +9,13 @@ import { App } from './App'
 // -----------------------------------------------------------------------------
 // 1. Registro Global de Plugins GSAP
 // -----------------------------------------------------------------------------
+
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 // -----------------------------------------------------------------------------
 // 2. Inicialização / Hidratação Híbrida do React no DOM
 // -----------------------------------------------------------------------------
+
 const rootElement = document.getElementById('root')
 
 if (rootElement) {
@@ -38,6 +40,7 @@ if (rootElement) {
   // ---------------------------------------------------------------------------
   // 3. Notificação de Carregamento GSAP (Prevenção de FOUC)
   // ---------------------------------------------------------------------------
+
   // Adiciona a classe .gsap-loaded no elemento raiz <html> via requestAnimationFrame,
   // liberando a visibilidade de elementos com opacidade inicial controlada pelo GSAP.
   requestAnimationFrame(() => {

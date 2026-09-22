@@ -6,6 +6,7 @@ import { ThemeContext } from './theme-context'
 /**
  * Propriedades aceitas pelo provedor de tema.
  */
+
 interface ThemeProviderProps {
   /** Elementos filhos que terão acesso ao contexto de tema via `useTheme()`. */
   children: React.ReactNode
@@ -25,10 +26,12 @@ interface ThemeProviderProps {
  * 4. **Persistência Segura:** Salva a escolha do usuário no `localStorage` protegendo contra
  *    exceções em ambientes restritivos (ex: iframes com sandbox ou navegação privada rígida).
  */
+
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // ---------------------------------------------------------------------------
   // 1. Estado Inicial do Tema
   // ---------------------------------------------------------------------------
+
   const [theme, setTheme] = useState<Theme>(() => {
     // Em tempo de pré-renderização (SSR) o objeto window não existe
     if (typeof window === 'undefined') return 'light'
@@ -44,6 +47,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // ---------------------------------------------------------------------------
   // 2. Sincronização do DOM e Meta Tags
   // ---------------------------------------------------------------------------
+
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add('dark')
@@ -59,6 +63,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // ---------------------------------------------------------------------------
   // 3. Listener Dinâmico para Preferência do Sistema Operacional
   // ---------------------------------------------------------------------------
+
   useEffect(() => {
     try {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -80,6 +85,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // ---------------------------------------------------------------------------
   // 4. Ação de Alternância (Toggle) com Persistência Segura
   // ---------------------------------------------------------------------------
+
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
       const nextTheme: Theme = prev === 'dark' ? 'light' : 'dark'
@@ -95,6 +101,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // ---------------------------------------------------------------------------
   // 5. Memorização do Valor do Contexto
   // ---------------------------------------------------------------------------
+
   const value = useMemo(
     () => ({
       theme,

@@ -8,6 +8,7 @@ import { getWhatsAppUrl, getWhatsAppUrgencyUrl } from '@/utils/whatsapp'
 /**
  * Dicionário tipado de ícones correspondentes aos procedimentos clínicos.
  */
+
 const SERVICE_ICONS: Record<
   ServiceItem['icon'],
   React.ComponentType<{ className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }>
@@ -34,6 +35,7 @@ const SERVICE_ICONS: Record<
  * 4. **Garantia de Deslocamento:**
  *    - Exibição de taxa zero de deslocamento e confirmação de pagamento seguro ao final.
  */
+
 export const ServicesPricing: React.FC = () => {
   const servicesSectionRef = useRef<HTMLElement | null>(null)
   const rafRef = useRef<number | null>(null)
@@ -58,6 +60,7 @@ export const ServicesPricing: React.FC = () => {
    * Atualiza as coordenadas do efeito radial de iluminação no card que recebe o cursor.
    * Utiliza requestAnimationFrame para throttle nativo e máxima performance.
    */
+
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     const card = e.currentTarget
     const clientX = e.clientX

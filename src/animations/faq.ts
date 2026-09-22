@@ -10,6 +10,7 @@ import gsap from 'gsap'
  * @param sectionEl - Elemento raiz da seção `<section id="faq">`.
  * @returns Função de reversão do contexto GSAP para desmontagem segura.
  */
+
 export const initFaqAnimation = (sectionEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     // Cabeçalho do FAQ

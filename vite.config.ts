@@ -10,6 +10,7 @@ import { fileURLToPath, URL } from 'node:url'
  * para os subsets essenciais das fontes Newsreader e Outfit, eliminando flash de texto invisível (FOIT)
  * e acelerando o First Contentful Paint (FCP).
  */
+
 function preloadFontsPlugin(): Plugin {
   return {
     name: 'preload-fonts',
@@ -55,6 +56,7 @@ function preloadFontsPlugin(): Plugin {
  *   - `vendor-gsap`: Isola GSAP, ScrollTrigger e @gsap/react em cache de longo prazo.
  *   - `vendor-react`: Isola o runtime do React e React-DOM.
  */
+
 export default defineConfig({
   plugins: [react(), tailwindcss(), preloadFontsPlugin()],
   resolve: {

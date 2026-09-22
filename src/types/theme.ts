@@ -3,11 +3,13 @@
  * - 'light': Modo claro editorial (paleta Alabaster & Warm Espresso).
  * - 'dark': Modo escuro noturno (paleta Obsidian com acentos Terracotta Silk).
  */
+
 export type Theme = 'light' | 'dark'
 
 /**
  * Contrato de contexto que expõe o estado global de tema e as ações de alternância.
  */
+
 export interface ThemeContextType {
   /** Nome do tema atualmente ativo ('light' ou 'dark'). */
   theme: Theme
