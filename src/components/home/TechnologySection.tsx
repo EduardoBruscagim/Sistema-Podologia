@@ -36,7 +36,7 @@ export const TechnologySection: React.FC = () => {
         {/* Célula Principal de Autoridade: Esterilização em Autoclave a 134°C + 100% Descartáveis com Sangria Total da Foto */}
         <div className="tech-featured col-span-1 md:col-span-2 lg:col-span-12 rounded-xl bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent/40 transition-[border-color,background-color] duration-300 relative overflow-hidden flex flex-col lg:block">
           {/* Conteúdo textual e indicadores de autoridade */}
-          <div className="relative z-10 lg:max-w-[56%] xl:max-w-[54%] p-6 sm:p-8 lg:p-10 flex flex-col justify-between h-full">
+          <div className="relative z-10 lg:max-w-[56%] xl:max-w-[54%] p-6 sm:p-8 lg:p-10 flex flex-col lg:justify-between lg:h-full">
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-4">
                 <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-md bg-accent/10 text-accent dark:bg-accent/20">
@@ -55,7 +55,7 @@ export const TechnologySection: React.FC = () => {
                 Instrumentos esterilizados e materiais descartáveis
               </h3>
 
-              <p className="text-sm sm:text-base text-on-surface-variant font-light leading-relaxed mb-8 max-w-[50ch] text-pretty">
+              <p className="text-sm sm:text-base text-on-surface-variant font-light leading-relaxed mb-6 sm:mb-8 max-w-[50ch] text-pretty">
                 Alicates e espátulas de metal são esterilizados em autoclave e mantidos em envelopes
                 lacrados até o atendimento. Lixas, lâminas, toalhas e luvas são descartadas após o
                 uso.
@@ -63,7 +63,7 @@ export const TechnologySection: React.FC = () => {
             </div>
 
             {/* Indicadores de autoridade com ícones em círculo */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-surface-border">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent shrink-0">
                   <Thermometer aria-hidden="true" className="w-4 h-4" />
@@ -103,7 +103,7 @@ export const TechnologySection: React.FC = () => {
           </div>
 
           {/* Imagem sangrando (bleed total) à direita com gradiente de mistura perfeito */}
-          <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-[54%] xl:w-[56%] w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto overflow-hidden">
+          <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-[54%] xl:w-[56%] w-full aspect-[16/10] sm:aspect-[21/9] lg:aspect-auto overflow-hidden">
             <picture className="w-full h-full block">
               <source type="image/avif" srcSet="/clinical-care-setup.avif" />
               <source type="image/webp" srcSet="/clinical-care-setup.webp" />
