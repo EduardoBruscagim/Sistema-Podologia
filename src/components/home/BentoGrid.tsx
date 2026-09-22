@@ -59,16 +59,12 @@ export const BentoGrid: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="mt-8 pt-4 border-t border-surface-border flex items-center text-xs text-sage font-medium">
-            Atendimento no seu ritmo e na privacidade do seu lar
-          </div>
         </div>
 
         {/* Coluna Direita (2 Cards Complementares Empilhados) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           {/* Card 2: Toda Mococa */}
-          <div className="bento-card flex-1 p-6 sm:p-7 rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-between shadow-xs">
+          <div className="bento-card flex-1 p-6 sm:p-7 rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-center shadow-xs">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sage">
@@ -87,17 +83,10 @@ export const BentoGrid: React.FC = () => {
                 acréscimo de deslocamento.
               </p>
             </div>
-
-            <div className="mt-6 pt-3.5 border-t border-surface-border flex items-center text-xs text-text-secondary font-light">
-              <span className="flex items-center gap-2">
-                <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
-                <span>Preço final transparente garantido</span>
-              </span>
-            </div>
           </div>
 
           {/* Card 3: Pontualidade & Dedicação */}
-          <div className="bento-card flex-1 p-6 sm:p-7 rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-between shadow-xs">
+          <div className="bento-card flex-1 p-6 sm:p-7 rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-center shadow-xs">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sage">
@@ -115,13 +104,6 @@ export const BentoGrid: React.FC = () => {
                 Seu horário é reservado exclusivamente para você, sem divisão de atenção e com
                 dedicação integral.
               </p>
-            </div>
-
-            <div className="mt-6 pt-3.5 border-t border-surface-border flex items-center text-xs text-text-secondary font-light">
-              <span className="flex items-center gap-2">
-                <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
-                <span>Atendimento calmo e individual</span>
-              </span>
             </div>
           </div>
         </div>
