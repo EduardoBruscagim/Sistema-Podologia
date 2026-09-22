@@ -26,7 +26,7 @@ export const AboutSection: React.FC = () => {
     <section
       id="sobre"
       ref={sectionRef}
-      className="max-w-6xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
+      className="max-w-6xl mx-auto px-6 py-12 lg:py-16 scroll-mt-28"
       aria-labelledby="about-heading"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
@@ -61,7 +61,7 @@ export const AboutSection: React.FC = () => {
                   <circle cx="43" cy="20" r="3" className="fill-accent" />
                 </svg>
               </div>
-              <div className="absolute -bottom-2 -right-1 px-3 py-1 rounded-full bg-sage text-on-sage text-[11px] uppercase font-semibold tracking-wider shadow-xs">
+              <div className="absolute -bottom-2 -right-1 px-3 py-1 rounded-full bg-sage text-on-sage text-[11px] uppercase font-semibold tracking-[0.16em] shadow-xs">
                 Mococa · SP
               </div>
             </div>
@@ -100,7 +100,7 @@ export const AboutSection: React.FC = () => {
         <div className="about-reveal lg:col-span-7 flex flex-col items-start text-left">
           <h2
             id="about-heading"
-            className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-6 text-balance"
+            className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-6 text-balance"
           >
             Cuidado dedicado com a confiança de quem atende na sua casa
           </h2>
