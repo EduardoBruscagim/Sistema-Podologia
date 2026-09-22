@@ -83,7 +83,7 @@ export const ServicesPricing: React.FC = () => {
   return (
     <section
       ref={servicesSectionRef}
-      className="max-w-6xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
+      className="max-w-6xl mx-auto px-6 py-12 lg:py-16 scroll-mt-28"
       id="procedimentos"
       aria-labelledby="services-pricing-heading"
     >
@@ -94,7 +94,7 @@ export const ServicesPricing: React.FC = () => {
       <div className="services-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="services-pricing-heading"
-          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance"
+          className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-4 text-balance"
         >
           Procedimentos e valores
         </h2>
@@ -105,10 +105,10 @@ export const ServicesPricing: React.FC = () => {
       </div>
 
       {/* ----------------------------------------------------------------- */}
-      {/* Grade de Cards de Procedimentos (3 Colunas)                       */}
+      {/* Grade de Cards de Procedimentos (3 Colunas em Desktop)            */}
       {/* ----------------------------------------------------------------- */}
 
-      <div className="services-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-8">
+      <div className="services-grid grid grid-cols-1 md:max-w-xl md:mx-auto lg:max-w-none lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
         {SERVICES.map((service) => {
           const ServiceIcon = SERVICE_ICONS[service.icon]
           return (
@@ -138,7 +138,7 @@ export const ServicesPricing: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <span
-                    className={`text-[11px] font-semibold tracking-widest uppercase px-2.5 py-1 rounded-md ${
+                    className={`text-[11px] font-semibold tracking-[0.16em] uppercase px-2.5 py-1 rounded-md ${
                       service.isFeatured
                         ? 'bg-accent/10 text-accent dark:bg-accent/20'
                         : 'bg-surface-variant text-text-secondary dark:bg-surface-border dark:text-on-surface-variant'
@@ -164,11 +164,11 @@ export const ServicesPricing: React.FC = () => {
                   {service.duration}
                 </span>
 
-                {/* Preço e Forma de Cobrança */}
+                {/* Preço e Forma de Cobrança com Tabular Numbers em Outfit Sans */}
                 <div className="mb-6 pb-6 border-b border-surface-border">
                   <div className="flex items-baseline gap-1">
                     <span className="text-sm font-sans text-text-secondary font-light">R$</span>
-                    <span className="font-serif text-4xl lg:text-5xl font-light text-on-surface tracking-tight tabular-nums">
+                    <span className="font-sans text-4xl lg:text-5xl font-normal text-on-surface tracking-tight tabular-nums">
                       {service.price}
                     </span>
                     <span className="text-xs text-text-secondary font-light ml-2">
@@ -197,7 +197,7 @@ export const ServicesPricing: React.FC = () => {
 
               {/* Ação de Agendamento Específico com Deslocamento Cortesia */}
               <div className="pt-6 mt-6 border-t border-surface-border">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-1">
                   <span className="text-xs text-text-secondary font-light">Deslocamento</span>
                   <span className="text-xs font-medium text-sage">Taxa R$ 0 em Mococa</span>
                 </div>
@@ -208,10 +208,10 @@ export const ServicesPricing: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Agendar Horário: ${service.title} pelo WhatsApp (abre em uma nova aba)`}
-                  className={`w-full min-h-[44px] inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer mt-4 ${
+                  className={`w-full min-h-[44px] inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.14em] font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer mt-4 ${
                     service.isFeatured
                       ? 'bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98]'
-                      : 'bg-surface-variant text-on-surface hover:bg-accent hover:text-on-accent active:scale-[0.98]'
+                      : 'bg-pure-white dark:bg-surface border border-surface-border hover:border-accent text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant active:scale-[0.98]'
                   }`}
                 >
                   Agendar Horário
@@ -246,7 +246,7 @@ export const ServicesPricing: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Atendimento de Urgência para unha encravada pelo WhatsApp (abre em uma nova aba)"
-          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.12em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
         >
           Atendimento de Urgência
         </a>

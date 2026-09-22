@@ -99,7 +99,7 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
             }`}
           >
             <span
-              className={`font-serif text-lg sm:text-xl font-normal transition-colors duration-200 ${
+              className={`font-serif text-lg sm:text-xl lg:text-[1.375rem] font-normal tracking-[-0.01em] transition-colors duration-200 ${
                 isOpen ? 'text-accent font-medium' : 'text-on-surface group-hover:text-accent'
               }`}
             >
@@ -202,13 +202,13 @@ export const FaqSection: React.FC = () => {
     <section
       ref={faqSectionRef}
       aria-labelledby="faq-heading"
-      className="max-w-4xl mx-auto px-6 py-16 lg:py-24 scroll-mt-28"
+      className="max-w-4xl mx-auto px-6 py-12 lg:py-16 scroll-mt-28"
       id="faq"
     >
       <div className="faq-header mb-12 lg:mb-16">
         <h2
           id="faq-heading"
-          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance"
+          className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-4 text-balance"
         >
           Perguntas frequentes
         </h2>

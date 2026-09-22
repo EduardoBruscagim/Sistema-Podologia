@@ -30,7 +30,7 @@ export const BentoGrid: React.FC = () => {
     <section
       ref={bentoSectionRef}
       aria-labelledby="bento-heading"
-      className="max-w-6xl mx-auto px-6 py-16 lg:py-24"
+      className="max-w-6xl mx-auto px-6 py-12 lg:py-16"
     >
       {/* ----------------------------------------------------------------- */}
       {/* Cabeçalho Editorial da Seção                                     */}
@@ -39,7 +39,7 @@ export const BentoGrid: React.FC = () => {
       <div className="bento-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="bento-heading"
-          className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-on-surface tracking-tight leading-[1.12] mb-4 text-balance"
+          className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-4 text-balance"
         >
           Como funciona o atendimento
         </h2>
@@ -57,7 +57,7 @@ export const BentoGrid: React.FC = () => {
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sage">
                 Praticidade Residencial
               </span>
-              <div className="bento-icon w-10 h-10 rounded-xl bg-sage-subtle flex items-center justify-center text-sage">
+              <div className="bento-icon w-10 h-10 rounded-lg bg-sage-subtle flex items-center justify-center text-sage">
                 <Home aria-hidden="true" className="w-5 h-5" />
               </div>
             </div>
