@@ -4,54 +4,66 @@
 
 ## Platform
 
-web
+web (mobile-first responsivo com SSG e alta performance)
 
 ## Users
 
-- **Clientes:** buscam cuidado profissional e higiênico para pés e mãos no conforto do seu lar em Mococa - SP; consultam serviços, tiram dúvidas e solicitam agendamento diretamente com a profissional.
-- **Profissional (Angélica Eduarda):** gestão de horários e rotas de atendimento domiciliar em Mococa, realização dos cuidados (corte, desencravar, cutilagem, esmaltação) com esterilização em autoclave e acompanhamento das clientes.
-- **Gestão:** controle dos atendimentos realizados e recebimentos exclusivos via PIX ou dinheiro vivo.
+- **Clientes:** Moradores de qualquer bairro de Mococa - SP que buscam cuidado podológico clínico e estética de unhas no aconchego de sua residência; consultam procedimentos, esclarecem dúvidas sobre biossegurança e solicitam horários diretamente via WhatsApp.
+- **Público Prioritário / Especial:** Idosos, acamados e pessoas com mobilidade reduzida ou sensibilidade nos pés que necessitam de atendimento paciente, cuidadoso e sem deslocamento.
+- **Profissional (Angélica Eduarda):** Especialista atuante em Mococa desde 2016; realiza podologia preventiva e corretiva (corte correto, desbaste de calosidades, desencravamento preventivo cuidadoso), manicure e cutilagem com autoclave hospitalar a 134°C, materiais 100% descartáveis e aparelhos portáteis (fototerapia LED e cabine UV).
+- **Gestão do Atendimento:** Comunicação direta sem intermediários pelo WhatsApp, rota otimizada nos bairros de Mococa e recebimento direto ao término do procedimento via PIX ou dinheiro vivo.
 
 ## Product Purpose
 
-Plataforma digital moderna e acolhedora para o atendimento domiciliar de cuidado com pés e mãos prestado por Angélica Eduarda na cidade de Mococa - SP. Facilita o acesso a informações transparentes sobre os serviços (pé e mão completo, pedicure, manicure, desencravamento preventivo e esmaltação), esclarece dúvidas sobre biossegurança e esterilização, e agiliza o contato e agendamento via WhatsApp sem intermediários ou custos extras.
+Plataforma digital de alta performance, estética editorial (_Quiet Luxury_) e conformidade estrita de acessibilidade para o atendimento domiciliar de podologia clínica e cuidado com pés e mãos prestado por Angélica Eduarda na cidade de Mococa - SP.
+
+A solução estabelece autoridade clínica e confiança imediata ao esclarecer os padrões hospitalares de esterilização (autoclave a 134°C, envelopes cirúrgicos lacrados abertos na presença da cliente e descartáveis de uso único), apresentar os equipamentos portáteis modernos (fototerapia LED de luz vermelha e cabine LED UV para secagem rápida), listar o catálogo transparente dos 3 procedimentos essenciais sem custos ocultos, e disponibilizar canais diretos e ágeis de agendamento, dúvidas e urgência podológica via WhatsApp com deslocamento gratuito (Taxa R$ 0).
 
 ## Positioning
 
-Cuidado especializado e higiênico para pés e mãos no conforto da sua residência em toda a cidade de Mococa - SP. Combina o conforto do atendimento em domicílio com padrão rigoroso de higiene (instrumentos esterilizados em autoclave e itens descartáveis), sem cobrança de taxa de deslocamento e com pagamento facilitado em PIX ou dinheiro vivo.
+Cuidado clínico especializado e acolhedor para pés e mãos no conforto do lar em toda a cidade de Mococa - SP.
+
+Combina a comodidade do atendimento residencial com o rigor sanitário de nível hospitalar, suporte a tecnologias clínicas portáteis modernas, garantia de pontualidade em horário exclusivo, taxa zero de visita e formas de pagamento simplificadas e transparentes (PIX ou dinheiro vivo ao término do serviço).
 
 ## Operating Context
 
-- **Cliente (Mobile / Desktop):** visualização rápida dos serviços oferecidos, tempo médio de atendimento, esclarecimento sobre esterilização/higiene e contato direto no WhatsApp para combinar horário.
-- **Atendimento Domiciliar em Mococa (Mobile):** deslocamento ágil entre bairros de Mococa, conferência de horários e comunicação direta com as clientes.
+- **Cliente (Smartphones e Tablets):** Visualização imediata dos serviços, durações e valores; verificação dos critérios de higiene e esterilização; acesso com um toque aos canais contextuais de WhatsApp (agendamento de procedimento específico, esclarecimento de dúvidas ou atendimento de urgência para dores de unha encravada).
+- **Cliente (Desktop / Laptops):** Leitura editorial aprofundada, exploração das credenciais da profissional e navegação acessível por teclado com alto contraste e modo escuro.
+- **Atendimento Domiciliar em Mococa:** Atendimento residencial prático em que a cliente fornece apenas uma cadeira/poltrona e uma tomada comum, sem cobrança de taxa de deslocamento em nenhum bairro do município.
 
 ## Capabilities and Roadmap
 
-- **Fase 1 (Entregue — Landing de Alta Conversão, CRO, Performance & Acessibilidade):**
-  - Landing page institucional moderna e elegante com Bento Grid de diferenciais, apresentação de serviços e FAQ desdobrável com tipografia arejada.
-  - Pacote de microinterações e animações editoriais de alto padrão a 60 FPS: odômetro numérico de credibilidade (+25.000), parallax óptico em 2 planos no Hero, resposta tátil uniforme em botões e spotlight dinâmico nos procedimentos.
-  - Pré-renderização estática (SSG) de alta velocidade com inlining automático de CSS crítico em `dist/index.html`, eliminando bloqueios de renderização no mobile.
-  - Arquitetura Anti-FOUC definitiva via classes síncronas no `<head>` e sincronização com `requestAnimationFrame`, eliminando saltos ou piscadas visuais.
-  - Tabela transparente com os 3 principais serviços prestados: _Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_.
-  - Informação clara sobre a cobertura em toda a cidade de Mococa - SP e confirmação de taxa de deslocamento zero (R$ 0).
-  - Canal direto via botão flutuante e atalhos customizados de WhatsApp para combinação de datas e horários.
-  - SEO local focado em Mococa - SP com Open Graph em alta resolução, robots.txt, sitemap.xml e Schema.org (`HealthAndBeautyBusiness`) via JSON-LD.
-  - Fontes 100% auto-hospedadas e conformidade estrita de acessibilidade WCAG AA/AAA (skip-link, contrastes calibrados, focus trap em menu mobile e prefers-reduced-motion).
+- **Fase 1 (Entregue — Landing Page de Alta Conversão, CRO, Performance Extrema & Acessibilidade Universal):**
+  - **Identidade Editorial & Quiet Luxury:** Design sóbrio com paleta mineral (Obsidian Espresso, Warm Alabaster, Botanical Sage e Rich Warm Terracotta), dupla tipográfica de prestígio (Newsreader Variable e Outfit Variable) e textura tátil microgranulada adaptativa.
+  - **Modo Escuro / Claro Completo:** Alternância fluida via `ThemeContext`, sincronização com `localStorage` e preferência do sistema operacional (`prefers-color-scheme`), ajuste dinâmico de `meta[name="theme-color"]` e anúncio de status para leitores de tela em região `aria-live="polite"`.
+  - **Hero de Altíssimo Desempenho (LCP Otimizado):** Imagem principal pré-carregada (`loading="eager"`, `fetchPriority="high"`, `decoding="sync"`), ausência de bloqueios visuais e parallax óptico sutil em 2 planos no desktop.
+  - **Odômetro Numérico Rítmico (TrustStats):** Contador progressivo via GSAP de `0` até `+25.000` atendimentos em `<dl>` semântico com tipografia tabular (`tabular-nums`) e fallback acessível imediato (`sr-only` e `prefers-reduced-motion`).
+  - **Bento Grid Operacional:** 3 células assimétricas ("Espaço simples, conforto absoluto", "Sem taxa de visita" e "Horário exclusivo") detalhando a praticidade da visita domiciliar.
+  - **Apresentação Humana & Credenciais (AboutSection):** Histórico de atuação desde 2016 em Mococa, monograma gráfico vetorial, compromissos práticos e botão de contato pessoal com a profissional.
+  - **Catálogo Transparente com Efeito Spotlight (ServicesPricing):** Apresentação dos 3 procedimentos canônicos (_Pé e Mão Completo_ a R$ 75, *Cuidado dos Pés* a R$ 45 e _Cuidado das Mãos_ a R$ 35), iluminação radial seguidora de cursor via `requestAnimationFrame`, feixe luminoso _border-sheen_ no serviço recomendado, e banner prioritário de urgência para unhas encravadas.
+  - **Seção de Higiene e Equipamentos (TechnologySection):** Destaque em sangria total da autoclave cirúrgica a 134°C e materiais descartáveis, complementado por cards da Fototerapia LED de luz vermelha e da Cabine UV portátil de secagem rápida.
+  - **Acordeão de FAQ Acessível (WAI-ARIA Accordion):** Animação fluida de altura via CSS Grid sem layout thrashing, indicador vertical hairline e suporte integral a navegação por teclado (`ArrowDown`, `ArrowUp`, `Home`, `End`).
+  - **Call-to-Action Duplo & Footer Completo:** Botão primário para agendamento, botão secundário para dúvidas, rodapé informativo em 4 colunas com touch targets mínimos de 44x44px e copyright dinâmico.
+  - **Botão Flutuante de WhatsApp:** Acesso rápido permanente em `<aside>` com compensação para áreas seguras de notch/gestos (`env(safe-area-inset-*)`) e alvo de toque generoso de 48x48px (WCAG AAA).
+  - **Engenharia SSG & Anti-FOUC:** Pré-renderização estática de HTML no build (`scripts/prerender.mjs`) com inlining automático de CSS crítico no `<head>`, preloading automático de fontes WOFF2 (`vite.config.ts`), script anti-FOUC síncrono e segurança `:focus-within` para usuários de teclado.
+  - **SEO Local e Dados Estruturados:** Schema.org (`HealthAndBeautyBusiness`), Open Graph de alta definição, Twitter Cards, meta tags canônicas, sitemap.xml e robots.txt otimizados para Mococa - SP.
+  - **Auditoria Automatizada de Acessibilidade:** Pipeline com Axe-Core + JSDOM (`scripts/audit-a11y.mjs`) atestando pontuação 100/100 sem nenhuma violação WCAG 2.1 / 2.2 AA e AAA.
 
-- **Fase 2 (Em Desenvolvimento — Motor de Agendamento & Integração):**
-  - Fluxo de solicitação de horário com seleção de serviço, preferências de data e endereço residencial em Mococa.
-  - Painel administrativo da profissional com visão de clientes, rotas do dia e histórico de atendimentos.
+- **Fase 2 (Em Planejamento — Automação de Agendamento & Gestão):**
+  - Seletor inteligente de data, período e bairro em Mococa para pré-agendamento estruturado antes do encaminhamento ao WhatsApp.
+  - Painel administrativo privativo para a profissional gerenciar a agenda diária, visualização de rotas e histórico de atendimentos por cliente.
 
 ## Evidence on Hand
 
-- Código-fonte funcional em React 19 + Vite focado na experiência de alta performance, ausência de jank e acessibilidade da página principal (Home).
-- Sistema de design documentado em `DESIGN.md` com tokens semânticos, paleta mineral e tokens de movimento refinados.
-- Animações GSAP modulares em `src/animations/` e orquestração limpa com `@gsap/react`.
-- Script de pré-renderização estática SSG (`scripts/prerender.mjs`) integrado ao pipeline de build.
+- Código-fonte limpo e modular em React 19, TypeScript, Vite 8, Tailwind CSS v4 e GSAP 3.
+- Design System consolidado e documentado em `DESIGN.md` com tokens semânticos, paleta mineral, especificações de componentes e diretrizes de acessibilidade.
+- Animações refinadas orquestradas com `@gsap/react` em `src/animations/` e gancho reutilizável `useSectionAnimation`.
+- Testes e validações passando com sucesso em `npm run check` (TypeScript, ESLint, Prettier, build SSG e auditoria Axe-Core com 100% de conformidade).
 
 ## Product Principles
 
-1. **Transparência e clareza total:** serviços explicados com simplicidade (corte, desencravar suave, lixar, cutilar e pintar), com destaque para atendimento em toda Mococa sem taxa de transporte.
-2. **Higiene e biossegurança rigorosa:** instrumentos 100% esterilizados em autoclave e descartáveis individuais abertos na presença da cliente.
-3. **Conforto domiciliar genuíno:** atendimento acolhedor no lar da cliente, sem filas de espera de salão e no horário combinado.
-4. **Agilidade de contato:** comunicação direta e transparente via WhatsApp, com opções de pagamento claras (PIX ou dinheiro vivo).
+1. **Transparência e clareza total:** Procedimentos descritos com exatidão de tempo e escopo, preços fixos pré-definidos e confirmação inequívoca de taxa zero de deslocamento em toda a cidade de Mococa.
+2. **Biossegurança e assepsia cirúrgica rigorosa:** Instrumentos esterilizados em autoclave hospitalar a 134°C, embalados em envelopes lacrados abertos na presença da cliente e insumos 100% descartáveis de uso único.
+3. **Cuidado humanizado e acolhedor:** Tratamento afetuoso, dedicado e sem pressa, com atenção e paciência especiais voltadas para idosos, pessoas acamadas e com sensibilidade física.
+4. **Tecnologia prática a favor do conforto:** Equipamentos portáteis clínicos que agregam valor perceptível imediato (fototerapia LED para alívio/cicatrização e cabine UV para secagem rápida de esmalte).
+5. **Acessibilidade universal e performance extrema:** Navegação inclusiva para todas as pessoas (teclado, leitores de tela, alto contraste e movimento reduzido), com carregamento instantâneo e ausência total de oscilações visuais.
