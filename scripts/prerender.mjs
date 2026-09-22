@@ -10,6 +10,20 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const distIndexPath = path.join(rootDir, 'dist', 'index.html')
 
+/**
+ * Pipeline de Pré-renderização Estática (SSG - Static Site Generation).
+ *
+ * ### Passos do Processo:
+ * 1. **Verificação Prévia:** Garante que o build do cliente do Vite (`vite build`) foi concluído e `dist/index.html` existe.
+ * 2. **Instanciação SSR do Vite:** Inicia uma instância Vite em `middlewareMode` para resolver módulos TypeScript/JSX
+ *    e dependências sem precisar de empacotamento prévio no servidor.
+ * 3. **Renderização para String HTML:** Invoca `renderToString(<App />)` gerando toda a árvore semântica da página.
+ * 4. **Injeção no DOM Estático:** Substitui o contêiner vazio `<div id="root"></div>` pelo HTML estático gerado.
+ * 5. **Otimização de Caminho Crítico (CSS Inline):**
+ *    Lê o arquivo CSS compilado em `dist/assets/css/` e o injeta como tag `<style>` inline,
+ *    substituindo a tag `<link rel="stylesheet">` externa. Isso elimina o bloqueio de renderização
+ *    (economizando ~150ms na conexão de rede móvel) e zera o tempo até o First Contentful Paint.
+ */
 async function prerender() {
   if (!fs.existsSync(distIndexPath)) {
     console.error('dist/index.html not found. Run vite build first.')
@@ -33,7 +47,7 @@ async function prerender() {
       `<div id="root" class="flex-1 flex flex-col">${appHtml}</div>`,
     )
 
-    // Injeta o CSS em <style> inline para eliminar a solicitação bloqueadora de renderização (150ms no Mobile)
+    // Injeta o CSS em <style> inline para eliminar a solicitação bloqueadora de renderização
     const cssDir = path.join(rootDir, 'dist', 'assets', 'css')
     if (fs.existsSync(cssDir)) {
       const cssFiles = fs.readdirSync(cssDir).filter((f) => f.endsWith('.css'))

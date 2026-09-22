@@ -1,21 +1,40 @@
 /**
- * Número oficial de WhatsApp para dúvidas e emergências com Angélica Eduarda (Mococa/SP):
- * 55 19 99544-3922 -> '5519995443922'
- * Pode ser customizado via variável de ambiente VITE_WHATSAPP_NUMBER.
+ * Utilitários para geração de links e formatação do canal oficial de WhatsApp.
+ * Centraliza os parâmetros de contato profissional para Angélica Eduarda em Mococa/SP.
+ */
+
+/**
+ * Leitura da variável de ambiente opcional para override do número em staging/teste.
  */
 const rawEnvNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined
 
+/**
+ * Número de telefone oficial sanitizado no padrão E.164 (apenas dígitos, ex: '5519995443922').
+ * Padrão: 55 (Brasil) 19 (Mococa/Região) 99544-3922.
+ */
 export const WHATSAPP_NUMBER = rawEnvNumber ? rawEnvNumber.replace(/\D/g, '') : '5519995443922'
 
+/**
+ * Mensagem padrão de saudação inicial ao abrir o canal de dúvidas.
+ */
 export const WHATSAPP_DEFAULT_MESSAGE =
   'Olá, Angélica! Gostaria de tirar uma dúvida sobre o atendimento em domicílio em Mococa.'
 
+/**
+ * Gera a URL universal da API do WhatsApp (`https://wa.me/...`) com o texto devidamente codificado.
+ *
+ * @param message - Texto predefinido que aparecerá na caixa de mensagem do cliente.
+ * @returns Link completo para abertura no WhatsApp Web ou aplicativo móvel.
+ */
 export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MESSAGE): string => {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 
 /**
- * Retorna link do WhatsApp para dúvidas específicas sobre procedimentos ou atendimento.
+ * Retorna link do WhatsApp parametrizado para esclarecimento de dúvidas sobre um procedimento específico.
+ *
+ * @param topic - Nome do procedimento ou tema de dúvida (ex: "Pé e Mão Completo", "Cabine UV").
+ * @returns URL formatada com mensagem contextualizada.
  */
 export const getWhatsAppDoubtUrl = (topic?: string): string => {
   const message = topic
@@ -25,7 +44,10 @@ export const getWhatsAppDoubtUrl = (topic?: string): string => {
 }
 
 /**
- * Retorna link do WhatsApp para situações de urgência podológica (dor aguda, unha encravada inflamada).
+ * Retorna link do WhatsApp parametrizado com mensagem prioritária de alívio rápido
+ * para situações de urgência podológica (ex: dor aguda, unha encravada ou inflamada).
+ *
+ * @returns URL formatada com solicitação de atendimento prioritário.
  */
 export const getWhatsAppUrgencyUrl = (): string => {
   const message =
@@ -34,7 +56,10 @@ export const getWhatsAppUrgencyUrl = (): string => {
 }
 
 /**
- * Retorna o número de WhatsApp formatado para exibição legível na interface (ex: (19) 99544-3922).
+ * Formata o número E.164 para exibição amigável e legível na interface de usuário.
+ * Exemplo: '5519995443922' -> '(19) 99544-3922'.
+ *
+ * @returns String formatada com DDD entre parênteses e hífen no número celular.
  */
 export const getWhatsAppDisplayNumber = (): string => {
   const digits = WHATSAPP_NUMBER.replace(/\D/g, '')

@@ -4,21 +4,48 @@ import { initNavbarAnimation } from '@/animations/navbar'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
 import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react'
 
+/**
+ * Componente de Cabeçalho / Barra de Navegação Superior.
+ *
+ * ### Funcionalidades e Acessibilidade:
+ * 1. **Efeito Scrolled Suave:** Transita para fundo translúcido (backdrop-blur) com borda capilar
+ *    ao rolar a página mais de 20px via `initNavbarAnimation`.
+ * 2. **Menu Mobile Acessível (WAI-ARIA Dialog/Drawer):**
+ *    - Bloqueio de rolagem do body quando aberto.
+ *    - Aplicação do atributo `inert` nos elementos adjacentes (`main`, `footer`, `aside`)
+ *      para evitar navegação por foco fora do menu aberto.
+ *    - Trap de foco estrito com `Tab` e `Shift+Tab`.
+ *    - Fechamento imediato com tecla `Escape` ou clique no backdrop.
+ *    - Restauração automática de foco para o botão hambúrguer ao fechar.
+ * 3. **Live Region para Tema:**
+ *    - Região `aria-live="polite"` que anuncia mudanças de modo claro/escuro para leitores de tela.
+ * 4. **Touch Targets Conformes (WCAG 2.2):**
+ *    - Todas as áreas interativas possuem dimensões mínimas de 44x44px.
+ */
 export const Navbar: React.FC = () => {
+  // ---------------------------------------------------------------------------
+  // 1. Estados e Referências DOM
+  // ---------------------------------------------------------------------------
   const { isDark, toggleTheme } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [themeStatusMessage, setThemeStatusMessage] = useState('')
+
   const headerRef = useRef<HTMLElement | null>(null)
   const mobileToggleRef = useRef<HTMLButtonElement | null>(null)
   const mobileMenuRef = useRef<HTMLDivElement | null>(null)
   const prevOpenRef = useRef(false)
 
+  // ---------------------------------------------------------------------------
+  // 2. Manipulação de Tema
+  // ---------------------------------------------------------------------------
   const handleToggleTheme = () => {
     toggleTheme()
     setThemeStatusMessage(isDark ? 'Modo claro ativado' : 'Modo escuro ativado')
   }
 
-  // Trava a rolagem e isola o conteúdo de fundo com inert quando o menu mobile estiver aberto
+  // ---------------------------------------------------------------------------
+  // 3. Trava de Rolagem e Isolamento Semântico (`inert`)
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
     const mainEl = document.getElementById('main-content')
@@ -43,7 +70,9 @@ export const Navbar: React.FC = () => {
     }
   }, [isMobileMenuOpen])
 
-  // Fecha o menu mobile e libera a rolagem se a tela for redimensionada para desktop (>= 1024px)
+  // ---------------------------------------------------------------------------
+  // 4. Auto-fechamento ao Redimensionar para Desktop (>= 1024px)
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     try {
       const mql = window.matchMedia('(min-width: 1024px)')
@@ -55,24 +84,30 @@ export const Navbar: React.FC = () => {
       mql.addEventListener('change', handleResize)
       return () => mql.removeEventListener('change', handleResize)
     } catch {
-      // MatchMedia indisponível
+      // MatchMedia indisponível no ambiente de teste/SSR
     }
   }, [])
 
-  // Gerenciamento de foco: move foco para o primeiro link ao abrir e restaura para o botão ao fechar
+  // ---------------------------------------------------------------------------
+  // 5. Gerenciamento e Restauração de Foco
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     if (isMobileMenuOpen) {
+      // Move o foco para o primeiro elemento navegável dentro do menu
       const firstFocusable = mobileMenuRef.current?.querySelector<HTMLElement>(
         'a[href], button:not([disabled])',
       )
       firstFocusable?.focus()
     } else if (prevOpenRef.current) {
+      // Devolve o foco ao botão disparador quando o menu é fechado
       mobileToggleRef.current?.focus()
     }
     prevOpenRef.current = isMobileMenuOpen
   }, [isMobileMenuOpen])
 
-  // Focus trap, Escape e clique fora para o menu mobile
+  // ---------------------------------------------------------------------------
+  // 6. Focus Trap, Tecla Escape e Clique Externo
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     if (!isMobileMenuOpen) return
 
@@ -134,6 +169,9 @@ export const Navbar: React.FC = () => {
     }
   }, [isMobileMenuOpen])
 
+  // ---------------------------------------------------------------------------
+  // 7. Inicialização da Animação do Header
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     const headerEl = headerRef.current
     if (!headerEl) return

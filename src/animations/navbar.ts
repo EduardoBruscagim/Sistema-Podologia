@@ -1,10 +1,19 @@
 /**
- * Gerencia a barra de navegação fixa:
- * - Mantém a barra permanentemente visível no topo da página.
- * - Aplica a classe '.is-scrolled' quando a página rolar mais de 20px,
- *   ativando o efeito translúcido (glassmorphism/blur) e a borda capilar.
- * - Usa listener nativo de alta performance ({ passive: true }) com requestAnimationFrame,
- *   eliminando qualquer reflow forçado ou dependência síncrona do GSAP no caminho crítico.
+ * Gerencia o estado visual da barra de navegação durante a rolagem (Navbar Scroll State).
+ *
+ * ### Decisões de Arquitetura e Performance:
+ * 1. **Zero Reflow com Listener Passivo:**
+ *    Usa um listener nativo de rolagem com `{ passive: true }`, evitando bloqueio da thread principal.
+ * 2. **Throttling via requestAnimationFrame (rAF):**
+ *    Garante que a atualização da classe `.is-scrolled` seja despachada apenas uma vez por quadro de animação
+ *    (60-120fps), eliminando jank ou trabalho repetitivo no scroll.
+ * 3. **Independência do GSAP no Caminho Crítico:**
+ *    A transição visual de vidro/blur e a borda capilar são controladas puramente por transições CSS
+ *    quando `.is-scrolled` é adicionado/removido, liberando a biblioteca GSAP para outros efeitos.
+ *
+ * @param headerEl - Elemento `<header>` fixo no topo.
+ * @param navContainerEl - Container pai opcional para ajuste de propriedades de ponteiro.
+ * @returns Função de cleanup para remoção do listener e restauração de estado.
  */
 export const initNavbarAnimation = (
   headerEl: HTMLElement,
@@ -18,6 +27,7 @@ export const initNavbarAnimation = (
 
   let isScrolled = false
 
+  // Atualiza classe apenas quando o limiar de 20px for ultrapassado
   const updateScrolledState = (scrollY: number) => {
     if (scrollY > 20 && !isScrolled) {
       isScrolled = true

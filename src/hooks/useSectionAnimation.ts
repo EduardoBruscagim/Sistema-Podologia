@@ -4,12 +4,24 @@ import { useGSAP } from '@gsap/react'
 import { applyReducedMotion } from '@/animations/reducedMotion'
 
 /**
- * Hook reutilizável para animações GSAP em seções, com suporte nativo e acessível a prefers-reduced-motion.
+ * Hook utilitário reutilizável para inicializar animações GSAP / ScrollTrigger em seções.
  *
- * - Configura matchMedia com detecção de movimento reduzido.
- * - Se o usuário preferir movimento reduzido, aplica autoAlpha: 1 e limpa transforms nos alvos.
- * - Caso contrário, invoca initAnimation vinculada ao elemento DOM da seção.
- * - Reverte e limpa automaticamente tweens e ScrollTriggers no unmount.
+ * ### Características e Salvaguardas:
+ * 1. **Acessibilidade Motora (WCAG 2.2 AAA):**
+ *    Detecta `(prefers-reduced-motion: reduce)` via `gsap.matchMedia()`.
+ *    Se o usuário solicitar movimento reduzido, aborta animações dinâmicas e aplica
+ *    `applyReducedMotion` nos seletores fornecidos, garantindo opacidade total imediata
+ *    e remoção de transforms/offsets.
+ * 2. **Isolamento de Escopo:**
+ *    Usa o hook oficial `@gsap/react` com `{ scope: scopeRef }`, garantindo que os seletores
+ *    declarados na animação não vazem para outras seções ou componentes.
+ * 3. **Gerenciamento Automático de Memória:**
+ *    Garante a chamada de `mm.revert()` e limpeza de ScrollTriggers quando o componente
+ *    for desmontado do DOM.
+ *
+ * @param scopeRef - Referência React ao elemento raiz da seção (`<section>`).
+ * @param initAnimation - Função de fábrica que instancia tweens/ScrollTriggers no elemento DOM.
+ * @param reducedMotionTargets - Seletor(es) ou elemento(s) que devem ter estilos inline limpos caso o movimento seja reduzido.
  */
 export const useSectionAnimation = (
   scopeRef: React.RefObject<HTMLElement | null>,
@@ -22,6 +34,7 @@ export const useSectionAnimation = (
       if (!el) return
 
       const mm = gsap.matchMedia()
+
       mm.add(
         {
           isMotionOk: '(prefers-reduced-motion: no-preference)',
@@ -29,6 +42,8 @@ export const useSectionAnimation = (
         },
         (context) => {
           const { isMotionOk } = context.conditions!
+
+          // Se a preferência do usuário for movimento reduzido, apenas assegura visibilidade
           if (!isMotionOk) {
             if (reducedMotionTargets) {
               applyReducedMotion(reducedMotionTargets)
@@ -36,6 +51,7 @@ export const useSectionAnimation = (
             return
           }
 
+          // Caso contrário, executa a animação interativa/scroll da seção
           return initAnimation(el)
         },
       )

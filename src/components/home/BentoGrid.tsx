@@ -3,9 +3,22 @@ import { initBentoAnimation } from '@/animations/bento'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { Home, MapPin, Clock, Check } from 'lucide-react'
 
+/**
+ * Seção de Funcionamento do Atendimento (Bento Grid).
+ *
+ * ### Filosofia e Estrutura Editorial:
+ * Utiliza um padrão Bento Box responsivo (12 colunas em desktop):
+ * - **Card 1 (Hero Bento - 7 colunas):** Destaque da comodidade do lar, praticidade e conforto
+ *   sem necessidade de estruturas complexas (apenas cadeira e tomada).
+ * - **Card 2 (5 colunas - superior):** Cobertura territorial completa em Mococa/SP sem taxa de visita.
+ * - **Card 3 (5 colunas - inferior):** Pontualidade rigorosa e atendimento individual com atenção total.
+ *
+ * Microinterações de hover suaves (`initCardsHover`) são vinculadas via GSAP nos ponteiros finos.
+ */
 export const BentoGrid: React.FC = () => {
   const bentoSectionRef = useRef<HTMLElement | null>(null)
 
+  // Dispara animações de entrada cascata e microinterações de hover nos cards
   useSectionAnimation(bentoSectionRef, initBentoAnimation, [
     '.bento-header',
     '.bento-card',
@@ -18,6 +31,9 @@ export const BentoGrid: React.FC = () => {
       aria-labelledby="bento-heading"
       className="max-w-6xl mx-auto px-6 py-16 lg:py-24"
     >
+      {/* ----------------------------------------------------------------- */}
+      {/* Cabeçalho Editorial da Seção                                     */}
+      {/* ----------------------------------------------------------------- */}
       <div className="bento-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="bento-heading"
@@ -27,6 +43,9 @@ export const BentoGrid: React.FC = () => {
         </h2>
       </div>
 
+      {/* ----------------------------------------------------------------- */}
+      {/* Grade Bento: Card Principal à Esquerda + 2 Cards Empilhados      */}
+      {/* ----------------------------------------------------------------- */}
       <div className="bento-grid grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Card 1 (Destaque Principal / Hero Card do Bento): Conforto do lar */}
         <div className="bento-card lg:col-span-7 p-7 sm:p-9 rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border flex flex-col justify-between shadow-xs">

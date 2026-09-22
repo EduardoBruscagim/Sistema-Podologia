@@ -3,11 +3,17 @@ import { ChevronDown } from 'lucide-react'
 import { initFaqAnimation } from '@/animations/faq'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 
+/**
+ * Interface representativa de uma pergunta e resposta do FAQ.
+ */
 interface FaqItem {
   question: string
   answer: string
 }
 
+/**
+ * Lista de perguntas frequentes sobre os atendimentos em Mococa/SP.
+ */
 const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Como funciona o atendimento em domicílio?',
@@ -40,6 +46,9 @@ const FAQ_ITEMS: FaqItem[] = [
   },
 ]
 
+/**
+ * Propriedades para cada item individual do acordeão.
+ */
 interface FaqAccordionItemProps {
   item: FaqItem
   index: number
@@ -48,6 +57,19 @@ interface FaqAccordionItemProps {
   onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => void
 }
 
+/**
+ * Item individual do acordeão acessível (WAI-ARIA Accordion Pattern).
+ *
+ * ### Decisões Técnicas de Animação e Acessibilidade:
+ * 1. **CSS Grid para Altura Fluida:**
+ *    - Utiliza transição de `grid-template-rows: 0fr` para `grid-template-rows: 1fr`
+ *      permitindo animação suave de expansão e colapso sem medição forçada de `offsetHeight` (zero layout thrashing).
+ * 2. **Atributos Semânticos ARIA:**
+ *    - Botão com `aria-expanded` e `aria-controls` apontando para o painel correspondente.
+ *    - Painel com `role="region"` e `aria-labelledby` apontando para o botão da pergunta.
+ * 3. **Indicador Visual Hairline:**
+ *    - Traço vertical de acento (`w-[3px] bg-accent`) com transição de escala vertical `scale-y`.
+ */
 const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
   ({ item, index, isOpen, onToggle, onKeyDown }) => {
     return (
@@ -123,6 +145,15 @@ const FaqAccordionItem: React.FC<FaqAccordionItemProps> = React.memo(
 
 FaqAccordionItem.displayName = 'FaqAccordionItem'
 
+/**
+ * Seção de Perguntas Frequentes (FaqSection).
+ *
+ * Suporta navegação completa por teclado segundo os padrões do W3C ARIA:
+ * - `ArrowDown`: Move o foco para a próxima pergunta (com wrap para o primeiro item).
+ * - `ArrowUp`: Move o foco para a pergunta anterior (com wrap para o último item).
+ * - `Home`: Move o foco imediatamente para a primeira pergunta.
+ * - `End`: Move o foco imediatamente para a última pergunta.
+ */
 export const FaqSection: React.FC = () => {
   const faqSectionRef = useRef<HTMLElement | null>(null)
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -131,6 +162,9 @@ export const FaqSection: React.FC = () => {
     setOpenIndex((prev) => (prev === index ? null : index))
   }
 
+  // ---------------------------------------------------------------------------
+  // Navegação Acessível por Teclado entre Cabeçalhos do Acordeão
+  // ---------------------------------------------------------------------------
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
     const total = FAQ_ITEMS.length
     let targetIndex: number | null = null
@@ -155,6 +189,7 @@ export const FaqSection: React.FC = () => {
     }
   }
 
+  // Dispara animação sequencial de entrada dos itens do FAQ via ScrollTrigger
   useSectionAnimation(faqSectionRef, initFaqAnimation, ['.faq-header', '.faq-item'])
 
   return (

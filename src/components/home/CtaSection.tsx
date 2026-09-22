@@ -3,9 +3,17 @@ import { initCtaAnimation } from '@/animations/cta'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { getWhatsAppUrl, getWhatsAppDoubtUrl } from '@/utils/whatsapp'
 
+/**
+ * Seção de Chamada para Ação Final (CtaSection).
+ *
+ * Oferece duas opções claras de conversão para o usuário:
+ * 1. **Botão Primário (Terracotta Accent):** Abertura do WhatsApp com mensagem pronta de agendamento.
+ * 2. **Botão Secundário (Borda Editorial):** Abertura do canal direto de esclarecimento de dúvidas prévias.
+ */
 export const CtaSection: React.FC = () => {
   const ctaSectionRef = useRef<HTMLElement | null>(null)
 
+  // Inicia animação de revelação suave da chamada final
   useSectionAnimation(ctaSectionRef, initCtaAnimation, '.cta-reveal')
 
   return (
@@ -25,7 +33,9 @@ export const CtaSection: React.FC = () => {
           Entre em contato pelo WhatsApp para agendar seu horário ou tirar dúvidas.
         </p>
 
+        {/* Grupo de Ações de Conversão */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+          {/* Ação Primária: Agendamento */}
           <a
             href={getWhatsAppUrl(
               'Olá, Angélica! Li as informações no site e gostaria de agendar um atendimento em domicílio em Mococa.',
@@ -37,6 +47,8 @@ export const CtaSection: React.FC = () => {
           >
             Solicitar Agendamento
           </a>
+
+          {/* Ação Secundária: Dúvidas */}
           <a
             className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 rounded-full bg-pure-white dark:bg-surface-variant border border-surface-border hover:border-accent text-on-surface text-xs uppercase tracking-[0.14em] font-medium hover:bg-surface-variant active:scale-[0.98] transition-[background-color,border-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             href={getWhatsAppDoubtUrl()}

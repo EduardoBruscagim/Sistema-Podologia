@@ -1,6 +1,19 @@
 import gsap from 'gsap'
 import { initCardsHover } from './cardHover'
 
+/**
+ * Animação de entrada e microinterações de hover para a seção de Procedimentos e Valores (ServicesPricing).
+ *
+ * ### Comportamento e Sequenciamento:
+ * 1. Revelação suave do cabeçalho da seção (`.services-header`).
+ * 2. Cascata fluida dos 3 cards de procedimentos (`.service-card`) com `stagger: 0.1` e elevação sem `scale`
+ *    para assegurar legibilidade absoluta de preços e tipografia.
+ * 3. Entrada da faixa de rodapé informativo (`.services-footer`) com garantia de deslocamento e formas de pagamento.
+ * 4. Microinteração de hover nos cards com elevação de `-4px` e microescala de `1.08` no ícone.
+ *
+ * @param sectionEl - Elemento raiz da seção `<section id="procedimentos">`.
+ * @returns Função de cleanup para remoção dos listeners de hover e reversão do contexto GSAP.
+ */
 export const initServicesAnimation = (sectionEl: HTMLElement): (() => void) => {
   const ctx = gsap.context(() => {
     // Cabeçalho da seção

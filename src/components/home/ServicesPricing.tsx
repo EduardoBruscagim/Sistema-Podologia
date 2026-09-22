@@ -5,6 +5,9 @@ import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { SERVICES, type ServiceItem } from '@/data/services'
 import { getWhatsAppUrl, getWhatsAppUrgencyUrl } from '@/utils/whatsapp'
 
+/**
+ * Dicionário tipado de ícones correspondentes aos procedimentos clínicos.
+ */
 const SERVICE_ICONS: Record<
   ServiceItem['icon'],
   React.ComponentType<{ className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }>
@@ -14,16 +17,35 @@ const SERVICE_ICONS: Record<
   hand: Hand,
 }
 
+/**
+ * Seção de Procedimentos e Valores (ServicesPricing).
+ *
+ * ### Características Técnicas e de UX:
+ * 1. **Efeito Spotlight Seguidor de Cursor:**
+ *    - Calcula a posição do mouse em relação ao card e define as variáveis CSS
+ *      `--mouse-x` e `--mouse-y` via `requestAnimationFrame`.
+ *    - O cancelamento prévio de frames pendentes (`cancelAnimationFrame`) garante
+ *      60-120fps fluidos sem engasgos de renderização ou sobrecarga de CPU.
+ * 2. **Destaque Editorial:**
+ *    - O procedimento recomendado (`isFeatured`) recebe iluminação superior (`animate-border-sheen`)
+ *      e contraste de borda proeminente.
+ * 3. **Banner de Urgência Podológica:**
+ *    - Bloco destacado com contato direto para dores agudas e unhas encravadas.
+ * 4. **Garantia de Deslocamento:**
+ *    - Exibição de taxa zero de deslocamento e confirmação de pagamento seguro ao final.
+ */
 export const ServicesPricing: React.FC = () => {
   const servicesSectionRef = useRef<HTMLElement | null>(null)
   const rafRef = useRef<number | null>(null)
 
+  // Inicializa animação em cascata dos cards e da faixa informativa
   useSectionAnimation(servicesSectionRef, initServicesAnimation, [
     '.services-header',
     '.service-card',
     '.services-footer',
   ])
 
+  // Limpeza de qualquer frame de animação pendente no unmount do componente
   useEffect(() => {
     return () => {
       if (rafRef.current !== null) {
@@ -32,6 +54,10 @@ export const ServicesPricing: React.FC = () => {
     }
   }, [])
 
+  /**
+   * Atualiza as coordenadas do efeito radial de iluminação no card que recebe o cursor.
+   * Utiliza requestAnimationFrame para throttle nativo e máxima performance.
+   */
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     const card = e.currentTarget
     const clientX = e.clientX
@@ -58,6 +84,9 @@ export const ServicesPricing: React.FC = () => {
       id="procedimentos"
       aria-labelledby="services-pricing-heading"
     >
+      {/* ----------------------------------------------------------------- */}
+      {/* Cabeçalho da Seção de Procedimentos                               */}
+      {/* ----------------------------------------------------------------- */}
       <div className="services-header mb-12 lg:mb-16 max-w-2xl">
         <h2
           id="services-pricing-heading"
@@ -71,7 +100,9 @@ export const ServicesPricing: React.FC = () => {
         </p>
       </div>
 
-      {/* 3 Cards de Procedimentos mapeados a partir de services.ts */}
+      {/* ----------------------------------------------------------------- */}
+      {/* Grade de Cards de Procedimentos (3 Colunas)                       */}
+      {/* ----------------------------------------------------------------- */}
       <div className="services-grid grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-8">
         {SERVICES.map((service) => {
           const ServiceIcon = SERVICE_ICONS[service.icon]
@@ -128,7 +159,7 @@ export const ServicesPricing: React.FC = () => {
                   {service.duration}
                 </span>
 
-                {/* Preço */}
+                {/* Preço e Forma de Cobrança */}
                 <div className="mb-6 pb-6 border-b border-surface-border">
                   <div className="flex items-baseline gap-1">
                     <span className="text-sm font-sans text-text-secondary font-light">R$</span>
@@ -145,6 +176,7 @@ export const ServicesPricing: React.FC = () => {
                   {service.description}
                 </p>
 
+                {/* Lista de Itens Inclusos no Procedimento */}
                 <ul
                   aria-label={`Benefícios do procedimento ${service.title}`}
                   className="flex flex-col gap-3 text-xs text-on-surface-variant font-light"
@@ -158,6 +190,7 @@ export const ServicesPricing: React.FC = () => {
                 </ul>
               </div>
 
+              {/* Ação de Agendamento Específico com Deslocamento Cortesia */}
               <div className="pt-6 mt-6 border-t border-surface-border">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-text-secondary font-light">Deslocamento</span>
@@ -184,7 +217,9 @@ export const ServicesPricing: React.FC = () => {
         })}
       </div>
 
-      {/* Chamada para Urgência / Dor de Unha Encravada */}
+      {/* ----------------------------------------------------------------- */}
+      {/* Chamada para Urgência / Dor de Unha Encravada                     */}
+      {/* ----------------------------------------------------------------- */}
       <div className="mb-6 p-5 sm:p-6 rounded-xl border border-accent/25 bg-accent/5 dark:bg-accent/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-start gap-3.5">
           <div className="w-9 h-9 rounded-lg bg-accent/15 text-accent flex items-center justify-center shrink-0 mt-0.5">
@@ -211,7 +246,9 @@ export const ServicesPricing: React.FC = () => {
         </a>
       </div>
 
-      {/* Reafirmação de Deslocamento e Materiais */}
+      {/* ----------------------------------------------------------------- */}
+      {/* Reafirmação de Deslocamento e Materiais                          */}
+      {/* ----------------------------------------------------------------- */}
       <div className="services-footer p-6 rounded-xl border border-surface-border bg-surface-variant/30 backdrop-blur-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-secondary font-light">
         <div className="flex items-center gap-2 text-center sm:text-left">
           <span className="text-sage font-medium" aria-hidden="true">
