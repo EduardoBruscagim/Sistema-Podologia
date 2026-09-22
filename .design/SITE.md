@@ -4,13 +4,13 @@
 
 ## 1. Core Identity
 
-| Field | Value |
-|---|---|
-| **Project Name** | Sistema de Podologia e Cuidado Clínico em Domicílio (Angélica Eduarda) |
-| **Mission** | Atendimento clínico especializado e acolhedor de podologia e manicure no conforto do lar em toda Mococa - SP com rigor hospitalar, taxa zero de deslocamento e transparência absoluta. |
-| **Target Audience** | Moradores de qualquer bairro de Mococa - SP, idosos, acamados e pessoas com sensibilidade ou restrições de mobilidade que necessitam de cuidado paciente e especializado em casa. |
-| **Voice & Tone** | Clínico rigoroso, acolhedor, transparente, calmo e discreto (Quiet Luxury). |
-| **Region** | Mococa, São Paulo, Brasil |
+| Field               | Value                                                                                                                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Project Name**    | Sistema de Podologia e Cuidado Clínico em Domicílio (Angélica Eduarda)                                                                                                                 |
+| **Mission**         | Atendimento clínico especializado e acolhedor de podologia e manicure no conforto do lar em toda Mococa - SP com rigor hospitalar, taxa zero de deslocamento e transparência absoluta. |
+| **Target Audience** | Moradores de qualquer bairro de Mococa - SP, idosos, acamados e pessoas com sensibilidade ou restrições de mobilidade que necessitam de cuidado paciente e especializado em casa.      |
+| **Voice & Tone**    | Clínico rigoroso, acolhedor, transparente, calmo e discreto (Quiet Luxury).                                                                                                            |
+| **Region**          | Mococa, São Paulo, Brasil                                                                                                                                                              |
 
 ## 2. Visual Language
 
@@ -41,12 +41,15 @@ Update this when a page is successfully generated.
 Pick the next task from here. Remove items as they're completed.
 
 ### High Priority
+
 - [ ] Construir a página de agendamento estruturado (`agendamento.html`) permitindo selecionar procedimento, data preferencial, período do atendimento e endereço/bairro em Mococa com Taxa R$ 0, integrando com mensagem estruturada no WhatsApp.
 
 ### Medium Priority
+
 - [ ] Construir a página de orientações clínicas e cuidados preventivos (`cuidados-preventivos.html`) com conteúdo educativo sobre corte correto de unhas, prevenção de calosidades e cuidados especiais com pés de pessoas idosas ou com sensibilidade.
 
 ### Low Priority
+
 - [ ] Painel interno da profissional para gestão diária de rotas e confirmação de agendamentos.
 
 ## 6. Creative Freedom
@@ -58,6 +61,7 @@ When the roadmap is empty, follow these guidelines to add pages:
 3. **Naming convention** — lowercase, descriptive filenames (e.g. `agendamento.html`).
 
 ### Ideas to Explore
+
 - [ ] `duvidas-frequentes.html` — Central expandida de dúvidas detalhadas sobre biossegurança, unhas encravadas e procedimentos.
 - [ ] `depoimentos.html` — Relatos e histórias de clientes e familiares de idosos atendidos em domicílio em Mococa.
 
