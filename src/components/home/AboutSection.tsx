@@ -35,13 +35,13 @@ export const AboutSection: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
 
         <div className="about-reveal lg:col-span-5 flex flex-col items-center">
-          <div className="w-full max-w-sm rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border p-7 sm:p-8 flex flex-col items-center text-center shadow-xs">
+          <div className="about-card w-full max-w-sm rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border p-7 sm:p-8 flex flex-col items-center text-center shadow-xs">
             {/* Emblema Editorial com Monograma */}
             <div className="relative mb-6">
               <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-surface-variant dark:bg-surface flex items-center justify-center border border-surface-border text-accent overflow-hidden">
                 <img
                   src="/angelica.jpg"
-                  alt="Foto da Angélica Eduarda"
+                  alt="Foto da Angélica Eduarda Amaro Bruscagim"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -76,7 +76,7 @@ export const AboutSection: React.FC = () => {
               </li>
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <Heart aria-hidden="true" className="w-4 h-4 text-accent shrink-0" />
-                <span>Atenção e carinho especial para idosos e acamados</span>
+                <span>Atenção especial para idosos e pés sensíveis</span>
               </li>
             </ul>
           </div>
@@ -96,20 +96,19 @@ export const AboutSection: React.FC = () => {
 
           <div className="space-y-4 text-base text-on-surface-variant font-light leading-relaxed mb-8 max-w-[54ch] text-pretty">
             <p>
-              Sou <strong>Angélica Eduarda</strong> e, desde 2016, dedico minha vocação ao cuidado
-              com a saúde dos pés e das mãos, sei que receber um profissional em sua residência
-              exige confiança, pontualidade e discrição.
+              Sou <strong>Angélica Eduarda Amaro Bruscagim</strong>. Trabalho com saúde dos pés e
+              das mãos desde 2016. Sei que receber alguém na sua casa exige confiança, pontualidade
+              e discrição.
             </p>
             <p>
-              Meu atendimento foi pensado para quem busca comodidade sem abrir mão de um padrão
-              clínico de qualidade, levo todos os aparelhos, toalhas descartáveis e envelopes
-              cirúrgicos lacrados até a sua sala ou quarto, proporcionando um atendimento completo,
-              seguro e confortável.
+              Criei meu atendimento para quem busca conforto sem perder a qualidade de uma clínica.
+              Eu levo os aparelhos, toalhas descartáveis e os envelopes com instrumentos lacrados
+              até a sua sala ou quarto, para um atendimento completo e seguro.
             </p>
             <p>
-              Tenho um carinho especial pelo atendimento de idosos, pessoas com sensibilidade nos
-              pés ou com restrições de mobilidade, todo o procedimento, desde o corte correto até o
-              desencravamento preventivo, é realizado sem pressa, com cuidado e com muita paciência.
+              Gosto especialmente de atender idosos, pessoas com sensibilidade nos pés ou com
+              restrições de mobilidade. Faço o procedimento sem pressa, desde o corte até a
+              prevenção de unhas encravadas, com cuidado e paciência.
             </p>
           </div>
 

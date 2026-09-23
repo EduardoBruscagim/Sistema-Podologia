@@ -72,8 +72,8 @@ export const initTechnologyAnimation = (sectionEl: HTMLElement): (() => void) =>
     )
   }, sectionEl)
 
-  // Hover refinado apenas nos cards interativos de tecnologia
-  const cards = sectionEl.querySelectorAll<HTMLElement>('.tech-card')
+  // Hover refinado em todos os cards de tecnologia
+  const cards = sectionEl.querySelectorAll<HTMLElement>('.tech-card, .tech-featured')
   const cleanupCardHover = initCardsHover(cards, {
     y: -4,
     duration: 0.28,
