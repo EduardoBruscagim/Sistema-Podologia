@@ -26,11 +26,10 @@ export const Footer: React.FC = () => {
 
           <div className="py-6 first:pt-0 md:py-0 md:col-span-1 lg:col-span-4 flex flex-col items-start">
             <span className="font-serif text-lg lg:text-xl font-normal tracking-wide text-on-surface mb-3">
-              Angélica Eduarda
+              Angélica Bruscagim
             </span>
             <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light max-w-[34ch] text-pretty mb-4">
-              Cuidando da saúde e da beleza dos seus pés e mãos, no conforto da sua casa em Mococa,
-              SP.
+              Cuidando da saúde e da beleza dos seus pés e mãos, no conforto da sua casa.
             </p>
             <span className="text-[11px] text-accent font-medium tracking-wide">
               Atendimento Domiciliar • Mococa, SP
