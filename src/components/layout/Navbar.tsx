@@ -46,16 +46,56 @@ export const Navbar: React.FC = () => {
   const backdropRef = useRef<HTMLDivElement | null>(null)
   const topLineRef = useRef<HTMLSpanElement | null>(null)
   const bottomLineRef = useRef<HTMLSpanElement | null>(null)
+  const themeBtnRef = useRef<HTMLButtonElement | null>(null)
+  const sunIconRef = useRef<SVGSVGElement | null>(null)
+  const moonIconRef = useRef<SVGSVGElement | null>(null)
   const tlRef = useRef<gsap.core.Timeline | null>(null)
+  const isFirstThemeMountRef = useRef(true)
   const prevOpenRef = useRef(false)
 
   // ---------------------------------------------------------------------------
-  // 2. Manipulação de Tema
+  // 2. Manipulação de Tema com Transição Cinemática (GSAP + View Transitions)
   // ---------------------------------------------------------------------------
 
-  const handleToggleTheme = () => {
-    toggleTheme()
-    setThemeStatusMessage(isDark ? 'Modo claro ativado' : 'Modo escuro ativado')
+  const handleToggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const nextIsDark = !isDark
+    setThemeStatusMessage(nextIsDark ? 'Modo escuro ativado' : 'Modo claro ativado')
+
+    const doc = document as Document & {
+      startViewTransition?: (callback: () => void | Promise<void>) => { ready: Promise<void> }
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    // Efeito de transição de onda circular (Circular Ripple) a partir das coordenadas do clique
+    if (typeof doc.startViewTransition === 'function' && !prefersReducedMotion) {
+      const rect = e.currentTarget.getBoundingClientRect()
+      const x = rect.left + rect.width / 2
+      const y = rect.top + rect.height / 2
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y),
+      )
+
+      const transition = doc.startViewTransition(() => {
+        toggleTheme()
+      })
+
+      transition.ready.then(() => {
+        document.documentElement.animate(
+          {
+            clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`],
+          },
+          {
+            duration: 420,
+            easing: 'cubic-bezier(0.32, 0.72, 0, 1)',
+            pseudoElement: '::view-transition-new(root)',
+          },
+        )
+      })
+    } else {
+      toggleTheme()
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -140,6 +180,74 @@ export const Navbar: React.FC = () => {
         )
     },
     { scope: navbarRootRef },
+  )
+
+  // ---------------------------------------------------------------------------
+  // 5. GSAP Morph & Spring Física para os Ícones de Tema (Sol / Lua)
+  // ---------------------------------------------------------------------------
+
+  useGSAP(
+    () => {
+      if (!sunIconRef.current || !moonIconRef.current) return
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      if (isFirstThemeMountRef.current || prefersReducedMotion) {
+        isFirstThemeMountRef.current = false
+        gsap.set(sunIconRef.current, {
+          rotate: isDark ? 0 : 90,
+          scale: isDark ? 1 : 0.2,
+          autoAlpha: isDark ? 1 : 0,
+        })
+        gsap.set(moonIconRef.current, {
+          rotate: isDark ? -90 : 0,
+          scale: isDark ? 0.2 : 1,
+          autoAlpha: isDark ? 0 : 1,
+        })
+        return
+      }
+
+      if (isDark) {
+        gsap.to(sunIconRef.current, {
+          rotate: 0,
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.35,
+          ease: 'back.out(2)',
+        })
+        gsap.to(moonIconRef.current, {
+          rotate: -90,
+          scale: 0.2,
+          autoAlpha: 0,
+          duration: 0.22,
+          ease: 'power2.in',
+        })
+      } else {
+        gsap.to(moonIconRef.current, {
+          rotate: 0,
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.35,
+          ease: 'back.out(2)',
+        })
+        gsap.to(sunIconRef.current, {
+          rotate: 90,
+          scale: 0.2,
+          autoAlpha: 0,
+          duration: 0.22,
+          ease: 'power2.in',
+        })
+      }
+
+      if (themeBtnRef.current) {
+        gsap.fromTo(
+          themeBtnRef.current,
+          { scale: 0.88 },
+          { scale: 1, duration: 0.32, ease: 'back.out(2.5)' },
+        )
+      }
+    },
+    { dependencies: [isDark], scope: navbarRootRef },
   )
 
   // Disparo bidirecional (play/reverse) ao alternar o estado do menu
@@ -359,19 +467,27 @@ export const Navbar: React.FC = () => {
 
           {/* Ações à Direita: Tema + "Agendar Horário" (Primário para #procedimentos) */}
           <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
-            {/* Alternador de Tema */}
+            {/* Alternador de Tema Cinematográfico com GSAP */}
             <button
+              ref={themeBtnRef}
               aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
               aria-pressed={isDark}
               onClick={handleToggleTheme}
-              className="min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+              className="touch-manipulation relative min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer overflow-hidden"
               type="button"
             >
-              {isDark ? (
-                <Sun aria-hidden="true" className="w-4 h-4" />
-              ) : (
-                <Moon aria-hidden="true" className="w-4 h-4" />
-              )}
+              <div className="relative w-5 h-5 flex items-center justify-center pointer-events-none">
+                <Sun
+                  ref={sunIconRef}
+                  aria-hidden="true"
+                  className="absolute w-4 h-4 text-accent transition-none"
+                />
+                <Moon
+                  ref={moonIconRef}
+                  aria-hidden="true"
+                  className="absolute w-4 h-4 text-accent transition-none"
+                />
+              </div>
             </button>
 
             {/* Região ao vivo para anúncio de status do tema para leitores de tela */}
