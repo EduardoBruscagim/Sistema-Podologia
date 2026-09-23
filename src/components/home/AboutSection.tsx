@@ -102,12 +102,13 @@ export const AboutSection: React.FC = () => {
             </p>
             <p>
               Pensei nesse formato de atendimento para quem não quer (ou não pode) pegar trânsito ou
-              esperar em salão, mas não abre mão da limpeza de uma clínica. Pode ficar tranquila na sua casa, eu levo até você o meu equipamento, toalhas e os alicates.
+              esperar em salão, mas não abre mão da limpeza de uma clínica. Pode ficar tranquila na
+              sua casa, eu levo até você o meu equipamento, toalhas e os alicates.
             </p>
             <p>
-              Tenho um cuidado enorme por atender idosos, diabéticos, quem tem a unha mais
-              sensível ou quem está com dificuldade de andar. Faço tudo no tempo da pessoa, sem
-              pressa nenhuma, sempre com muito cuidado pra não machucar.
+              Tenho um cuidado enorme por atender idosos, diabéticos, quem tem a unha mais sensível
+              ou quem está com dificuldade de andar. Faço tudo no tempo da pessoa, sem pressa
+              nenhuma, sempre com muito cuidado pra não machucar.
             </p>
           </div>
 
