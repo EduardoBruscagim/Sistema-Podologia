@@ -99,8 +99,7 @@ export const ServicesPricing: React.FC = () => {
           Procedimentos e valores
         </h2>
         <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
-          Cuidados especializados com instrumentos esterilizados e taxa zero de visita em toda
-          Mococa, SP.
+          Levo os instrumentos esterilizados até a sua casa em Mococa, sem cobrar taxa de visita.
         </p>
       </div>
 
@@ -236,8 +235,8 @@ export const ServicesPricing: React.FC = () => {
               Está com dor aguda ou unha encravada?
             </h3>
             <p className="text-xs sm:text-sm text-on-surface-variant font-light leading-relaxed mt-0.5 max-w-[55ch]">
-              Atendimento podológico em domicílio para alívio imediato e desencravamento preventivo
-              cuidadoso em Mococa.
+              Vou até você em Mococa para dar alívio rápido e desencravar a unha com muito cuidado,
+              no seu tempo.
             </p>
           </div>
         </div>
@@ -262,8 +261,8 @@ export const ServicesPricing: React.FC = () => {
             •
           </span>
           <span>
-            Os instrumentos são esterilizados e os materiais descartáveis são abertos na hora do
-            atendimento.
+            Abro todos os instrumentos esterilizados e materiais descartáveis na sua frente, na hora
+            do atendimento.
           </span>
         </div>
         <div className="font-sans text-xs font-medium text-on-surface shrink-0">
