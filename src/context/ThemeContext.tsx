@@ -107,7 +107,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       return
     }
 
-    // 1. Suporte nativo à View Transitions API do navegador (GPU accelerated, suave e sem lag)
+    // 1. Suporte nativo à View Transitions API do navegador (GPU accelerated, circular blur mask reveal)
     const doc = document as Document & {
       startViewTransition?: (callback: () => void | Promise<void>) => {
         finished: Promise<void>
@@ -123,12 +123,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       return
     }
 
-    // 2. Fallback fluido via classe temporária com interpolação de cores
-    document.documentElement.classList.add('theme-transition')
+    // Fallback direto e instantâneo
     applyTheme()
-    window.setTimeout(() => {
-      document.documentElement.classList.remove('theme-transition')
-    }, 320)
   }, [])
 
   // ---------------------------------------------------------------------------
