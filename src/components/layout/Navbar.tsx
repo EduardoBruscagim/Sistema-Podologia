@@ -68,17 +68,20 @@ export const Navbar: React.FC = () => {
     const footerEl = document.querySelector('footer')
     const asideEl = document.querySelector('aside')
 
-    if (isMobileMenuOpen) {
-      mainEl?.setAttribute('inert', '')
-      footerEl?.setAttribute('inert', '')
-      asideEl?.setAttribute('inert', '')
-    } else {
-      mainEl?.removeAttribute('inert')
-      footerEl?.removeAttribute('inert')
-      asideEl?.removeAttribute('inert')
-    }
+    const rafId = requestAnimationFrame(() => {
+      if (isMobileMenuOpen) {
+        mainEl?.setAttribute('inert', '')
+        footerEl?.setAttribute('inert', '')
+        asideEl?.setAttribute('inert', '')
+      } else {
+        mainEl?.removeAttribute('inert')
+        footerEl?.removeAttribute('inert')
+        asideEl?.removeAttribute('inert')
+      }
+    })
 
     return () => {
+      cancelAnimationFrame(rafId)
       document.body.style.overflow = ''
       mainEl?.removeAttribute('inert')
       footerEl?.removeAttribute('inert')
@@ -87,7 +90,7 @@ export const Navbar: React.FC = () => {
   }, [isMobileMenuOpen])
 
   // ---------------------------------------------------------------------------
-  // 4. GSAP Reversible Timeline (Padrão Apple - Entrada, Saída e Interrupção Suave)
+  // 4. GSAP Reversible Timeline (Padrão Apple Snappy - Ultra Rápido & Fluido)
   // ---------------------------------------------------------------------------
 
   useGSAP(
@@ -97,7 +100,7 @@ export const Navbar: React.FC = () => {
       // Configuração de estado inicial fechado
       gsap.set(mobileMenuRef.current, {
         autoAlpha: 0,
-        y: prefersReducedMotion ? 0 : -20,
+        y: prefersReducedMotion ? 0 : -14,
       })
       if (backdropRef.current) {
         gsap.set(backdropRef.current, { autoAlpha: 0 })
@@ -106,7 +109,7 @@ export const Navbar: React.FC = () => {
       gsap.set(bottomLineRef.current, { y: 3.5, rotate: 0 })
       gsap.set('.mobile-nav-item', {
         autoAlpha: 0,
-        y: prefersReducedMotion ? 0 : -14,
+        y: prefersReducedMotion ? 0 : -10,
       })
 
       if (prefersReducedMotion) {
@@ -114,26 +117,26 @@ export const Navbar: React.FC = () => {
           .timeline({ paused: true })
           .to(topLineRef.current, { rotate: 45, y: 0, duration: 0.1 }, 0)
           .to(bottomLineRef.current, { rotate: -45, y: 0, duration: 0.1 }, 0)
-          .to([mobileMenuRef.current, backdropRef.current], { autoAlpha: 1, duration: 0.15 }, 0)
-          .to('.mobile-nav-item', { autoAlpha: 1, duration: 0.1 }, 0.05)
+          .to([mobileMenuRef.current, backdropRef.current], { autoAlpha: 1, duration: 0.1 }, 0)
+          .to('.mobile-nav-item', { autoAlpha: 1, duration: 0.08 }, 0.02)
         return
       }
 
-      // Timeline mestre de alta precisão física (60-120fps)
+      // Timeline mestre de altíssima velocidade e zero atrito (Padrão iOS/Apple)
       tlRef.current = gsap
         .timeline({ paused: true })
-        // 1. Hambúrguer: as duas linhas convergem para o centro e giram 45°/-45° formando o X
-        .to(topLineRef.current, { y: 0, rotate: 45, duration: 0.28, ease: 'power2.inOut' }, 0)
-        .to(bottomLineRef.current, { y: 0, rotate: -45, duration: 0.28, ease: 'power2.inOut' }, 0)
-        // 2. Backdrop escurecido suave
-        .to(backdropRef.current, { autoAlpha: 1, duration: 0.35, ease: 'power2.out' }, 0)
-        // 3. Painel do menu desce suavemente com desaceleração exponencial (Apple style)
-        .to(mobileMenuRef.current, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 0)
-        // 4. Stagger refinado dos itens de navegação (entrada em cascata fluida)
+        // 1. Hambúrguer: transição instantânea e precisa para o X em 220ms
+        .to(topLineRef.current, { y: 0, rotate: 45, duration: 0.22, ease: 'power2.out' }, 0)
+        .to(bottomLineRef.current, { y: 0, rotate: -45, duration: 0.22, ease: 'power2.out' }, 0)
+        // 2. Backdrop escurecido leve
+        .to(backdropRef.current, { autoAlpha: 1, duration: 0.22, ease: 'power2.out' }, 0)
+        // 3. Painel do menu desce ágil com desaceleração exponencial em 240ms
+        .to(mobileMenuRef.current, { autoAlpha: 1, y: 0, duration: 0.24, ease: 'power2.out' }, 0)
+        // 4. Stagger ágil dos links (20ms por item)
         .to(
           '.mobile-nav-item',
-          { autoAlpha: 1, y: 0, duration: 0.38, stagger: 0.045, ease: 'power3.out' },
-          0.08,
+          { autoAlpha: 1, y: 0, duration: 0.2, stagger: 0.02, ease: 'power2.out' },
+          0.04,
         )
     },
     { scope: navbarRootRef },
@@ -292,7 +295,7 @@ export const Navbar: React.FC = () => {
                 ref={mobileToggleRef}
                 type="button"
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer z-50"
+                className="touch-manipulation relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer z-50"
                 aria-label={
                   isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'
                 }
@@ -395,7 +398,7 @@ export const Navbar: React.FC = () => {
         id="mobile-menu"
         aria-label="Menu móvel"
         aria-hidden={!isMobileMenuOpen}
-        className="fixed inset-0 lg:hidden z-40 flex flex-col bg-surface/98 dark:bg-[#11100f]/98 backdrop-blur-3xl overflow-hidden pointer-events-auto"
+        className="fixed inset-0 lg:hidden z-40 flex flex-col bg-surface dark:bg-[#11100f] overflow-hidden pointer-events-auto"
       >
         {/* Espaçador da altura exata do header */}
         <div className="h-18 sm:h-20 shrink-0" aria-hidden="true" />
