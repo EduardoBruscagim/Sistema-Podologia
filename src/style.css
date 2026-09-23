@@ -370,10 +370,7 @@
   }
 }
 
-/* ==========================================================================
-   Transição de Tema Cinematográfica (Circular Reveal)
-   ========================================================================== */
-
+/* Transição Circular Suave de Tema via View Transitions (60-120fps GPU) */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -386,4 +383,12 @@
 
 ::view-transition-new(root) {
   z-index: 9999;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 1;
 }
