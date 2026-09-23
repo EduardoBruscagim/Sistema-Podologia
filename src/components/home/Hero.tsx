@@ -46,7 +46,7 @@ export const Hero: React.FC = () => {
 
           <p className="font-sans text-base sm:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-[48ch] font-light text-pretty">
             Vou até você em qualquer cantinho de Mococa, e não cobro taxa de visita. Pode ficar
-            tranquila: abro todo o material esterilizado aí, na sua frente.
+            tranquila.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
