@@ -225,10 +225,10 @@ export const FaqSection: React.FC = () => {
           id="faq-heading"
           className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-4 text-balance"
         >
-          Perguntas frequentes
+          Principais dúvidas
         </h2>
         <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
-          Tire suas dúvidas sobre como funciona o atendimento e a higiene dos materiais.
+          O que as pessoas mais me perguntam antes de marcar.
         </p>
       </div>
 

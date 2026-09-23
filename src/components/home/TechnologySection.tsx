@@ -75,7 +75,7 @@ export const TechnologySection: React.FC = () => {
               </div>
 
               <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-on-surface mb-4 leading-tight">
-                Instrumentos esterilizados e materiais descartáveis
+                Tudo 100% esterilizado e descartável
               </h3>
 
               <p className="text-sm sm:text-base text-on-surface-variant font-light leading-relaxed mb-6 sm:mb-8 max-w-[50ch] text-pretty">

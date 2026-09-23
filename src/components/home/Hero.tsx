@@ -41,12 +41,12 @@ export const Hero: React.FC = () => {
             id="hero-title"
             className="font-serif text-[2.75rem] sm:text-5xl lg:text-[4rem] font-normal text-on-surface tracking-[-0.025em] leading-[1.08] mb-6 text-balance"
           >
-            Podologia e manicure no <span className="italic font-light">conforto</span> da sua casa.
+            Sua podóloga e manicure, sem você precisar sair de casa.
           </h1>
 
           <p className="font-sans text-base sm:text-lg text-on-surface-variant leading-relaxed mb-8 max-w-[48ch] font-light text-pretty">
-            Atendimento em domicílio em qualquer bairro de Mococa, sem taxa de visita. Instrumentos
-            esterilizados e materiais descartáveis.
+            Vou até você em qualquer cantinho de Mococa, e não cobro taxa de visita. Pode ficar
+            tranquila: abro todo o material esterilizado aí, na sua frente.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 w-full">
@@ -54,7 +54,7 @@ export const Hero: React.FC = () => {
               href="#procedimentos"
               className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.14em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
             >
-              Solicitar Agendamento
+              Chamar no WhatsApp
             </a>
           </div>
         </div>

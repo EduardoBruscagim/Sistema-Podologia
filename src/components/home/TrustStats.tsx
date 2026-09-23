@@ -64,11 +64,11 @@ export const TrustStats: React.FC = () => {
         <div className="stat-block stat-reveal col-span-1 bg-pure-white dark:bg-surface-variant p-6 sm:p-8 lg:p-10 flex flex-col justify-center transition-colors duration-200">
           <dt className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent inline-block" aria-hidden="true" />
-            Deslocamento em Mococa
+            Taxa de visita
           </dt>
           <dd className="m-0 flex flex-col">
             <span className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-on-surface tracking-tight leading-none tabular-nums">
-              Taxa R$ 0
+              R$ 0
             </span>
           </dd>
         </div>
