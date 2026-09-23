@@ -66,8 +66,9 @@ export const BentoGrid: React.FC = () => {
               No conforto da sua casa
             </h3>
             <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed font-light max-w-[46ch] text-pretty">
-              Pode deixar comigo, levo os equipamentos, as toalhas e todo o material descartável. Você
-              só precisa escolher o lugar que preferir da casa pra sentar que tenha tomada perto.
+              Pode deixar comigo, levo os equipamentos, as toalhas e todo o material descartável.
+              Você só precisa escolher o lugar que preferir da casa pra sentar que tenha tomada
+              perto.
             </p>
 
             <ul
@@ -104,7 +105,8 @@ export const BentoGrid: React.FC = () => {
                 Chego em qualquer bairro
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Vou até a sua casa em qualquer bairro da cidade pelo valor da tabela. Não tem taxa de visita nem cobrança extra por distância.
+                Vou até a sua casa em qualquer bairro da cidade pelo valor da tabela. Não tem taxa
+                de visita nem cobrança extra por distância.
               </p>
             </div>
           </div>
@@ -125,7 +127,8 @@ export const BentoGrid: React.FC = () => {
                 Seu momento de cuidado
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                O horário que a gente marcar é inteirinho seu. Faço o atendimento com muita calma, sem pressa de terminar.
+                O horário que a gente marcar é inteirinho seu. Faço o atendimento com muita calma,
+                sem pressa de terminar.
               </p>
             </div>
           </div>
