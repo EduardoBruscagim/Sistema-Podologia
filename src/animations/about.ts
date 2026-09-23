@@ -1,4 +1,5 @@
 import gsap from 'gsap'
+import { initCardsHover } from './cardHover'
 
 /**
  * Animação de entrada da seção Sobre a Profissional (AboutSection).
@@ -33,7 +34,15 @@ export const initAboutAnimation = (containerEl?: HTMLElement): (() => void) => {
     )
   }, containerEl)
 
+  // Vincula hover refinado no card de credenciais
+  const cards = containerEl.querySelectorAll<HTMLElement>('.about-card')
+  const cleanupHover = initCardsHover(cards, {
+    y: -4,
+    duration: 0.28,
+  })
+
   return () => {
+    cleanupHover()
     ctx.revert()
   }
 }
