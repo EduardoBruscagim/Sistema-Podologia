@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { initAboutAnimation } from '@/animations/about'
 import { useSectionAnimation } from '@/hooks/useSectionAnimation'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
-import { Heart, ShieldCheck, Calendar, Check, ArrowUpRight } from 'lucide-react'
+import { Heart, ShieldCheck, Calendar, Check, ArrowUpRight, GraduationCap } from 'lucide-react'
 
 /**
  * Seção Sobre a Profissional (AboutSection).
@@ -38,28 +38,13 @@ export const AboutSection: React.FC = () => {
           <div className="w-full max-w-sm rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border p-7 sm:p-8 flex flex-col items-center text-center shadow-xs">
             {/* Emblema Editorial com Monograma */}
             <div className="relative mb-6">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-surface-variant dark:bg-surface flex items-center justify-center border border-surface-border text-accent">
-                <svg
-                  viewBox="0 0 64 64"
-                  fill="none"
-                  className="w-14 h-14 sm:w-16 sm:h-16"
-                  aria-hidden="true"
-                >
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="30"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeDasharray="3 3"
-                    opacity="0.4"
-                  />
-                  <path
-                    d="M32 16L43 46H37.8L35.2 39H28.8L26.2 46H21L32 16ZM32 24.2L29.6 35H34.4L32 24.2Z"
-                    className="fill-on-surface"
-                  />
-                  <circle cx="43" cy="20" r="3" className="fill-accent" />
-                </svg>
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-surface-variant dark:bg-surface flex items-center justify-center border border-surface-border text-accent overflow-hidden">
+                <img
+                  src="/angelica.jpg"
+                  alt="Foto da Angélica Eduarda"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <div className="absolute -bottom-2 -right-1 px-3 py-1 rounded-full bg-sage text-on-sage text-[11px] uppercase font-semibold tracking-[0.16em] shadow-xs">
                 Mococa · SP
@@ -77,15 +62,19 @@ export const AboutSection: React.FC = () => {
               aria-label="Credenciais profissionais"
               className="w-full flex flex-col gap-2 pt-4 border-t border-surface-border text-left"
             >
-              <li className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
+              <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <Calendar aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
                 <span>Atuação profissional em Mococa desde 2016</span>
               </li>
-              <li className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
+              <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
+                <GraduationCap aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
+                <span>Formação Técnica em Podologia (Universidade de São Paulo)</span>
+              </li>
+              <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <ShieldCheck aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
                 <span>Instrumentos cirúrgicos esterilizados em autoclave</span>
               </li>
-              <li className="flex items-center gap-2.5 text-xs text-on-surface-variant font-light">
+              <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <Heart aria-hidden="true" className="w-4 h-4 text-accent shrink-0" />
                 <span>Atenção e carinho especial para idosos e acamados</span>
               </li>

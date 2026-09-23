@@ -198,6 +198,19 @@ export const FaqSection: React.FC = () => {
   // Dispara animação sequencial de entrada dos itens do FAQ via ScrollTrigger
   useSectionAnimation(faqSectionRef, initFaqAnimation, ['.faq-header', '.faq-item'])
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+
   return (
     <section
       ref={faqSectionRef}
@@ -205,6 +218,10 @@ export const FaqSection: React.FC = () => {
       className="max-w-4xl mx-auto px-6 py-12 lg:py-16 scroll-mt-28"
       id="faq"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className="faq-header mb-12 lg:mb-16">
         <h2
           id="faq-heading"
