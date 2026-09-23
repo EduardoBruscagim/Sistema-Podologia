@@ -51,6 +51,9 @@ export const TrustStats: React.FC = () => {
             >
               +25.000
             </span>
+            <span className="mt-2 text-xs sm:text-sm text-text-secondary leading-snug">
+              De segunda a sábado, por toda Mococa, desde 2016.
+            </span>
           </dd>
         </div>
 

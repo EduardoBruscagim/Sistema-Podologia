@@ -1,0 +1,387 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/outfit';
+@import '@fontsource-variable/newsreader';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Obsidian Espresso & Warm Alabaster (Base Editorial) */
+  --color-primary: #181615;
+  --color-primary-hover: #2d2927;
+  --color-on-primary: #faf8f5;
+
+  /* Accent de Ação Exclusivo: Rich Warm Terracotta (WCAG AA > 5:1) */
+  --color-accent: #9b4124;
+  --color-accent-hover: #82351c;
+  --color-on-accent: #ffffff;
+
+  /* Superfícies e Bordas Capilares */
+  --color-surface: #faf8f5;
+  --color-surface-variant: #f2eee8;
+  --color-on-surface: #181615;
+  --color-on-surface-variant: #514d48;
+  --color-text-secondary: #514d48;
+  --color-pure-white: #ffffff;
+  --color-surface-border: rgba(24, 22, 21, 0.08);
+  --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
+
+  /* Botanical Sage & WhatsApp Reassurance */
+  --color-sage: #3b5346;
+  --color-sage-hover: #2c4035;
+  --color-sage-subtle: #eaf0ec;
+  --color-on-sage: #ffffff;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1eb857;
+
+  /* Geometria e Raios Rigorosos */
+  --radius-card: 0.75rem;
+  --radius-pill: 9999px;
+  --radius-badge: 0.25rem;
+
+  /* Sombras Minerais Refinadas (Quiet Luxury) */
+  --shadow-2xs: 0 1px 2px rgba(24, 22, 21, 0.04);
+  --shadow-xs: 0 1px 3px rgba(24, 22, 21, 0.05);
+  --shadow-sm: 0 2px 4px rgba(24, 22, 21, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(24, 22, 21, 0.07);
+  --shadow-lg: 0 8px 24px -4px rgba(24, 22, 21, 0.09);
+  --shadow-xl: 0 16px 32px -6px rgba(24, 22, 21, 0.12);
+  --shadow-2xl: 0 24px 48px -12px rgba(24, 22, 21, 0.18);
+
+  /* Tipografia Editorial */
+  --font-serif: 'Newsreader Variable', 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans:
+    'Outfit Variable', 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Breakpoint para viewports ultra-estreitos */
+  --breakpoint-xs: 22.5rem;
+}
+
+:root,
+[data-theme],
+[data-theme='light'] {
+  --color-primary: #181615;
+  --color-primary-hover: #2d2927;
+  --color-on-primary: #faf8f5;
+  --color-accent: #9b4124;
+  --color-accent-hover: #82351c;
+  --color-on-accent: #ffffff;
+  --color-surface: #faf8f5;
+  --color-surface-variant: #f2eee8;
+  --color-on-surface: #181615;
+  --color-on-surface-variant: #514d48;
+  --color-text-secondary: #514d48;
+  --color-pure-white: #ffffff;
+  --color-surface-border: rgba(24, 22, 21, 0.08);
+  --color-surface-border-subtle: rgba(24, 22, 21, 0.04);
+  --color-sage: #3b5346;
+  --color-sage-hover: #2c4035;
+  --color-sage-subtle: #eaf0ec;
+  --color-on-sage: #ffffff;
+  --radius-card: 0.75rem;
+  --radius-pill: 9999px;
+  --radius-badge: 0.25rem;
+}
+
+:where(.dark, .dark *),
+[data-theme='dark'] {
+  --color-primary: #faf8f5;
+  --color-primary-hover: #e8e3dc;
+  --color-on-primary: #141211;
+  /* Accent em dark mode: Terracotta Silk com contraste > 6:1 contra #11100F */
+  --color-accent: #e08264;
+  --color-accent-hover: #e8957c;
+  --color-on-accent: #11100f;
+  --color-surface: #11100f;
+  --color-surface-variant: #1a1816;
+  --color-on-surface: #faf8f5;
+  --color-on-surface-variant: #b5afa6;
+  --color-text-secondary: #a39c92;
+  --color-pure-white: #1a1816;
+  --color-surface-border: rgba(250, 248, 245, 0.08);
+  --color-surface-border-subtle: rgba(250, 248, 245, 0.04);
+  --color-sage: #7ea08e;
+  --color-sage-hover: #9ab9a8;
+  --color-sage-subtle: #19261f;
+  --color-on-sage: #11100f;
+}
+
+@layer base {
+  ::selection {
+    background-color: rgba(155, 65, 36, 0.25);
+    color: #181615;
+  }
+
+  :where(.dark, .dark *) ::selection,
+  .dark ::selection {
+    background-color: rgba(224, 130, 100, 0.35);
+    color: #faf8f5;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+    scroll-padding-top: 6rem;
+    scroll-padding-bottom: 6rem;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    :root,
+    [data-theme='light'] {
+      --color-surface-border: rgba(24, 22, 21, 0.25);
+      --color-surface-border-subtle: rgba(24, 22, 21, 0.15);
+      --color-text-secondary: #2d2927;
+      --color-on-surface-variant: #2d2927;
+    }
+
+    :where(.dark, .dark *),
+    [data-theme='dark'] {
+      --color-surface-border: rgba(250, 248, 245, 0.3);
+      --color-surface-border-subtle: rgba(250, 248, 245, 0.2);
+      --color-text-secondary: #dcd7cf;
+      --color-on-surface-variant: #dcd7cf;
+    }
+
+    button,
+    a {
+      outline-color: currentColor;
+    }
+  }
+
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline: 2px solid Highlight !important;
+      outline-offset: 2px !important;
+    }
+  }
+
+  /* Prevenção de FOUC e sobressalto inicial (jump/flash) em elementos com revelação GSAP */
+  .js:not(.gsap-loaded) .stat-reveal,
+  .js:not(.gsap-loaded) .bento-header,
+  .js:not(.gsap-loaded) .bento-card,
+  .js:not(.gsap-loaded) .about-reveal,
+  .js:not(.gsap-loaded) .services-header,
+  .js:not(.gsap-loaded) .service-card,
+  .js:not(.gsap-loaded) .services-footer,
+  .js:not(.gsap-loaded) .tech-header,
+  .js:not(.gsap-loaded) .tech-featured,
+  .js:not(.gsap-loaded) .tech-card,
+  .js:not(.gsap-loaded) .faq-header,
+  .js:not(.gsap-loaded) .faq-item,
+  .js:not(.gsap-loaded) .cta-reveal {
+    opacity: 0;
+  }
+
+  /* Garante acessibilidade total por teclado e leitor de tela: qualquer elemento com foco interno torna-se 100% visível */
+  .stat-reveal:focus-within,
+  .bento-header:focus-within,
+  .bento-card:focus-within,
+  .about-reveal:focus-within,
+  .services-header:focus-within,
+  .service-card:focus-within,
+  .services-footer:focus-within,
+  .tech-header:focus-within,
+  .tech-featured:focus-within,
+  .tech-card:focus-within,
+  .faq-header:focus-within,
+  .faq-item:focus-within,
+  .cta-reveal:focus-within {
+    opacity: 1 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+
+    .js:not(.gsap-loaded) .stat-reveal,
+    .js:not(.gsap-loaded) .bento-header,
+    .js:not(.gsap-loaded) .bento-card,
+    .js:not(.gsap-loaded) .about-reveal,
+    .js:not(.gsap-loaded) .services-header,
+    .js:not(.gsap-loaded) .service-card,
+    .js:not(.gsap-loaded) .services-footer,
+    .js:not(.gsap-loaded) .tech-header,
+    .js:not(.gsap-loaded) .tech-featured,
+    .js:not(.gsap-loaded) .tech-card,
+    .js:not(.gsap-loaded) .faq-header,
+    .js:not(.gsap-loaded) .faq-item,
+    .js:not(.gsap-loaded) .cta-reveal {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Preserve essential loading spinner indications */
+    .animate-spin {
+      animation-duration: 1s !important;
+      animation-iteration-count: infinite !important;
+    }
+
+    /* Explicitly preserve 150ms transitions for opacity, color, background-color, border-color, box-shadow */
+    .transition-opacity,
+    .transition-colors,
+    .transition-shadow,
+    .transition,
+    [class*='transition-'] {
+      transition-duration: 150ms !important;
+    }
+
+    .transition-transform,
+    .transition-all {
+      transition-property: opacity, color, background-color, border-color, box-shadow !important;
+      transition-duration: 150ms !important;
+    }
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    color: var(--color-on-surface);
+    caret-color: var(--color-accent);
+    font-size: 1rem;
+    line-height: 1.55;
+    background-color: var(--color-surface);
+    position: relative;
+  }
+
+  /* Textura de Grão Tátil (SVG feTurbulence inline) + Gradientes Editoriais */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -10;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E"),
+      radial-gradient(circle at 50% 0%, rgba(24, 22, 21, 0.02) 0%, transparent 60%),
+      radial-gradient(circle at 90% 20%, rgba(59, 83, 70, 0.02) 0%, transparent 40%),
+      linear-gradient(180deg, #faf8f5 0%, #f7f4ee 45%, #faf8f5 100%);
+    background-size:
+      180px 180px,
+      auto,
+      auto,
+      auto;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  }
+
+  :where(.dark, .dark *) body,
+  html.dark body,
+  .dark body {
+    background-color: #11100f;
+    color: #faf8f5;
+  }
+
+  :where(.dark, .dark *) body::before,
+  html.dark body::before,
+  .dark body::before {
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"),
+      radial-gradient(circle at 50% 0%, rgba(126, 160, 142, 0.05) 0%, transparent 60%),
+      linear-gradient(180deg, #11100f 0%, #171514 100%);
+    background-size:
+      180px 180px,
+      auto,
+      auto;
+    background-repeat: repeat, no-repeat, no-repeat;
+  }
+
+  /* Em telas touch móveis, neutraliza feTurbulence SVG procedural em elemento fixed para evitar repintura e microjank */
+  @media (hover: none) and (pointer: coarse) {
+    body::before {
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(24, 22, 21, 0.02) 0%, transparent 60%),
+        radial-gradient(circle at 90% 20%, rgba(59, 83, 70, 0.02) 0%, transparent 40%),
+        linear-gradient(180deg, #faf8f5 0%, #f7f4ee 45%, #faf8f5 100%);
+    }
+
+    :where(.dark, .dark *) body::before,
+    html.dark body::before,
+    .dark body::before {
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(126, 160, 142, 0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #11100f 0%, #171514 100%);
+    }
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Barra de rolagem sutil refinada */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(24, 22, 21, 0.2);
+    border-radius: var(--radius-pill);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(24, 22, 21, 0.35);
+  }
+
+  :where(.dark, .dark *) ::-webkit-scrollbar-thumb,
+  html.dark ::-webkit-scrollbar-thumb,
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(250, 248, 245, 0.2);
+  }
+
+  :where(.dark, .dark *) ::-webkit-scrollbar-thumb:hover,
+  html.dark ::-webkit-scrollbar-thumb:hover,
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(250, 248, 245, 0.35);
+  }
+}
+
+@keyframes border-sheen {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-border-sheen {
+  animation: border-sheen 3s cubic-bezier(0.16, 1, 0.3, 1) 2;
+}
+
+.group:hover .animate-border-sheen {
+  animation: border-sheen 2.5s cubic-bezier(0.16, 1, 0.3, 1) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-border-sheen,
+  .group:hover .animate-border-sheen {
+    animation: none !important;
+  }
+}

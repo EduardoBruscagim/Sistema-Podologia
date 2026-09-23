@@ -61,7 +61,8 @@ export const SERVICES: ServiceItem[] = [
     description: 'Cuidados para a saúde e higiene dos pés.',
     features: [
       'Corte correto para evitar unhas encravadas',
-      'Remoção de calosidades',
+      'Prevenção e cuidado seguro com Pé Diabético',
+      'Remoção cuidadosa de calosidades',
       'Lixamento plantar e hidratação',
       'Esmaltação (opcional)',
     ],
