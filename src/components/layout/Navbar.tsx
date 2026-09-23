@@ -1,8 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import { useTheme } from '@/hooks/useTheme'
 import { initNavbarAnimation } from '@/animations/navbar'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
 import { Sun, Moon, ArrowUpRight } from 'lucide-react'
+
+gsap.registerPlugin(useGSAP)
 
 /**
  * Componente de Cabeçalho / Barra de Navegação Superior.
@@ -10,13 +14,16 @@ import { Sun, Moon, ArrowUpRight } from 'lucide-react'
  * ### Funcionalidades e Acessibilidade:
  * 1. **Efeito Scrolled Suave:** Transita para fundo translúcido (backdrop-blur) com borda capilar
  *    ao rolar a página mais de 20px via `initNavbarAnimation`.
- * 2. **Menu Mobile Acessível (WAI-ARIA Dialog/Drawer):**
+ * 2. **Menu Mobile Acessível & Animação GSAP (Apple Standard):**
+ *    - Timeline reversível via `@gsap/react` (`useGSAP`).
+ *    - Transição fluida de hambúrguer para X com interpolação em timeline.
+ *    - Desdobramento suave do menu e entrada em cascata (stagger) dos itens de navegação.
  *    - Bloqueio de rolagem do body quando aberto.
  *    - Aplicação do atributo `inert` nos elementos adjacentes (`main`, `footer`, `aside`)
  *      para evitar navegação por foco fora do menu aberto.
  *    - Trap de foco estrito com `Tab` e `Shift+Tab`.
  *    - Fechamento imediato com tecla `Escape` ou clique no backdrop.
- *    - Restauração automática de foco para o botão hambúrguer ao fechar.
+ *    - Restauração automática de foco para o botão disparador ao fechar.
  * 3. **Live Region para Tema:**
  *    - Região `aria-live="polite"` que anuncia mudanças de modo claro/escuro para leitores de tela.
  * 4. **Touch Targets Conformes (WCAG 2.2):**
@@ -32,9 +39,14 @@ export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [themeStatusMessage, setThemeStatusMessage] = useState('')
 
+  const navbarRootRef = useRef<HTMLDivElement | null>(null)
   const headerRef = useRef<HTMLElement | null>(null)
   const mobileToggleRef = useRef<HTMLButtonElement | null>(null)
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null)
+  const mobileMenuRef = useRef<HTMLElement | null>(null)
+  const backdropRef = useRef<HTMLDivElement | null>(null)
+  const topLineRef = useRef<HTMLSpanElement | null>(null)
+  const bottomLineRef = useRef<HTMLSpanElement | null>(null)
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
   const prevOpenRef = useRef(false)
 
   // ---------------------------------------------------------------------------
@@ -75,7 +87,70 @@ export const Navbar: React.FC = () => {
   }, [isMobileMenuOpen])
 
   // ---------------------------------------------------------------------------
-  // 4. Auto-fechamento ao Redimensionar para Desktop (>= 1024px)
+  // 4. GSAP Reversible Timeline (Padrão Apple - Entrada, Saída e Interrupção Suave)
+  // ---------------------------------------------------------------------------
+
+  useGSAP(
+    () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      // Configuração de estado inicial fechado
+      gsap.set(mobileMenuRef.current, {
+        autoAlpha: 0,
+        y: prefersReducedMotion ? 0 : -20,
+      })
+      if (backdropRef.current) {
+        gsap.set(backdropRef.current, { autoAlpha: 0 })
+      }
+      gsap.set(topLineRef.current, { y: -3.5, rotate: 0 })
+      gsap.set(bottomLineRef.current, { y: 3.5, rotate: 0 })
+      gsap.set('.mobile-nav-item', {
+        autoAlpha: 0,
+        y: prefersReducedMotion ? 0 : -14,
+      })
+
+      if (prefersReducedMotion) {
+        tlRef.current = gsap
+          .timeline({ paused: true })
+          .to(topLineRef.current, { rotate: 45, y: 0, duration: 0.1 }, 0)
+          .to(bottomLineRef.current, { rotate: -45, y: 0, duration: 0.1 }, 0)
+          .to([mobileMenuRef.current, backdropRef.current], { autoAlpha: 1, duration: 0.15 }, 0)
+          .to('.mobile-nav-item', { autoAlpha: 1, duration: 0.1 }, 0.05)
+        return
+      }
+
+      // Timeline mestre de alta precisão física (60-120fps)
+      tlRef.current = gsap
+        .timeline({ paused: true })
+        // 1. Hambúrguer: as duas linhas convergem para o centro e giram 45°/-45° formando o X
+        .to(topLineRef.current, { y: 0, rotate: 45, duration: 0.28, ease: 'power2.inOut' }, 0)
+        .to(bottomLineRef.current, { y: 0, rotate: -45, duration: 0.28, ease: 'power2.inOut' }, 0)
+        // 2. Backdrop escurecido suave
+        .to(backdropRef.current, { autoAlpha: 1, duration: 0.35, ease: 'power2.out' }, 0)
+        // 3. Painel do menu desce suavemente com desaceleração exponencial (Apple style)
+        .to(mobileMenuRef.current, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 0)
+        // 4. Stagger refinado dos itens de navegação (entrada em cascata fluida)
+        .to(
+          '.mobile-nav-item',
+          { autoAlpha: 1, y: 0, duration: 0.38, stagger: 0.045, ease: 'power3.out' },
+          0.08,
+        )
+    },
+    { scope: navbarRootRef },
+  )
+
+  // Disparo bidirecional (play/reverse) ao alternar o estado do menu
+  useEffect(() => {
+    if (!tlRef.current) return
+    if (isMobileMenuOpen) {
+      tlRef.current.play()
+    } else {
+      tlRef.current.reverse()
+    }
+  }, [isMobileMenuOpen])
+
+  // ---------------------------------------------------------------------------
+  // 5. Auto-fechamento ao Redimensionar para Desktop (>= 1024px)
   // ---------------------------------------------------------------------------
 
   useEffect(() => {
@@ -84,6 +159,7 @@ export const Navbar: React.FC = () => {
       const handleResize = (e: MediaQueryListEvent) => {
         if (e.matches) {
           setIsMobileMenuOpen(false)
+          tlRef.current?.progress(0).pause()
         }
       }
       mql.addEventListener('change', handleResize)
@@ -94,7 +170,7 @@ export const Navbar: React.FC = () => {
   }, [])
 
   // ---------------------------------------------------------------------------
-  // 5. Gerenciamento e Restauração de Foco
+  // 6. Gerenciamento e Restauração de Foco
   // ---------------------------------------------------------------------------
 
   useEffect(() => {
@@ -188,15 +264,14 @@ export const Navbar: React.FC = () => {
   }, [])
 
   return (
-    <>
+    <div ref={navbarRootRef}>
       {/* Backdrop Mobile para fechar ao clicar fora */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-primary/40 lg:hidden pointer-events-auto z-40 transition-opacity duration-300"
-          onClick={() => setIsMobileMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+      <div
+        ref={backdropRef}
+        className="fixed inset-0 bg-primary/40 lg:hidden pointer-events-auto z-40"
+        onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
 
       {/* Header Fixo Superior (z-50) */}
       <header
@@ -211,7 +286,7 @@ export const Navbar: React.FC = () => {
         <div className="max-w-6xl mx-auto px-3 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
           {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Editorial */}
           <div className="flex items-center gap-1 sm:gap-3 min-w-0 flex-1">
-            {/* Botão Hambúrguer Mobile/Tablet Premium (Estilo Apple) */}
+            {/* Botão Hambúrguer Mobile/Tablet Premium (Estilo Apple com GSAP) */}
             <div className="lg:hidden flex items-center shrink-0">
               <button
                 ref={mobileToggleRef}
@@ -226,14 +301,12 @@ export const Navbar: React.FC = () => {
               >
                 <div className="w-[18px] h-[18px] relative flex items-center justify-center pointer-events-none">
                   <span
-                    className={`absolute h-[1.2px] w-[16px] bg-current rounded-full transition-transform duration-[280ms] ease-[cubic-bezier(0.32,0.72,0,1)] origin-center ${
-                      isMobileMenuOpen ? 'translate-y-0 rotate-45' : '-translate-y-[3.5px] rotate-0'
-                    }`}
+                    ref={topLineRef}
+                    className="absolute h-[1.2px] w-[16px] bg-current rounded-full origin-center will-change-transform"
                   />
                   <span
-                    className={`absolute h-[1.2px] w-[16px] bg-current rounded-full transition-transform duration-[280ms] ease-[cubic-bezier(0.32,0.72,0,1)] origin-center ${
-                      isMobileMenuOpen ? 'translate-y-0 -rotate-45' : 'translate-y-[3.5px] rotate-0'
-                    }`}
+                    ref={bottomLineRef}
+                    className="absolute h-[1.2px] w-[16px] bg-current rounded-full origin-center will-change-transform"
                   />
                 </div>
               </button>
@@ -316,16 +389,13 @@ export const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* Menu Mobile/Tablet Fullscreen Overlay (Estilo Apple) - z-40 */}
+      {/* Menu Mobile/Tablet Fullscreen Overlay (Estilo Apple com GSAP) - z-40 */}
       <nav
         ref={mobileMenuRef}
         id="mobile-menu"
         aria-label="Menu móvel"
-        className={`fixed inset-0 lg:hidden z-40 flex flex-col bg-surface/98 dark:bg-[#11100f]/98 backdrop-blur-3xl transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-          isMobileMenuOpen
-            ? 'opacity-100 translate-y-0 visible pointer-events-auto'
-            : 'opacity-0 -translate-y-6 invisible pointer-events-none'
-        }`}
+        aria-hidden={!isMobileMenuOpen}
+        className="fixed inset-0 lg:hidden z-40 flex flex-col bg-surface/98 dark:bg-[#11100f]/98 backdrop-blur-3xl overflow-hidden pointer-events-auto"
       >
         {/* Espaçador da altura exata do header */}
         <div className="h-18 sm:h-20 shrink-0" aria-hidden="true" />
@@ -338,17 +408,12 @@ export const Navbar: React.FC = () => {
               { label: 'Procedimentos', href: '#procedimentos' },
               { label: 'Higiene & Equipamentos', href: '#tecnologia' },
               { label: 'Dúvidas Frequentes', href: '#faq' },
-            ].map((item, idx) => (
+            ].map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{
-                  transitionDelay: isMobileMenuOpen ? `${idx * 40 + 80}ms` : `${(3 - idx) * 30}ms`,
-                }}
-                className={`py-4 sm:py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-on-surface hover:text-accent transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
-                  isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-                }`}
+                className="mobile-nav-item py-4 sm:py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-on-surface hover:text-accent transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent will-change-transform"
               >
                 {item.label}
               </a>
@@ -361,12 +426,7 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
               onClick={() => setIsMobileMenuOpen(false)}
-              style={{
-                transitionDelay: isMobileMenuOpen ? '240ms' : '0ms',
-              }}
-              className={`py-4 sm:py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-accent transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
-                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-              }`}
+              className="mobile-nav-item py-4 sm:py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-accent transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent will-change-transform"
             >
               <span>Dúvidas no WhatsApp</span>
               <ArrowUpRight aria-hidden="true" className="w-5 h-5" />
@@ -374,14 +434,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Ação de Agendamento Mobile */}
-          <div
-            className={`mt-8 pb-10 transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-              isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-            }`}
-            style={{
-              transitionDelay: isMobileMenuOpen ? '280ms' : '0ms',
-            }}
-          >
+          <div className="mobile-nav-item mt-8 pb-10 will-change-transform">
             <a
               href="#procedimentos"
               onClick={() => setIsMobileMenuOpen(false)}
@@ -392,6 +445,6 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   )
 }
