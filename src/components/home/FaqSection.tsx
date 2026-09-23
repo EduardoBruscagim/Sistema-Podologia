@@ -157,6 +157,19 @@ FaqAccordionItem.displayName = 'FaqAccordionItem'
  * - `End`: Move o foco imediatamente para a última pergunta.
  */
 
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+}
+
 export const FaqSection: React.FC = () => {
   const faqSectionRef = useRef<HTMLElement | null>(null)
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -196,19 +209,6 @@ export const FaqSection: React.FC = () => {
   // Dispara animação sequencial de entrada dos itens do FAQ via ScrollTrigger
   useSectionAnimation(faqSectionRef, initFaqAnimation, ['.faq-header', '.faq-item'])
 
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  }
-
   return (
     <section
       ref={faqSectionRef}
@@ -218,7 +218,9 @@ export const FaqSection: React.FC = () => {
     >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, '\\u003c'),
+        }}
       />
       <div className="faq-header mb-12 lg:mb-16">
         <h2
