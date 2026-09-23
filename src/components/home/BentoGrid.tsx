@@ -63,11 +63,12 @@ export const BentoGrid: React.FC = () => {
             </div>
 
             <h3 className="font-serif text-2xl sm:text-3xl font-normal text-on-surface mb-3 leading-snug">
-              Espaço simples, conforto absoluto
+              Conforto absoluto, sem bagunça
             </h3>
             <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed font-light max-w-[46ch] text-pretty">
-              Levo todos os aparelhos, toalhas higienizadas e insumos descartáveis. Você só precisa
-              de uma cadeira ou poltrona confortável e uma tomada comum por perto.
+              Pode deixar comigo: levo o motorzinho, as toalhas e todo o material descartável. Você
+              só precisa escolher o lugar mais gostoso da casa pra sentar e me arrumar uma tomada
+              pertinho.
             </p>
 
             <ul
@@ -76,11 +77,11 @@ export const BentoGrid: React.FC = () => {
             >
               <li className="flex items-center gap-2 text-xs text-text-secondary font-light">
                 <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
-                <span>Sem trânsito ou filas de salão</span>
+                <span>Zero trânsito e zero espera</span>
               </li>
               <li className="flex items-center gap-2 text-xs text-text-secondary font-light">
                 <Check aria-hidden="true" className="w-3.5 h-3.5 text-sage shrink-0" />
-                <span>Insumos 100% esterilizados</span>
+                <span>Tudo 100% esterilizado</span>
               </li>
             </ul>
           </div>
@@ -101,11 +102,11 @@ export const BentoGrid: React.FC = () => {
               </div>
 
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug">
-                Sem taxa de visita
+                Chego em qualquer bairro
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Vou até a sua casa em qualquer bairro de Mococa pelo valor da tabela, sem cobrar
-                nada a mais pelo deslocamento.
+                Vou até a sua casa em qualquer bairro de Mococa pelo valor da tabela. Não tem
+                pegadinha nem taxa escondida de deslocamento.
               </p>
             </div>
           </div>
@@ -123,11 +124,11 @@ export const BentoGrid: React.FC = () => {
               </div>
 
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug">
-                Horário reservado
+                Seu momento de cuidado
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Aquele horário é só seu. Faço o atendimento com calma e foco total, sem dividir a
-                atenção com outros clientes.
+                O horário que a gente marcar é inteirinho seu. Faço o atendimento com muita calma,
+                sem ficar olhando pro relógio ou dividindo a atenção.
               </p>
             </div>
           </div>

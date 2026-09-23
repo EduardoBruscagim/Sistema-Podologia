@@ -64,19 +64,19 @@ export const AboutSection: React.FC = () => {
             >
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <Calendar aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-                <span>Atuação profissional em Mococa desde 2016</span>
+                <span>Cuidando de pés e mãos em Mococa desde 2016</span>
               </li>
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <GraduationCap aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-                <span>Formação Técnica em Podologia (Universidade de São Paulo)</span>
+                <span>Técnica em Podologia (formada em São Paulo)</span>
               </li>
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <ShieldCheck aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-                <span>Instrumentos cirúrgicos esterilizados em autoclave</span>
+                <span>Tudo 100% esterilizado em autoclave</span>
               </li>
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <Heart aria-hidden="true" className="w-4 h-4 text-accent shrink-0" />
-                <span>Atenção especial para idosos e pés sensíveis</span>
+                <span>Muito carinho com idosos e pés sensíveis</span>
               </li>
             </ul>
           </div>
@@ -91,24 +91,25 @@ export const AboutSection: React.FC = () => {
             id="about-heading"
             className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-6 text-balance"
           >
-            Cuidado dedicado com a confiança de quem atende na sua casa
+            Cuidado e paciência, direto na sua casa
           </h2>
 
           <div className="space-y-4 text-base text-on-surface-variant font-light leading-relaxed mb-8 max-w-[54ch] text-pretty">
             <p>
-              Sou <strong>Angélica Eduarda Amaro Bruscagim</strong>. Trabalho com saúde dos pés e
-              das mãos desde 2016. Sei que receber alguém na sua casa exige confiança, pontualidade
-              e discrição.
+              Oi, eu sou a <strong>Angélica Eduarda Amaro Bruscagim</strong>! Cuido da saúde dos pés
+              e das mãos aqui em Mococa desde 2016. Eu sei que abrir a porta de casa pra alguém
+              exige muita confiança, por isso levo a discrição e a pontualidade muito a sério.
             </p>
             <p>
-              Criei meu atendimento para quem busca conforto sem perder a qualidade de uma clínica.
-              Eu levo os aparelhos, toalhas descartáveis e os envelopes com instrumentos lacrados
-              até a sua sala ou quarto, para um atendimento completo e seguro.
+              Pensei nesse formato de atendimento para quem não quer (ou não pode) pegar trânsito ou
+              esperar em salão, mas não abre mão da limpeza de uma clínica. Pode ficar de boa na sua
+              poltrona: eu levo até você o meu motorzinho, toalhas limpinhas e os alicates
+              esterilizados.
             </p>
             <p>
-              Gosto especialmente de atender idosos, pessoas com sensibilidade nos pés ou com
-              restrições de mobilidade. Faço o procedimento sem pressa, desde o corte até a
-              prevenção de unhas encravadas, com cuidado e paciência.
+              Tenho um carinho enorme por atender nossos idosos, diabéticos, quem tem a unha mais
+              sensível ou quem está com dificuldade de andar. Faço tudo no tempo da pessoa, sem
+              pressa nenhuma, sempre com muito cuidado pra não machucar.
             </p>
           </div>
 
@@ -120,27 +121,25 @@ export const AboutSection: React.FC = () => {
           >
             <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-              <span>Sem taxa de visita em toda Mococa</span>
+              <span>Vou a qualquer bairro de Mococa sem cobrar visita</span>
             </li>
             <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-              <span>Horário individual reservado</span>
+              <span>Aquele horário é inteirinho seu</span>
             </li>
             <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-              <span>Materiais abertos na sua frente</span>
+              <span>Abro o material esterilizado na sua frente</span>
             </li>
             <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-              <span>Pagamento no final por PIX ou dinheiro</span>
+              <span>Você paga no finalzinho, no PIX ou dinheiro</span>
             </li>
           </ul>
 
           {/* Ação Direta de Contato Humanizado */}
           <a
-            href={getWhatsAppUrl(
-              'Olá, Angélica! Li sobre seu atendimento no site e gostaria de conversar sobre um horário em domicílio em Mococa.',
-            )}
+            href={getWhatsAppUrl('Oi, Angélica! Vi o seu site e queria marcar um horário pra mim.')}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Falar com a Angélica no WhatsApp (abre em uma nova aba)"
