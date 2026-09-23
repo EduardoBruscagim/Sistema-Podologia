@@ -141,6 +141,36 @@
     }
   }
 
+  /* Transição fluida de alto desempenho para troca de tema (View Transitions API + Fallback) */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition:
+      background-color 300ms cubic-bezier(0.32, 0.72, 0, 1),
+      border-color 300ms cubic-bezier(0.32, 0.72, 0, 1),
+      color 300ms cubic-bezier(0.32, 0.72, 0, 1),
+      fill 300ms cubic-bezier(0.32, 0.72, 0, 1) !important;
+    transition-delay: 0s !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.01ms !important;
+    }
+    html.theme-transition,
+    html.theme-transition * {
+      transition: none !important;
+    }
+  }
+
   @media (prefers-contrast: more) {
     :root,
     [data-theme='light'] {
@@ -368,27 +398,4 @@
   .group:hover .animate-border-sheen {
     animation: none !important;
   }
-}
-
-/* Transição Circular Suave de Tema via View Transitions (60-120fps GPU) */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 9999;
-}
-
-.dark::view-transition-old(root) {
-  z-index: 9999;
-}
-
-.dark::view-transition-new(root) {
-  z-index: 1;
 }
