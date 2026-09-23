@@ -49,97 +49,12 @@ export const Navbar: React.FC = () => {
   const tlRef = useRef<gsap.core.Timeline | null>(null)
   const prevOpenRef = useRef(false)
 
-  const themeBtnRef = useRef<HTMLButtonElement | null>(null)
-  const sunIconRef = useRef<SVGSVGElement | null>(null)
-  const moonIconRef = useRef<SVGSVGElement | null>(null)
-
   // ---------------------------------------------------------------------------
-  // 2. Manipulação de Tema com GSAP & View Transitions (Suave, Premium & Zero Jank)
+  // 2. Manipulação de Tema
   // ---------------------------------------------------------------------------
 
-  const handleToggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    // 1. Feedback tátil com GSAP no botão (micro-bounce ultra suave)
-    if (!prefersReducedMotion && themeBtnRef.current) {
-      gsap.fromTo(
-        themeBtnRef.current,
-        { scale: 0.86 },
-        { scale: 1, duration: 0.28, ease: 'back.out(2.5)' },
-      )
-    }
-
-    // 2. Animação de rotação e escala entre Sun e Moon via GSAP
-    if (!prefersReducedMotion && sunIconRef.current && moonIconRef.current) {
-      if (isDark) {
-        // Mudando para Light: Moon rotaciona e encolhe, Sun surge girando suave
-        gsap.to(moonIconRef.current, {
-          rotate: -90,
-          scale: 0,
-          autoAlpha: 0,
-          duration: 0.2,
-          ease: 'power2.in',
-        })
-        gsap.fromTo(
-          sunIconRef.current,
-          { rotate: 90, scale: 0, autoAlpha: 0 },
-          { rotate: 0, scale: 1, autoAlpha: 1, duration: 0.28, ease: 'back.out(2)', delay: 0.05 },
-        )
-      } else {
-        // Mudando para Dark: Sun rotaciona e encolhe, Moon surge girando com spring
-        gsap.to(sunIconRef.current, {
-          rotate: 90,
-          scale: 0,
-          autoAlpha: 0,
-          duration: 0.2,
-          ease: 'power2.in',
-        })
-        gsap.fromTo(
-          moonIconRef.current,
-          { rotate: -90, scale: 0, autoAlpha: 0 },
-          { rotate: 0, scale: 1, autoAlpha: 1, duration: 0.28, ease: 'back.out(2)', delay: 0.05 },
-        )
-      }
-    }
-
-    // 3. Transição circular expansiva (Circular Reveal na GPU)
-    const doc = document as Document & {
-      startViewTransition?: (callback: () => void) => { ready: Promise<void> }
-    }
-
-    if (!prefersReducedMotion && typeof doc.startViewTransition === 'function') {
-      const rect = themeBtnRef.current?.getBoundingClientRect()
-      const x = rect ? rect.left + rect.width / 2 : e.clientX || window.innerWidth / 2
-      const y = rect ? rect.top + rect.height / 2 : e.clientY || 40
-      const endRadius = Math.hypot(
-        Math.max(x, window.innerWidth - x),
-        Math.max(y, window.innerHeight - y),
-      )
-
-      const transition = doc.startViewTransition(() => {
-        toggleTheme()
-      })
-
-      transition.ready
-        .then(() => {
-          document.documentElement.animate(
-            {
-              clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`],
-            },
-            {
-              duration: 350,
-              easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-              pseudoElement: '::view-transition-new(root)',
-            },
-          )
-        })
-        .catch(() => {
-          // Fallback silencioso
-        })
-    } else {
-      toggleTheme()
-    }
-
+  const handleToggleTheme = () => {
+    toggleTheme()
     setThemeStatusMessage(isDark ? 'Modo claro ativado' : 'Modo escuro ativado')
   }
 
@@ -444,28 +359,31 @@ export const Navbar: React.FC = () => {
 
           {/* Ações à Direita: Tema + "Agendar Horário" (Primário para #procedimentos) */}
           <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
-            {/* Alternador de Tema com GSAP Icon Choreography */}
+            {/* Alternador de Tema com Microinteração Fluida (Tailwind transitions) */}
             <button
-              ref={themeBtnRef}
               aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
               aria-pressed={isDark}
               onClick={handleToggleTheme}
               className="touch-manipulation relative min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer overflow-hidden"
               type="button"
             >
-              <span className="w-4 h-4 relative flex items-center justify-center pointer-events-none">
-                <Sun
-                  ref={sunIconRef}
+              <span className="relative w-5 h-5 flex items-center justify-center pointer-events-none">
+                {/* Ícone da Lua (visível no modo claro, gira e encolhe ao ir para escuro) */}
+                <Moon
                   aria-hidden="true"
-                  className={`w-4 h-4 absolute inset-0 will-change-transform ${
-                    isDark ? 'opacity-0 invisible' : 'opacity-100 visible'
+                  className={`w-4 h-4 absolute transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+                    isDark
+                      ? 'opacity-0 scale-50 rotate-90 pointer-events-none'
+                      : 'opacity-100 scale-100 rotate-0 text-current'
                   }`}
                 />
-                <Moon
-                  ref={moonIconRef}
+                {/* Ícone do Sol (visível no modo escuro, gira e expande ao ativar) */}
+                <Sun
                   aria-hidden="true"
-                  className={`w-4 h-4 absolute inset-0 will-change-transform ${
-                    isDark ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  className={`w-4 h-4 absolute transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+                    isDark
+                      ? 'opacity-100 scale-100 rotate-0 text-current'
+                      : 'opacity-0 scale-50 -rotate-90 pointer-events-none'
                   }`}
                 />
               </span>

@@ -83,19 +83,52 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, [])
 
   // ---------------------------------------------------------------------------
-  // 4. Ação de Alternância (Toggle) com Persistência Segura
+  // 4. Ação de Alternância (Toggle) Fluida e Otimizada
   // ---------------------------------------------------------------------------
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const nextTheme: Theme = prev === 'dark' ? 'light' : 'dark'
-      try {
-        localStorage.setItem('theme', nextTheme)
-      } catch {
-        // Ignora restrições de segurança ou quotas do localStorage
+    const applyTheme = () => {
+      setTheme((prev) => {
+        const nextTheme: Theme = prev === 'dark' ? 'light' : 'dark'
+        try {
+          localStorage.setItem('theme', nextTheme)
+        } catch {
+          // Ignora restrições de segurança ou quotas do localStorage
+        }
+        return nextTheme
+      })
+    }
+
+    if (
+      typeof window === 'undefined' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      applyTheme()
+      return
+    }
+
+    // 1. Suporte nativo à View Transitions API do navegador (GPU accelerated, suave e sem lag)
+    const doc = document as Document & {
+      startViewTransition?: (callback: () => void | Promise<void>) => {
+        finished: Promise<void>
+        ready: Promise<void>
+        updateCallbackDone: Promise<void>
       }
-      return nextTheme
-    })
+    }
+
+    if (typeof doc.startViewTransition === 'function') {
+      doc.startViewTransition(() => {
+        applyTheme()
+      })
+      return
+    }
+
+    // 2. Fallback fluido via classe temporária com interpolação de cores
+    document.documentElement.classList.add('theme-transition')
+    applyTheme()
+    window.setTimeout(() => {
+      document.documentElement.classList.remove('theme-transition')
+    }, 320)
   }, [])
 
   // ---------------------------------------------------------------------------
