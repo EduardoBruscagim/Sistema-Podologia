@@ -213,7 +213,7 @@ export const ServicesPricing: React.FC = () => {
                       : 'bg-pure-white dark:bg-surface border border-surface-border hover:border-accent text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant active:scale-[0.98]'
                   }`}
                 >
-                  Agendar Horário
+                  Agendar esse
                 </a>
               </div>
             </div>
@@ -232,11 +232,11 @@ export const ServicesPricing: React.FC = () => {
           </div>
           <div>
             <h3 className="font-serif text-lg text-on-surface font-normal leading-snug">
-              Está com dor aguda ou unha encravada?
+              A unha encravou e tá doendo muito?
             </h3>
             <p className="text-xs sm:text-sm text-on-surface-variant font-light leading-relaxed mt-0.5 max-w-[55ch]">
-              Vou até você em Mococa para dar alívio rápido e desencravar a unha com muito cuidado,
-              no seu tempo.
+              Me chama que eu vou até você. Faço o procedimento com a mão super leve pra te dar
+              alívio logo, sem pressa pra não machucar.
             </p>
           </div>
         </div>
@@ -247,7 +247,7 @@ export const ServicesPricing: React.FC = () => {
           aria-label="Atendimento de Urgência para unha encravada pelo WhatsApp (abre em uma nova aba)"
           className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
         >
-          Atendimento de Urgência
+          Chamar urgência
         </a>
       </div>
 
@@ -260,13 +260,10 @@ export const ServicesPricing: React.FC = () => {
           <span className="text-sage font-medium" aria-hidden="true">
             •
           </span>
-          <span>
-            Abro todos os instrumentos esterilizados e materiais descartáveis na sua frente, na hora
-            do atendimento.
-          </span>
+          <span>Pode confiar: só abro os envelopes esterilizados aí mesmo, na sua frente.</span>
         </div>
         <div className="font-sans text-xs font-medium text-on-surface shrink-0">
-          Pagamento ao final por PIX ou dinheiro
+          Paga só quando terminar, no PIX ou dinheiro.
         </div>
       </div>
     </section>

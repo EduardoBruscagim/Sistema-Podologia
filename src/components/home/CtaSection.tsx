@@ -38,15 +38,13 @@ export const CtaSection: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
           {/* Ação Primária: Agendamento */}
           <a
-            href={getWhatsAppUrl(
-              'Olá, Angélica! Li as informações no site e gostaria de agendar um atendimento em domicílio em Mococa.',
-            )}
+            href={getWhatsAppUrl('Oi, Angélica! Vi o seu site e queria marcar um horário.')}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Solicitar agendamento pelo WhatsApp (abre em uma nova aba)"
+            aria-label="Marcar horário pelo WhatsApp (abre em uma nova aba)"
             className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
           >
-            Solicitar Agendamento
+            Chamar no WhatsApp
           </a>
 
           {/* Ação Secundária: Dúvidas */}
@@ -55,9 +53,9 @@ export const CtaSection: React.FC = () => {
             href={getWhatsAppDoubtUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Dúvidas no WhatsApp: falar com Angélica (abre em uma nova aba)"
+            aria-label="Tirar uma dúvida no WhatsApp (abre em uma nova aba)"
           >
-            Dúvidas no WhatsApp
+            Tirar uma dúvida
           </a>
         </div>
       </div>
