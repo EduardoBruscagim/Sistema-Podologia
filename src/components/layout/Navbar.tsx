@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useTheme } from '@/hooks/useTheme'
 import { initNavbarAnimation } from '@/animations/navbar'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
-import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react'
+import { Sun, Moon, ArrowUpRight } from 'lucide-react'
 
 /**
  * Componente de Cabeçalho / Barra de Navegação Superior.
@@ -206,24 +206,31 @@ export const Navbar: React.FC = () => {
         <div className="max-w-6xl mx-auto px-3 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
           {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Editorial */}
           <div className="flex items-center gap-1 sm:gap-3 min-w-0">
-            {/* Botão Hambúrguer Mobile/Tablet com área de toque mínima 44x44px */}
+            {/* Botão Hambúrguer Mobile/Tablet Premium (Estilo Apple) */}
             <div className="lg:hidden flex items-center">
               <button
                 ref={mobileToggleRef}
                 type="button"
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                className="relative min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer z-50"
                 aria-label={
                   isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'
                 }
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
               >
-                {isMobileMenuOpen ? (
-                  <X aria-hidden="true" className="w-5 h-5" />
-                ) : (
-                  <Menu aria-hidden="true" className="w-5 h-5" />
-                )}
+                <div className="w-[16px] h-[10px] relative flex flex-col justify-between">
+                  <span
+                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      isMobileMenuOpen ? 'top-[4px] rotate-45' : 'top-0'
+                    }`}
+                  />
+                  <span
+                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      isMobileMenuOpen ? 'top-[4px] -rotate-45' : 'bottom-0'
+                    }`}
+                  />
+                </div>
               </button>
             </div>
 
@@ -307,67 +314,73 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Menu Mobile/Tablet Dropdown com focus trap, backdrop e navegação semântica */}
+        {/* Menu Mobile/Tablet Dropdown (Estilo Apple - Full Screen Overlay) */}
         <nav
           ref={mobileMenuRef}
           id="mobile-menu"
           aria-label="Menu móvel"
           hidden={!isMobileMenuOpen}
-          className={`absolute top-full left-0 right-0 p-4 bg-surface border-b border-surface-border shadow-lg flex flex-col gap-2 lg:hidden z-50 transition-all duration-200 ${
+          className={`fixed top-[72px] sm:top-[80px] bottom-0 left-0 right-0 px-6 pt-6 pb-24 bg-surface/95 dark:bg-surface/90 backdrop-blur-2xl flex flex-col lg:hidden z-40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto ${
             isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
           }`}
         >
-          <a
-            href="#sobre"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            Sobre a Profissional
-          </a>
-          <a
-            href="#procedimentos"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            Procedimentos
-          </a>
-          <a
-            href="#tecnologia"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            Higiene & Equipamentos
-          </a>
-          <a
-            href="#faq"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-on-surface hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            Dúvidas Frequentes
-          </a>
+          <div className="flex flex-col flex-1 max-w-sm mx-auto w-full mt-4">
+            {[
+              { label: 'Sobre a Profissional', href: '#sobre' },
+              { label: 'Procedimentos', href: '#procedimentos' },
+              { label: 'Higiene & Equipamentos', href: '#tecnologia' },
+              { label: 'Dúvidas Frequentes', href: '#faq' },
+            ].map((item, idx) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{
+                  transitionDelay: isMobileMenuOpen ? `${idx * 0.05 + 0.1}s` : '0s',
+                }}
+                className={`py-5 border-b border-surface-border/60 text-[1.25rem] font-medium tracking-wide text-on-surface hover:text-accent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                  isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
 
-          {/* Link direto de dúvidas no WhatsApp */}
-          <a
-            href={getWhatsAppUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="px-4 py-3 min-h-[44px] rounded-lg text-xs uppercase tracking-[0.16em] font-medium text-accent hover:bg-surface-variant transition-colors flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            <span>Dúvidas no WhatsApp</span>
-            <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
-          </a>
-
-          {/* Separador e Ação de Agendamento Mobile */}
-          <div className="pt-3 border-t border-surface-border flex flex-col gap-2.5">
+            {/* Link direto de dúvidas no WhatsApp */}
             <a
-              href="#procedimentos"
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full min-h-[44px] min-w-[44px] px-4 py-3 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
+              style={{
+                transitionDelay: isMobileMenuOpen ? '0.3s' : '0s',
+              }}
+              className={`py-5 border-b border-surface-border/60 text-[1.25rem] font-medium tracking-wide text-accent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+              }`}
             >
-              Agendar Horário
+              <span>Dúvidas no WhatsApp</span>
+              <ArrowUpRight aria-hidden="true" className="w-5 h-5" />
             </a>
+
+            {/* Ação de Agendamento Mobile */}
+            <div
+              className={`mt-8 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+              }`}
+              style={{
+                transitionDelay: isMobileMenuOpen ? '0.35s' : '0s',
+              }}
+            >
+              <a
+                href="#procedimentos"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full min-h-[52px] px-6 py-4 rounded-full bg-accent text-on-accent text-sm uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer shadow-lg shadow-accent/20"
+              >
+                Agendar Horário
+              </a>
+            </div>
           </div>
         </nav>
       </header>
