@@ -68,7 +68,7 @@ export const AboutSection: React.FC = () => {
               </li>
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <GraduationCap aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-                <span>Técnica em Podologia (formada em São Paulo)</span>
+                <span>Formada em São Paulo</span>
               </li>
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <ShieldCheck aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
@@ -76,7 +76,7 @@ export const AboutSection: React.FC = () => {
               </li>
               <li className="flex items-start gap-2.5 text-xs text-on-surface-variant font-light leading-snug">
                 <Heart aria-hidden="true" className="w-4 h-4 text-accent shrink-0" />
-                <span>Muito carinho com idosos e pés sensíveis</span>
+                <span>Muito cuidado com idosos e pés sensíveis</span>
               </li>
             </ul>
           </div>
@@ -102,12 +102,10 @@ export const AboutSection: React.FC = () => {
             </p>
             <p>
               Pensei nesse formato de atendimento para quem não quer (ou não pode) pegar trânsito ou
-              esperar em salão, mas não abre mão da limpeza de uma clínica. Pode ficar de boa na sua
-              poltrona: eu levo até você o meu motorzinho, toalhas limpinhas e os alicates
-              esterilizados.
+              esperar em salão, mas não abre mão da limpeza de uma clínica. Pode ficar tranquila na sua casa, eu levo até você o meu equipamento, toalhas e os alicates.
             </p>
             <p>
-              Tenho um carinho enorme por atender nossos idosos, diabéticos, quem tem a unha mais
+              Tenho um cuidado enorme por atender idosos, diabéticos, quem tem a unha mais
               sensível ou quem está com dificuldade de andar. Faço tudo no tempo da pessoa, sem
               pressa nenhuma, sempre com muito cuidado pra não machucar.
             </p>
@@ -125,11 +123,11 @@ export const AboutSection: React.FC = () => {
             </li>
             <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-              <span>Aquele horário é inteirinho seu</span>
+              <span>Aquele horário é exclusivo seu</span>
             </li>
             <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
-              <span>Abro o material esterilizado na sua frente</span>
+              <span>Abro os materiais na sua frente</span>
             </li>
             <li className="flex items-center gap-2.5 text-xs text-on-surface font-normal p-3 rounded-lg bg-surface-variant/40 border border-surface-border">
               <Check aria-hidden="true" className="w-4 h-4 text-sage shrink-0" />
