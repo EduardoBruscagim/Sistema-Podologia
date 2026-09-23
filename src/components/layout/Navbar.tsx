@@ -219,15 +219,15 @@ export const Navbar: React.FC = () => {
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
               >
-                <div className="w-[16px] h-[10px] relative flex flex-col justify-between">
+                <div className="w-[18px] h-[12px] relative flex flex-col justify-between">
                   <span
-                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      isMobileMenuOpen ? 'top-[4px] rotate-45' : 'top-0'
+                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
+                      isMobileMenuOpen ? 'translate-y-[5.25px] rotate-45' : 'translate-y-0'
                     }`}
                   />
                   <span
-                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      isMobileMenuOpen ? 'top-[4px] -rotate-45' : 'bottom-0'
+                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
+                      isMobileMenuOpen ? '-translate-y-[5.25px] -rotate-45' : 'translate-y-[10.5px]'
                     }`}
                   />
                 </div>
@@ -320,8 +320,10 @@ export const Navbar: React.FC = () => {
           id="mobile-menu"
           aria-label="Menu móvel"
           hidden={!isMobileMenuOpen}
-          className={`fixed top-[72px] sm:top-[80px] bottom-0 left-0 right-0 px-6 pt-6 pb-24 bg-surface/95 dark:bg-surface/90 backdrop-blur-2xl flex flex-col lg:hidden z-40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto ${
-            isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+          className={`fixed top-[72px] sm:top-[80px] bottom-0 left-0 right-0 px-6 pt-6 pb-24 bg-surface/95 dark:bg-surface/90 backdrop-blur-2xl flex flex-col lg:hidden z-40 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-y-auto ${
+            isMobileMenuOpen
+              ? 'opacity-100 visible [clip-path:inset(0_0_0_0)]'
+              : 'opacity-0 invisible pointer-events-none [clip-path:inset(0_0_100%_0)]'
           }`}
         >
           <div className="flex flex-col flex-1 max-w-sm mx-auto w-full mt-4">
@@ -336,10 +338,10 @@ export const Navbar: React.FC = () => {
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 style={{
-                  transitionDelay: isMobileMenuOpen ? `${idx * 0.05 + 0.1}s` : '0s',
+                  transitionDelay: isMobileMenuOpen ? `${idx * 0.04 + 0.1}s` : '0s',
                 }}
-                className={`py-5 border-b border-surface-border/60 text-[1.25rem] font-medium tracking-wide text-on-surface hover:text-accent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
-                  isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                className={`py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-on-surface hover:text-accent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                  isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
                 }`}
               >
                 {item.label}
@@ -354,10 +356,10 @@ export const Navbar: React.FC = () => {
               aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
               onClick={() => setIsMobileMenuOpen(false)}
               style={{
-                transitionDelay: isMobileMenuOpen ? '0.3s' : '0s',
+                transitionDelay: isMobileMenuOpen ? '0.26s' : '0s',
               }}
-              className={`py-5 border-b border-surface-border/60 text-[1.25rem] font-medium tracking-wide text-accent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
-                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+              className={`py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-accent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
               }`}
             >
               <span>Dúvidas no WhatsApp</span>
@@ -366,17 +368,17 @@ export const Navbar: React.FC = () => {
 
             {/* Ação de Agendamento Mobile */}
             <div
-              className={`mt-8 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+              className={`mt-8 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
               }`}
               style={{
-                transitionDelay: isMobileMenuOpen ? '0.35s' : '0s',
+                transitionDelay: isMobileMenuOpen ? '0.3s' : '0s',
               }}
             >
               <a
                 href="#procedimentos"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full min-h-[52px] px-6 py-4 rounded-full bg-accent text-on-accent text-sm uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer shadow-lg shadow-accent/20"
+                className="w-full min-h-[52px] px-6 py-4 rounded-full bg-accent text-on-accent text-[13px] uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer shadow-lg shadow-accent/20"
               >
                 Agendar Horário
               </a>
