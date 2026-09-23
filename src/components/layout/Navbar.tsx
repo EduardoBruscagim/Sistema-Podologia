@@ -201,33 +201,37 @@ export const Navbar: React.FC = () => {
       <header
         ref={headerRef}
         data-mobile-menu-open={isMobileMenuOpen}
-        className="pointer-events-auto w-full transition-[background-color,border-color,backdrop-filter] duration-300 border-b border-transparent [&.is-scrolled]:bg-surface/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-surface-border relative z-50"
+        className={`pointer-events-auto w-full transition-[background-color,border-color,backdrop-filter] duration-300 border-b relative z-50 ${
+          isMobileMenuOpen
+            ? 'bg-surface/95 dark:bg-surface/90 backdrop-blur-2xl border-surface-border'
+            : 'border-transparent [&.is-scrolled]:bg-surface/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-surface-border'
+        }`}
       >
         <div className="max-w-6xl mx-auto px-3 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
           {/* Lado Esquerdo: Hambúrguer Mobile + Logotipo Editorial */}
-          <div className="flex items-center gap-1 sm:gap-3 min-w-0">
+          <div className="flex items-center gap-1 sm:gap-3 min-w-0 flex-1">
             {/* Botão Hambúrguer Mobile/Tablet Premium (Estilo Apple) */}
-            <div className="lg:hidden flex items-center">
+            <div className="lg:hidden flex items-center shrink-0">
               <button
                 ref={mobileToggleRef}
                 type="button"
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                className="relative min-w-[44px] min-h-[44px] shrink-0 flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer z-50"
+                className="relative min-w-[44px] min-h-[44px] flex items-center justify-center rounded-md text-text-secondary hover:text-accent dark:hover:text-accent hover:bg-surface-variant transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer z-50"
                 aria-label={
                   isMobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'
                 }
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
               >
-                <div className="w-[18px] h-[12px] relative flex flex-col justify-between">
+                <div className="relative flex items-center justify-center w-[24px] h-[24px]">
                   <span
-                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
-                      isMobileMenuOpen ? 'translate-y-[5.25px] rotate-45' : 'translate-y-0'
+                    className={`absolute w-[18px] h-[1.5px] bg-current rounded-full transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                      isMobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-[4px]'
                     }`}
                   />
                   <span
-                    className={`absolute left-0 w-full h-[1.5px] bg-current rounded-full transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
-                      isMobileMenuOpen ? '-translate-y-[5.25px] -rotate-45' : 'translate-y-[10.5px]'
+                    className={`absolute w-[18px] h-[1.5px] bg-current rounded-full transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                      isMobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-[4px]'
                     }`}
                   />
                 </div>
@@ -239,12 +243,8 @@ export const Navbar: React.FC = () => {
               href="/"
               className="flex flex-col justify-center min-h-[44px] text-left py-1 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg select-none group min-w-0"
             >
-              <span className="font-serif text-[13px] xs:text-sm sm:text-lg lg:text-xl font-medium tracking-[0.06em] sm:tracking-[0.10em] uppercase text-on-surface group-hover:text-accent transition-colors leading-none whitespace-nowrap">
+              <span className="font-serif text-sm sm:text-base lg:text-lg font-medium tracking-[0.06em] sm:tracking-[0.10em] uppercase text-on-surface group-hover:text-accent transition-colors leading-none whitespace-nowrap truncate">
                 Angélica Bruscagim
-              </span>
-              <span className="font-sans text-[11px] sm:text-xs text-accent font-medium mt-1 whitespace-nowrap truncate">
-                <span className="sm:hidden">Podologia · Mococa</span>
-                <span className="hidden sm:inline">Podologia em Domicílio · Mococa</span>
               </span>
             </a>
           </div>
