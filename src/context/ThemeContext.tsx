@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { flushSync } from 'react-dom'
 import type { Theme } from '@/types/theme'
 import { updateThemeColorMeta } from '@/utils/theme'
 import { ThemeContext } from './theme-context'
@@ -87,23 +88,31 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // ---------------------------------------------------------------------------
 
   const toggleTheme = useCallback(() => {
-    const applyTheme = () => {
-      setTheme((prev) => {
-        const nextTheme: Theme = prev === 'dark' ? 'light' : 'dark'
-        try {
-          localStorage.setItem('theme', nextTheme)
-        } catch {
-          // Ignora restrições de segurança ou quotas do localStorage
-        }
-        return nextTheme
-      })
+    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark'
+    const isNextDark = nextTheme === 'dark'
+
+    const syncDOM = () => {
+      if (isNextDark) {
+        document.documentElement.classList.add('dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+        document.documentElement.setAttribute('data-theme', 'light')
+      }
+      updateThemeColorMeta(isNextDark)
+      try {
+        localStorage.setItem('theme', nextTheme)
+      } catch {
+        // Ignora restrições de segurança ou quotas do localStorage
+      }
     }
 
     if (
       typeof window === 'undefined' ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      applyTheme()
+      syncDOM()
+      setTheme(nextTheme)
       return
     }
 
@@ -117,15 +126,31 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
 
     if (typeof doc.startViewTransition === 'function') {
-      doc.startViewTransition(() => {
-        applyTheme()
+      document.documentElement.classList.add('view-transitioning')
+      const transition = doc.startViewTransition(() => {
+        // flushSync força o React a atualizar a árvore de componentes e o DOM de forma
+        // 100% síncrona ANTES da captura do novo snapshot pelo navegador.
+        // Isso elimina a sobrecarga no meio da animação (efeito Nokia / lag).
+        flushSync(() => {
+          syncDOM()
+          setTheme(nextTheme)
+        })
       })
+
+      transition.finished
+        .catch(() => {
+          // Ignora cancelamento no caso de cliques repetidos e rápidos
+        })
+        .finally(() => {
+          document.documentElement.classList.remove('view-transitioning')
+        })
       return
     }
 
     // Fallback direto e instantâneo
-    applyTheme()
-  }, [])
+    syncDOM()
+    setTheme(nextTheme)
+  }, [theme])
 
   // ---------------------------------------------------------------------------
   // 5. Memorização do Valor do Contexto

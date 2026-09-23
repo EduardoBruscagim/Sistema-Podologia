@@ -154,17 +154,19 @@
       top left / 0 no-repeat;
     -webkit-mask-origin: content-box;
     mask-origin: content-box;
-    animation: scale 1s;
+    animation: scale 0.8s var(--expo-out);
     animation-fill-mode: both;
     transform-origin: top left;
+    mix-blend-mode: normal;
   }
 
   ::view-transition-old(root),
   .dark::view-transition-old(root) {
-    animation: scale 1s;
+    animation: scale 0.8s var(--expo-out);
     animation-fill-mode: both;
     transform-origin: top left;
     z-index: -1;
+    mix-blend-mode: normal;
   }
 
   @keyframes scale {
@@ -172,6 +174,13 @@
       -webkit-mask-size: 350vmax;
       mask-size: 350vmax;
     }
+  }
+
+  /* Previne conflito de transições CSS durante a captura instantânea do View Transition */
+  html.view-transitioning *,
+  html.view-transitioning *::before,
+  html.view-transitioning *::after {
+    transition: none !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
