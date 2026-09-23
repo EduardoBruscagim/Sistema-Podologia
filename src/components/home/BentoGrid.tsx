@@ -104,8 +104,8 @@ export const BentoGrid: React.FC = () => {
                 Sem taxa de visita
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Atendimento em qualquer bairro da cidade de Mococa pelo valor exato da tabela, sem
-                acréscimo de deslocamento.
+                Vou até a sua casa em qualquer bairro de Mococa pelo valor da tabela, sem cobrar
+                nada a mais pelo deslocamento.
               </p>
             </div>
           </div>
@@ -123,11 +123,11 @@ export const BentoGrid: React.FC = () => {
               </div>
 
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug">
-                Horário exclusivo
+                Horário reservado
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Seu horário é reservado exclusivamente para você, sem divisão de atenção e com
-                dedicação integral.
+                Aquele horário é só seu. Faço o atendimento com calma e foco total, sem dividir a
+                atenção com outros clientes.
               </p>
             </div>
           </div>

@@ -18,33 +18,31 @@ interface FaqItem {
 
 const FAQ_ITEMS: FaqItem[] = [
   {
-    question: 'Como funciona o atendimento em domicílio?',
+    question: 'Como funciona o atendimento na minha casa?',
     answer:
-      'O atendimento é realizado na sua casa com dia e horário combinados. Levo os aparelhos e materiais necessários. Você só precisa de um lugar para sentar e uma tomada por perto.',
+      'A gente combina o dia e a hora. Eu levo todos os aparelhos e produtos. Você só precisa escolher um lugar confortável para sentar e ter uma tomada por perto.',
   },
   {
-    question: 'Como faço para agendar?',
-    answer:
-      'Escolha o procedimento nesta página e clique no botão para abrir o WhatsApp. Por lá combinamos o dia e o horário.',
+    question: 'Como eu marco um horário?',
+    answer: 'É só me mandar uma mensagem no WhatsApp. A gente conversa e já deixa tudo certinho.',
   },
   {
-    question: 'Preciso preparar algo em casa?',
+    question: 'Preciso deixar alguma coisa pronta em casa?',
     answer:
-      'Não precisa preparar nada. Levo toalhas, lixas e produtos. É necessário apenas ter uma tomada próxima para ligar os aparelhos.',
+      'Não precisa se preocupar com nada. Eu levo toalhas, lixas e todos os produtos que vamos usar.',
   },
   {
-    question: 'Como é feita a esterilização dos instrumentos?',
+    question: 'Como você esteriliza os alicates?',
     answer:
-      'Alicates e espátulas de metal são esterilizados em autoclave e embalados em envelopes lacrados, abertos na sua frente. Lixas, toalhas e luvas são descartadas após o uso.',
+      'Meus alicates e espátulas são esterilizados em autoclave e ficam em envelopes que eu só abro na sua frente. Lixas, toalhas e luvas vão pro lixo logo depois do uso.',
   },
   {
-    question: 'Existe cobrança de deslocamento em Mococa?',
-    answer:
-      'Não há taxa de visita. Atendo em qualquer bairro de Mococa pelo valor da tabela de procedimentos.',
+    question: 'Tem taxa para você vir até aqui?',
+    answer: 'Nenhuma! Vou até qualquer bairro de Mococa sem cobrar nada a mais pelo deslocamento.',
   },
   {
-    question: 'Quais são as formas de pagamento?',
-    answer: 'O pagamento é feito ao final do atendimento, por PIX ou em dinheiro.',
+    question: 'Como eu posso pagar?',
+    answer: 'Você pode me pagar no fim do atendimento, com PIX ou dinheiro mesmo.',
   },
 ]
 
@@ -230,7 +228,7 @@ export const FaqSection: React.FC = () => {
           Perguntas frequentes
         </h2>
         <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
-          Dúvidas comuns sobre o atendimento em domicílio e materiais.
+          Tire suas dúvidas sobre como funciona o atendimento e a higiene dos materiais.
         </p>
       </div>
 

@@ -47,7 +47,7 @@ export const TechnologySection: React.FC = () => {
           Higiene e equipamentos
         </h2>
         <p className="text-base text-on-surface-variant font-light leading-relaxed max-w-[48ch] text-pretty">
-          Instrumentos esterilizados e aparelhos portáteis para o atendimento.
+          Levo tudo de mais seguro e moderno até você.
         </p>
       </div>
 
@@ -79,9 +79,9 @@ export const TechnologySection: React.FC = () => {
               </h3>
 
               <p className="text-sm sm:text-base text-on-surface-variant font-light leading-relaxed mb-6 sm:mb-8 max-w-[50ch] text-pretty">
-                Alicates e espátulas de metal são esterilizados em autoclave e mantidos em envelopes
-                lacrados até o atendimento. Lixas, lâminas, toalhas e luvas são descartadas após o
-                uso.
+                Meus alicates de metal são esterilizados em autoclave e ficam em envelopes lacrados
+                que eu só abro aí na sua frente. Lixas, lâminas, toalhas e luvas vão pro lixo depois
+                do uso.
               </p>
             </div>
 
@@ -177,7 +177,7 @@ export const TechnologySection: React.FC = () => {
               </h3>
 
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Auxilia na cicatrização e no alívio de desconfortos nas unhas.
+                Acelera a cicatrização e acalma qualquer desconforto nas unhas.
               </p>
             </div>
           </div>
@@ -214,7 +214,7 @@ export const TechnologySection: React.FC = () => {
               </h3>
 
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
-                Seca o esmalte rapidamente para você poder calçar sapatos ou chinelos sem borrar.
+                Seca o esmalte na hora. Você já sai calçando o sapato que quiser sem borrar nada.
               </p>
             </div>
           </div>

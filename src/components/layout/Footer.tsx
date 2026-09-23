@@ -29,7 +29,8 @@ export const Footer: React.FC = () => {
               Angélica Eduarda
             </span>
             <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light max-w-[34ch] text-pretty mb-4">
-              Podologia e manicure em domicílio em Mococa, SP.
+              Cuidando da saúde e da beleza dos seus pés e mãos, no conforto da sua casa em Mococa,
+              SP.
             </p>
             <span className="text-[11px] text-accent font-medium tracking-wide">
               Atendimento Domiciliar • Mococa, SP
@@ -59,7 +60,7 @@ export const Footer: React.FC = () => {
                     href="#sobre"
                     className="py-2.5 px-2 -mx-2 inline-flex items-center min-h-[44px] min-w-[44px] hover:text-accent transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
                   >
-                    Sobre a Profissional
+                    Sobre mim
                   </a>
                 </li>
                 <li>
@@ -96,20 +97,20 @@ export const Footer: React.FC = () => {
 
           <div className="py-6 md:py-0 md:col-span-1 lg:col-span-3">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
-              Higiene e materiais
+              Segurança e higiene
             </h3>
             <ul className="flex flex-col gap-2.5 text-xs text-on-surface-variant font-light">
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-accent/60 shrink-0" />
-                <span>Instrumentos esterilizados em autoclave</span>
+                <span>Alicates esterilizados em autoclave</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-accent/60 shrink-0" />
-                <span>Materiais descartáveis de uso único</span>
+                <span>Materiais 100% descartáveis</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-accent/60 shrink-0" />
-                <span>Envelopes abertos no atendimento</span>
+                <span>Envelopes abertos na sua frente</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-accent/60 shrink-0" />
@@ -124,10 +125,11 @@ export const Footer: React.FC = () => {
 
           <div className="py-6 last:pb-0 md:py-0 md:col-span-1 lg:col-span-3">
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
-              Atendimento & Contato
+              Contato
             </h3>
             <p className="text-xs text-on-surface-variant font-light leading-relaxed mb-3">
-              Atendimento de segunda a sábado com horário marcado pelo WhatsApp.
+              Atendo de segunda a sábado. Me mande uma mensagem no WhatsApp para marcarmos o seu
+              horário.
             </p>
             <a
               href={getWhatsAppUrl()}

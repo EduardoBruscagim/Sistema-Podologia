@@ -41,7 +41,7 @@ export const SERVICES: ServiceItem[] = [
     duration: 'Duração média de 1h30',
     price: 75,
     priceSuffix: 'sessão completa',
-    description: 'Atendimento para pés e mãos na mesma visita.',
+    description: 'Faço o pé e a mão na mesma visita, com toda a calma.',
     features: [
       'Corte correto das unhas',
       'Cutilagem e esmaltação',
@@ -58,7 +58,7 @@ export const SERVICES: ServiceItem[] = [
     duration: 'Duração média de 1h',
     price: 45,
     priceSuffix: 'sessão',
-    description: 'Cuidados para a saúde e higiene dos pés.',
+    description: 'Cuido da saúde e da beleza dos seus pés.',
     features: [
       'Corte correto para evitar unhas encravadas',
       'Prevenção e cuidado seguro com Pé Diabético',
@@ -76,7 +76,7 @@ export const SERVICES: ServiceItem[] = [
     duration: 'Duração média de 40min',
     price: 35,
     priceSuffix: 'sessão',
-    description: 'Manicure tradicional com corte, lixamento e esmaltação.',
+    description: 'Faço as unhas das mãos com muito cuidado.',
     features: [
       'Corte e lixamento das unhas',
       'Cutilagem e hidratação',

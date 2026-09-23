@@ -28,10 +28,10 @@ export const CtaSection: React.FC = () => {
           id="cta-heading"
           className="font-serif text-[2rem] sm:text-4xl lg:text-[3rem] font-normal text-on-surface tracking-[-0.02em] leading-[1.12] mb-5 max-w-[26ch] text-balance"
         >
-          Agende seu atendimento em domicílio
+          Vamos marcar seu horário?
         </h2>
         <p className="text-base text-on-surface-variant max-w-[48ch] mx-auto leading-relaxed mb-10 font-light text-pretty">
-          Entre em contato pelo WhatsApp para agendar seu horário ou tirar dúvidas.
+          Me mande uma mensagem no WhatsApp. A gente combina o melhor dia para eu ir até você.
         </p>
 
         {/* Grupo de Ações de Conversão */}
