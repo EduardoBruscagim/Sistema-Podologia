@@ -46,11 +46,10 @@ export const initCardsHover = (
 ): (() => void) => {
   if (typeof window === 'undefined') return () => {}
 
-  // Não ativa hover em dispositivos touch sem ponteiro fino ou com preferência de movimento reduzido
-  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  // Permite ativação do hover em mobile via touchstart/touchend, exceto se usuário tiver preferência de movimento reduzido
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  if (!isFinePointer || prefersReduced) {
+  if (prefersReduced) {
     return () => {}
   }
 
@@ -106,10 +105,16 @@ export const initCardsHover = (
 
     card.addEventListener('mouseenter', handleMouseEnter)
     card.addEventListener('mouseleave', handleMouseLeave)
+    card.addEventListener('touchstart', handleMouseEnter, { passive: true })
+    card.addEventListener('touchend', handleMouseLeave)
+    card.addEventListener('touchcancel', handleMouseLeave)
 
     cleanups.push(() => {
       card.removeEventListener('mouseenter', handleMouseEnter)
       card.removeEventListener('mouseleave', handleMouseLeave)
+      card.removeEventListener('touchstart', handleMouseEnter)
+      card.removeEventListener('touchend', handleMouseLeave)
+      card.removeEventListener('touchcancel', handleMouseLeave)
       gsap.killTweensOf(card)
       if (iconEl) gsap.killTweensOf(iconEl)
       gsap.set(card, { clearProps: 'transform' })

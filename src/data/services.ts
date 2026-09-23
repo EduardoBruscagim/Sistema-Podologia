@@ -37,7 +37,7 @@ export const SERVICES: ServiceItem[] = [
     id: 'pe-e-mao-completo',
     title: 'Pé e Mão Completo',
     badge: 'Mais Procurado',
-    isFeatured: true,
+    isFeatured: false,
     duration: 'Duração média de 1h30',
     price: 75,
     priceSuffix: 'sessão completa',
