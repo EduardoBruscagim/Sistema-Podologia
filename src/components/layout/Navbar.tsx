@@ -188,22 +188,23 @@ export const Navbar: React.FC = () => {
   }, [])
 
   return (
-    <div className="fixed top-0 inset-x-0 w-full z-50 pointer-events-none">
+    <>
       {/* Backdrop Mobile para fechar ao clicar fora */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-primary/40 lg:hidden pointer-events-auto z-40 transition-opacity duration-200"
+          className="fixed inset-0 bg-primary/40 lg:hidden pointer-events-auto z-40 transition-opacity duration-300"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-hidden="true"
         />
       )}
 
+      {/* Header Fixo Superior (z-50) */}
       <header
         ref={headerRef}
         data-mobile-menu-open={isMobileMenuOpen}
-        className={`pointer-events-auto w-full transition-[background-color,border-color,backdrop-filter] duration-300 border-b relative z-50 ${
+        className={`fixed top-0 inset-x-0 w-full z-50 pointer-events-auto transition-[background-color,border-color,backdrop-filter] duration-300 border-b ${
           isMobileMenuOpen
-            ? 'bg-surface/95 dark:bg-surface/90 backdrop-blur-2xl border-surface-border'
+            ? 'bg-surface/98 dark:bg-[#11100f]/98 backdrop-blur-2xl border-surface-border'
             : 'border-transparent [&.is-scrolled]:bg-surface/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-surface-border'
         }`}
       >
@@ -223,15 +224,15 @@ export const Navbar: React.FC = () => {
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
               >
-                <div className="relative flex items-center justify-center w-[24px] h-[24px]">
+                <div className="w-[18px] h-[18px] relative flex items-center justify-center pointer-events-none">
                   <span
-                    className={`absolute w-[18px] h-[1.5px] bg-current rounded-full transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                      isMobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-[4px]'
+                    className={`absolute h-[1.2px] w-[16px] bg-current rounded-full transition-transform duration-[280ms] ease-[cubic-bezier(0.32,0.72,0,1)] origin-center ${
+                      isMobileMenuOpen ? 'translate-y-0 rotate-45' : '-translate-y-[3.5px] rotate-0'
                     }`}
                   />
                   <span
-                    className={`absolute w-[18px] h-[1.5px] bg-current rounded-full transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                      isMobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-[4px]'
+                    className={`absolute h-[1.2px] w-[16px] bg-current rounded-full transition-transform duration-[280ms] ease-[cubic-bezier(0.32,0.72,0,1)] origin-center ${
+                      isMobileMenuOpen ? 'translate-y-0 -rotate-45' : 'translate-y-[3.5px] rotate-0'
                     }`}
                   />
                 </div>
@@ -313,20 +314,25 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
         </div>
+      </header>
 
-        {/* Menu Mobile/Tablet Dropdown (Estilo Apple - Full Screen Overlay) */}
-        <nav
-          ref={mobileMenuRef}
-          id="mobile-menu"
-          aria-label="Menu móvel"
-          hidden={!isMobileMenuOpen}
-          className={`fixed top-[72px] sm:top-[80px] bottom-0 left-0 right-0 px-6 pt-6 pb-24 bg-surface/95 dark:bg-surface/90 backdrop-blur-2xl flex flex-col lg:hidden z-40 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] overflow-y-auto ${
-            isMobileMenuOpen
-              ? 'opacity-100 visible [clip-path:inset(0_0_0_0)]'
-              : 'opacity-0 invisible pointer-events-none [clip-path:inset(0_0_100%_0)]'
-          }`}
-        >
-          <div className="flex flex-col flex-1 max-w-sm mx-auto w-full mt-4">
+      {/* Menu Mobile/Tablet Fullscreen Overlay (Estilo Apple) - z-40 */}
+      <nav
+        ref={mobileMenuRef}
+        id="mobile-menu"
+        aria-label="Menu móvel"
+        className={`fixed inset-0 lg:hidden z-40 flex flex-col bg-surface/98 dark:bg-[#11100f]/98 backdrop-blur-3xl transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+          isMobileMenuOpen
+            ? 'opacity-100 translate-y-0 visible pointer-events-auto'
+            : 'opacity-0 -translate-y-6 invisible pointer-events-none'
+        }`}
+      >
+        {/* Espaçador da altura exata do header */}
+        <div className="h-18 sm:h-20 shrink-0" aria-hidden="true" />
+
+        {/* Conteúdo com rolagem fluida e sem corte */}
+        <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col justify-between max-w-sm mx-auto w-full">
+          <div className="flex flex-col">
             {[
               { label: 'Sobre a Profissional', href: '#sobre' },
               { label: 'Procedimentos', href: '#procedimentos' },
@@ -338,10 +344,10 @@ export const Navbar: React.FC = () => {
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 style={{
-                  transitionDelay: isMobileMenuOpen ? `${idx * 0.04 + 0.1}s` : '0s',
+                  transitionDelay: isMobileMenuOpen ? `${idx * 40 + 80}ms` : `${(3 - idx) * 30}ms`,
                 }}
-                className={`py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-on-surface hover:text-accent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
-                  isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+                className={`py-4 sm:py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-on-surface hover:text-accent transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                  isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
                 }`}
               >
                 {item.label}
@@ -356,36 +362,36 @@ export const Navbar: React.FC = () => {
               aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
               onClick={() => setIsMobileMenuOpen(false)}
               style={{
-                transitionDelay: isMobileMenuOpen ? '0.26s' : '0s',
+                transitionDelay: isMobileMenuOpen ? '240ms' : '0ms',
               }}
-              className={`py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-accent transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
-                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+              className={`py-4 sm:py-5 border-b border-surface-border/60 text-[1.375rem] font-medium tracking-tight text-accent transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center justify-between focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
               }`}
             >
               <span>Dúvidas no WhatsApp</span>
               <ArrowUpRight aria-hidden="true" className="w-5 h-5" />
             </a>
-
-            {/* Ação de Agendamento Mobile */}
-            <div
-              className={`mt-8 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-              }`}
-              style={{
-                transitionDelay: isMobileMenuOpen ? '0.3s' : '0s',
-              }}
-            >
-              <a
-                href="#procedimentos"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full min-h-[52px] px-6 py-4 rounded-full bg-accent text-on-accent text-[13px] uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer shadow-lg shadow-accent/20"
-              >
-                Agendar Horário
-              </a>
-            </div>
           </div>
-        </nav>
-      </header>
-    </div>
+
+          {/* Ação de Agendamento Mobile */}
+          <div
+            className={`mt-8 pb-10 transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+              isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+            }`}
+            style={{
+              transitionDelay: isMobileMenuOpen ? '280ms' : '0ms',
+            }}
+          >
+            <a
+              href="#procedimentos"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full min-h-[52px] px-6 py-4 rounded-full bg-accent text-on-accent text-[13px] uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer shadow-lg shadow-accent/20"
+            >
+              Agendar Horário
+            </a>
+          </div>
+        </div>
+      </nav>
+    </>
   )
 }
