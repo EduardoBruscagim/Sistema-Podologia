@@ -50,11 +50,15 @@ export const Navbar: React.FC = () => {
   const prevOpenRef = useRef(false)
 
   // ---------------------------------------------------------------------------
-  // 2. Manipulação de Tema
+  // 2. Manipulação de Tema com Captura de Coordenadas
   // ---------------------------------------------------------------------------
 
-  const handleToggleTheme = () => {
-    toggleTheme()
+  const handleToggleTheme = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const x = rect.left + rect.width / 2
+    const y = rect.top + rect.height / 2
+
+    toggleTheme({ x, y })
     setThemeStatusMessage(isDark ? 'Modo claro ativado' : 'Modo escuro ativado')
   }
 
