@@ -33,6 +33,20 @@ const applyThemeToDOM = (nextTheme: Theme): void => {
 }
 
 /**
+ * Recupera de forma segura a preferência salva no localStorage.
+ * Trata exceções em ambientes com restrições rígidas (ex: navegação anônima do Safari ou iframes com sandbox)
+ * e valida se o valor armazenado é estritamente 'dark' ou 'light'.
+ */
+const readThemePreference = (): Theme | null => {
+  try {
+    const saved = localStorage.getItem('theme')
+    return saved === 'dark' || saved === 'light' ? saved : null
+  } catch {
+    return null
+  }
+}
+
+/**
  * Salva a preferência explícita do usuário no localStorage.
  * Deve ser invocada exclusivamente quando o usuário aciona o botão manual de tema.
  */
@@ -51,14 +65,16 @@ const persistThemePreference = (nextTheme: Theme): void => {
  * 1. **Separação Rígida de Responsabilidades:** `applyThemeToDOM` gerencia exclusivamente
  *    a camada visual. A gravação em `localStorage` é delegada a `persistThemePreference`
  *    e executada apenas em cliques manuais, preservando o acompanhamento do SO.
- * 2. **Sincronismo Preciso no Snapshot da View Transition:** O uso direcionado de `flushSync`
+ * 2. **Leitura e Gravação 100% Seguras:** Tanto a leitura (`readThemePreference`) quanto
+ *    a gravação (`persistThemePreference`) são encapsuladas contra falhas de quota ou permissão.
+ * 3. **Sincronismo Preciso no Snapshot da View Transition:** O uso direcionado de `flushSync`
  *    dentro do callback do `startViewTransition` garante que tanto as variáveis CSS
  *    quanto os elementos controlados pelo React (ícone Sol/Lua e estados ARIA no Navbar)
  *    já estejam no novo estado antes da captura do snapshot pelo navegador.
- * 3. **Prevenção de Cliques Rápidos Concorrentes:** Uma ref `isTransitioningRef` atua como
+ * 4. **Prevenção de Cliques Rápidos Concorrentes:** Uma ref `isTransitioningRef` atua como
  *    trava de reentrância, evitando que cliques múltiplos disparem transições sobrepostas
  *    ou limpem prematuramente a classe `.view-transitioning`.
- * 4. **Origem Dinâmica da Animação:** Injeta as coordenadas `--theme-x` e `--theme-y`
+ * 5. **Origem Dinâmica da Animação:** Injeta as coordenadas `--theme-x` e `--theme-y`
  *    para expansão do clip-path circular a partir do centro do botão clicado.
  */
 
@@ -71,10 +87,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     // Em tempo de pré-renderização (SSR) o objeto window não existe
     if (typeof window === 'undefined') return 'light'
 
-    const saved = localStorage.getItem('theme') as Theme | null
-    if (saved === 'dark' || saved === 'light') return saved
+    const saved = readThemePreference()
+    if (saved) return saved
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    try {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    } catch {
+      return 'light'
+    }
   })
 
   const isDark = theme === 'dark'
@@ -103,8 +123,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
       const handleChange = (e: MediaQueryListEvent) => {
         // Apenas acompanha o SO se o usuário NÃO tiver salvo uma escolha manual explícita
-        const saved = localStorage.getItem('theme')
-        if (!saved) {
+        if (!readThemePreference()) {
           setTheme(e.matches ? 'dark' : 'light')
         }
       }
