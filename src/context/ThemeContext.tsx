@@ -1,4 +1,5 @@
-import React, { startTransition, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import type { Theme, ThemeCoordinates } from '@/types/theme'
 import { updateThemeColorMeta } from '@/utils/theme'
 import { ThemeContext } from './theme-context'
@@ -13,8 +14,8 @@ interface ThemeProviderProps {
 }
 
 /**
- * Aplica o tema diretamente no DOM (atributos do <html>, meta-tags e localStorage).
- * Centraliza a mutação em um único ponto, eliminando trabalho duplicado.
+ * Sincroniza a aparência visual no DOM (atributos do <html> e meta-tags).
+ * Não altera o localStorage para não transformar mudanças do SO em escolhas manuais.
  */
 const applyThemeToDOM = (nextTheme: Theme): void => {
   const isDark = nextTheme === 'dark'
@@ -29,28 +30,36 @@ const applyThemeToDOM = (nextTheme: Theme): void => {
   }
 
   updateThemeColorMeta(isDark)
+}
 
+/**
+ * Salva a preferência explícita do usuário no localStorage.
+ * Deve ser invocada exclusivamente quando o usuário aciona o botão manual de tema.
+ */
+const persistThemePreference = (nextTheme: Theme): void => {
   try {
     localStorage.setItem('theme', nextTheme)
   } catch {
-    // Ignora restrições de segurança ou quotas do localStorage (ex: navegação anônima rígida)
+    // O tema visual continua funcionando mesmo sem armazenamento (ex: navegação anônima rígida)
   }
 }
 
 /**
  * Provedor do estado global de tema ('light' | 'dark').
  *
- * ### Fluxo de Execução Otimizado para 60 FPS:
- * 1. **Zero Bloqueio no Callback da View Transition:** O DOM é sincronizado diretamente no callback
- *    do `startViewTransition` sem usar `flushSync`. Como todos os estilos e variáveis de tema
- *    são governados por CSS (`data-theme`), o navegador captura o novo snapshot instantaneamente
- *    sem congelar o renderizador do React.
- * 2. **Transição Concorrente no React:** A atualização de estado do React é despachada via `startTransition`,
- *    permitindo que a UI mantenha 60 FPS estáveis enquanto o compositor da GPU anima o reveal circular.
- * 3. **Eliminação de Mutação Duplicada:** O `useEffect` monitora alterações externas (ex: SO)
- *    e só muta o DOM se os atributos atuais divergirem do novo estado.
- * 4. **Origem Dinâmica da Animação:** Permite injetar as coordenadas `--theme-x` e `--theme-y`
- *    para o clip-path expandir a partir do botão clicado.
+ * ### Fluxo de Execução Resiliente e Otimizado para 60 FPS:
+ * 1. **Separação Rígida de Responsabilidades:** `applyThemeToDOM` gerencia exclusivamente
+ *    a camada visual. A gravação em `localStorage` é delegada a `persistThemePreference`
+ *    e executada apenas em cliques manuais, preservando o acompanhamento do SO.
+ * 2. **Sincronismo Preciso no Snapshot da View Transition:** O uso direcionado de `flushSync`
+ *    dentro do callback do `startViewTransition` garante que tanto as variáveis CSS
+ *    quanto os elementos controlados pelo React (ícone Sol/Lua e estados ARIA no Navbar)
+ *    já estejam no novo estado antes da captura do snapshot pelo navegador.
+ * 3. **Prevenção de Cliques Rápidos Concorrentes:** Uma ref `isTransitioningRef` atua como
+ *    trava de reentrância, evitando que cliques múltiplos disparem transições sobrepostas
+ *    ou limpem prematuramente a classe `.view-transitioning`.
+ * 4. **Origem Dinâmica da Animação:** Injeta as coordenadas `--theme-x` e `--theme-y`
+ *    para expansão do clip-path circular a partir do centro do botão clicado.
  */
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
@@ -69,16 +78,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   })
 
   const isDark = theme === 'dark'
+  const isTransitioningRef = useRef(false)
 
   // ---------------------------------------------------------------------------
-  // 2. Sincronização Segura do DOM e Meta Tags (Zero Duplicação)
+  // 2. Sincronização Segura do DOM e Meta Tags (Zero Poluição de LocalStorage)
   // ---------------------------------------------------------------------------
 
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute('data-theme')
     const targetTheme = isDark ? 'dark' : 'light'
 
-    // Só muta o DOM se ainda não tiver sido sincronizado pelo toggle direto
+    // Só sincroniza o DOM se os atributos atuais divergirem do estado do React
     if (currentTheme !== targetTheme) {
       applyThemeToDOM(targetTheme)
     }
@@ -92,7 +102,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     try {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
       const handleChange = (e: MediaQueryListEvent) => {
-        // Apenas acompanha o SO se o usuário não tiver salvo uma preferência manual
+        // Apenas acompanha o SO se o usuário NÃO tiver salvo uma escolha manual explícita
         const saved = localStorage.getItem('theme')
         if (!saved) {
           setTheme(e.matches ? 'dark' : 'light')
@@ -107,12 +117,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   }, [])
 
   // ---------------------------------------------------------------------------
-  // 4. Ação de Alternância (Toggle) Fluida e Otimizada
+  // 4. Ação de Alternância (Toggle) Fluida, Segura e com Trava de Reentrância
   // ---------------------------------------------------------------------------
 
   const toggleTheme = useCallback(
     (coords?: ThemeCoordinates) => {
+      // Evita conflitos de concorrência caso o usuário clique várias vezes em < 450ms
+      if (isTransitioningRef.current) return
+
       const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark'
+
+      // Persistência ocorre exclusivamente pelo clique manual do usuário
+      persistThemePreference(nextTheme)
 
       // Atualiza coordenadas no CSS para que o clip-path circular nasça exatamente do botão
       if (coords) {
@@ -125,13 +141,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ) {
         applyThemeToDOM(nextTheme)
-        startTransition(() => {
-          setTheme(nextTheme)
-        })
+        setTheme(nextTheme)
         return
       }
 
-      // Suporte nativo à View Transitions API do navegador (GPU accelerated circular clip-path reveal)
+      // Suporte à View Transitions API do navegador (GPU accelerated circular clip-path reveal)
       const doc = document as Document & {
         startViewTransition?: (callback: () => void | Promise<void>) => {
           finished: Promise<void>
@@ -141,33 +155,44 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       }
 
       if (typeof doc.startViewTransition === 'function') {
+        isTransitioningRef.current = true
         document.documentElement.classList.add('view-transitioning')
-        const transition = doc.startViewTransition(() => {
-          // O DOM muda imediatamente aqui no callback síncrono.
-          // O navegador captura o novo snapshot já com as classes e CSS variables atualizados.
-          applyThemeToDOM(nextTheme)
 
-          // O React atualiza seu estado sem bloquear o pipeline da View Transition (sem flushSync)
-          startTransition(() => {
-            setTheme(nextTheme)
+        let transition: ReturnType<typeof doc.startViewTransition>
+        try {
+          transition = doc.startViewTransition(() => {
+            // Sincroniza o DOM visual (classes e atributos de estilo)
+            applyThemeToDOM(nextTheme)
+
+            // flushSync garante que o React atualize o DOM de componentes (ícone Sol/Lua e
+            // aria-pressed do Navbar) antes da captura do snapshot do novo estado pelo browser
+            flushSync(() => {
+              setTheme(nextTheme)
+            })
           })
-        })
+        } catch {
+          // Se a inicialização falhar, restaura a trava e aplica diretamente
+          isTransitioningRef.current = false
+          document.documentElement.classList.remove('view-transitioning')
+          applyThemeToDOM(nextTheme)
+          setTheme(nextTheme)
+          return
+        }
 
         transition.finished
           .catch(() => {
-            // Ignora cancelamento no caso de cliques repetidos e rápidos
+            // Ignora cancelamento caso ocorra descarte pelo navegador
           })
           .finally(() => {
+            isTransitioningRef.current = false
             document.documentElement.classList.remove('view-transitioning')
           })
         return
       }
 
-      // Fallback direto e instantâneo caso View Transitions API não esteja disponível
+      // Fallback instantâneo caso View Transitions API não esteja disponível
       applyThemeToDOM(nextTheme)
-      startTransition(() => {
-        setTheme(nextTheme)
-      })
+      setTheme(nextTheme)
     },
     [theme],
   )
