@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { flushSync } from 'react-dom'
-import type { Theme } from '@/types/theme'
+import React, { startTransition, useCallback, useEffect, useMemo, useState } from 'react'
+import type { Theme, ThemeCoordinates } from '@/types/theme'
 import { updateThemeColorMeta } from '@/utils/theme'
 import { ThemeContext } from './theme-context'
 
@@ -14,18 +13,44 @@ interface ThemeProviderProps {
 }
 
 /**
+ * Aplica o tema diretamente no DOM (atributos do <html>, meta-tags e localStorage).
+ * Centraliza a mutação em um único ponto, eliminando trabalho duplicado.
+ */
+const applyThemeToDOM = (nextTheme: Theme): void => {
+  const isDark = nextTheme === 'dark'
+  const root = document.documentElement
+
+  if (isDark) {
+    root.classList.add('dark')
+    root.setAttribute('data-theme', 'dark')
+  } else {
+    root.classList.remove('dark')
+    root.setAttribute('data-theme', 'light')
+  }
+
+  updateThemeColorMeta(isDark)
+
+  try {
+    localStorage.setItem('theme', nextTheme)
+  } catch {
+    // Ignora restrições de segurança ou quotas do localStorage (ex: navegação anônima rígida)
+  }
+}
+
+/**
  * Provedor do estado global de tema ('light' | 'dark').
  *
- * ### Responsabilidades e Fluxo de Execução:
- * 1. **Inicialização Resiliente:** Verifica o `localStorage` do navegador; se ausente,
- *    consulta a preferência de sistema via `window.matchMedia('(prefers-color-scheme: dark)')`.
- *    Durante SSR/build, assume 'light' por padrão para consistência estática.
- * 2. **Sincronização com o DOM:** Adiciona/remove a classe `.dark` e o atributo `data-theme`
- *    no elemento raiz `<html>`, além de atualizar a meta tag `theme-color` para navegadores móveis.
- * 3. **Detecção Reativa do SO:** Escuta eventos de alteração de tema do sistema operacional
- *    quando o usuário ainda não tiver definido uma preferência manual explícita.
- * 4. **Persistência Segura:** Salva a escolha do usuário no `localStorage` protegendo contra
- *    exceções em ambientes restritivos (ex: iframes com sandbox ou navegação privada rígida).
+ * ### Fluxo de Execução Otimizado para 60 FPS:
+ * 1. **Zero Bloqueio no Callback da View Transition:** O DOM é sincronizado diretamente no callback
+ *    do `startViewTransition` sem usar `flushSync`. Como todos os estilos e variáveis de tema
+ *    são governados por CSS (`data-theme`), o navegador captura o novo snapshot instantaneamente
+ *    sem congelar o renderizador do React.
+ * 2. **Transição Concorrente no React:** A atualização de estado do React é despachada via `startTransition`,
+ *    permitindo que a UI mantenha 60 FPS estáveis enquanto o compositor da GPU anima o reveal circular.
+ * 3. **Eliminação de Mutação Duplicada:** O `useEffect` monitora alterações externas (ex: SO)
+ *    e só muta o DOM se os atributos atuais divergirem do novo estado.
+ * 4. **Origem Dinâmica da Animação:** Permite injetar as coordenadas `--theme-x` e `--theme-y`
+ *    para o clip-path expandir a partir do botão clicado.
  */
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
@@ -46,19 +71,17 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const isDark = theme === 'dark'
 
   // ---------------------------------------------------------------------------
-  // 2. Sincronização do DOM e Meta Tags
+  // 2. Sincronização Segura do DOM e Meta Tags (Zero Duplicação)
   // ---------------------------------------------------------------------------
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark')
-      document.documentElement.setAttribute('data-theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      document.documentElement.setAttribute('data-theme', 'light')
-    }
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    const targetTheme = isDark ? 'dark' : 'light'
 
-    updateThemeColorMeta(isDark)
+    // Só muta o DOM se ainda não tiver sido sincronizado pelo toggle direto
+    if (currentTheme !== targetTheme) {
+      applyThemeToDOM(targetTheme)
+    }
   }, [isDark])
 
   // ---------------------------------------------------------------------------
@@ -87,70 +110,67 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // 4. Ação de Alternância (Toggle) Fluida e Otimizada
   // ---------------------------------------------------------------------------
 
-  const toggleTheme = useCallback(() => {
-    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark'
-    const isNextDark = nextTheme === 'dark'
+  const toggleTheme = useCallback(
+    (coords?: ThemeCoordinates) => {
+      const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark'
 
-    const syncDOM = () => {
-      if (isNextDark) {
-        document.documentElement.classList.add('dark')
-        document.documentElement.setAttribute('data-theme', 'dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-        document.documentElement.setAttribute('data-theme', 'light')
+      // Atualiza coordenadas no CSS para que o clip-path circular nasça exatamente do botão
+      if (coords) {
+        document.documentElement.style.setProperty('--theme-x', `${coords.x}px`)
+        document.documentElement.style.setProperty('--theme-y', `${coords.y}px`)
       }
-      updateThemeColorMeta(isNextDark)
-      try {
-        localStorage.setItem('theme', nextTheme)
-      } catch {
-        // Ignora restrições de segurança ou quotas do localStorage
-      }
-    }
 
-    if (
-      typeof window === 'undefined' ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ) {
-      syncDOM()
-      setTheme(nextTheme)
-      return
-    }
-
-    // 1. Suporte nativo à View Transitions API do navegador (GPU accelerated, circular blur mask reveal)
-    const doc = document as Document & {
-      startViewTransition?: (callback: () => void | Promise<void>) => {
-        finished: Promise<void>
-        ready: Promise<void>
-        updateCallbackDone: Promise<void>
-      }
-    }
-
-    if (typeof doc.startViewTransition === 'function') {
-      document.documentElement.classList.add('view-transitioning')
-      const transition = doc.startViewTransition(() => {
-        // flushSync força o React a atualizar a árvore de componentes e o DOM de forma
-        // 100% síncrona ANTES da captura do novo snapshot pelo navegador.
-        // Isso elimina a sobrecarga no meio da animação (efeito Nokia / lag).
-        flushSync(() => {
-          syncDOM()
+      if (
+        typeof window === 'undefined' ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        applyThemeToDOM(nextTheme)
+        startTransition(() => {
           setTheme(nextTheme)
         })
+        return
+      }
+
+      // Suporte nativo à View Transitions API do navegador (GPU accelerated circular clip-path reveal)
+      const doc = document as Document & {
+        startViewTransition?: (callback: () => void | Promise<void>) => {
+          finished: Promise<void>
+          ready: Promise<void>
+          updateCallbackDone: Promise<void>
+        }
+      }
+
+      if (typeof doc.startViewTransition === 'function') {
+        document.documentElement.classList.add('view-transitioning')
+        const transition = doc.startViewTransition(() => {
+          // O DOM muda imediatamente aqui no callback síncrono.
+          // O navegador captura o novo snapshot já com as classes e CSS variables atualizados.
+          applyThemeToDOM(nextTheme)
+
+          // O React atualiza seu estado sem bloquear o pipeline da View Transition (sem flushSync)
+          startTransition(() => {
+            setTheme(nextTheme)
+          })
+        })
+
+        transition.finished
+          .catch(() => {
+            // Ignora cancelamento no caso de cliques repetidos e rápidos
+          })
+          .finally(() => {
+            document.documentElement.classList.remove('view-transitioning')
+          })
+        return
+      }
+
+      // Fallback direto e instantâneo caso View Transitions API não esteja disponível
+      applyThemeToDOM(nextTheme)
+      startTransition(() => {
+        setTheme(nextTheme)
       })
-
-      transition.finished
-        .catch(() => {
-          // Ignora cancelamento no caso de cliques repetidos e rápidos
-        })
-        .finally(() => {
-          document.documentElement.classList.remove('view-transitioning')
-        })
-      return
-    }
-
-    // Fallback direto e instantâneo
-    syncDOM()
-    setTheme(nextTheme)
-  }, [theme])
+    },
+    [theme],
+  )
 
   // ---------------------------------------------------------------------------
   // 5. Memorização do Valor do Contexto

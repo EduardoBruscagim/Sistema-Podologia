@@ -7,6 +7,14 @@
 export type Theme = 'light' | 'dark'
 
 /**
+ * Coordenadas (x, y) de origem do disparo do tema (geralmente centro do botão alternador).
+ */
+export interface ThemeCoordinates {
+  x: number
+  y: number
+}
+
+/**
  * Contrato de contexto que expõe o estado global de tema e as ações de alternância.
  */
 
@@ -16,5 +24,5 @@ export interface ThemeContextType {
   /** Flag booleana de conveniência que indica se o tema atual é 'dark'. */
   isDark: boolean
   /** Alterna entre modo claro e escuro, persistindo a escolha no localStorage e atualizando o DOM. */
-  toggleTheme: () => void
+  toggleTheme: (coords?: ThemeCoordinates) => void
 }

@@ -59,6 +59,8 @@
 :root,
 [data-theme],
 [data-theme='light'] {
+  --theme-x: 50%;
+  --theme-y: 50%;
   --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
   --color-primary: #181615;
   --color-primary-hover: #2d2927;
@@ -142,37 +144,35 @@
     }
   }
 
-  /* Transição circular com desfoque de alta fidelidade para troca de tema (View Transitions API) */
+  /* Transição circular ultra-otimizada para troca de tema (View Transitions API + clip-path acelerado por GPU) */
   ::view-transition-group(root) {
-    animation-timing-function: var(--expo-out);
-  }
-
-  ::view-transition-new(root) {
-    -webkit-mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA0MCI+PGRlZnM+PGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMiIvPjwvZmlsdGVyPjwvZGVmcz48Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMTgiIGZpbGw9IndoaXRlIiBmaWx0ZXI9InVybCgjYmx1cikiLz48L3N2Zz4=')
-      top left / 0 no-repeat;
-    mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA0MCI+PGRlZnM+PGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMiIvPjwvZmlsdGVyPjwvZGVmcz48Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMTgiIGZpbGw9IndoaXRlIiBmaWx0ZXI9InVybCgjYmx1cikiLz48L3N2Zz4=')
-      top left / 0 no-repeat;
-    -webkit-mask-origin: content-box;
-    mask-origin: content-box;
-    animation: scale 0.8s var(--expo-out);
-    animation-fill-mode: both;
-    transform-origin: top left;
-    mix-blend-mode: normal;
+    animation-duration: 450ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   ::view-transition-old(root),
-  .dark::view-transition-old(root) {
-    animation: scale 0.8s var(--expo-out);
-    animation-fill-mode: both;
-    transform-origin: top left;
-    z-index: -1;
+  ::view-transition-new(root) {
+    animation-duration: 450ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     mix-blend-mode: normal;
   }
 
-  @keyframes scale {
+  ::view-transition-old(root) {
+    animation: none;
+    z-index: 1;
+  }
+
+  ::view-transition-new(root) {
+    animation: theme-reveal 450ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    z-index: 2;
+  }
+
+  @keyframes theme-reveal {
+    from {
+      clip-path: circle(0px at var(--theme-x, 50%) var(--theme-y, 50%));
+    }
     to {
-      -webkit-mask-size: 350vmax;
-      mask-size: 350vmax;
+      clip-path: circle(150vmax at var(--theme-x, 50%) var(--theme-y, 50%));
     }
   }
 
@@ -317,19 +317,19 @@
     position: relative;
   }
 
-  /* Textura de Grão Tátil (SVG feTurbulence inline) */
+  /* Textura de Grão Tátil (Textura raster WebP ultra-leve pré-renderizada) */
   body::before {
     content: '';
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
     z-index: -10;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
+    background-image: url('/noise.webp');
+    background-size: 128px 128px;
     background-repeat: repeat;
+    opacity: 0.035;
   }
 
   :where(.dark, .dark *) body,
@@ -342,10 +342,11 @@
   :where(.dark, .dark *) body::before,
   html.dark body::before,
   .dark body::before {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    background-image: url('/noise.webp');
+    opacity: 0.02;
   }
 
-  /* Em telas touch móveis, ocultar o SVG procedural para máxima performance e evitar bugs de repintura */
+  /* Em telas touch móveis, ocultar o ruído para máxima performance de rolagem */
   @media (hover: none) and (pointer: coarse) {
     body::before {
       display: none;
