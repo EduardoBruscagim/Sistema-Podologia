@@ -62,6 +62,13 @@ export const ServicesPricing: React.FC = () => {
    */
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
+    if (
+      typeof window !== 'undefined' &&
+      !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    ) {
+      return
+    }
+
     const card = e.currentTarget
     const clientX = e.clientX
     const clientY = e.clientY

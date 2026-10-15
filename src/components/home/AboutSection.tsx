@@ -9,7 +9,7 @@ import { Heart, ShieldCheck, Calendar, Check, ArrowUpRight, GraduationCap } from
  *
  * ### Estrutura Editorial e Humanização:
  * - **Lado Esquerdo (Card de Credenciais):**
- *   Monograma tipográfico em SVG (iniciais e agulha/ponto de cuidado), badge de Mococa/SP
+ *   Retrato fotográfico com emblema e badge de Mococa/SP
  *   e lista de credenciais fundamentais (experiência desde 2016, autoclave cirúrgica e foco em idosos).
  * - **Lado Direito (Narrativa Pessoal e Diferenciais):**
  *   Texto humanizado que detalha a discrição e a biossegurança no atendimento domiciliar,
@@ -36,12 +36,15 @@ export const AboutSection: React.FC = () => {
 
         <div className="about-reveal lg:col-span-5 flex flex-col items-center">
           <div className="about-card w-full max-w-sm rounded-2xl bg-pure-white dark:bg-surface-variant border border-surface-border p-7 sm:p-8 flex flex-col items-center text-center shadow-xs">
-            {/* Emblema Editorial com Monograma */}
+            {/* Emblema Editorial com Retrato */}
             <div className="relative mb-6">
               <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-surface-variant dark:bg-surface flex items-center justify-center border border-surface-border text-accent overflow-hidden">
                 <img
-                  src="/angelica.jpg"
+                  src="/angelica.webp"
                   alt="Foto da Angélica Eduarda Amaro Bruscagim"
+                  width={112}
+                  height={112}
+                  decoding="async"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
