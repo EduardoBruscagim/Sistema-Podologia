@@ -1,5 +1,5 @@
 import React from 'react'
-import { getWhatsAppUrl } from '@/utils/whatsapp'
+import { getWhatsAppUrl, getWhatsAppDisplayNumber } from '@/utils/whatsapp'
 
 /**
  * Componente de Rodapé Editorial (Footer).
@@ -126,15 +126,18 @@ export const Footer: React.FC = () => {
             <h3 className="text-xs uppercase tracking-[0.16em] font-medium text-on-surface mb-4">
               Contato
             </h3>
-            <p className="text-xs text-on-surface-variant font-light leading-relaxed mb-3">
-              Atendo de segunda a sábado. Me mande uma mensagem no WhatsApp para marcarmos o seu
+            <p className="text-xs text-on-surface-variant font-light leading-relaxed mb-2">
+              Seg a Sáb, das 8h às 19h. Me mande uma mensagem no WhatsApp para marcarmos o seu
               horário.
+            </p>
+            <p className="text-xs font-mono font-medium text-on-surface mb-3 tracking-wide">
+              {getWhatsAppDisplayNumber()}
             </p>
             <a
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Dúvidas no WhatsApp (abre em uma nova aba)"
+              aria-label={`Dúvidas no WhatsApp ${getWhatsAppDisplayNumber()} (abre em uma nova aba)`}
               className="inline-flex items-center gap-1.5 min-h-[44px] py-1 text-xs text-accent hover:text-accent-hover font-medium transition-colors group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md"
             >
               <span>Dúvidas no WhatsApp</span>

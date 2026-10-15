@@ -75,7 +75,9 @@ async function runAudit() {
     process.exit(1)
   } else {
     console.log('✅ ZERO ACCESSIBILITY VIOLATIONS DETECTED!')
-    console.log('Score: 100/100 (Full WCAG 2.1 & 2.2 AA/AAA & Best Practices compliance)\n')
+    console.log(
+      'Score: 100/100 (Full WCAG 2.1 & 2.2 AA & Best Practices static DOM/ARIA compliance)\n',
+    )
   }
 }
 

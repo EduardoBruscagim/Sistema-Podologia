@@ -44,7 +44,8 @@ Thumbs.db
 skills-lock.json
 AGENTS.md
 GEMINI.md
-.impeccable/live/annotations/
-.impeccable/live/sessions/
-.impeccable/live/inject-journal.json
-.impeccable/live/roots.json
+.impeccable/
+
+# Temporary and backup files
+*.bak
+codigo-completo.*

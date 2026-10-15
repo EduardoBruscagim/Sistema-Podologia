@@ -6,8 +6,6 @@ import { initNavbarAnimation } from '@/animations/navbar'
 import { getWhatsAppUrl } from '@/utils/whatsapp'
 import { Sun, Moon, ArrowUpRight } from 'lucide-react'
 
-gsap.registerPlugin(useGSAP)
-
 /**
  * Componente de Cabeçalho / Barra de Navegação Superior.
  *
@@ -275,7 +273,10 @@ export const Navbar: React.FC = () => {
       {/* Backdrop Mobile para fechar ao clicar fora */}
       <div
         ref={backdropRef}
-        className="fixed inset-0 bg-primary/40 lg:hidden pointer-events-auto z-40"
+        id="mobile-menu-backdrop"
+        className={`fixed inset-0 bg-primary/40 lg:hidden z-40 opacity-0 invisible transition-none ${
+          isMobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
+        }`}
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden="true"
       />
@@ -286,7 +287,7 @@ export const Navbar: React.FC = () => {
         data-mobile-menu-open={isMobileMenuOpen}
         className={`fixed top-0 inset-x-0 w-full z-50 pointer-events-auto transition-[background-color,border-color,backdrop-filter] duration-300 border-b ${
           isMobileMenuOpen
-            ? 'bg-surface/98 dark:bg-[#11100f]/98 backdrop-blur-2xl border-surface-border'
+            ? 'bg-surface/98 dark:bg-surface/98 backdrop-blur-2xl border-surface-border'
             : 'border-transparent [&.is-scrolled]:bg-surface/90 [&.is-scrolled]:backdrop-blur-md [&.is-scrolled]:border-surface-border'
         }`}
       >
@@ -365,6 +366,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
             {/* Alternador de Tema com Microinteração Fluida (Tailwind transitions) */}
             <button
+              suppressHydrationWarning
               aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
               aria-pressed={isDark}
               onClick={handleToggleTheme}
@@ -372,23 +374,15 @@ export const Navbar: React.FC = () => {
               type="button"
             >
               <span className="relative w-5 h-5 flex items-center justify-center pointer-events-none">
-                {/* Ícone da Lua (visível no modo claro, gira e encolhe ao ir para escuro) */}
+                {/* Ícone da Lua (visível no modo claro, gira e encolhe no escuro) */}
                 <Moon
                   aria-hidden="true"
-                  className={`w-4 h-4 absolute transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-                    isDark
-                      ? 'opacity-0 scale-50 rotate-90 pointer-events-none'
-                      : 'opacity-100 scale-100 rotate-0 text-current'
-                  }`}
+                  className="w-4 h-4 absolute transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] opacity-100 scale-100 rotate-0 text-current dark:opacity-0 dark:scale-50 dark:rotate-90 dark:pointer-events-none"
                 />
                 {/* Ícone do Sol (visível no modo escuro, gira e expande ao ativar) */}
                 <Sun
                   aria-hidden="true"
-                  className={`w-4 h-4 absolute transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-                    isDark
-                      ? 'opacity-100 scale-100 rotate-0 text-current'
-                      : 'opacity-0 scale-50 -rotate-90 pointer-events-none'
-                  }`}
+                  className="w-4 h-4 absolute transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] opacity-0 scale-50 -rotate-90 pointer-events-none dark:opacity-100 dark:scale-100 dark:rotate-0 dark:text-current dark:pointer-events-auto"
                 />
               </span>
             </button>
@@ -417,7 +411,10 @@ export const Navbar: React.FC = () => {
         id="mobile-menu"
         aria-label="Menu móvel"
         aria-hidden={!isMobileMenuOpen}
-        className="fixed inset-0 lg:hidden z-40 flex flex-col bg-surface dark:bg-[#11100f] overflow-hidden pointer-events-auto"
+        inert={!isMobileMenuOpen ? true : undefined}
+        className={`fixed inset-0 lg:hidden z-40 flex flex-col bg-surface dark:bg-surface overflow-hidden opacity-0 invisible transition-none ${
+          isMobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
+        }`}
       >
         {/* Espaçador da altura exata do header */}
         <div className="h-18 sm:h-20 shrink-0" aria-hidden="true" />

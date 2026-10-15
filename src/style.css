@@ -222,6 +222,8 @@
   }
 
   /* Prevenção de FOUC e sobressalto inicial (jump/flash) em elementos com revelação GSAP */
+  .js:not(.gsap-loaded) #mobile-menu,
+  .js:not(.gsap-loaded) #mobile-menu-backdrop,
   .js:not(.gsap-loaded) .stat-reveal,
   .js:not(.gsap-loaded) .bento-header,
   .js:not(.gsap-loaded) .bento-card,
