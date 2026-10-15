@@ -46,9 +46,13 @@ export const initCardsHover = (
 ): (() => void) => {
   if (typeof window === 'undefined') return () => {}
 
-  // Permite ativação do hover em mobile via touchstart/touchend, exceto se usuário tiver preferência de movimento reduzido
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  // Filtro de Ponteiro Fino: Executa exclusivamente em dispositivos desktop com mouse/trackpad.
+  // Não é ativado em telas de toque (touch), evitando o problema de hover travado ("sticky hover") no scroll mobile.
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    return () => {}
+  }
 
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReduced) {
     return () => {}
   }
@@ -105,16 +109,10 @@ export const initCardsHover = (
 
     card.addEventListener('mouseenter', handleMouseEnter)
     card.addEventListener('mouseleave', handleMouseLeave)
-    card.addEventListener('touchstart', handleMouseEnter, { passive: true })
-    card.addEventListener('touchend', handleMouseLeave)
-    card.addEventListener('touchcancel', handleMouseLeave)
 
     cleanups.push(() => {
       card.removeEventListener('mouseenter', handleMouseEnter)
       card.removeEventListener('mouseleave', handleMouseLeave)
-      card.removeEventListener('touchstart', handleMouseEnter)
-      card.removeEventListener('touchend', handleMouseLeave)
-      card.removeEventListener('touchcancel', handleMouseLeave)
       gsap.killTweensOf(card)
       if (iconEl) gsap.killTweensOf(iconEl)
       gsap.set(card, { clearProps: 'transform' })

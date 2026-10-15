@@ -16,8 +16,9 @@ interface ThemeProviderProps {
 /**
  * Sincroniza a aparência visual no DOM (atributos do <html> e meta-tags).
  * Não altera o localStorage para não transformar mudanças do SO em escolhas manuais.
+ * Preserva as tags <meta name="theme-color" media="..."> originais a menos que haja escolha manual.
  */
-const applyThemeToDOM = (nextTheme: Theme): void => {
+const applyThemeToDOM = (nextTheme: Theme, isManualChange = false): void => {
   const isDark = nextTheme === 'dark'
   const root = document.documentElement
 
@@ -29,7 +30,9 @@ const applyThemeToDOM = (nextTheme: Theme): void => {
     root.setAttribute('data-theme', 'light')
   }
 
-  updateThemeColorMeta(isDark)
+  if (isManualChange || readThemePreference() !== null) {
+    updateThemeColorMeta(isDark)
+  }
 }
 
 /**
@@ -159,7 +162,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         typeof window === 'undefined' ||
         window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ) {
-        applyThemeToDOM(nextTheme)
+        applyThemeToDOM(nextTheme, true)
         setTheme(nextTheme)
         return
       }
@@ -181,7 +184,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         try {
           transition = doc.startViewTransition(() => {
             // Sincroniza o DOM visual (classes e atributos de estilo)
-            applyThemeToDOM(nextTheme)
+            applyThemeToDOM(nextTheme, true)
 
             // flushSync garante que o React atualize o DOM de componentes (ícone Sol/Lua e
             // aria-pressed do Navbar) antes da captura do snapshot do novo estado pelo browser
@@ -193,7 +196,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           // Se a inicialização falhar, restaura a trava e aplica diretamente
           isTransitioningRef.current = false
           document.documentElement.classList.remove('view-transitioning')
-          applyThemeToDOM(nextTheme)
+          applyThemeToDOM(nextTheme, true)
           setTheme(nextTheme)
           return
         }
@@ -210,7 +213,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       }
 
       // Fallback instantâneo caso View Transitions API não esteja disponível
-      applyThemeToDOM(nextTheme)
+      applyThemeToDOM(nextTheme, true)
       setTheme(nextTheme)
     },
     [theme],

@@ -43,10 +43,19 @@ async function prerender() {
     const appHtml = renderToString(React.createElement(App))
 
     let indexHtml = fs.readFileSync(distIndexPath, 'utf8')
-    indexHtml = indexHtml.replace(
-      '<div id="root" class="flex-1 flex flex-col"></div>',
-      `<div id="root" class="flex-1 flex flex-col">${appHtml}</div>`,
-    )
+    const rootPattern = /<div id="root"[^>]*><\/div>/
+    if (!rootPattern.test(indexHtml)) {
+      throw new Error('Target container <div id="root"...></div> not found in dist/index.html')
+    }
+
+    indexHtml = indexHtml.replace(rootPattern, (match) => {
+      const openTag = match.slice(0, -6) // remove </div>
+      return `${openTag}${appHtml}</div>`
+    })
+
+    if (!indexHtml.includes(appHtml)) {
+      throw new Error('Verification failed: appHtml was not properly injected into dist/index.html')
+    }
 
     // Injeta o CSS em <style> inline para eliminar a solicitação bloqueadora de renderização
     const cssDir = path.join(rootDir, 'dist', 'assets', 'css')
@@ -55,10 +64,10 @@ async function prerender() {
       if (cssFiles.length > 0) {
         const cssPath = path.join(cssDir, cssFiles[0])
         const cssContent = fs.readFileSync(cssPath, 'utf8')
-        indexHtml = indexHtml.replace(
-          /<link\s+rel="stylesheet"[^>]*href="\/assets\/css\/[^"]*"[^>]*>/i,
-          `<style>${cssContent}</style>`,
-        )
+        const linkCssPattern = /<link\s+rel="stylesheet"[^>]*href="\/assets\/css\/[^"]*"[^>]*>/i
+        if (linkCssPattern.test(indexHtml)) {
+          indexHtml = indexHtml.replace(linkCssPattern, () => `<style>${cssContent}</style>`)
+        }
       }
     }
 

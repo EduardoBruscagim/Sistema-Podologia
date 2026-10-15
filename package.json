@@ -12,13 +12,18 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:a11y": "node scripts/audit-a11y.mjs",
-    "check": "npm run lint && npm run format:check && npm run build && npm run test:a11y",
+    "check": "npm run lint && npm run format:check && npm test && npm run build && npm run test:a11y",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@tailwindcss/oxide-win32-x64-msvc": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
@@ -30,11 +35,11 @@
     "eslint-plugin-react-refresh": "^0.5.7",
     "jsdom": "^30.1.2",
     "prettier": "^3.9.10",
-    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.1",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
   },
   "dependencies": {
     "@fontsource-variable/newsreader": "^5.3.0",
