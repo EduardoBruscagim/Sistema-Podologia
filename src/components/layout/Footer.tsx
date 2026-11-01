@@ -130,7 +130,7 @@ export const Footer: React.FC = () => {
               Seg a Sáb, das 8h às 19h. Me mande uma mensagem no WhatsApp para marcarmos o seu
               horário.
             </p>
-            <p className="text-xs font-mono font-medium text-on-surface mb-3 tracking-wide">
+            <p className="text-xs font-mono font-medium text-on-surface mb-3 tracking-wide tabular-nums">
               {getWhatsAppDisplayNumber()}
             </p>
             <a

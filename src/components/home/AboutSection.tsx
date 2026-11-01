@@ -145,7 +145,7 @@ export const AboutSection: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Falar com a Angélica no WhatsApp (abre em uma nova aba)"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface min-h-[44px] cursor-pointer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.97] transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface min-h-[44px] cursor-pointer"
           >
             <span>Falar com a Angélica</span>
             <ArrowUpRight aria-hidden="true" className="w-4 h-4" />

@@ -74,7 +74,7 @@ export const TechnologySection: React.FC = () => {
                 </span>
               </div>
 
-              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-on-surface mb-4 leading-tight">
+              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-on-surface mb-4 leading-tight text-balance">
                 Tudo 100% esterilizado e descartável
               </h3>
 
@@ -172,7 +172,7 @@ export const TechnologySection: React.FC = () => {
                 </div>
               </div>
 
-              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug">
+              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug text-balance">
                 LED de luz vermelha
               </h3>
 
@@ -209,7 +209,7 @@ export const TechnologySection: React.FC = () => {
                 </div>
               </div>
 
-              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug">
+              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug text-balance">
                 Cabine UV portátil
               </h3>
 

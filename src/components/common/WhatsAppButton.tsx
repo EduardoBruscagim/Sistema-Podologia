@@ -25,7 +25,7 @@ export const WhatsAppButton: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Dúvidas no WhatsApp - Falar com Angélica (abre em uma nova aba)"
-        className="group flex items-center justify-center gap-2.5 bg-sage hover:bg-sage-hover text-on-sage border border-surface-border p-3 lg:px-5 lg:py-3.5 rounded-full shadow-md hover:shadow-lg shadow-primary/10 hover:shadow-primary/20 dark:shadow-black/40 transition-[transform,box-shadow,background-color] active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-surface min-h-[48px] min-w-[48px]"
+        className="group flex items-center justify-center gap-2.5 bg-sage hover:bg-sage-hover text-on-sage border border-surface-border p-3 lg:px-5 lg:py-3.5 rounded-full shadow-md hover:shadow-lg shadow-primary/10 hover:shadow-primary/20 dark:shadow-black/40 transition-[transform,box-shadow,background-color] active:scale-[0.97] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-surface min-h-[48px] min-w-[48px]"
       >
         {/* Ícone oficial vetorial do WhatsApp */}
         <svg

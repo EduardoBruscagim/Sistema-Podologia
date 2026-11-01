@@ -56,7 +56,7 @@ export const Hero: React.FC = () => {
               href={getWhatsAppUrl('Oi, Angélica! Vim pelo site e gostaria de agendar um horário.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98] text-xs uppercase tracking-[0.14em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.97] text-xs uppercase tracking-[0.14em] font-medium transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
             >
               Chamar no WhatsApp
             </a>
