@@ -214,10 +214,10 @@ export const ServicesPricing: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Agendar Horário: ${service.title} pelo WhatsApp (abre em uma nova aba)`}
-                  className={`w-full min-h-[44px] inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.14em] font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer mt-4 ${
+                  className={`w-full min-h-[44px] inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs uppercase tracking-[0.14em] font-medium transition-[background-color,border-color,transform,box-shadow] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer mt-4 ${
                     service.isFeatured
-                      ? 'bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.98]'
-                      : 'bg-pure-white dark:bg-surface border border-surface-border hover:border-accent text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant active:scale-[0.98]'
+                      ? 'bg-accent text-on-accent hover:bg-accent-hover active:scale-[0.97]'
+                      : 'bg-pure-white dark:bg-surface border border-surface-border hover:border-accent text-on-surface hover:bg-surface-variant dark:hover:bg-surface-variant active:scale-[0.97]'
                   }`}
                 >
                   Agendar esse
@@ -238,7 +238,7 @@ export const ServicesPricing: React.FC = () => {
             <AlertCircle aria-hidden="true" className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-serif text-lg text-on-surface font-normal leading-snug">
+            <h3 className="font-serif text-lg text-on-surface font-normal leading-snug text-balance">
               A unha encravou e tá doendo muito?
             </h3>
             <p className="text-xs sm:text-sm text-on-surface-variant font-light leading-relaxed mt-0.5 max-w-[55ch]">
@@ -252,7 +252,7 @@ export const ServicesPricing: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Atendimento de Urgência para unha encravada pelo WhatsApp (abre em uma nova aba)"
-          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 min-h-[44px] rounded-full bg-accent text-on-accent text-xs uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.97] transition-[background-color,transform] shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer"
         >
           Chamar urgência
         </a>

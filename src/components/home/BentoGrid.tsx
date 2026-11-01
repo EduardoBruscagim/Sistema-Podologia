@@ -62,7 +62,7 @@ export const BentoGrid: React.FC = () => {
               </div>
             </div>
 
-            <h3 className="font-serif text-2xl sm:text-3xl font-normal text-on-surface mb-3 leading-snug">
+            <h3 className="font-serif text-2xl sm:text-3xl font-normal text-on-surface mb-3 leading-snug text-balance">
               No conforto da sua casa
             </h3>
             <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed font-light max-w-[46ch] text-pretty">
@@ -101,7 +101,7 @@ export const BentoGrid: React.FC = () => {
                 </div>
               </div>
 
-              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug">
+              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug text-balance">
                 Chego em qualquer bairro
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">
@@ -123,7 +123,7 @@ export const BentoGrid: React.FC = () => {
                 </div>
               </div>
 
-              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug">
+              <h3 className="font-serif text-xl sm:text-2xl font-normal text-on-surface mb-2 leading-snug text-balance">
                 Seu momento de cuidado
               </h3>
               <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed font-light text-pretty">

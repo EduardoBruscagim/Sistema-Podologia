@@ -396,7 +396,7 @@ export const Navbar: React.FC = () => {
             <a
               href="#procedimentos"
               aria-label="Agendar Horário - Ver procedimentos e horários"
-              className="hidden xs:inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer whitespace-nowrap shrink-0"
+              className="hidden xs:inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-accent text-on-accent text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.97] transition-[background-color,transform] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer whitespace-nowrap shrink-0"
             >
               <span className="sm:hidden">Agendar</span>
               <span className="hidden sm:inline">Agendar Horário</span>
@@ -457,7 +457,7 @@ export const Navbar: React.FC = () => {
             <a
               href="#procedimentos"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full min-h-[52px] px-6 py-4 rounded-full bg-accent text-on-accent text-[13px] uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.98] transition-all flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer shadow-lg shadow-accent/20"
+              className="w-full min-h-[52px] px-6 py-4 rounded-full bg-accent text-on-accent text-[13px] uppercase tracking-[0.14em] font-medium hover:bg-accent-hover active:scale-[0.97] transition-[background-color,transform,box-shadow] flex items-center justify-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface cursor-pointer shadow-lg shadow-accent/20"
             >
               Agendar Horário
             </a>
