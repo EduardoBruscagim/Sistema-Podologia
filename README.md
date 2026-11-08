@@ -3,6 +3,12 @@
 > **Atendimento domiciliar em Mococa, SP.**  
 > Interface moderna, sem taxa de deslocamento, com foco em cuidado com os pés e mãos, instrumentos esterilizados e acessibilidade WCAG.
 
+[![CI](https://github.com/EduardoBruscagim/Sistema-Podologia/actions/workflows/ci.yml/badge.svg)](https://github.com/EduardoBruscagim/Sistema-Podologia/actions/workflows/ci.yml)
+[![Deploy](https://img.shields.io/badge/deploy-Vercel-black?logo=vercel)](https://agendamento-angelica.vercel.app)
+[![WCAG 2.2 AA](https://img.shields.io/badge/WCAG_2.2-100%2F100_AA-emerald)](scripts/audit-a11y.mjs)
+
+🌐 **Demonstração em Produção:** [https://agendamento-angelica.vercel.app](https://agendamento-angelica.vercel.app)
+
 ---
 
 ## 🎯 Sobre o Projeto
@@ -34,8 +40,8 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 - **Tabela Transparente de Serviços (`ServicesPricing`)**: Detalhamento dos 3 principais procedimentos (_Pé e Mão Completo_, _Cuidado dos Pés_ e _Cuidado das Mãos_), tempo estimado, diferenciais e valores pré-definidos.
 - **Canal Direto de Contato (WhatsApp)**: Botão flutuante acessível e atalhos contextualizados para agendamento sem intermediários.
 - **Transparência Geográfica e Comercial**: Cobertura em toda a cidade de Mococa, SP com taxa de deslocamento zero (R$ 0) e pagamentos via PIX ou dinheiro.
-- **Modo Claro / Escuro com Anti-FOUC**: Alternador de tema acessível com persistência em `localStorage` e script síncrono no `<head>` com sincronização de `theme-color` móvel.
-- **Acessibilidade Universal (WCAG AA/AAA)**: _Skip link_ funcional (`#main-content`), contrastes calibrados (`text-on-accent` e `dark:text-surface`), anéis de foco visíveis e alvos de toque de no mínimo 44x44px.
+- **Modo Claro / Escuro com View Transitions API & Anti-FOUC**: Alternador de tema acessível com revelação circular acelerada por GPU (`clip-path`), persistência segura em `localStorage` e script síncrono no `<head>` com sincronização de `theme-color` móvel.
+- **Acessibilidade Universal Auditada (WCAG 2.1/2.2 AA/AAA)**: _Skip link_ funcional (`#main-content`), contrastes calibrados (`text-on-accent` e `dark:text-surface`), anéis de foco visíveis, alvos de toque de no mínimo 44x44px e validação automatizada com `axe-core`.
 - **Fontes 100% Auto-hospedadas**: Fontes variáveis `Newsreader` e `Outfit` servidas localmente em formato WOFF2, eliminando dependências de rede e atrasos de renderização de fontes externas.
 
 ### Fase 2 (Em Desenvolvimento / Roadmap):
@@ -55,7 +61,8 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 | **Tipografia**                         | [Newsreader Variable](https://fontsource.org/fonts/newsreader) e [Outfit Variable](https://fontsource.org/fonts/outfit) (`@fontsource-variable/*` auto-hospedadas) |
 | **Animações & Motion**                 | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger + `@gsap/react` com microinterações refinadas                                                                |
 | **Ícones & Acessibilidade**            | [Lucide React](https://lucide.dev/) (SVGs acessíveis com `aria-hidden`)                                                                                            |
-| **Qualidade & Padronização**           | ESLint 10 (`typescript-eslint`), Prettier 3                                                                                                                        |
+| **Testes & Auditoria**                 | [Vitest](https://vitest.dev/), [React Testing Library](https://testing-library.com/), [Axe-Core](https://github.com/dequelabs/axe-core) + JSDOM                    |
+| **Qualidade & Padronização**           | ESLint 10 (`typescript-eslint`), Prettier 3, GitHub Actions CI                                                                                                     |
 | **Pré-renderização (SSG)**             | Script customizado `scripts/prerender.mjs` com React Server DOM e inlining de CSS crítico                                                                          |
 | **Backend / Persistência (Planejado)** | Supabase (PostgreSQL, Auth, Storage)                                                                                                                               |
 
@@ -63,7 +70,7 @@ Para detalhes estratégicos de produto e diretrizes visuais completas, consulte:
 
 ## 📁 Estrutura do Projeto
 
-A organização de diretórios reflete a separação modular de componentes, animações e hooks em React 19:
+A organização de diretórios reflete a separação modular de componentes, animações, testes e hooks em React 19:
 
 ```text
 ├── src/
@@ -79,26 +86,29 @@ A organização de diretórios reflete a separação modular de componentes, ani
 │   │   ├── services.ts     # Entrada escalonada dos procedimentos
 │   │   ├── stats.ts        # Odômetro numérico (+25.000) e métricas de confiança
 │   │   └── technology.ts   # Revelação dos diferenciais tecnológicos e autoclave
-│   ├── components/         # Componentes modulares React
-│   │   ├── common/         # Componentes compartilhados (WhatsAppButton, BrandIntro)
+│   ├── components/         # Componentes modulares React e testes colocalizados
+│   │   ├── common/         # Componentes compartilhados (WhatsAppButton)
 │   │   ├── home/           # Seções da Home (Hero, TrustStats, BentoGrid, AboutSection, ServicesPricing, TechnologySection, FaqSection, CtaSection)
 │   │   └── layout/         # Componentes estruturais (Navbar, Footer)
 │   ├── context/            # Provedores de contexto React (ThemeContext)
 │   ├── data/               # Modelos e dados estáticos (services.ts)
 │   ├── hooks/              # Hooks customizados isolados (useTheme, useSectionAnimation)
 │   ├── pages/              # Páginas da aplicação (HomePage)
+│   ├── test/               # Configuração do ambiente Vitest / JSDOM (setup.ts)
 │   ├── types/              # Definições de interfaces e tipos TypeScript (theme.ts)
 │   ├── utils/              # Helpers e utilitários puros (theme.ts, whatsapp.ts)
 │   ├── App.tsx             # Ponto de entrada da aplicação e provedor de tema
 │   ├── main.tsx            # Ponto de entrada React, registro GSAP e sincronizador anti-FOUC
 │   └── style.css           # Tokens de tema semânticos, fontes variáveis e regras de proteção FOUC
 ├── scripts/
-│   └── prerender.mjs       # Pré-renderizador estático (SSG) com inlining de CSS crítico
+│   ├── prerender.mjs       # Pré-renderizador estático (SSG) com inlining de CSS crítico
+│   └── audit-a11y.mjs      # Runner automatizado de auditoria WCAG 2.1/2.2 AA com Axe-Core
 ├── public/                 # Assets otimizados (WebP), robots.txt, sitemap.xml, og-image.webp
 ├── index.html              # Shell HTML semântico com JSON-LD Schema.org, anti-FOUC e LCP preloads
 ├── DESIGN.md               # Especificação detalhada do Design System e motion tokens
 ├── PRODUCT.md              # Documento de produto, proposta de valor e roadmap
 ├── vite.config.ts          # Configuração do Vite com suporte a React e Tailwind
+├── vitest.config.ts        # Configuração de testes unitários e de integração
 └── package.json            # Dependências e scripts do projeto
 ```
 
@@ -116,7 +126,7 @@ A organização de diretórios reflete a separação modular de componentes, ani
 Clone o repositório e instale as dependências:
 
 ```bash
-git clone https://github.com/Eduuhbruscagim/Sistema-Podologia.git
+git clone https://github.com/EduardoBruscagim/Sistema-Podologia.git
 cd Sistema-Podologia
 npm install
 ```
@@ -135,17 +145,19 @@ Acesse `http://localhost:5173` no seu navegador.
 
 ## 📜 Scripts Disponíveis
 
-| Comando                | Descrição                                                                                    |
-| :--------------------- | :------------------------------------------------------------------------------------------- |
-| `npm run dev`          | Inicia o servidor local de desenvolvimento com Hot Module Replacement (HMR).                 |
-| `npm run build`        | Valida tipagens estáticas (`tsc -b`) e compila os assets para produção no diretório `dist/`. |
-| `npm run preview`      | Executa um servidor local para inspecionar o build de produção gerado em `dist/`.            |
-| `npm run typecheck`    | Executa checagem de tipos estáticos sem emitir arquivos.                                     |
-| `npm run lint`         | Executa a validação de código estático via ESLint.                                           |
-| `npm run lint:fix`     | Corrige problemas automáticos apontados pelo ESLint.                                         |
-| `npm run format`       | Aplica a formatação de código com Prettier em todos os arquivos compatíveis.                 |
-| `npm run format:check` | Verifica se o código atende às regras de formatação sem alterá-lo.                           |
-| `npm run check`        | Pipeline completa de integridade local (`lint` + `format:check` + `build`).                  |
+| Comando                | Descrição                                                                                        |
+| :--------------------- | :----------------------------------------------------------------------------------------------- |
+| `npm run dev`          | Inicia o servidor local de desenvolvimento com Hot Module Replacement (HMR).                     |
+| `npm run build`        | Valida tipagens estáticas (`tsc -b`), compila os assets e executa o pré-renderizador SSG.        |
+| `npm run preview`      | Executa um servidor local para inspecionar o build de produção gerado em `dist/`.                |
+| `npm run typecheck`    | Executa checagem de tipos estáticos sem emitir arquivos.                                         |
+| `npm run lint`         | Executa a validação de código estático via ESLint.                                               |
+| `npm run lint:fix`     | Corrige problemas automáticos apontados pelo ESLint.                                             |
+| `npm run format`       | Aplica a formatação de código com Prettier em todos os arquivos compatíveis.                     |
+| `npm run format:check` | Verifica se o código atende às regras de formatação sem alterá-lo.                               |
+| `npm test`             | Executa a suíte de testes unitários e de componentes com Vitest e React Testing Library.         |
+| `npm run test:a11y`    | Executa auditoria automatizada de acessibilidade WCAG 2.1/2.2 AA com Axe-Core sobre o build SSG. |
+| `npm run check`        | Pipeline completa de integridade (`lint` + `format:check` + `test` + `build` + `test:a11y`).     |
 
 ---
 
